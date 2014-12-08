@@ -25,6 +25,21 @@ class Candidate: NSObject {
         }
     }
     
+    var lengthAttributeString: Int {
+        get {
+            switch type {
+            case .Empty:
+                return 0
+            case .Special:
+                return text.getReadingLength()
+            case .English:
+                return (text.getReadingLength() + 1) / 2
+            case .Chinese:
+                return text.getReadingLength()
+            }
+        }
+    }
+    
     var shuangpinAttributeString: String {
         get {
             switch type {

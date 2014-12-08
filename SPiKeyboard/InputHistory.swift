@@ -68,7 +68,7 @@ class InputHistory {
         databaseQueue?.inDatabase() {
             db in
             if frequency == 0 {
-                if !db.executeUpdate("insert into history (candidate, shuangpin, shengmu, length, frequency, candidate_type) values (?, ?, ?, ?, ?, ?)", withArgumentsInArray: [candidate.text, candidate.shuangpinAttributeString, candidate.shengmuAttributeString, (candidate.text.getReadingLength()) as NSNumber, 1, candidate.typeAttributeString]) {
+                if !db.executeUpdate("insert into history (candidate, shuangpin, shengmu, length, frequency, candidate_type) values (?, ?, ?, ?, ?, ?)", withArgumentsInArray: [candidate.text, candidate.shuangpinAttributeString, candidate.shengmuAttributeString, candidate.lengthAttributeString as NSNumber, 1, candidate.typeAttributeString]) {
                     println("insert 1 table failed: \(db.lastErrorMessage()) \(candidate.text) \(candidate.shuangpinAttributeString)")
                 }
             } else {

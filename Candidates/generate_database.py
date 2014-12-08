@@ -504,7 +504,7 @@ for line in lines:
   candidate = word
   shuangpinString = word.lower()
   shengmuString = word[0].lower()
-  length = len(word)
+  length = (len(word) + 1) / 2
   frequency = 0
   quanpinString = word.lower()
   candidateType = 2
