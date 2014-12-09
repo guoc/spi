@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BD458DB41A37076B00664B2F /* TypingString.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD458DB31A37076B00664B2F /* TypingString.swift */; };
 		BDEDF6871A2DCBF3000CC6B6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDEDF6861A2DCBF3000CC6B6 /* AppDelegate.swift */; };
 		BDEDF6891A2DCBF3000CC6B6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDEDF6881A2DCBF3000CC6B6 /* ViewController.swift */; };
 		BDEDF68C1A2DCBF3000CC6B6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BDEDF68A1A2DCBF3000CC6B6 /* Main.storyboard */; };
@@ -93,6 +94,7 @@
 		28CEC39B9B29B8967F369828 /* Pods-SPiKeyboard.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SPiKeyboard.release.xcconfig"; path = "Pods/Target Support Files/Pods-SPiKeyboard/Pods-SPiKeyboard.release.xcconfig"; sourceTree = "<group>"; };
 		3A0B55CB267D381EA3595BCC /* Pods-SPiKeyboard.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SPiKeyboard.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SPiKeyboard/Pods-SPiKeyboard.debug.xcconfig"; sourceTree = "<group>"; };
 		BB1BD71E99BF370161715A4C /* libPods-SPiKeyboard.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SPiKeyboard.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BD458DB31A37076B00664B2F /* TypingString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypingString.swift; sourceTree = "<group>"; };
 		BDEDF6811A2DCBF3000CC6B6 /* SPi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SPi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDEDF6851A2DCBF3000CC6B6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BDEDF6861A2DCBF3000CC6B6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -279,14 +281,15 @@
 			isa = PBXGroup;
 			children = (
 				BDEDF6FF1A2DD338000CC6B6 /* MyKeyboardViewController.swift */,
-				BDEDF6F71A2DD338000CC6B6 /* Candidate.swift */,
-				BDEDF6F81A2DD338000CC6B6 /* CandidateCell.swift */,
-				BDEDF6F91A2DD338000CC6B6 /* candidates.sqlite */,
-				BDEDF6FA1A2DD338000CC6B6 /* CandidatesBanner.swift */,
 				BDEDF6FB1A2DD338000CC6B6 /* CandidatesDataModel.swift */,
-				BDEDF6FD1A2DD338000CC6B6 /* InputHistory.swift */,
-				BDEDF6FE1A2DD338000CC6B6 /* MyCollectionViewFlowLayout.swift */,
+				BD458DB31A37076B00664B2F /* TypingString.swift */,
+				BDEDF6F71A2DD338000CC6B6 /* Candidate.swift */,
 				BDEDF7011A2DD338000CC6B6 /* PinYinHelper.swift */,
+				BDEDF6FD1A2DD338000CC6B6 /* InputHistory.swift */,
+				BDEDF6FA1A2DD338000CC6B6 /* CandidatesBanner.swift */,
+				BDEDF6F81A2DD338000CC6B6 /* CandidateCell.swift */,
+				BDEDF6FE1A2DD338000CC6B6 /* MyCollectionViewFlowLayout.swift */,
+				BDEDF6F91A2DD338000CC6B6 /* candidates.sqlite */,
 				BDEDF75D1A2DD69D000CC6B6 /* TastyImitationKeyboard */,
 				BDEDF7021A2DD338000CC6B6 /* Resource */,
 				BDEDF70C1A2DD338000CC6B6 /* schemes */,
@@ -577,6 +580,7 @@
 				BDEDF77F1A2DD69D000CC6B6 /* KeyboardModel.swift in Sources */,
 				BDEDF7711A2DD69D000CC6B6 /* Catboard.swift in Sources */,
 				BDEDF7181A2DD338000CC6B6 /* CandidatesBanner.swift in Sources */,
+				BD458DB41A37076B00664B2F /* TypingString.swift in Sources */,
 				BDEDF7771A2DD69D000CC6B6 /* ExtraView.swift in Sources */,
 				BDEDF7721A2DD69D000CC6B6 /* CatboardBanner.swift in Sources */,
 				BDEDF71C1A2DD338000CC6B6 /* MyKeyboardViewController.swift in Sources */,
