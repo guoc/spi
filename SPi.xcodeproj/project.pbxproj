@@ -278,7 +278,7 @@
 		BDEDF6B11A2DCC76000CC6B6 /* SPiKeyboard */ = {
 			isa = PBXGroup;
 			children = (
-				BDEDF75D1A2DD69D000CC6B6 /* TastyImitationKeyboard */,
+				BDEDF6FF1A2DD338000CC6B6 /* MyKeyboardViewController.swift */,
 				BDEDF6F71A2DD338000CC6B6 /* Candidate.swift */,
 				BDEDF6F81A2DD338000CC6B6 /* CandidateCell.swift */,
 				BDEDF6F91A2DD338000CC6B6 /* candidates.sqlite */,
@@ -286,8 +286,8 @@
 				BDEDF6FB1A2DD338000CC6B6 /* CandidatesDataModel.swift */,
 				BDEDF6FD1A2DD338000CC6B6 /* InputHistory.swift */,
 				BDEDF6FE1A2DD338000CC6B6 /* MyCollectionViewFlowLayout.swift */,
-				BDEDF6FF1A2DD338000CC6B6 /* MyKeyboardViewController.swift */,
 				BDEDF7011A2DD338000CC6B6 /* PinYinHelper.swift */,
+				BDEDF75D1A2DD69D000CC6B6 /* TastyImitationKeyboard */,
 				BDEDF7021A2DD338000CC6B6 /* Resource */,
 				BDEDF70C1A2DD338000CC6B6 /* schemes */,
 				BDEDF7131A2DD338000CC6B6 /* Settings.bundle */,

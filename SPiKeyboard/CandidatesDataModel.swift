@@ -93,21 +93,23 @@ class FormalizedTypingString {
 class TypingString {
     
     var _formalizedTypingStringForQuery: FormalizedTypingString? = nil
-    var _displayedString: String? = nil
+    var _remainingDisplayedShuangpinString: String? = nil
+    
+    var cachedCandidates: [(candidate: String, typing: String)] = []
     
     var userTypingString: String {
         didSet {
             _formalizedTypingStringForQuery = nil
-            _displayedString = nil
+            _remainingDisplayedShuangpinString = nil
         }
     }
     
     var displayedString: String {
         get {
-            if _displayedString == nil {
-                _displayedString = getFormalizedTypingString(userTypingString, byScheme: ShuangpinScheme.getScheme(), forDisplay: true).string
+            if _remainingDisplayedShuangpinString == nil {
+                _remainingDisplayedShuangpinString = joinedCandidate + getFormalizedTypingString(userTypingString, byScheme: ShuangpinScheme.getScheme(), forDisplay: true).string
             }
-            return _displayedString!
+            return _remainingDisplayedShuangpinString!
         }
     }
     
@@ -117,6 +119,12 @@ class TypingString {
                 _formalizedTypingStringForQuery = getFormalizedTypingString(userTypingString, byScheme: ShuangpinScheme.getScheme(), forDisplay: false)
             }
             return _formalizedTypingStringForQuery!
+        }
+    }
+    
+    var joinedCandidate: String {
+        get {
+            return "".join(cachedCandidates.map({x in return x.candidate}))
         }
     }
     
@@ -137,7 +145,8 @@ class TypingString {
     func reset() {
         userTypingString = ""
         _formalizedTypingStringForQuery = nil
-        _displayedString = nil
+        _remainingDisplayedShuangpinString = nil
+        cachedCandidates = []
     }
     
     func append(newString: String) {
@@ -145,14 +154,30 @@ class TypingString {
     }
     
     func deleteLast() {
-        userTypingString = dropLast(userTypingString)
+        if cachedCandidates.isEmpty {
+            userTypingString = dropLast(userTypingString)
+        } else {
+            let cachedCandidate = (cachedCandidates.last as (candidate: String, typing: String)?)!.candidate
+            let cachedTyping = (cachedCandidates.last as (candidate: String, typing: String)?)!.typing
+            userTypingString = cachedTyping + userTypingString
+            cachedCandidates.removeLast()
+        }
     }
     
     func isEmpty() -> Bool {
         return (userTypingString == "")
     }
     
-    func removeHeadByNumberOfWords(numberOfWords: Int) {
+    func readyToInsert() -> Bool {
+        if userTypingString == "" {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    func updateBySelectedCandidateText(candidateText: String) {
+        let numberOfWords = candidateText.getReadingLength()
         if self.type == .Special {
             reset()
         } else if self.type == .EnglishOrShuangpin {    // See caller, it only could be Shuangpin
@@ -162,9 +187,12 @@ class TypingString {
             // Get end
             let truncatingLength = numberOfWords * 2 - numberOfUnderscore
             if  truncatingLength < userTypingString.getReadingLength() {
-                userTypingString = userTypingString.substringFromIndex(advance(userTypingString.startIndex, truncatingLength))
+                let index = advance(userTypingString.startIndex, truncatingLength)
+                cachedCandidates.append((candidate: candidateText, typing: userTypingString.substringToIndex(index)))
+                userTypingString = userTypingString.substringFromIndex(index)
             } else {
-                reset()
+                cachedCandidates.append((candidate: candidateText, typing: userTypingString.substringToIndex(userTypingString.endIndex)))
+                userTypingString = ""
             }
         }
     }
@@ -285,7 +313,7 @@ class CandidatesDataModel {
         }
     }
     
-    func removeSelectedCandidatePinyinInTyping(candidateIndexPath: NSIndexPath, needCandidatesUpdate needUpdate: Bool = true) {
+    func updateTypingWithSelectedCandidateAt(candidateIndexPath: NSIndexPath, needCandidatesUpdate needUpdate: Bool = true) {
         
         let candidateText = textAt(candidateIndexPath)
         let candidate = candidateAt(candidateIndexPath)
@@ -300,7 +328,7 @@ class CandidatesDataModel {
             inputHistory.updateHistory(with: .SelectLastCandidate, withSelectedCandidates: candidate)
         } else {
             if typingString.type == .EnglishOrShuangpin {   // Only could be Shuangpin because not select typing
-                typingString.removeHeadByNumberOfWords(candidateText!.getReadingLength())
+                typingString.updateBySelectedCandidateText(candidateText!)
                 if typingString.type == .Empty {
                     inputHistory.updateHistory(with: .SelectLastCandidate, withSelectedCandidates: candidate)
                 } else {
@@ -544,6 +572,14 @@ class CandidatesDataModel {
     
     func allText() -> [String] {
         return [textAt(indexPathZero)!] + candidates.map({x in return x.text})
+    }
+    
+    func getTypingCachedCandidate() -> String? {
+        if typingString.readyToInsert() {
+            return typingString.joinedCandidate
+        } else {
+            return nil
+        }
     }
     
 

@@ -40,8 +40,11 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
         if key.type == .Space {
             if candidatesDataModel.hasTyping() {
                 if let firstCandidate = candidatesDataModel.textAt(indexPathFirst) {
-                    (self.textDocumentProxy as? UIKeyInput)!.insertText(firstCandidate)
                     candidatesUpdateQueue.selectCandidate(indexPathFirst)
+                    if let candidate = candidatesDataModel.getTypingCachedCandidate() {
+                        (self.textDocumentProxy as? UIKeyInput)!.insertText(candidate)
+                        candidatesDataModel.clearTypingAndCandidates()
+                    }
                 } else {
                     let typingStringAsCandidate = candidatesDataModel.getUserTypingString()
                     (self.textDocumentProxy as? UIKeyInput)!.insertText(typingStringAsCandidate)
@@ -127,8 +130,11 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
             }
         } else {
             let selectedCandidate = candidatesDataModel.textAt(indexPath)!
-            (self.textDocumentProxy as? UIKeyInput)!.insertText(selectedCandidate)
             candidatesUpdateQueue.selectCandidate(indexPath)
+            if let candidate = candidatesDataModel.getTypingCachedCandidate() {
+                (self.textDocumentProxy as? UIKeyInput)!.insertText(candidate)
+                candidatesDataModel.clearTypingAndCandidates()
+            }
         }
     }
     
@@ -423,7 +429,7 @@ class CandidatesUpdateQueue {
         self.controller.setMode(0)
         self.controller.exitCandidatesTableIfNecessary()
         self.controller.candidatesBanner!.scrollToFirstCandidate()
-        self.controller.candidatesDataModel.removeSelectedCandidatePinyinInTyping(selectedCandidateIndexPath, needCandidatesUpdate: false)
+        self.controller.candidatesDataModel.updateTypingWithSelectedCandidateAt(selectedCandidateIndexPath, needCandidatesUpdate: false)
         candidatesUpdateQueue.cancelAllOperations()
         addCommonUpdateOperation(controller: controller)
     }
