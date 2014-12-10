@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		BD458DB41A37076B00664B2F /* TypingString.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD458DB31A37076B00664B2F /* TypingString.swift */; };
+		BDD3E7441A383BBA00CF2CB9 /* InputHistoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDD3E7431A383BBA00CF2CB9 /* InputHistoryTableViewController.swift */; };
+		BDD3E7461A3846AA00CF2CB9 /* InputHistoryRowCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BDD3E7451A3846AA00CF2CB9 /* InputHistoryRowCell.xib */; };
+		BDD3E7481A38477A00CF2CB9 /* InputHistoryRowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDD3E7471A38477A00CF2CB9 /* InputHistoryRowCell.swift */; };
 		BDEDF6871A2DCBF3000CC6B6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDEDF6861A2DCBF3000CC6B6 /* AppDelegate.swift */; };
 		BDEDF6891A2DCBF3000CC6B6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDEDF6881A2DCBF3000CC6B6 /* ViewController.swift */; };
 		BDEDF68C1A2DCBF3000CC6B6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BDEDF68A1A2DCBF3000CC6B6 /* Main.storyboard */; };
@@ -95,6 +98,9 @@
 		3A0B55CB267D381EA3595BCC /* Pods-SPiKeyboard.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SPiKeyboard.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SPiKeyboard/Pods-SPiKeyboard.debug.xcconfig"; sourceTree = "<group>"; };
 		BB1BD71E99BF370161715A4C /* libPods-SPiKeyboard.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SPiKeyboard.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD458DB31A37076B00664B2F /* TypingString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypingString.swift; sourceTree = "<group>"; };
+		BDD3E7431A383BBA00CF2CB9 /* InputHistoryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputHistoryTableViewController.swift; sourceTree = "<group>"; };
+		BDD3E7451A3846AA00CF2CB9 /* InputHistoryRowCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InputHistoryRowCell.xib; sourceTree = "<group>"; };
+		BDD3E7471A38477A00CF2CB9 /* InputHistoryRowCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputHistoryRowCell.swift; sourceTree = "<group>"; };
 		BDEDF6811A2DCBF3000CC6B6 /* SPi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SPi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDEDF6851A2DCBF3000CC6B6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BDEDF6861A2DCBF3000CC6B6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -289,6 +295,9 @@
 				BDEDF6FA1A2DD338000CC6B6 /* CandidatesBanner.swift */,
 				BDEDF6F81A2DD338000CC6B6 /* CandidateCell.swift */,
 				BDEDF6FE1A2DD338000CC6B6 /* MyCollectionViewFlowLayout.swift */,
+				BDD3E7431A383BBA00CF2CB9 /* InputHistoryTableViewController.swift */,
+				BDD3E7451A3846AA00CF2CB9 /* InputHistoryRowCell.xib */,
+				BDD3E7471A38477A00CF2CB9 /* InputHistoryRowCell.swift */,
 				BDEDF6F91A2DD338000CC6B6 /* candidates.sqlite */,
 				BDEDF75D1A2DD69D000CC6B6 /* TastyImitationKeyboard */,
 				BDEDF7021A2DD338000CC6B6 /* Resource */,
@@ -495,6 +504,7 @@
 			files = (
 				BDEDF72D1A2DD338000CC6B6 /* Settings.bundle in Resources */,
 				BDEDF72B1A2DD338000CC6B6 /* 紫光拼音.spscheme in Resources */,
+				BDD3E7461A3846AA00CF2CB9 /* InputHistoryRowCell.xib in Resources */,
 				BDEDF7261A2DD338000CC6B6 /* keyboard-more-candidates-arrows.sketch in Resources */,
 				BDEDF72C1A2DD338000CC6B6 /* 自然码.spscheme in Resources */,
 				BDEDF71E1A2DD338000CC6B6 /* arrow-down-black.pdf in Resources */,
@@ -585,6 +595,8 @@
 				BDEDF7721A2DD69D000CC6B6 /* CatboardBanner.swift in Sources */,
 				BDEDF71C1A2DD338000CC6B6 /* MyKeyboardViewController.swift in Sources */,
 				BDEDF7741A2DD69D000CC6B6 /* DefaultSettings.swift in Sources */,
+				BDD3E7481A38477A00CF2CB9 /* InputHistoryRowCell.swift in Sources */,
+				BDD3E7441A383BBA00CF2CB9 /* InputHistoryTableViewController.swift in Sources */,
 				BDEDF77A1A2DD69D000CC6B6 /* KeyboardConnector.swift in Sources */,
 				BDEDF77B1A2DD69D000CC6B6 /* KeyboardInputTraits.swift in Sources */,
 				BDEDF7821A2DD69D000CC6B6 /* Shapes.swift in Sources */,

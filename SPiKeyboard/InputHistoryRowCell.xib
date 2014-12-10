@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="inputHistoryRowCell" id="8uY-eh-IFN" customClass="InputHistoryRowCell" customModule="SPiKeyboard" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="57"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8uY-eh-IFN" id="P5i-mc-Nk0">
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="中" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iar-Fs-aVY">
+                        <rect key="frame" x="8" y="18" width="17" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="候选字" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YdI-37-cvx">
+                        <rect key="frame" x="61" y="18" width="51" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="hb xr zi" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q26-VK-yDl">
+                        <rect key="frame" x="256" y="8" width="56" height="14"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="hxz" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s6x-WQ-VpT">
+                        <rect key="frame" x="256" y="27" width="27" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Irp-ub-z88">
+                        <rect key="frame" x="302" y="27" width="10" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FqF-qe-evE">
+                        <rect key="frame" x="33" y="17" width="20" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="Irp-ub-z88" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="s6x-WQ-VpT" secondAttribute="trailing" constant="5" id="1h9-0A-Qce"/>
+                    <constraint firstItem="Irp-ub-z88" firstAttribute="top" secondItem="q26-VK-yDl" secondAttribute="centerY" constant="5" id="3sC-2M-gpW"/>
+                    <constraint firstItem="q26-VK-yDl" firstAttribute="leading" secondItem="YdI-37-cvx" secondAttribute="trailing" constant="8" id="B2R-Om-Dbt"/>
+                    <constraint firstAttribute="centerY" secondItem="FqF-qe-evE" secondAttribute="centerY" id="E6s-tp-3DU"/>
+                    <constraint firstItem="q26-VK-yDl" firstAttribute="top" secondItem="P5i-mc-Nk0" secondAttribute="topMargin" id="Es2-0D-rjV"/>
+                    <constraint firstItem="YdI-37-cvx" firstAttribute="leading" secondItem="FqF-qe-evE" secondAttribute="trailing" constant="8" id="IxO-A6-DKD"/>
+                    <constraint firstItem="Iar-Fs-aVY" firstAttribute="leading" secondItem="P5i-mc-Nk0" secondAttribute="leadingMargin" id="JIK-kj-2me"/>
+                    <constraint firstItem="q26-VK-yDl" firstAttribute="leading" secondItem="s6x-WQ-VpT" secondAttribute="leading" priority="250" id="ODN-Tw-acn"/>
+                    <constraint firstItem="s6x-WQ-VpT" firstAttribute="top" secondItem="q26-VK-yDl" secondAttribute="bottom" constant="5" id="Oor-7U-aqi"/>
+                    <constraint firstItem="FqF-qe-evE" firstAttribute="leading" secondItem="Iar-Fs-aVY" secondAttribute="trailing" constant="8" id="Op7-De-2Dj"/>
+                    <constraint firstItem="FqF-qe-evE" firstAttribute="trailing" secondItem="P5i-mc-Nk0" secondAttribute="trailingMargin" id="i7k-Nw-dJT"/>
+                    <constraint firstAttribute="centerYWithinMargins" secondItem="q26-VK-yDl" secondAttribute="bottom" constant="6" id="iRJ-0V-B5Y"/>
+                    <constraint firstAttribute="centerY" secondItem="Iar-Fs-aVY" secondAttribute="centerY" id="jtG-DF-xgv"/>
+                    <constraint firstItem="Irp-ub-z88" firstAttribute="bottom" secondItem="P5i-mc-Nk0" secondAttribute="bottomMargin" id="lGS-sU-yXn"/>
+                    <constraint firstItem="Irp-ub-z88" firstAttribute="top" secondItem="P5i-mc-Nk0" secondAttribute="centerYWithinMargins" constant="-1" id="lWf-vT-Hx6"/>
+                    <constraint firstItem="Irp-ub-z88" firstAttribute="trailing" secondItem="q26-VK-yDl" secondAttribute="trailing" id="mxz-N4-TJd"/>
+                    <constraint firstItem="q26-VK-yDl" firstAttribute="trailing" secondItem="P5i-mc-Nk0" secondAttribute="trailingMargin" id="pik-LM-JV8"/>
+                    <constraint firstItem="s6x-WQ-VpT" firstAttribute="bottom" secondItem="P5i-mc-Nk0" secondAttribute="bottomMargin" id="rnr-Sr-bEf"/>
+                    <constraint firstItem="FqF-qe-evE" firstAttribute="leading" secondItem="q26-VK-yDl" secondAttribute="trailing" constant="8" id="tzW-x0-8pZ"/>
+                    <constraint firstAttribute="centerY" secondItem="YdI-37-cvx" secondAttribute="centerY" id="vJJ-At-wdY"/>
+                    <constraint firstItem="s6x-WQ-VpT" firstAttribute="bottom" secondItem="P5i-mc-Nk0" secondAttribute="centerYWithinMargins" id="wLE-ug-MdW"/>
+                    <constraint firstItem="YdI-37-cvx" firstAttribute="leading" secondItem="Iar-Fs-aVY" secondAttribute="trailing" constant="8" id="xsC-36-Lxo"/>
+                </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="i7k-Nw-dJT"/>
+                        <exclude reference="tzW-x0-8pZ"/>
+                        <exclude reference="xsC-36-Lxo"/>
+                        <exclude reference="B2R-Om-Dbt"/>
+                        <exclude reference="wLE-ug-MdW"/>
+                        <exclude reference="3sC-2M-gpW"/>
+                    </mask>
+                </variation>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="candidateLabel" destination="YdI-37-cvx" id="gFT-nX-HkE"/>
+                <outlet property="frequencyLabel" destination="FqF-qe-evE" id="B2q-WV-awZ"/>
+                <outlet property="lengthLabel" destination="Irp-ub-z88" id="tmA-EE-pMW"/>
+                <outlet property="shengmuLabel" destination="s6x-WQ-VpT" id="ne8-eA-o6p"/>
+                <outlet property="shuangpinLabel" destination="q26-VK-yDl" id="1L1-57-2XM"/>
+                <outlet property="typeLabel" destination="Iar-Fs-aVY" id="rrq-8M-6nd"/>
+            </connections>
+            <point key="canvasLocation" x="579" y="379.5"/>
+        </tableViewCell>
+    </objects>
+</document>

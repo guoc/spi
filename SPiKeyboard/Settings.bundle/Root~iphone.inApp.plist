@@ -32,10 +32,20 @@
 				<string>紫光拼音</string>
 			</array>
 		</dict>
+		<dict>
+			<key>IASKViewControllerClass</key>
+			<string>SPiKeyboard.InputHistoryTableViewController</string>
+			<key>IASKViewControllerSelector</key>
+			<string>init</string>
+			<key>Title</key>
+			<string>Input History</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
 	</array>
 	<key>StringsTable</key>
 	<string>Root</string>
 	<key>Title</key>
-	<string>WhereTo</string>
+	<string>SPi Settings</string>
 </dict>
 </plist>
