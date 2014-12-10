@@ -50,10 +50,8 @@ class CandidateCell: UICollectionViewCell {
     }
     
     class func getCellSizeByText(text: String) -> CGSize {
-        let utf32Length = text.lengthOfBytesUsingEncoding(NSUTF32StringEncoding)
-        let acsiiLength = text.lengthOfBytesUsingEncoding(NSASCIIStringEncoding)
-        let textIsAlphabetic: Bool = (utf32Length / 4 == acsiiLength)
-        let textLength = utf32Length / 4
+        let textIsAlphabetic: Bool = text.canBeConvertedToEncoding(NSASCIIStringEncoding)
+        let textLength = text.lengthOfBytesUsingEncoding(NSUTF32StringEncoding) / 4
         var returnWidth: CGFloat!
         let cachedWidth = textWidthCache[textLength]
         if textIsAlphabetic || cachedWidth == nil {
