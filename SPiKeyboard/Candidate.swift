@@ -1,6 +1,6 @@
 
 enum CandidateType {
-    case Empty, Special, English, Chinese
+    case Empty, Special, English, Chinese, OnlyText
 }
 
 class Candidate: NSObject {
@@ -21,11 +21,13 @@ class Candidate: NSObject {
                 return englishString!
             case .Chinese:
                 return shuangpinString!
+            default:
+                assertionFailure("Wrong candidate type!")
             }
         }
     }
     
-    var lengthAttributeString: Int {
+    var lengthAttribute: Int {
         get {
             switch type {
             case .Empty:
@@ -36,6 +38,8 @@ class Candidate: NSObject {
                 return (text.getReadingLength() + 1) / 2
             case .Chinese:
                 return text.getReadingLength()
+            default:
+                assertionFailure("Wrong candidate type!")
             }
         }
     }
@@ -51,6 +55,8 @@ class Candidate: NSObject {
                 return text.lowercaseString
             case .Chinese:
                 return shuangpinString!
+            default:
+                assertionFailure("Wrong candidate type!")
             }
         }
     }
@@ -66,6 +72,8 @@ class Candidate: NSObject {
                 return String(text[text.startIndex])
             case .Chinese:
                 return getShengmuString(from: shuangpinString!)
+            default:
+                assertionFailure("Wrong candidate type!")
             }
         }
     }
@@ -83,6 +91,11 @@ class Candidate: NSObject {
                 assertionFailure("Wrong candidate type!")
             }
         }
+    }
+    
+    init(text: String) {
+        self.type = .OnlyText
+        self.text = text
     }
     
     init(text: String, withShuangpinString shuangpin: String) {
@@ -119,6 +132,8 @@ class Candidate: NSObject {
             self.type = .Chinese
             self.text = text
             self.shuangpinString = queryString
+        default:
+            assertionFailure("Wrong candidate type!")
         }
     }
 

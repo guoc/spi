@@ -20,46 +20,81 @@ class FormalizedTypingString {
 }
 
 class TypingString {
-    
-    var _formalizedTypingStringForQuery: FormalizedTypingString? = nil
-    var _remainingDisplayedShuangpinString: String? = nil
-    
-    var cachedCandidates: [(candidate: String, typing: String)] = []
-    
+  
     var userTypingString: String {
         didSet {
-            _formalizedTypingStringForQuery = nil
-            _remainingDisplayedShuangpinString = nil
+            resetCacheProperty()
+        }
+    }
+    var _cachedCandidatesWithCorrespondingTyping: [(candidate: Candidate, typing: String)] = [] {
+        didSet {
+            resetCacheProperty()
         }
     }
     
-    var displayedString: String {
+    // Properties for cache computed properties
+    func resetCacheProperty() {
+        _remainingDisplayedShuangpinString = nil
+        _displayedString = nil
+        _remainingUserTypingString = nil
+        _remainingFormalizedTypingStringForQuery = nil
+        _joinedCandidate = nil
+    }
+    var _remainingDisplayedShuangpinString: String? = nil
+    var _displayedString: String? = nil
+    var _remainingUserTypingString: String? = nil
+    var _remainingFormalizedTypingStringForQuery: FormalizedTypingString? = nil
+    var _joinedCandidate: String? = nil
+    
+    var remainingDisplayedShuangpinString: String {
         get {
             if _remainingDisplayedShuangpinString == nil {
-                _remainingDisplayedShuangpinString = joinedCandidate + getFormalizedTypingString(userTypingString, byScheme: ShuangpinScheme.getScheme(), forDisplay: true).string
+                _remainingDisplayedShuangpinString = getFormalizedTypingString(remainingUserTypingString, byScheme: ShuangpinScheme.getScheme(), forDisplay: true).string
             }
             return _remainingDisplayedShuangpinString!
         }
     }
     
-    var formalizedTypingStringForQuery: FormalizedTypingString {
+    var displayedString: String {
         get {
-            if _formalizedTypingStringForQuery == nil {
-                _formalizedTypingStringForQuery = getFormalizedTypingString(userTypingString, byScheme: ShuangpinScheme.getScheme(), forDisplay: false)
+            if _displayedString == nil {
+                _displayedString = joinedCandidate + remainingDisplayedShuangpinString
             }
-            return _formalizedTypingStringForQuery!
+            return _displayedString!
+        }
+    }
+    
+    var remainingUserTypingString: String {
+        get {
+            if _remainingUserTypingString == nil {
+                let wordLengthOfAllCachedCandidateTypings = _cachedCandidatesWithCorrespondingTyping.reduce(0, combine: {(s: Int, x: (candidate: Candidate, typing: String)) -> Int in return s + x.typing.getReadingLength()})
+                _remainingUserTypingString = userTypingString.substringFromIndex(advance(userTypingString.startIndex, wordLengthOfAllCachedCandidateTypings))
+            }
+            return _remainingUserTypingString!
+        }
+    }
+    
+    var remainingFormalizedTypingStringForQuery: FormalizedTypingString {
+        get {
+            if _remainingFormalizedTypingStringForQuery == nil {
+                _remainingFormalizedTypingStringForQuery = getFormalizedTypingString(remainingUserTypingString, byScheme: ShuangpinScheme.getScheme(), forDisplay: false)
+            }
+            return _remainingFormalizedTypingStringForQuery!
         }
     }
     
     var joinedCandidate: String {
         get {
-            return "".join(cachedCandidates.map({x in return x.candidate}))
+            if _joinedCandidate == nil {
+                _joinedCandidate = "".join(_cachedCandidatesWithCorrespondingTyping.map({x in return x.candidate.text}))
+            }
+            return _joinedCandidate!
         }
     }
     
-    var type: FormalizedTypingStringType {
+    var typeOfRemainingFormalizedTyping: FormalizedTypingStringType {
         get {
-            return self.formalizedTypingStringForQuery.type
+            return self.remainingFormalizedTypingStringForQuery.type
         }
     }
     
@@ -73,23 +108,37 @@ class TypingString {
     
     func reset() {
         userTypingString = ""
-        _formalizedTypingStringForQuery = nil
-        _remainingDisplayedShuangpinString = nil
-        cachedCandidates = []
+        _cachedCandidatesWithCorrespondingTyping = []
     }
     
     func append(newString: String) {
         userTypingString += newString
     }
     
+    func popOneCachedCandidate() {
+        let cachedTyping = (_cachedCandidatesWithCorrespondingTyping.last as (candidate: Candidate, typing: String)?)!.typing
+        _cachedCandidatesWithCorrespondingTyping.removeLast()
+    }
+    
+    func popAllCachedCandidates() {
+        while _cachedCandidatesWithCorrespondingTyping.isEmpty == false {
+            popOneCachedCandidate()
+        }
+    }
+    
     func deleteLast() {
-        if cachedCandidates.isEmpty {
+        if _cachedCandidatesWithCorrespondingTyping.isEmpty {
             userTypingString = dropLast(userTypingString)
         } else {
-            let cachedCandidate = (cachedCandidates.last as (candidate: String, typing: String)?)!.candidate
-            let cachedTyping = (cachedCandidates.last as (candidate: String, typing: String)?)!.typing
-            userTypingString = cachedTyping + userTypingString
-            cachedCandidates.removeLast()
+            popOneCachedCandidate()
+        }
+    }
+    
+    func hasSelectedPartialCandidates() -> Bool {
+        if _cachedCandidatesWithCorrespondingTyping.isEmpty == false && remainingDisplayedShuangpinString != "" {
+            return true
+        } else {
+            return false
         }
     }
     
@@ -98,31 +147,44 @@ class TypingString {
     }
     
     func readyToInsert() -> Bool {
-        if userTypingString == "" {
+        if remainingUserTypingString == "" && _cachedCandidatesWithCorrespondingTyping.isEmpty == false {
             return true
         } else {
             return false
         }
     }
     
-    func updateBySelectedCandidateText(candidateText: String) {
-        let numberOfWords = candidateText.getReadingLength()
-        if self.type == .Special {
+    func getCandidate() -> Candidate {
+        if userTypingString.containsNonLetters() == true {
+            return Candidate(text: userTypingString, withSpecialString: userTypingString)
+        } else if typeOfRemainingFormalizedTyping == .Empty && _cachedCandidatesWithCorrespondingTyping.isEmpty == false {
+            return Candidate(text: "".join(_cachedCandidatesWithCorrespondingTyping.map({x -> String in return x.candidate.text})), withShuangpinString: " ".join(_cachedCandidatesWithCorrespondingTyping.map({x -> String in return x.candidate.queryCode})))
+        } else if hasSelectedPartialCandidates() {
+            return Candidate(text: "".join(_cachedCandidatesWithCorrespondingTyping.map({x -> String in return x.candidate.text})))
+        } else {
+            return Candidate(text: userTypingString, withEnglishString: userTypingString.lowercaseString)
+        }
+    }
+    
+    func updateBySelectedCandidate(candidate: Candidate) {
+        let candidateText = candidate.text
+        if self.typeOfRemainingFormalizedTyping == .Special {
             reset()
-        } else if self.type == .EnglishOrShuangpin {    // See caller, it only could be Shuangpin
+        } else if self.typeOfRemainingFormalizedTyping == .EnglishOrShuangpin {    // See caller, it only could be Shuangpin
+            let numberOfWords = candidateText.getReadingLength()
             // Get how many "_" in the pinyin of candidate
-            let candidateShuangpinArray = formalizedTypingStringForQuery.string.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+            let candidateShuangpinArray = remainingFormalizedTypingStringForQuery.string.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
             let numberOfUnderscore = candidateShuangpinArray[0..<min(numberOfWords, candidateShuangpinArray.count)].reduce(0, { $0 + (contains($1, "_") ? 1 : 0) })
             // Get end
             let truncatingLength = numberOfWords * 2 - numberOfUnderscore
-            if  truncatingLength < userTypingString.getReadingLength() {
-                let index = advance(userTypingString.startIndex, truncatingLength)
-                cachedCandidates.append((candidate: candidateText, typing: userTypingString.substringToIndex(index)))
-                userTypingString = userTypingString.substringFromIndex(index)
+            if  truncatingLength < remainingUserTypingString.getReadingLength() {
+                let index = advance(remainingUserTypingString.startIndex, truncatingLength)
+                _cachedCandidatesWithCorrespondingTyping.append((candidate: candidate, typing: remainingUserTypingString.substringToIndex(index)))
             } else {
-                cachedCandidates.append((candidate: candidateText, typing: userTypingString.substringToIndex(userTypingString.endIndex)))
-                userTypingString = ""
+                _cachedCandidatesWithCorrespondingTyping.append((candidate: candidate, typing: remainingUserTypingString.substringToIndex(remainingUserTypingString.endIndex)))
             }
+        } else {
+            assertionFailure("unintended branch!")
         }
     }
     

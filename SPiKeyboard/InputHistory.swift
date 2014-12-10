@@ -1,17 +1,8 @@
 
 import Foundation
 
-enum InputAction {
-    case StartNewTyping, ContinueTyping, SelectNonLastCandidate, SelectLastCandidate, DeleteBackwardNonLastTyping, DeleteBackwardLastTyping, ResetTyping
-}
-
-enum TypingState {
-    case Empty, NonEmpty
-}
-
 class InputHistory {
     
-    var currentTypingState = TypingState.Empty
     var candidatesRecord = [Candidate]()
     var history = [String: Int]()
     
@@ -68,7 +59,7 @@ class InputHistory {
         databaseQueue?.inDatabase() {
             db in
             if frequency == 0 {
-                if !db.executeUpdate("insert into history (candidate, shuangpin, shengmu, length, frequency, candidate_type) values (?, ?, ?, ?, ?, ?)", withArgumentsInArray: [candidate.text, candidate.shuangpinAttributeString, candidate.shengmuAttributeString, candidate.lengthAttributeString as NSNumber, 1, candidate.typeAttributeString]) {
+                if !db.executeUpdate("insert into history (candidate, shuangpin, shengmu, length, frequency, candidate_type) values (?, ?, ?, ?, ?, ?)", withArgumentsInArray: [candidate.text, candidate.shuangpinAttributeString, candidate.shengmuAttributeString, candidate.lengthAttribute as NSNumber, 1, candidate.typeAttributeString]) {
                     println("insert 1 table failed: \(db.lastErrorMessage()) \(candidate.text) \(candidate.shuangpinAttributeString)")
                 }
             } else {
@@ -79,58 +70,11 @@ class InputHistory {
         }
     }
     
-    func updateHistory(with inputAction: InputAction, withSelectedCandidates selectedCandidate: Candidate? = nil) {
-        print(inputAction)
-        switch (inputAction) {
-        case .StartNewTyping:
-            assert(currentTypingState == .Empty, "Action \(inputAction) should start with state .Empty")
-            currentTypingState = .NonEmpty
-        case .ContinueTyping:
-            assert(currentTypingState == .NonEmpty, "Action \(inputAction) should start with state .NonEmpty")
-            currentTypingState = .NonEmpty
-        case .SelectNonLastCandidate:
-            assert(currentTypingState == .NonEmpty, "Action \(inputAction) should start with state .NonEmpty")
-            currentTypingState = .NonEmpty
-            candidatesRecord.append(selectedCandidate!)
-            updateDatabase(with: selectedCandidate!)
-        case .SelectLastCandidate:
-            assert(currentTypingState == .NonEmpty, "Action \(inputAction) should start with state .NonEmpty")
-            currentTypingState = .Empty
-            candidatesRecord.append(selectedCandidate!)
-            if candidatesRecord.count > 1 {
-                updateDatabase(with: selectedCandidate!)
-            }
-            func sumCandidatesRecord() -> Candidate? {
-                var sumText = ""
-                var queryCodeArray = [String]()
-                var type: CandidateType = candidatesRecord[0].type
-                for candidate in candidatesRecord {
-                    if candidate.type != candidatesRecord[0].type {
-                        return nil
-                    }
-                    sumText += candidate.text
-                    queryCodeArray.append(candidate.queryCode)
-                }
-                let sumQueryCode = " ".join(queryCodeArray)
-                return Candidate(text: sumText, type: type, queryString: sumQueryCode)
-            }
-            if let sumCandidate = sumCandidatesRecord() {
-                updateDatabase(with: sumCandidate)
-            }
-            candidatesRecord = [Candidate]()
-            println(history)
-        case .DeleteBackwardNonLastTyping:
-            assert(currentTypingState == .NonEmpty, "Action \(inputAction) should start with state .NonEmpty")
-            currentTypingState = .NonEmpty
-            candidatesRecord = [Candidate]()
-        case .DeleteBackwardLastTyping:
-            assert(currentTypingState == .NonEmpty, "Action \(inputAction) should start with state .NonEmpty")
-            currentTypingState = .Empty
-            candidatesRecord = [Candidate]()
-        case .ResetTyping:
-            currentTypingState = .Empty
-            candidatesRecord = [Candidate]()
+    func updateHistoryWith(candidate: Candidate) {
+        if candidate.type == .OnlyText {
+            return
         }
+        updateDatabase(with: candidate)
     }
     
     func getCandidatesByQueryArguments(queryArguments: [String], andWhereStatement whereStatement: String) -> [Candidate] {

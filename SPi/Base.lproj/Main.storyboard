@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6246"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -37,41 +37,54 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="H2o-SM-mIX">
+                                <rect key="frame" x="149" y="158" width="303" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="K0F-XM-Whf" firstAttribute="leading" secondItem="QZb-nw-ry2" secondAttribute="leading" id="2NR-3O-d0t"/>
                             <constraint firstAttribute="centerY" secondItem="QZb-nw-ry2" secondAttribute="centerY" id="4Hl-QR-LR8"/>
+                            <constraint firstItem="H2o-SM-mIX" firstAttribute="width" secondItem="K0F-XM-Whf" secondAttribute="width" id="6hd-dl-1uh"/>
                             <constraint firstAttribute="centerX" secondItem="QZb-nw-ry2" secondAttribute="centerX" id="6pk-ti-X7V"/>
                             <constraint firstAttribute="centerX" secondItem="QZb-nw-ry2" secondAttribute="centerX" id="AHa-NQ-0Is"/>
                             <constraint firstAttribute="centerY" secondItem="QZb-nw-ry2" secondAttribute="centerY" id="M94-T1-Ea7"/>
                             <constraint firstItem="QZb-nw-ry2" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="40" id="UaA-7z-kH6"/>
                             <constraint firstItem="K0F-XM-Whf" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="ZvV-0J-1ue"/>
                             <constraint firstItem="QZb-nw-ry2" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="40" id="anm-ot-Rtn"/>
+                            <constraint firstAttribute="centerX" secondItem="H2o-SM-mIX" secondAttribute="centerX" id="bGM-RI-6S3"/>
+                            <constraint firstItem="H2o-SM-mIX" firstAttribute="leading" secondItem="K0F-XM-Whf" secondAttribute="leading" id="cPd-1t-WGj"/>
                             <constraint firstAttribute="centerX" secondItem="K0F-XM-Whf" secondAttribute="centerX" id="fLE-LR-wff"/>
+                            <constraint firstItem="H2o-SM-mIX" firstAttribute="trailing" secondItem="K0F-XM-Whf" secondAttribute="trailing" id="gkx-6K-tFv"/>
                             <constraint firstItem="K0F-XM-Whf" firstAttribute="trailing" secondItem="QZb-nw-ry2" secondAttribute="trailing" id="ke9-hq-BUL"/>
                             <constraint firstItem="QZb-nw-ry2" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="259" id="o7f-fr-NYi"/>
                             <constraint firstItem="K0F-XM-Whf" firstAttribute="top" secondItem="QZb-nw-ry2" secondAttribute="bottom" constant="8" id="oCq-ma-uFx"/>
                             <constraint firstAttribute="centerX" secondItem="QZb-nw-ry2" secondAttribute="centerX" id="ulp-Ap-m5O"/>
+                            <constraint firstItem="H2o-SM-mIX" firstAttribute="top" secondItem="K0F-XM-Whf" secondAttribute="bottom" constant="8" id="whV-Hb-qaX"/>
                             <constraint firstItem="K0F-XM-Whf" firstAttribute="leading" secondItem="QZb-nw-ry2" secondAttribute="leading" id="x3w-VL-GTf"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="2NR-3O-d0t"/>
-                                <exclude reference="ZvV-0J-1ue"/>
-                                <exclude reference="ke9-hq-BUL"/>
-                                <exclude reference="x3w-VL-GTf"/>
                                 <exclude reference="4Hl-QR-LR8"/>
                                 <exclude reference="AHa-NQ-0Is"/>
                                 <exclude reference="M94-T1-Ea7"/>
                                 <exclude reference="o7f-fr-NYi"/>
                                 <exclude reference="ulp-Ap-m5O"/>
+                                <exclude reference="2NR-3O-d0t"/>
+                                <exclude reference="ZvV-0J-1ue"/>
+                                <exclude reference="ke9-hq-BUL"/>
+                                <exclude reference="x3w-VL-GTf"/>
+                                <exclude reference="cPd-1t-WGj"/>
+                                <exclude reference="gkx-6K-tFv"/>
                             </mask>
                         </variation>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="125" y="333"/>
         </scene>
     </scenes>
 </document>

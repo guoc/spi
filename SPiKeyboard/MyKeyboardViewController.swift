@@ -25,6 +25,14 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
         fatalError("init(coder:) has not been implemented")
     }
     
+    func insertCandidateAutomaticallyIfNecessary() {
+        if let candidate = candidatesDataModel.getTypingCompleteCachedCandidate() {
+            (self.textDocumentProxy as? UIKeyInput)!.insertText(candidate)
+            candidatesDataModel.typingString.reset()
+            candidatesDataModel.updateDataModelRaisedByTypingChange()
+        }
+    }
+    
     override func keyPressed(key: Key) {
         /* Make sure the implementation is same as its super class' function except the folloing part */
         /* For this function, it's all part */
@@ -41,10 +49,6 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
             if candidatesDataModel.hasTyping() {
                 if let firstCandidate = candidatesDataModel.textAt(indexPathFirst) {
                     candidatesUpdateQueue.selectCandidate(indexPathFirst)
-                    if let candidate = candidatesDataModel.getTypingCachedCandidate() {
-                        (self.textDocumentProxy as? UIKeyInput)!.insertText(candidate)
-                        candidatesDataModel.clearTypingAndCandidates()
-                    }
                 } else {
                     let typingStringAsCandidate = candidatesDataModel.getUserTypingString()
                     (self.textDocumentProxy as? UIKeyInput)!.insertText(typingStringAsCandidate)
@@ -124,17 +128,19 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
         
         if indexPath == indexPathZero {
             if candidatesDataModel.hasTyping() {
-                let userTypingStringAsCandidate = candidatesDataModel.getUserTypingString()
-                (self.textDocumentProxy as? UIKeyInput)!.insertText(userTypingStringAsCandidate)
-                candidatesUpdateQueue.selectCandidate(indexPath)
+                if candidatesDataModel.typingString.hasSelectedPartialCandidates() {
+                    let displayedTypingStringAsCandidate = candidatesDataModel.textAt(indexPathZero)
+                    (self.textDocumentProxy as? UIKeyInput)!.insertText(displayedTypingStringAsCandidate!)
+                    candidatesUpdateQueue.selectCandidate(indexPathZero)
+                } else {
+                    let typingStringAsCandidate = candidatesDataModel.getUserTypingString()
+                    (self.textDocumentProxy as? UIKeyInput)!.insertText(typingStringAsCandidate)
+                    candidatesUpdateQueue.selectCandidate(indexPathZero)
+                }
             }
         } else {
             let selectedCandidate = candidatesDataModel.textAt(indexPath)!
             candidatesUpdateQueue.selectCandidate(indexPath)
-            if let candidate = candidatesDataModel.getTypingCachedCandidate() {
-                (self.textDocumentProxy as? UIKeyInput)!.insertText(candidate)
-                candidatesDataModel.clearTypingAndCandidates()
-            }
         }
     }
     
@@ -447,6 +453,7 @@ class CandidatesUpdateQueue {
                 return
             }
             dispatch_async(dispatch_get_main_queue(), {
+                self.controller.insertCandidateAutomaticallyIfNecessary()
                 self.controller.candidatesDataModel.commitUpdate()
                 self.controller.updateCandidatesBanner()
             })

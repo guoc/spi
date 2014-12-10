@@ -76,7 +76,7 @@ class CandidatesDataModel {
 
     var typingString = TypingString()
     var candidates = [Candidate]()
-    var cachedCandidates: [Candidate]!
+    var cachedCandidates: [Candidate]!    // For two-stage update data to avoid update UI in background thread
     var inputHistory = InputHistory()
 
     var databaseQueue: FMDatabaseQueue?
@@ -98,13 +98,14 @@ class CandidatesDataModel {
         databaseQueue!.close()
     }
     
+    func reset() {
+        typingString = TypingString()
+        candidates = [Candidate]()
+        cachedCandidates = nil
+        inputHistory = InputHistory()
+    }
+    
     func appendTypingStringBy(newString: String, needCandidatesUpdate needUpdate: Bool = true) {
-        
-        if typingString.type == .Empty {
-            inputHistory.updateHistory(with: .StartNewTyping)
-        } else {
-            inputHistory.updateHistory(with: .ContinueTyping)
-        }
         
         typingString.append(newString)
         if needUpdate {
@@ -117,12 +118,6 @@ class CandidatesDataModel {
         typingString.deleteLast()
         if needUpdate {
             updateDataModelRaisedByTypingChange()
-        }
-        
-        if typingString.type == .Empty {
-            inputHistory.updateHistory(with: .DeleteBackwardLastTyping)
-        } else {
-            inputHistory.updateHistory(with: .DeleteBackwardNonLastTyping)
         }
     }
     
@@ -137,22 +132,22 @@ class CandidatesDataModel {
         }
         
         if candidateIndexPath == indexPathZero {
-            clearTypingAndCandidates()
-            inputHistory.updateHistory(with: .SelectLastCandidate, withSelectedCandidates: candidate)
+            inputHistory.updateHistoryWith(candidate)
+            reset()
         } else {
-            if typingString.type == .EnglishOrShuangpin {   // Only could be Shuangpin because not select typing
-                typingString.updateBySelectedCandidateText(candidateText!)
-                if typingString.type == .Empty {
-                    inputHistory.updateHistory(with: .SelectLastCandidate, withSelectedCandidates: candidate)
+            if typingString.typeOfRemainingFormalizedTyping == .EnglishOrShuangpin {   // Only could be Shuangpin because not select typing
+                typingString.updateBySelectedCandidate(candidate)
+                if typingString.typeOfRemainingFormalizedTyping == .Empty {
+                    inputHistory.updateHistoryWith(typingString.getCandidate())
                 } else {
-                    inputHistory.updateHistory(with: .SelectNonLastCandidate, withSelectedCandidates: candidate)
+
                 }
-            } else if typingString.type == .English {
-                clearTypingAndCandidates()
-                inputHistory.updateHistory(with: .SelectLastCandidate, withSelectedCandidates: candidate)
-            } else if typingString.type == .Special {
-                clearTypingAndCandidates()
-                inputHistory.updateHistory(with: .SelectLastCandidate, withSelectedCandidates: candidate)
+            } else if typingString.typeOfRemainingFormalizedTyping == .English {
+                reset()
+                inputHistory.updateHistoryWith(candidate)
+            } else if typingString.typeOfRemainingFormalizedTyping == .Special {
+                reset()
+                inputHistory.updateHistoryWith(candidate)
             } else {
                 
             }
@@ -165,31 +160,28 @@ class CandidatesDataModel {
     
     func resetTyping(needCandidatesUpdate needUpdate: Bool = true) {
         
-        inputHistory.updateHistory(with: .ResetTyping)
-        
-        clearTypingAndCandidates()
+        reset()
         if needUpdate {
             updateDataModelRaisedByTypingChange()
         }
     }
     
-    func clearTypingAndCandidates() {
-        typingString = TypingString()
-        candidates = [Candidate]()
-    }
-    
     func prepareUpdateDataModelRaisedByTypingChange() {
-        let formalizedTypingString = typingString.formalizedTypingStringForQuery
+        let formalizedTypingString = typingString.remainingFormalizedTypingStringForQuery
         switch formalizedTypingString.type {
         case .Empty:
-            clearTypingAndCandidates()
+            if typingString.readyToInsert() == true {
+                
+            } else {
+                reset()
+            }
         case .EnglishOrShuangpin, .English, .Special:
-            cachedCandidates = getCandidatesByFormalizedTypingString(typingString.formalizedTypingStringForQuery)
+            cachedCandidates = getCandidatesByFormalizedTypingString(typingString.remainingFormalizedTypingStringForQuery)
         }
     }
     
     func commitUpdate() {
-        let formalizedTypingString = typingString.formalizedTypingStringForQuery
+        let formalizedTypingString = typingString.remainingFormalizedTypingStringForQuery
         switch formalizedTypingString.type {
         case .Empty:
             break
@@ -372,12 +364,7 @@ class CandidatesDataModel {
     
     func candidateAt(indexPath: NSIndexPath) -> Candidate {
         if indexPath == indexPathZero {
-            let userTyping = typingString.userTypingString
-            if userTyping.containsNonLetters() == true {
-                return Candidate(text: userTyping, withSpecialString: userTyping)
-            } else {
-                return Candidate(text: userTyping, withEnglishString: userTyping.lowercaseString)
-            }
+            return typingString.getCandidate()
         } else {
             return candidates[indexPath.row - 1]
         }
@@ -387,7 +374,7 @@ class CandidatesDataModel {
         return [textAt(indexPathZero)!] + candidates.map({x in return x.text})
     }
     
-    func getTypingCachedCandidate() -> String? {
+    func getTypingCompleteCachedCandidate() -> String? {
         if typingString.readyToInsert() {
             return typingString.joinedCandidate
         } else {
