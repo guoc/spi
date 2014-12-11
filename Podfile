@@ -11,6 +11,6 @@ end
 
 target 'SPiKeyboard' do
 pod 'FMDB', '~> 2.4'
-pod 'InAppSettingsKit', '~> 2.3'
+pod 'InAppSettingsKit', '~> 2.3.2'
 end
 

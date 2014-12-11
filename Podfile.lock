@@ -4,14 +4,14 @@ PODS:
   - FMDB/common (2.4)
   - FMDB/standard (2.4):
     - FMDB/common
-  - InAppSettingsKit (2.3)
+  - InAppSettingsKit (2.3.2)
 
 DEPENDENCIES:
   - FMDB (~> 2.4)
-  - InAppSettingsKit (~> 2.3)
+  - InAppSettingsKit (~> 2.3.2)
 
 SPEC CHECKSUMS:
   FMDB: 0b2fa25e5264ef177973c0cb8c02c711107979aa
-  InAppSettingsKit: 96e3500969b31546b252b039ad6b2b8d82693a1a
+  InAppSettingsKit: 4bae27eb319bf350af5f933196ebc68dbfc65538
 
 COCOAPODS: 0.35.0
