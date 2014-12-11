@@ -135,21 +135,11 @@ class CandidatesDataModel {
             inputHistory.updateHistoryWith(candidate)
             reset()
         } else {
-            if typingString.typeOfRemainingFormalizedTyping == .EnglishOrShuangpin {   // Only could be Shuangpin because not select typing
-                typingString.updateBySelectedCandidate(candidate)
-                if typingString.typeOfRemainingFormalizedTyping == .Empty {
-                    inputHistory.updateHistoryWith(typingString.getCandidate())
-                } else {
-
-                }
-            } else if typingString.typeOfRemainingFormalizedTyping == .English {
-                reset()
-                inputHistory.updateHistoryWith(candidate)
-            } else if typingString.typeOfRemainingFormalizedTyping == .Special {
-                reset()
-                inputHistory.updateHistoryWith(candidate)
+            typingString.updateBySelectedCandidate(candidate)
+            if typingString.typeOfRemainingFormalizedTyping == .Empty {
+                inputHistory.updateHistoryWith(typingString.getCandidate())
             } else {
-                
+
             }
         }
         

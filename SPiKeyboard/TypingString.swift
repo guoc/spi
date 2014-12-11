@@ -167,11 +167,16 @@ class TypingString {
     }
     
     func updateBySelectedCandidate(candidate: Candidate) {
-        let candidateText = candidate.text
-        if self.typeOfRemainingFormalizedTyping == .Special {
-            reset()
-        } else if self.typeOfRemainingFormalizedTyping == .EnglishOrShuangpin {    // See caller, it only could be Shuangpin
-            let numberOfWords = candidateText.getReadingLength()
+        switch candidate.type {
+        case .Empty:
+            assertionFailure("Wrong branch!")
+        case .English, .Special, .OnlyText:
+            assert(_cachedCandidatesWithCorrespondingTyping.isEmpty, "_cachedCandidatesWithCorrespondingTyping: \(_cachedCandidatesWithCorrespondingTyping) should be empty!")
+            let newCandidateWithCorrespondingTyping = (candidate: candidate, typing: userTypingString)
+            _cachedCandidatesWithCorrespondingTyping.append(newCandidateWithCorrespondingTyping)
+        case .Chinese:
+            assert(self.typeOfRemainingFormalizedTyping == .EnglishOrShuangpin, "typeOfRemainingFormalizedTyping should be .EnglishOrShuangpin")
+            let numberOfWords = candidate.text.getReadingLength()
             // Get how many "_" in the pinyin of candidate
             let candidateShuangpinArray = remainingFormalizedTypingStringForQuery.string.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
             let numberOfUnderscore = candidateShuangpinArray[0..<min(numberOfWords, candidateShuangpinArray.count)].reduce(0, { $0 + (contains($1, "_") ? 1 : 0) })
@@ -183,8 +188,6 @@ class TypingString {
             } else {
                 _cachedCandidatesWithCorrespondingTyping.append((candidate: candidate, typing: remainingUserTypingString.substringToIndex(remainingUserTypingString.endIndex)))
             }
-        } else {
-            assertionFailure("unintended branch!")
         }
     }
     
