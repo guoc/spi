@@ -13,7 +13,7 @@ class ShuangpinScheme {
     }
     
     class func loadScheme() {
-        let schemeName = NSUserDefaults.standardUserDefaults().stringForKey("scheme") ?? "自然码"
+        let schemeName = NSUserDefaults.standardUserDefaults().stringForKey("kScheme") ?? "自然码"
         let path = NSBundle.mainBundle().pathForResource(schemeName, ofType: "spscheme")
         if NSFileManager.defaultManager().fileExistsAtPath(path!) {
             _scheme = NSDictionary(contentsOfFile: path!) as [String: String]!

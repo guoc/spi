@@ -5,10 +5,28 @@
 	<key>PreferenceSpecifiers</key>
 	<array>
 		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>IASKViewControllerClass</key>
+			<string>SPiKeyboard.InputHistoryTableViewController</string>
+			<key>IASKViewControllerSelector</key>
+			<string>init</string>
+			<key>Title</key>
+			<string>Input History</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
 			<key>DefaultValue</key>
 			<string>自然码</string>
 			<key>Key</key>
-			<string>scheme</string>
+			<string>kScheme</string>
 			<key>Title</key>
 			<string>双拼方案</string>
 			<key>Titles</key>
@@ -31,16 +49,6 @@
 				<string>智能ABC</string>
 				<string>紫光拼音</string>
 			</array>
-		</dict>
-		<dict>
-			<key>IASKViewControllerClass</key>
-			<string>SPiKeyboard.InputHistoryTableViewController</string>
-			<key>IASKViewControllerSelector</key>
-			<string>init</string>
-			<key>Title</key>
-			<string>Input History</string>
-			<key>Type</key>
-			<string>PSChildPaneSpecifier</string>
 		</dict>
 	</array>
 	<key>StringsTable</key>

@@ -337,8 +337,7 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
         let keyboardSettingsViewController = IASKAppSettingsViewController()
         keyboardSettingsViewController.delegate = self
         let aNavController = UINavigationController(rootViewController: keyboardSettingsViewController)
-        //[viewController setShowCreditsFooter:NO];   // Uncomment to not display InAppSettingsKit credits for creators.
-        // But we encourage you not to uncomment. Thank you!
+        keyboardSettingsViewController.showCreditsFooter = false
         keyboardSettingsViewController.showDoneButton = true;
         self.presentViewController(aNavController, animated: true, completion: nil)
     }
