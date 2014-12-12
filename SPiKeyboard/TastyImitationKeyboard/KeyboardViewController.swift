@@ -556,8 +556,9 @@ class KeyboardViewController: UIInputViewController {
             if charactersAreInCorrectState {
                 (self.textDocumentProxy as? UITextDocumentProxy)?.deleteBackward()
                 (self.textDocumentProxy as? UITextDocumentProxy)?.deleteBackward()
-                (self.textDocumentProxy as? UITextDocumentProxy)?.insertText(".")
-                (self.textDocumentProxy as? UITextDocumentProxy)?.insertText(" ")
+//                (self.textDocumentProxy as? UITextDocumentProxy)?.insertText(".")    // Commented by guoc for changing to Chinese period
+//                (self.textDocumentProxy as? UITextDocumentProxy)?.insertText(" ")    // Commented by guoc for changing to Chinese period
+                (self.textDocumentProxy as? UITextDocumentProxy)?.insertText("。")    // Added by guoc for changing to Chinese period
             }
             
             self.autoPeriodState = .NoSpace
