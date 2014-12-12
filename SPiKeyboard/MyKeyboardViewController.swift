@@ -188,7 +188,7 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
     }
     
     func getCellSizeAtIndex(indexPath: NSIndexPath, inDataModel dataModel: CandidatesDataModel, andSetLayout layout: UICollectionViewFlowLayout) -> CGSize {
-        let size = CandidateCell.getCellSizeByText(dataModel.textAt(indexPath)!)
+        let size = CandidateCell.getCellSizeByText(dataModel.textAt(indexPath)!, needAccuracy: indexPath == indexPathZero ? true : false)
         if let myLayout = layout as? MyCollectionViewFlowLayout {
             myLayout.updateLayoutRaisedByCellAt(indexPath, withCellSize: size)
         }
@@ -196,13 +196,14 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
     }
     
     func resetLayoutWithDataModel() {
-        let allCellSize = candidatesDataModel.allText().map(CandidateCell.getCellSizeByText)
+        var allCellSize = candidatesDataModel.allText().map({CandidateCell.getCellSizeByText($0, needAccuracy: false)})
+        allCellSize[0] = CandidateCell.getCellSizeByText(candidatesDataModel.textAt(indexPathZero)!, needAccuracy: true)
         candidatesBanner!.resetLayoutWithAllCellSize(allCellSize)
     }
     
     func onlyUpdateTyping() {
-        let size = CandidateCell.getCellSizeByText(candidatesDataModel.textAt(indexPathZero)!)
-        let typingIndex = NSIndexPath(forRow: 0, inSection: 0)
+        let size = CandidateCell.getCellSizeByText(candidatesDataModel.textAt(indexPathZero)!, needAccuracy: true)
+        let typingIndex = indexPathZero
         candidatesBanner!.updateCellAt(typingIndex, withCellSize: size)
     }
     
@@ -327,7 +328,7 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
     }
     
     func updateTypingText() {
-        let size = CandidateCell.getCellSizeByText(candidatesDataModel.textAt(indexPathZero)!)
+        let size = CandidateCell.getCellSizeByText(candidatesDataModel.textAt(indexPathZero)!, needAccuracy: true)
         candidatesBanner!.collectionViewLayout.updateLayoutRaisedByCellAt(indexPathZero, withCellSize: size)
     }
     

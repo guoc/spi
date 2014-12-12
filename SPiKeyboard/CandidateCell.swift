@@ -10,8 +10,7 @@ import UIKit
 
 var candidateTextFont = UIFont(descriptor: UIFontDescriptor.preferredFontDescriptorWithTextStyle(UIFontTextStyleBody), size: 20)
 
-// Somewhen this should be cleared
-var textWidthCache = [Int: CGFloat]()
+let oneChineseGlyphWidth = ("镜" as NSString).boundingRectWithSize(CGSize(width: CGFloat.infinity, height: metric("topBanner")), options: .UsesLineFragmentOrigin, attributes: [NSFontAttributeName: candidateTextFont], context: nil).width
 
 class CandidateCell: UICollectionViewCell {
     
@@ -49,26 +48,18 @@ class CandidateCell: UICollectionViewCell {
             textLabel.textColor = UIColor.darkTextColor()        }
     }
     
-    class func getCellSizeByText(text: String) -> CGSize {
-        let textIsAlphabetic: Bool = text.canBeConvertedToEncoding(NSASCIIStringEncoding)
-        let textLength = text.lengthOfBytesUsingEncoding(NSUTF32StringEncoding) / 4
-        var returnWidth: CGFloat!
-        let cachedWidth = textWidthCache[textLength]
-        if textIsAlphabetic || cachedWidth == nil {
-            let maxTypingCandidateCellWidth = CGFloat.infinity
-            let textWidth = (text as NSString).boundingRectWithSize(CGSize(width: maxTypingCandidateCellWidth, height: metric("topBanner")), options: .UsesLineFragmentOrigin, attributes: [NSFontAttributeName: candidateTextFont], context: nil).width + 20
-            if textWidth > maxTypingCandidateCellWidth {
-                returnWidth = maxTypingCandidateCellWidth
-            } else if textWidth < defaultCandidateCellWidth {
-                returnWidth = defaultCandidateCellWidth
-            } else {
-                returnWidth = textWidth
-            }
-            if textIsAlphabetic == false {
-                textWidthCache[textLength] = returnWidth
-            }
+    class func getCellSizeByText(text: String, needAccuracy: Bool) -> CGSize {
+        var textWidth: CGFloat = 0
+        if needAccuracy {
+            textWidth = (text as NSString).boundingRectWithSize(CGSize(width: CGFloat.infinity, height: metric("topBanner")), options: .UsesLineFragmentOrigin, attributes: [NSFontAttributeName: candidateTextFont], context: nil).width + 20
         } else {
-            returnWidth = cachedWidth
+            textWidth = oneChineseGlyphWidth * CGFloat(text.getReadingLength()) + 20
+        }
+        var returnWidth: CGFloat = 0
+        if textWidth < defaultCandidateCellWidth {
+            returnWidth = defaultCandidateCellWidth
+        } else {
+            returnWidth = textWidth
         }
         return CGSize(width: returnWidth, height: metric("topBanner"))
     }
