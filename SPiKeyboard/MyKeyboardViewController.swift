@@ -211,10 +211,6 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
     var nextPageStartX: CGFloat = 0
     var previousPageStartX: CGFloat = 0
     
-//    // For candidates table scroll
-//    var nextPageStartY: CGFloat = 0
-//    var previousPageStartY: CGFloat = 0
-    
     func scrollViewWillBeginDragging(scrollView: UIScrollView) {
 
         let collectionView = scrollView as UICollectionView
@@ -224,53 +220,15 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
             
             return
             
-//            let mostTopCellIndexPathRow = visibleItems.reduce(Int.max) {
-////                collectionView.layoutAttributesForItemAtIndexPath($1 as NSIndexPath)!.frame.minY < collectionView.bounds.minY ? $0 :
-//                    min($0, $1.row)
-//            }
-//            let mostTopCellIndexPath = NSIndexPath(forItem: mostTopCellIndexPathRow, inSection: 0)
-//            
-//            let mostBottomCellIndexPathRow = visibleItems.reduce(Int.min) {
-////                collectionView.layoutAttributesForItemAtIndexPath($1 as NSIndexPath)!.frame.maxY > collectionView.bounds.maxY ? $0 :
-//                    max($0, $1.row)
-//            }
-//            let mostBottomCellIndexPath = NSIndexPath(forItem: mostBottomCellIndexPathRow, inSection: 0)
-//            
-//            nextPageStartY = collectionView.layoutAttributesForItemAtIndexPath(mostBottomCellIndexPath)!.frame.minY
-//            
-//            let maxYOfMostTopCell = collectionView.layoutAttributesForItemAtIndexPath(mostTopCellIndexPath)!.frame.maxY
-//            var indexPath: NSIndexPath! = mostTopCellIndexPath
-//            while collectionView.layoutAttributesForItemAtIndexPath(indexPath)!.frame.minY + collectionView.bounds.height >= maxYOfMostTopCell {
-//                if indexPath.row - 1 < 0 {
-//                    break
-//                } else {
-//                    indexPath = NSIndexPath(forRow: indexPath.row - 1, inSection: indexPath.section)
-//                }
-//            }
-//
-//            if indexPath.row - 1 < 0 {
-//                indexPath = indexPathZero
-//            } else {
-//                indexPath = NSIndexPath(forRow: indexPath.row + 1, inSection: indexPath.section)
-//            }
-//            previousPageStartY = collectionView.layoutAttributesForItemAtIndexPath(indexPath)!.frame.minY
-            
         } else {    // For candidates banner scroll
         
             var mostLeftCellIndexPathRow = visibleItems.reduce(Int.max) {
-//                collectionView.layoutAttributesForItemAtIndexPath($1 as NSIndexPath)!.frame.minX < collectionView.bounds.minX ? $0 :
-                    min($0, $1.row)
+                min($0, $1.row)
             }
             
             var mostRightCellIndexPathRow = visibleItems.reduce(Int.min) {
-//                collectionView.layoutAttributesForItemAtIndexPath($1 as NSIndexPath)!.frame.maxX > collectionView.bounds.maxX ? $0 :
-                    max($0, $1.row)
+                max($0, $1.row)
             }
-            
-//            if mostLeftCellIndexPathRow >= mostRightCellIndexPathRow {
-//                mostLeftCellIndexPathRow = max(mostLeftCellIndexPathRow - 1, 0)
-//                mostRightCellIndexPathRow = min(mostRightCellIndexPathRow + 1, collectionView.numberOfItemsInSection(0))
-//            }
             
             var mostLeftCellIndexPath = NSIndexPath(forItem: mostLeftCellIndexPathRow, inSection: 0)
             var mostRightCellIndexPath = NSIndexPath(forItem: mostRightCellIndexPathRow, inSection: 0)
@@ -319,14 +277,6 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
         if scrollView.isKindOfMyCollectionViewFlowLayout() == false {    // For candidates table scroll
             
             return
-            
-//            assert(previousPageStartY < nextPageStartY, "Calculate wrong pages start")
-//            if targetContentOffset.memory.y > nextPageStartY {
-//                targetContentOffset.memory.y = nextPageStartY
-//            }
-//            if targetContentOffset.memory.y < previousPageStartY {
-//                targetContentOffset.memory.y = previousPageStartY
-//            }
             
         } else {    // For candidates banner scroll
             
