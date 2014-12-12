@@ -50,6 +50,22 @@
 				<string>紫光拼音</string>
 			</array>
 		</dict>
+		<dict>
+			<key>FooterText</key>
+			<string>连按两下空格键插入句号。</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>DefaultValue</key>
+			<string>YES</string>
+			<key>Key</key>
+			<string>kPeriodShortcut</string>
+			<key>Title</key>
+			<string>句号快捷键</string>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+		</dict>
 	</array>
 	<key>StringsTable</key>
 	<string>Root</string>
