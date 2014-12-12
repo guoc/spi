@@ -80,6 +80,13 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
         /* */
     }
     
+    override func keyPressedHelper(sender: KeyboardKey) {
+        super.keyPressedHelper(sender)    // keyPressed is called in super.keyPressedHelper
+        if candidatesDataModel.hasTyping() {
+            autoPeriodState = .NoSpace
+        }
+    }
+    
     var isDeletingTyping = false
     
     override func backspaceDown(sender: KeyboardKey) {
