@@ -272,8 +272,16 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
 //                mostRightCellIndexPathRow = min(mostRightCellIndexPathRow + 1, collectionView.numberOfItemsInSection(0))
 //            }
             
-            let mostLeftCellIndexPath = NSIndexPath(forItem: mostLeftCellIndexPathRow, inSection: 0)
-            let mostRightCellIndexPath = NSIndexPath(forItem: mostRightCellIndexPathRow, inSection: 0)
+            var mostLeftCellIndexPath = NSIndexPath(forItem: mostLeftCellIndexPathRow, inSection: 0)
+            var mostRightCellIndexPath = NSIndexPath(forItem: mostRightCellIndexPathRow, inSection: 0)
+            
+            // Avoid wrong calculation when candidate cell is wider than the width of collectionView
+            let collectionViewBoundsX = collectionView.bounds.origin.x
+            if collectionView.layoutAttributesForItemAtIndexPath(mostRightCellIndexPath)!.frame.minX <= (collectionViewBoundsX > 0 ? collectionViewBoundsX : 0) {    // Expression "? :" for the case when collectionViewBoundsX < 0 because of inset
+                if mostRightCellIndexPath.row + 1 < collectionView.numberOfItemsInSection(0) {
+                    mostRightCellIndexPath = NSIndexPath(forItem: mostRightCellIndexPath.row + 1, inSection: 0)
+                }
+            }
             
             nextPageStartX = collectionView.layoutAttributesForItemAtIndexPath(mostRightCellIndexPath)!.frame.minX
             
@@ -286,11 +294,22 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
                     indexPath = NSIndexPath(forRow: indexPath.row - 1, inSection: indexPath.section)
                 }
             }
-            if indexPath.row - 1 < 0 {
-                indexPath = indexPathZero
+            
+            if indexPath.row == mostLeftCellIndexPath.row {
+                // Avoid wrong calculation when candidate cell is wider than the width of collectionView
+                if indexPath.row - 1 < 0 {
+                    indexPath = indexPathZero
+                } else {
+                    indexPath = NSIndexPath(forRow: indexPath.row - 1, inSection: indexPath.section)
+                }
             } else {
-                indexPath = NSIndexPath(forRow: indexPath.row + 1, inSection: indexPath.section)
+                if indexPath.row - 1 < 0 {
+                    indexPath = indexPathZero
+                } else {
+                    indexPath = NSIndexPath(forRow: indexPath.row + 1, inSection: indexPath.section)
+                }
             }
+            
             previousPageStartX = collectionView.layoutAttributesForItemAtIndexPath(indexPath)!.frame.minX
             
         }
