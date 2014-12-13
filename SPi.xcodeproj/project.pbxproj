@@ -13,7 +13,6 @@
 		BDD3E7481A38477A00CF2CB9 /* InputHistoryRowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDD3E7471A38477A00CF2CB9 /* InputHistoryRowCell.swift */; };
 		BDEDF6871A2DCBF3000CC6B6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDEDF6861A2DCBF3000CC6B6 /* AppDelegate.swift */; };
 		BDEDF6891A2DCBF3000CC6B6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDEDF6881A2DCBF3000CC6B6 /* ViewController.swift */; };
-		BDEDF68C1A2DCBF3000CC6B6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BDEDF68A1A2DCBF3000CC6B6 /* Main.storyboard */; };
 		BDEDF68E1A2DCBF3000CC6B6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BDEDF68D1A2DCBF3000CC6B6 /* Images.xcassets */; };
 		BDEDF6911A2DCBF3000CC6B6 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = BDEDF68F1A2DCBF3000CC6B6 /* LaunchScreen.xib */; };
 		BDEDF69D1A2DCBF3000CC6B6 /* SPiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDEDF69C1A2DCBF3000CC6B6 /* SPiTests.swift */; };
@@ -59,6 +58,17 @@
 		BDEDF7811A2DD69D000CC6B6 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BDEDF76E1A2DD69D000CC6B6 /* Media.xcassets */; };
 		BDEDF7821A2DD69D000CC6B6 /* Shapes.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDEDF76F1A2DD69D000CC6B6 /* Shapes.swift */; };
 		BDEDF7831A2DD69D000CC6B6 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDEDF7701A2DD69D000CC6B6 /* Utilities.swift */; };
+		BDFAA6B31A3C148800958D6D /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BDFAA6B21A3C148800958D6D /* Settings.bundle */; };
+		BDFAA6B91A3C15DD00958D6D /* screenshot-tap-keyboard-settings-icon-5s.png in Resources */ = {isa = PBXBuildFile; fileRef = BDFAA6B51A3C15DD00958D6D /* screenshot-tap-keyboard-settings-icon-5s.png */; };
+		BDFAA6BA1A3C15DD00958D6D /* screenshot-tap-keyboard-settings-icon-6.png in Resources */ = {isa = PBXBuildFile; fileRef = BDFAA6B61A3C15DD00958D6D /* screenshot-tap-keyboard-settings-icon-6.png */; };
+		BDFAA6BB1A3C15DD00958D6D /* screenshot-tap-keyboard-settings-icon-6p.png in Resources */ = {isa = PBXBuildFile; fileRef = BDFAA6B71A3C15DD00958D6D /* screenshot-tap-keyboard-settings-icon-6p.png */; };
+		BDFAA6C21A3C160B00958D6D /* 29@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDFAA6BC1A3C160B00958D6D /* 29@2x.png */; };
+		BDFAA6C31A3C160B00958D6D /* 29@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDFAA6BD1A3C160B00958D6D /* 29@3x.png */; };
+		BDFAA6C41A3C160B00958D6D /* 40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDFAA6BE1A3C160B00958D6D /* 40@2x.png */; };
+		BDFAA6C51A3C160B00958D6D /* 40@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDFAA6BF1A3C160B00958D6D /* 40@3x.png */; };
+		BDFAA6C61A3C160B00958D6D /* 60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDFAA6C01A3C160B00958D6D /* 60@2x.png */; };
+		BDFAA6C71A3C160B00958D6D /* 60@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDFAA6C11A3C160B00958D6D /* 60@3x.png */; };
+		C9BD93BA718424E818463E94 /* libPods-SPi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C02615D65B03FB74D46621CE /* libPods-SPi.a */; };
 		E8103BB38134BF28C2BB94E9 /* libPods-SPiKeyboard.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BB1BD71E99BF370161715A4C /* libPods-SPiKeyboard.a */; };
 /* End PBXBuildFile section */
 
@@ -96,6 +106,7 @@
 /* Begin PBXFileReference section */
 		28CEC39B9B29B8967F369828 /* Pods-SPiKeyboard.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SPiKeyboard.release.xcconfig"; path = "Pods/Target Support Files/Pods-SPiKeyboard/Pods-SPiKeyboard.release.xcconfig"; sourceTree = "<group>"; };
 		3A0B55CB267D381EA3595BCC /* Pods-SPiKeyboard.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SPiKeyboard.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SPiKeyboard/Pods-SPiKeyboard.debug.xcconfig"; sourceTree = "<group>"; };
+		5B7F17C5AD6502748E2F908E /* Pods-SPi.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SPi.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SPi/Pods-SPi.debug.xcconfig"; sourceTree = "<group>"; };
 		BB1BD71E99BF370161715A4C /* libPods-SPiKeyboard.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SPiKeyboard.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD458DB31A37076B00664B2F /* TypingString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypingString.swift; sourceTree = "<group>"; };
 		BDD3E7431A383BBA00CF2CB9 /* InputHistoryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputHistoryTableViewController.swift; sourceTree = "<group>"; };
@@ -105,7 +116,6 @@
 		BDEDF6851A2DCBF3000CC6B6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BDEDF6861A2DCBF3000CC6B6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BDEDF6881A2DCBF3000CC6B6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		BDEDF68B1A2DCBF3000CC6B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BDEDF68D1A2DCBF3000CC6B6 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		BDEDF6901A2DCBF3000CC6B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		BDEDF6961A2DCBF3000CC6B6 /* SPiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SPiTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -160,10 +170,20 @@
 		BDEDF76E1A2DD69D000CC6B6 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		BDEDF76F1A2DD69D000CC6B6 /* Shapes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shapes.swift; sourceTree = "<group>"; };
 		BDEDF7701A2DD69D000CC6B6 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
-		BDEDF7851A2DD908000CC6B6 /* Icon-60@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-60@3x.png"; sourceTree = "<group>"; };
-		BDEDF7861A2DD908000CC6B6 /* Icon-Small-40@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small-40@3x.png"; sourceTree = "<group>"; };
-		BDEDF7871A2DD908000CC6B6 /* Icon-Small@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small@3x.png"; sourceTree = "<group>"; };
 		BDEDF7881A2DD908000CC6B6 /* icon.sketch */ = {isa = PBXFileReference; lastKnownFileType = file; path = icon.sketch; sourceTree = "<group>"; };
+		BDFAA6B21A3C148800958D6D /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		BDFAA6B51A3C15DD00958D6D /* screenshot-tap-keyboard-settings-icon-5s.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "screenshot-tap-keyboard-settings-icon-5s.png"; sourceTree = "<group>"; };
+		BDFAA6B61A3C15DD00958D6D /* screenshot-tap-keyboard-settings-icon-6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "screenshot-tap-keyboard-settings-icon-6.png"; sourceTree = "<group>"; };
+		BDFAA6B71A3C15DD00958D6D /* screenshot-tap-keyboard-settings-icon-6p.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "screenshot-tap-keyboard-settings-icon-6p.png"; sourceTree = "<group>"; };
+		BDFAA6BC1A3C160B00958D6D /* 29@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "29@2x.png"; sourceTree = "<group>"; };
+		BDFAA6BD1A3C160B00958D6D /* 29@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "29@3x.png"; sourceTree = "<group>"; };
+		BDFAA6BE1A3C160B00958D6D /* 40@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "40@2x.png"; sourceTree = "<group>"; };
+		BDFAA6BF1A3C160B00958D6D /* 40@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "40@3x.png"; sourceTree = "<group>"; };
+		BDFAA6C01A3C160B00958D6D /* 60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "60@2x.png"; sourceTree = "<group>"; };
+		BDFAA6C11A3C160B00958D6D /* 60@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "60@3x.png"; sourceTree = "<group>"; };
+		BDFBE1351A3BF1FB00C87DED /* SPi-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SPi-Bridging-Header.h"; sourceTree = "<group>"; };
+		C02615D65B03FB74D46621CE /* libPods-SPi.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SPi.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CBBEC80C8F6F4297FDFBA38B /* Pods-SPi.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SPi.release.xcconfig"; path = "Pods/Target Support Files/Pods-SPi/Pods-SPi.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,6 +191,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C9BD93BA718424E818463E94 /* libPods-SPi.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -197,6 +218,8 @@
 			children = (
 				3A0B55CB267D381EA3595BCC /* Pods-SPiKeyboard.debug.xcconfig */,
 				28CEC39B9B29B8967F369828 /* Pods-SPiKeyboard.release.xcconfig */,
+				5B7F17C5AD6502748E2F908E /* Pods-SPi.debug.xcconfig */,
+				CBBEC80C8F6F4297FDFBA38B /* Pods-SPi.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -205,6 +228,7 @@
 			isa = PBXGroup;
 			children = (
 				BB1BD71E99BF370161715A4C /* libPods-SPiKeyboard.a */,
+				C02615D65B03FB74D46621CE /* libPods-SPi.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -235,13 +259,14 @@
 		BDEDF6831A2DCBF3000CC6B6 /* SPi */ = {
 			isa = PBXGroup;
 			children = (
+				BDFAA6B21A3C148800958D6D /* Settings.bundle */,
 				BDEDF6861A2DCBF3000CC6B6 /* AppDelegate.swift */,
 				BDEDF6881A2DCBF3000CC6B6 /* ViewController.swift */,
-				BDEDF68A1A2DCBF3000CC6B6 /* Main.storyboard */,
 				BDEDF68D1A2DCBF3000CC6B6 /* Images.xcassets */,
 				BDEDF68F1A2DCBF3000CC6B6 /* LaunchScreen.xib */,
 				BDEDF7841A2DD908000CC6B6 /* Resource */,
 				BDEDF6841A2DCBF3000CC6B6 /* Supporting Files */,
+				BDFBE1351A3BF1FB00C87DED /* SPi-Bridging-Header.h */,
 			);
 			path = SPi;
 			sourceTree = "<group>";
@@ -372,9 +397,15 @@
 		BDEDF7841A2DD908000CC6B6 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				BDEDF7851A2DD908000CC6B6 /* Icon-60@3x.png */,
-				BDEDF7861A2DD908000CC6B6 /* Icon-Small-40@3x.png */,
-				BDEDF7871A2DD908000CC6B6 /* Icon-Small@3x.png */,
+				BDFAA6BC1A3C160B00958D6D /* 29@2x.png */,
+				BDFAA6BD1A3C160B00958D6D /* 29@3x.png */,
+				BDFAA6BE1A3C160B00958D6D /* 40@2x.png */,
+				BDFAA6BF1A3C160B00958D6D /* 40@3x.png */,
+				BDFAA6C01A3C160B00958D6D /* 60@2x.png */,
+				BDFAA6C11A3C160B00958D6D /* 60@3x.png */,
+				BDFAA6B51A3C15DD00958D6D /* screenshot-tap-keyboard-settings-icon-5s.png */,
+				BDFAA6B61A3C15DD00958D6D /* screenshot-tap-keyboard-settings-icon-6.png */,
+				BDFAA6B71A3C15DD00958D6D /* screenshot-tap-keyboard-settings-icon-6p.png */,
 				BDEDF7881A2DD908000CC6B6 /* icon.sketch */,
 			);
 			path = Resource;
@@ -387,10 +418,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BDEDF6A01A2DCBF3000CC6B6 /* Build configuration list for PBXNativeTarget "SPi" */;
 			buildPhases = (
+				4DC2D6DFC0D2E6698B842D39 /* Check Pods Manifest.lock */,
 				BDEDF67D1A2DCBF3000CC6B6 /* Sources */,
 				BDEDF67E1A2DCBF3000CC6B6 /* Frameworks */,
 				BDEDF67F1A2DCBF3000CC6B6 /* Resources */,
 				BDEDF6BC1A2DCC76000CC6B6 /* Embed App Extensions */,
+				213AC6103C4C7FB8AF886CDB /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -485,9 +518,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BDEDF68C1A2DCBF3000CC6B6 /* Main.storyboard in Resources */,
+				BDFAA6C41A3C160B00958D6D /* 40@2x.png in Resources */,
+				BDFAA6BA1A3C15DD00958D6D /* screenshot-tap-keyboard-settings-icon-6.png in Resources */,
+				BDFAA6C51A3C160B00958D6D /* 40@3x.png in Resources */,
+				BDFAA6B31A3C148800958D6D /* Settings.bundle in Resources */,
+				BDFAA6C21A3C160B00958D6D /* 29@2x.png in Resources */,
+				BDFAA6C61A3C160B00958D6D /* 60@2x.png in Resources */,
+				BDFAA6BB1A3C15DD00958D6D /* screenshot-tap-keyboard-settings-icon-6p.png in Resources */,
 				BDEDF6911A2DCBF3000CC6B6 /* LaunchScreen.xib in Resources */,
+				BDFAA6B91A3C15DD00958D6D /* screenshot-tap-keyboard-settings-icon-5s.png in Resources */,
+				BDFAA6C31A3C160B00958D6D /* 29@3x.png in Resources */,
 				BDEDF68E1A2DCBF3000CC6B6 /* Images.xcassets in Resources */,
+				BDFAA6C71A3C160B00958D6D /* 60@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -539,6 +581,21 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		213AC6103C4C7FB8AF886CDB /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SPi/Pods-SPi-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		34E550DE3BEB7EF70897BF70 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -552,6 +609,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SPiKeyboard/Pods-SPiKeyboard-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4DC2D6DFC0D2E6698B842D39 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -626,14 +698,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		BDEDF68A1A2DCBF3000CC6B6 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				BDEDF68B1A2DCBF3000CC6B6 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		BDEDF68F1A2DCBF3000CC6B6 /* LaunchScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -726,25 +790,32 @@
 		};
 		BDEDF6A11A2DCBF3000CC6B6 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5B7F17C5AD6502748E2F908E /* Pods-SPi.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = SPi/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "SPi/SPi-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		BDEDF6A21A2DCBF3000CC6B6 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CBBEC80C8F6F4297FDFBA38B /* Pods-SPi.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = SPi/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "4560d004-95cc-486d-b2ea-542645fd1f8a";
+				SWIFT_OBJC_BRIDGING_HEADER = "SPi/SPi-Bridging-Header.h";
 			};
 			name = Release;
 		};

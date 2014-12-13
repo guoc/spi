@@ -2,7 +2,7 @@
 # platform :ios, '6.0'
 
 target 'SPi' do
-
+pod 'InAppSettingsKit', '~> 2.3.2'
 end
 
 target 'SPiTests' do
