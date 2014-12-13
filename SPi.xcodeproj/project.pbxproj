@@ -59,9 +59,6 @@
 		BDEDF7821A2DD69D000CC6B6 /* Shapes.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDEDF76F1A2DD69D000CC6B6 /* Shapes.swift */; };
 		BDEDF7831A2DD69D000CC6B6 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDEDF7701A2DD69D000CC6B6 /* Utilities.swift */; };
 		BDFAA6B31A3C148800958D6D /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BDFAA6B21A3C148800958D6D /* Settings.bundle */; };
-		BDFAA6B91A3C15DD00958D6D /* screenshot-tap-keyboard-settings-icon-5s.png in Resources */ = {isa = PBXBuildFile; fileRef = BDFAA6B51A3C15DD00958D6D /* screenshot-tap-keyboard-settings-icon-5s.png */; };
-		BDFAA6BA1A3C15DD00958D6D /* screenshot-tap-keyboard-settings-icon-6.png in Resources */ = {isa = PBXBuildFile; fileRef = BDFAA6B61A3C15DD00958D6D /* screenshot-tap-keyboard-settings-icon-6.png */; };
-		BDFAA6BB1A3C15DD00958D6D /* screenshot-tap-keyboard-settings-icon-6p.png in Resources */ = {isa = PBXBuildFile; fileRef = BDFAA6B71A3C15DD00958D6D /* screenshot-tap-keyboard-settings-icon-6p.png */; };
 		BDFAA6C21A3C160B00958D6D /* 29@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDFAA6BC1A3C160B00958D6D /* 29@2x.png */; };
 		BDFAA6C31A3C160B00958D6D /* 29@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDFAA6BD1A3C160B00958D6D /* 29@3x.png */; };
 		BDFAA6C41A3C160B00958D6D /* 40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDFAA6BE1A3C160B00958D6D /* 40@2x.png */; };
@@ -109,6 +106,12 @@
 		5B7F17C5AD6502748E2F908E /* Pods-SPi.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SPi.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SPi/Pods-SPi.debug.xcconfig"; sourceTree = "<group>"; };
 		BB1BD71E99BF370161715A4C /* libPods-SPiKeyboard.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SPiKeyboard.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD458DB31A37076B00664B2F /* TypingString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypingString.swift; sourceTree = "<group>"; };
+		BD683ACE1A3C4A5C004F17CB /* screenshot-tap-keyboard-settings-icon-5s.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "screenshot-tap-keyboard-settings-icon-5s.png"; sourceTree = "<group>"; };
+		BD683ACF1A3C4A5C004F17CB /* screenshot-tap-keyboard-settings-icon-6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "screenshot-tap-keyboard-settings-icon-6.png"; sourceTree = "<group>"; };
+		BD683AD01A3C4A5C004F17CB /* screenshot-tap-keyboard-settings-icon-6p.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "screenshot-tap-keyboard-settings-icon-6p.png"; sourceTree = "<group>"; };
+		BD683AD21A3C4A5C004F17CB /* screenshot-tap-keyboard-settings-icon-5s.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "screenshot-tap-keyboard-settings-icon-5s.png"; sourceTree = "<group>"; };
+		BD683AD31A3C4A5C004F17CB /* screenshot-tap-keyboard-settings-icon-6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "screenshot-tap-keyboard-settings-icon-6.png"; sourceTree = "<group>"; };
+		BD683AD41A3C4A5C004F17CB /* screenshot-tap-keyboard-settings-icon-6p.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "screenshot-tap-keyboard-settings-icon-6p.png"; sourceTree = "<group>"; };
 		BDD3E7431A383BBA00CF2CB9 /* InputHistoryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputHistoryTableViewController.swift; sourceTree = "<group>"; };
 		BDD3E7451A3846AA00CF2CB9 /* InputHistoryRowCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InputHistoryRowCell.xib; sourceTree = "<group>"; };
 		BDD3E7471A38477A00CF2CB9 /* InputHistoryRowCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputHistoryRowCell.swift; sourceTree = "<group>"; };
@@ -172,9 +175,6 @@
 		BDEDF7701A2DD69D000CC6B6 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		BDEDF7881A2DD908000CC6B6 /* icon.sketch */ = {isa = PBXFileReference; lastKnownFileType = file; path = icon.sketch; sourceTree = "<group>"; };
 		BDFAA6B21A3C148800958D6D /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
-		BDFAA6B51A3C15DD00958D6D /* screenshot-tap-keyboard-settings-icon-5s.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "screenshot-tap-keyboard-settings-icon-5s.png"; sourceTree = "<group>"; };
-		BDFAA6B61A3C15DD00958D6D /* screenshot-tap-keyboard-settings-icon-6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "screenshot-tap-keyboard-settings-icon-6.png"; sourceTree = "<group>"; };
-		BDFAA6B71A3C15DD00958D6D /* screenshot-tap-keyboard-settings-icon-6p.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "screenshot-tap-keyboard-settings-icon-6p.png"; sourceTree = "<group>"; };
 		BDFAA6BC1A3C160B00958D6D /* 29@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "29@2x.png"; sourceTree = "<group>"; };
 		BDFAA6BD1A3C160B00958D6D /* 29@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "29@3x.png"; sourceTree = "<group>"; };
 		BDFAA6BE1A3C160B00958D6D /* 40@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "40@2x.png"; sourceTree = "<group>"; };
@@ -231,6 +231,35 @@
 				C02615D65B03FB74D46621CE /* libPods-SPi.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BD683ACC1A3C4A5C004F17CB /* screenshot-tap-keyboard-settings-icon */ = {
+			isa = PBXGroup;
+			children = (
+				BD683ACD1A3C4A5C004F17CB /* black */,
+				BD683AD11A3C4A5C004F17CB /* white */,
+			);
+			path = "screenshot-tap-keyboard-settings-icon";
+			sourceTree = "<group>";
+		};
+		BD683ACD1A3C4A5C004F17CB /* black */ = {
+			isa = PBXGroup;
+			children = (
+				BD683ACE1A3C4A5C004F17CB /* screenshot-tap-keyboard-settings-icon-5s.png */,
+				BD683ACF1A3C4A5C004F17CB /* screenshot-tap-keyboard-settings-icon-6.png */,
+				BD683AD01A3C4A5C004F17CB /* screenshot-tap-keyboard-settings-icon-6p.png */,
+			);
+			path = black;
+			sourceTree = "<group>";
+		};
+		BD683AD11A3C4A5C004F17CB /* white */ = {
+			isa = PBXGroup;
+			children = (
+				BD683AD21A3C4A5C004F17CB /* screenshot-tap-keyboard-settings-icon-5s.png */,
+				BD683AD31A3C4A5C004F17CB /* screenshot-tap-keyboard-settings-icon-6.png */,
+				BD683AD41A3C4A5C004F17CB /* screenshot-tap-keyboard-settings-icon-6p.png */,
+			);
+			path = white;
 			sourceTree = "<group>";
 		};
 		BDEDF6781A2DCBF3000CC6B6 = {
@@ -397,15 +426,13 @@
 		BDEDF7841A2DD908000CC6B6 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				BD683ACC1A3C4A5C004F17CB /* screenshot-tap-keyboard-settings-icon */,
 				BDFAA6BC1A3C160B00958D6D /* 29@2x.png */,
 				BDFAA6BD1A3C160B00958D6D /* 29@3x.png */,
 				BDFAA6BE1A3C160B00958D6D /* 40@2x.png */,
 				BDFAA6BF1A3C160B00958D6D /* 40@3x.png */,
 				BDFAA6C01A3C160B00958D6D /* 60@2x.png */,
 				BDFAA6C11A3C160B00958D6D /* 60@3x.png */,
-				BDFAA6B51A3C15DD00958D6D /* screenshot-tap-keyboard-settings-icon-5s.png */,
-				BDFAA6B61A3C15DD00958D6D /* screenshot-tap-keyboard-settings-icon-6.png */,
-				BDFAA6B71A3C15DD00958D6D /* screenshot-tap-keyboard-settings-icon-6p.png */,
 				BDEDF7881A2DD908000CC6B6 /* icon.sketch */,
 			);
 			path = Resource;
@@ -519,14 +546,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				BDFAA6C41A3C160B00958D6D /* 40@2x.png in Resources */,
-				BDFAA6BA1A3C15DD00958D6D /* screenshot-tap-keyboard-settings-icon-6.png in Resources */,
 				BDFAA6C51A3C160B00958D6D /* 40@3x.png in Resources */,
 				BDFAA6B31A3C148800958D6D /* Settings.bundle in Resources */,
 				BDFAA6C21A3C160B00958D6D /* 29@2x.png in Resources */,
 				BDFAA6C61A3C160B00958D6D /* 60@2x.png in Resources */,
-				BDFAA6BB1A3C15DD00958D6D /* screenshot-tap-keyboard-settings-icon-6p.png in Resources */,
 				BDEDF6911A2DCBF3000CC6B6 /* LaunchScreen.xib in Resources */,
-				BDFAA6B91A3C15DD00958D6D /* screenshot-tap-keyboard-settings-icon-5s.png in Resources */,
 				BDFAA6C31A3C160B00958D6D /* 29@3x.png in Resources */,
 				BDEDF68E1A2DCBF3000CC6B6 /* Images.xcassets in Resources */,
 				BDFAA6C71A3C160B00958D6D /* 60@3x.png in Resources */,
