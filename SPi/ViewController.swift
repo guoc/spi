@@ -10,6 +10,8 @@ import UIKit
 
 class ViewController: UINavigationController, IASKSettingsDelegate {
     
+    var appSettingsViewController: IASKAppSettingsViewController!
+    
     override init() {
         var appSettingsViewController = IASKAppSettingsViewController()
         super.init(rootViewController: appSettingsViewController)
@@ -17,6 +19,7 @@ class ViewController: UINavigationController, IASKSettingsDelegate {
         appSettingsViewController.showCreditsFooter = false
         appSettingsViewController.showDoneButton = false
         appSettingsViewController.title = "SPi 双拼输入法"
+        self.appSettingsViewController = appSettingsViewController
     }
 
     required init(coder aDecoder: NSCoder) {
@@ -50,15 +53,12 @@ class ViewController: UINavigationController, IASKSettingsDelegate {
         return nil
     }
     
-//    override func viewWillAppear(animated: Bool) {
-//        self.setNavigationBarHidden(true, animated: animated)
-//        super.viewWillAppear(animated)
-//    }
-//
-//    override func viewWillDisappear(animated: Bool) {
-//        self.setNavigationBarHidden(false, animated: animated)
-//        super.viewWillDisappear(animated)
-//    }
+    override func viewWillAppear(animated: Bool) {
+        if isCustomKeyboardEnabled() == false {
+            self.appSettingsViewController.tableView(self.appSettingsViewController.tableView, didSelectRowAtIndexPath: NSIndexPath(forItem: 0, inSection: 0))
+        }
+        super.viewWillAppear(animated)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,7 +69,19 @@ class ViewController: UINavigationController, IASKSettingsDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
+    func isCustomKeyboardEnabled() -> Bool {
+        let bundleID = "name.guoc.SPi.SPiKeyboard"
+        if let keyboards: [String] = NSUserDefaults.standardUserDefaults().dictionaryRepresentation()["AppleKeyboards"] as? [String] {   // Array of all active keyboards
+            for keyboard in keyboards {
+                if keyboard == bundleID {
+                    return true
+                }
+            }
+        }
+        return false
+    }
+    
 
 }
 
