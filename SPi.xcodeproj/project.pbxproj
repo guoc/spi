@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BD02DE3C1A3C8E9800EBC0E1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BD02DE3B1A3C8E9800EBC0E1 /* Images.xcassets */; };
 		BD458DB41A37076B00664B2F /* TypingString.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD458DB31A37076B00664B2F /* TypingString.swift */; };
 		BDD3E7441A383BBA00CF2CB9 /* InputHistoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDD3E7431A383BBA00CF2CB9 /* InputHistoryTableViewController.swift */; };
 		BDD3E7461A3846AA00CF2CB9 /* InputHistoryRowCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BDD3E7451A3846AA00CF2CB9 /* InputHistoryRowCell.xib */; };
@@ -26,11 +27,6 @@
 		BDEDF71B1A2DD338000CC6B6 /* MyCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDEDF6FE1A2DD338000CC6B6 /* MyCollectionViewFlowLayout.swift */; };
 		BDEDF71C1A2DD338000CC6B6 /* MyKeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDEDF6FF1A2DD338000CC6B6 /* MyKeyboardViewController.swift */; };
 		BDEDF71D1A2DD338000CC6B6 /* PinYinHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDEDF7011A2DD338000CC6B6 /* PinYinHelper.swift */; };
-		BDEDF71E1A2DD338000CC6B6 /* arrow-down-black.pdf in Resources */ = {isa = PBXBuildFile; fileRef = BDEDF7031A2DD338000CC6B6 /* arrow-down-black.pdf */; };
-		BDEDF71F1A2DD338000CC6B6 /* arrow-down-white.pdf in Resources */ = {isa = PBXBuildFile; fileRef = BDEDF7041A2DD338000CC6B6 /* arrow-down-white.pdf */; };
-		BDEDF7201A2DD338000CC6B6 /* arrow-up-black.pdf in Resources */ = {isa = PBXBuildFile; fileRef = BDEDF7051A2DD338000CC6B6 /* arrow-up-black.pdf */; };
-		BDEDF7211A2DD338000CC6B6 /* arrow-up-white.pdf in Resources */ = {isa = PBXBuildFile; fileRef = BDEDF7061A2DD338000CC6B6 /* arrow-up-white.pdf */; };
-		BDEDF7261A2DD338000CC6B6 /* keyboard-more-candidates-arrows.sketch in Resources */ = {isa = PBXBuildFile; fileRef = BDEDF70B1A2DD338000CC6B6 /* keyboard-more-candidates-arrows.sketch */; };
 		BDEDF7271A2DD338000CC6B6 /* 小鹤双拼.spscheme in Resources */ = {isa = PBXBuildFile; fileRef = BDEDF70D1A2DD338000CC6B6 /* 小鹤双拼.spscheme */; };
 		BDEDF7281A2DD338000CC6B6 /* 微软拼音2003.spscheme in Resources */ = {isa = PBXBuildFile; fileRef = BDEDF70E1A2DD338000CC6B6 /* 微软拼音2003.spscheme */; };
 		BDEDF7291A2DD338000CC6B6 /* 拼音加加.spscheme in Resources */ = {isa = PBXBuildFile; fileRef = BDEDF70F1A2DD338000CC6B6 /* 拼音加加.spscheme */; };
@@ -59,12 +55,6 @@
 		BDEDF7821A2DD69D000CC6B6 /* Shapes.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDEDF76F1A2DD69D000CC6B6 /* Shapes.swift */; };
 		BDEDF7831A2DD69D000CC6B6 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDEDF7701A2DD69D000CC6B6 /* Utilities.swift */; };
 		BDFAA6B31A3C148800958D6D /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BDFAA6B21A3C148800958D6D /* Settings.bundle */; };
-		BDFAA6C21A3C160B00958D6D /* 29@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDFAA6BC1A3C160B00958D6D /* 29@2x.png */; };
-		BDFAA6C31A3C160B00958D6D /* 29@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDFAA6BD1A3C160B00958D6D /* 29@3x.png */; };
-		BDFAA6C41A3C160B00958D6D /* 40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDFAA6BE1A3C160B00958D6D /* 40@2x.png */; };
-		BDFAA6C51A3C160B00958D6D /* 40@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDFAA6BF1A3C160B00958D6D /* 40@3x.png */; };
-		BDFAA6C61A3C160B00958D6D /* 60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDFAA6C01A3C160B00958D6D /* 60@2x.png */; };
-		BDFAA6C71A3C160B00958D6D /* 60@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDFAA6C11A3C160B00958D6D /* 60@3x.png */; };
 		C9BD93BA718424E818463E94 /* libPods-SPi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C02615D65B03FB74D46621CE /* libPods-SPi.a */; };
 		E8103BB38134BF28C2BB94E9 /* libPods-SPiKeyboard.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BB1BD71E99BF370161715A4C /* libPods-SPiKeyboard.a */; };
 /* End PBXBuildFile section */
@@ -105,6 +95,7 @@
 		3A0B55CB267D381EA3595BCC /* Pods-SPiKeyboard.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SPiKeyboard.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SPiKeyboard/Pods-SPiKeyboard.debug.xcconfig"; sourceTree = "<group>"; };
 		5B7F17C5AD6502748E2F908E /* Pods-SPi.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SPi.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SPi/Pods-SPi.debug.xcconfig"; sourceTree = "<group>"; };
 		BB1BD71E99BF370161715A4C /* libPods-SPiKeyboard.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SPiKeyboard.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BD02DE3B1A3C8E9800EBC0E1 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		BD458DB31A37076B00664B2F /* TypingString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypingString.swift; sourceTree = "<group>"; };
 		BD683ACE1A3C4A5C004F17CB /* screenshot-tap-keyboard-settings-icon-5s.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "screenshot-tap-keyboard-settings-icon-5s.png"; sourceTree = "<group>"; };
 		BD683ACF1A3C4A5C004F17CB /* screenshot-tap-keyboard-settings-icon-6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "screenshot-tap-keyboard-settings-icon-6.png"; sourceTree = "<group>"; };
@@ -352,6 +343,7 @@
 				BDD3E7431A383BBA00CF2CB9 /* InputHistoryTableViewController.swift */,
 				BDD3E7451A3846AA00CF2CB9 /* InputHistoryRowCell.xib */,
 				BDD3E7471A38477A00CF2CB9 /* InputHistoryRowCell.swift */,
+				BD02DE3B1A3C8E9800EBC0E1 /* Images.xcassets */,
 				BDEDF6F91A2DD338000CC6B6 /* candidates.sqlite */,
 				BDEDF75D1A2DD69D000CC6B6 /* TastyImitationKeyboard */,
 				BDEDF7021A2DD338000CC6B6 /* Resource */,
@@ -546,15 +538,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BDFAA6C41A3C160B00958D6D /* 40@2x.png in Resources */,
-				BDFAA6C51A3C160B00958D6D /* 40@3x.png in Resources */,
 				BDFAA6B31A3C148800958D6D /* Settings.bundle in Resources */,
-				BDFAA6C21A3C160B00958D6D /* 29@2x.png in Resources */,
-				BDFAA6C61A3C160B00958D6D /* 60@2x.png in Resources */,
 				BDEDF6911A2DCBF3000CC6B6 /* LaunchScreen.xib in Resources */,
-				BDFAA6C31A3C160B00958D6D /* 29@3x.png in Resources */,
 				BDEDF68E1A2DCBF3000CC6B6 /* Images.xcassets in Resources */,
-				BDFAA6C71A3C160B00958D6D /* 60@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -570,20 +556,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				BDEDF72D1A2DD338000CC6B6 /* Settings.bundle in Resources */,
+				BD02DE3C1A3C8E9800EBC0E1 /* Images.xcassets in Resources */,
 				BDEDF72B1A2DD338000CC6B6 /* 紫光拼音.spscheme in Resources */,
 				BDD3E7461A3846AA00CF2CB9 /* InputHistoryRowCell.xib in Resources */,
-				BDEDF7261A2DD338000CC6B6 /* keyboard-more-candidates-arrows.sketch in Resources */,
 				BDEDF72C1A2DD338000CC6B6 /* 自然码.spscheme in Resources */,
-				BDEDF71E1A2DD338000CC6B6 /* arrow-down-black.pdf in Resources */,
 				BDEDF7811A2DD69D000CC6B6 /* Media.xcassets in Resources */,
 				BDEDF7291A2DD338000CC6B6 /* 拼音加加.spscheme in Resources */,
-				BDEDF7201A2DD338000CC6B6 /* arrow-up-black.pdf in Resources */,
-				BDEDF71F1A2DD338000CC6B6 /* arrow-down-white.pdf in Resources */,
 				BDEDF72A1A2DD338000CC6B6 /* 智能ABC.spscheme in Resources */,
 				BDEDF7171A2DD338000CC6B6 /* candidates.sqlite in Resources */,
 				BDEDF7281A2DD338000CC6B6 /* 微软拼音2003.spscheme in Resources */,
 				BDEDF7751A2DD69D000CC6B6 /* DefaultSettings.xib in Resources */,
-				BDEDF7211A2DD338000CC6B6 /* arrow-up-white.pdf in Resources */,
 				BDEDF7271A2DD338000CC6B6 /* 小鹤双拼.spscheme in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
