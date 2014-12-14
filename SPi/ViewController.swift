@@ -47,6 +47,7 @@ class ViewController: UINavigationController, IASKSettingsDelegate {
         if let key = settingsViewController.settingsReader.keyForSection(section) {
             if key == "kScreenshotTapKeyboardSettingsIcon" {
                 var imageView = UIImageView(image: UIImage(named: "Screenshot tap keyboard settings icon"))
+                imageView.contentMode = .ScaleAspectFit
                 return imageView
             }
         }
