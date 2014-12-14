@@ -510,6 +510,7 @@
 					};
 					BDEDF6AF1A2DCC76000CC6B6 = {
 						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = 46J35R76NH;
 					};
 				};
 			};
@@ -753,7 +754,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "4560d004-95cc-486d-b2ea-542645fd1f8a";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -789,7 +790,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "4560d004-95cc-486d-b2ea-542645fd1f8a";
+				PROVISIONING_PROFILE = "bc847f3b-0f70-4bee-ab17-54d0c4037506";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -821,7 +822,7 @@
 				INFOPLIST_FILE = SPi/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "4560d004-95cc-486d-b2ea-542645fd1f8a";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "SPi/SPi-Bridging-Header.h";
 			};
 			name = Release;
@@ -894,7 +895,7 @@
 				INFOPLIST_FILE = SPiKeyboard/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "4560d004-95cc-486d-b2ea-542645fd1f8a";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 				STRIP_STYLE = "non-global";
 				SWIFT_OBJC_BRIDGING_HEADER = "SPiKeyboard/SPiKeyboard-Bridging-Header.h";
