@@ -59,6 +59,10 @@ class InputHistoryTableViewController: UITableViewController {
         self.rows.sort {
             ($0["frequency"] as NSNumber).integerValue > ($1["frequency"] as NSNumber).integerValue
         }
+        
+        self.rows = self.rows.filter {
+            self.candidateTextIsInCandidatesDatabase($0["candidate"] as String) == false
+        }
     }
 
     // MARK: - Table view data source
@@ -88,6 +92,31 @@ class InputHistoryTableViewController: UITableViewController {
         }
         
         return cell
+    }
+    
+    lazy var _candidateDatabase: FMDatabase = {
+        let databasePath = NSBundle.mainBundle().pathForResource("candidates", ofType: "sqlite")
+        let database = FMDatabase(path: databasePath)
+        if !database.open() {
+            assertionFailure("Unable to open database")
+        }
+        return database
+    }()
+    
+    func candidateTextIsInCandidatesDatabase(candidateText: String) -> Bool {
+        if let rs = _candidateDatabase.executeQuery("select * from candidates where candidate == ?", withArgumentsInArray: [candidateText]) {
+            if rs.next() {
+                return true
+            } else {
+                return false
+            }
+        } else {
+            assertionFailure("select failed: \(_candidateDatabase.lastErrorMessage())")
+        }
+    }
+    
+    deinit {
+        _candidateDatabase.close()
     }
 
     /*
