@@ -53,7 +53,7 @@ func defaultKeyboard() -> Keyboard {
     
     var returnKey = Key(.Return)
 //    returnKey.uppercaseKeyCap = "return"    // Commented by guoc
-    returnKey.uppercaseKeyCap = "换行"    // Added by guoc
+    returnKey.uppercaseKeyCap = "⏎"    // Added by guoc
     returnKey.uppercaseOutput = "\n"
     returnKey.lowercaseOutput = "\n"
     defaultKeyboard.addKey(returnKey, row: 3, page: 0)
