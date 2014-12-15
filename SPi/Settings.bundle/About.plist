@@ -6,21 +6,9 @@
 	<array>
 		<dict>
 			<key>File</key>
-			<string>Tutorial</string>
+			<string>Acknowledgements</string>
 			<key>Title</key>
-			<string>设置向导</string>
-			<key>Type</key>
-			<string>PSChildPaneSpecifier</string>
-		</dict>
-		<dict>
-			<key>Type</key>
-			<string>PSGroupSpecifier</string>
-		</dict>
-		<dict>
-			<key>File</key>
-			<string>About</string>
-			<key>Title</key>
-			<string>关于SPi</string>
+			<string>第三方软件许可</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -28,6 +16,6 @@
 	<key>StringsTable</key>
 	<string>Root</string>
 	<key>Title</key>
-	<string>SPi Settings</string>
+	<string>关于SPi</string>
 </dict>
 </plist>
