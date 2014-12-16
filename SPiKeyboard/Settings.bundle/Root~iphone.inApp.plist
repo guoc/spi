@@ -9,20 +9,6 @@
 			<string>PSGroupSpecifier</string>
 		</dict>
 		<dict>
-			<key>IASKViewControllerClass</key>
-			<string>SPiKeyboard.InputHistoryTableViewController</string>
-			<key>IASKViewControllerSelector</key>
-			<string>init</string>
-			<key>Title</key>
-			<string>Input History</string>
-			<key>Type</key>
-			<string>PSChildPaneSpecifier</string>
-		</dict>
-		<dict>
-			<key>Type</key>
-			<string>PSGroupSpecifier</string>
-		</dict>
-		<dict>
 			<key>DefaultValue</key>
 			<string>自然码</string>
 			<key>Key</key>
