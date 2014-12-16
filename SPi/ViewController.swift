@@ -54,6 +54,12 @@ class ViewController: UINavigationController, IASKSettingsDelegate {
         return nil
     }
     
+    func settingsViewController(sender: IASKAppSettingsViewController!, buttonTappedForSpecifier specifier: IASKSpecifier!) {
+        if specifier.key() == "kFeedback" {
+            UserVoice.presentUserVoiceInterfaceForParentViewController(self)
+        }
+    }
+    
     override func viewWillAppear(animated: Bool) {
         if isCustomKeyboardEnabled() == false {
             self.appSettingsViewController.tableView(self.appSettingsViewController.tableView, didSelectRowAtIndexPath: NSIndexPath(forItem: 0, inSection: 0))

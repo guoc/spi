@@ -17,6 +17,18 @@
 			<string>PSGroupSpecifier</string>
 		</dict>
 		<dict>
+			<key>Key</key>
+			<string>kFeedback</string>
+			<key>Title</key>
+			<string>写给作者</string>
+			<key>Type</key>
+			<string>IASKButtonSpecifier</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
 			<key>File</key>
 			<string>About</string>
 			<key>Title</key>

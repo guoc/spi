@@ -3,6 +3,7 @@
 
 target 'SPi' do
 pod 'InAppSettingsKit', '~> 2.3.2'
+pod 'uservoice-iphone-sdk'
 end
 
 target 'SPiTests' do

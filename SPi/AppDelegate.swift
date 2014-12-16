@@ -21,6 +21,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             window.makeKeyAndVisible()
             window.rootViewController = ViewController()
         }
+        
+        // Config UserVoice
+        let config = UVConfig(site: "spi.uservoice.com")
+        config.forumId = 278027
+        // [config identifyUserWithEmail:@"email@example.com" name:@"User Name", guid:@"USER_ID");
+        UserVoice.initialize(config)
+        
         return true
     }
 

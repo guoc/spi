@@ -4,3 +4,5 @@
 
 #import "IASKAppSettingsViewController.h"
 #import "IASKSettingsReader.h"
+
+#import "UserVoice.h"
