@@ -60,11 +60,10 @@ class ViewController: UINavigationController, IASKSettingsDelegate {
         }
     }
     
-    override func viewWillAppear(animated: Bool) {
+    func pushToTutorialIfNecessary() {
         if isCustomKeyboardEnabled() == false {
             self.appSettingsViewController.tableView(self.appSettingsViewController.tableView, didSelectRowAtIndexPath: NSIndexPath(forItem: 0, inSection: 0))
         }
-        super.viewWillAppear(animated)
     }
     
     override func viewDidLoad() {

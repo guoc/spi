@@ -28,6 +28,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // [config identifyUserWithEmail:@"email@example.com" name:@"User Name", guid:@"USER_ID");
         UserVoice.initialize(config)
         
+        if let window = window {
+            if let controller = window.rootViewController as? ViewController {
+                controller.pushToTutorialIfNecessary()
+            }
+        }
+        
         return true
     }
 
