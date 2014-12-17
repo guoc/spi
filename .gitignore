@@ -2,3 +2,6 @@ xcuserdata
 Pods
 candidates.sqlite
 .DS_Store
+Gemfile
+Gemfile.lock
+_site
