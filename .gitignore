@@ -5,3 +5,5 @@ candidates.sqlite
 Gemfile
 Gemfile.lock
 _site
+.sass-cache
+
