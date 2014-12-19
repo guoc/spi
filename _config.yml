@@ -1,10 +1,10 @@
 # Site settings
 title:       SPi 双拼输入法 for iPhone
-email:       spi-support@guoc.name
+email:       support@spiim.com
 author:      guoc
 description: "在iPhone上简单地打双拼"
 baseurl:     ""
-url:         "http://spi.guoc.name"
+url:         "http://spiim.com"
 
 # Google analytics
 google_analytics: "UA-57747253-2"
