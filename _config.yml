@@ -7,7 +7,7 @@ baseurl:     ""
 url:         "http://spi.guoc.name"
 
 # Google analytics
-google_analytics:
+google_analytics: "UA-57747253-2"
 
 # Optional features
 animated:           false
