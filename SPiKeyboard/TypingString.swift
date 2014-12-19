@@ -214,7 +214,7 @@ class TypingString {
         //            return useForDisply ? FormalizedTypingString(type: .English, string: userTypingString) : FormalizedTypingString(type: .English, string: word)
         //        }
         
-        if userTypingString.onlyContainsLowercaseLetters() == false {    // no matter for display or not
+        if userTypingString.containsNonLetters() {    // no matter for display or not
             return FormalizedTypingString(type: .Special, string: userTypingString)
         } else if userTypingString.containsUppercaseLetters() == true {
             return FormalizedTypingString(type: .English, string: userTypingString)

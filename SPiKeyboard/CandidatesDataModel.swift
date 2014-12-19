@@ -222,6 +222,10 @@ class CandidatesDataModel {
                 queryArguments.append(getShengmuString(from: strToAppend).lowercaseString)
                 queryArguments.append(strToAppend)
             }
+        } else if formalizedTypingString.type == .English {
+            let strToAppend = formalizedStr.lowercaseString
+            queryArguments.append(String(strToAppend[strToAppend.startIndex]))
+            queryArguments.append(strToAppend + "%")
         } else if formalizedTypingString.type == .Special {
             let strToAppend = formalizedStr
             queryArguments.append(String(strToAppend[strToAppend.startIndex]))
