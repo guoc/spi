@@ -49,11 +49,22 @@ class CandidateCell: UICollectionViewCell {
     }
     
     class func getCellSizeByText(text: String, needAccuracy: Bool) -> CGSize {
+        
+        func accurateWidth() -> CGFloat {
+            return (text as NSString).boundingRectWithSize(CGSize(width: CGFloat.infinity, height: metric("topBanner")), options: .UsesLineFragmentOrigin, attributes: [NSFontAttributeName: candidateTextFont], context: nil).width + 20
+        }
+        
         var textWidth: CGFloat = 0
         if needAccuracy {
-            textWidth = (text as NSString).boundingRectWithSize(CGSize(width: CGFloat.infinity, height: metric("topBanner")), options: .UsesLineFragmentOrigin, attributes: [NSFontAttributeName: candidateTextFont], context: nil).width + 20
+            textWidth = accurateWidth()
         } else {
-            textWidth = oneChineseGlyphWidth * CGFloat(text.getReadingLength()) + 20
+            let length = text.getReadingLength()
+            let utf8Length = text.lengthOfBytesUsingEncoding(NSUTF8StringEncoding)
+            if utf8Length == length * 3 {
+                textWidth = oneChineseGlyphWidth * CGFloat(text.getReadingLength()) + 20
+            } else {
+                textWidth = accurateWidth()
+            }
         }
         var returnWidth: CGFloat = 0
         if textWidth < defaultCandidateCellWidth {
