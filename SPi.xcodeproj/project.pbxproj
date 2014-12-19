@@ -115,7 +115,6 @@
 		BDEDF6961A2DCBF3000CC6B6 /* SPiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SPiTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDEDF69B1A2DCBF3000CC6B6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BDEDF69C1A2DCBF3000CC6B6 /* SPiTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPiTests.swift; sourceTree = "<group>"; };
-		BDEDF6A71A2DCC0A000CC6B6 /* candidates.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = candidates.sqlite; sourceTree = "<group>"; };
 		BDEDF6A81A2DCC0A000CC6B6 /* english_word_list.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = english_word_list.txt; sourceTree = "<group>"; };
 		BDEDF6A91A2DCC0A000CC6B6 /* extra_candidates_utf8.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = extra_candidates_utf8.txt; sourceTree = "<group>"; };
 		BDEDF6AA1A2DCC0A000CC6B6 /* generate_database.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = generate_database.py; sourceTree = "<group>"; };
@@ -319,7 +318,6 @@
 		BDEDF6A61A2DCC0A000CC6B6 /* Candidates */ = {
 			isa = PBXGroup;
 			children = (
-				BDEDF6A71A2DCC0A000CC6B6 /* candidates.sqlite */,
 				BDEDF6A81A2DCC0A000CC6B6 /* english_word_list.txt */,
 				BDEDF6A91A2DCC0A000CC6B6 /* extra_candidates_utf8.txt */,
 				BDEDF6AA1A2DCC0A000CC6B6 /* generate_database.py */,
