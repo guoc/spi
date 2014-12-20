@@ -78,42 +78,11 @@ class InputHistory {
     }
     
     func getCandidatesByQueryArguments(queryArguments: [String], andWhereStatement whereStatement: String) -> [Candidate] {
-        var candidates = [Candidate]()
         let queryStatement = "select candidate, shuangpin, candidate_type from history where " + whereStatement + " order by length desc, frequency desc"
         println(queryStatement)
         println(queryArguments)
-        databaseQueue?.inDatabase() {
-            db in
-            if let rs = db.executeQuery(queryStatement, withArgumentsInArray: queryArguments) {
-                while rs.next() {
-                    let candidateString = rs.stringForColumn("candidate") as String
-                    let queryCode = rs.stringForColumn("shuangpin") as String
-                    let candidateType = rs.intForColumn("candidate_type")
-                    
-                    var candidate: Candidate?
-                    
-                    switch candidateType {
-                    case 1:    // .Chinese:
-                        candidate = Candidate(text: candidateString, withShuangpinString: queryCode)
-                    case 2:    // .English:
-                        candidate = Candidate(text: candidateString, withEnglishString: queryCode)
-                    case 3:    // .Special:
-                        candidate = Candidate(text: candidateString, withSpecialString: queryCode)
-                    default:
-                        assertionFailure("Wrong candidate type!")
-                    }
-                    
-                    if candidate != nil {
-                        candidates.append(candidate!)
-                    }
-                    if candidates.count >= 100 {
-                        break
-                    }
-                }
-            } else {
-                println("select failed: \(db.lastErrorMessage())")
-            }
-        }
+        let candidates = databaseQueue!.getCandidates(byQueryStatement: queryStatement, byQueryArguments: queryArguments, needTruncateCandidates: false)
+        
         return candidates
     }
     

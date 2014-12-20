@@ -70,6 +70,45 @@ extension String {
     }
 }
 
+extension FMDatabaseQueue {
+    func getCandidates(byQueryStatement queryStatement: String, byQueryArguments queryArguments: [String], needTruncateCandidates: Bool) -> [Candidate] {
+        
+        var candidates = [Candidate]()
+        self.inDatabase() {
+            db in
+            if let rs = db.executeQuery(queryStatement, withArgumentsInArray: queryArguments) {
+                while rs.next() {
+                    let candidateString = rs.stringForColumn("candidate") as String
+                    let queryCode = rs.stringForColumn("shuangpin") as String
+                    let candidateType = rs.intForColumn("candidate_type")
+                    
+                    var candidate: Candidate?
+                    
+                    switch candidateType {
+                    case 1:    // .Chinese:
+                        candidate = Candidate(text: candidateString, withShuangpinString: queryCode)
+                    case 2:    // .English:
+                        candidate = Candidate(text: candidateString, withEnglishString: queryCode)
+                    case 3:    // .Special:
+                        candidate = Candidate(text: candidateString, withSpecialString: queryCode)
+                    default:
+                        assertionFailure("Wrong candidate type!")
+                    }
+                    if candidate != nil {
+                        candidates.append(candidate!)
+                    }
+                    
+                    if needTruncateCandidates && candidates.count >= 100 {
+                        break
+                    }
+                }
+            } else {
+                println("select failed: \(db.lastErrorMessage())")
+            }
+        }
+        return candidates
+    }
+}
 
 
 class CandidatesDataModel {
@@ -186,58 +225,117 @@ class CandidatesDataModel {
     }
     
     func getCandidatesByFormalizedTypingString(formalizedTypingString: FormalizedTypingString) -> [Candidate] {
-        var formalizedStr: String!
         
-        switch formalizedTypingString.type {
-        case .Empty:
-            return [Candidate]()
-        case .EnglishOrShuangpin, .English, .Special:
-            formalizedStr = formalizedTypingString.string
+        func mergeCandidatesArrays(candidatesA: [Candidate], candidatesB: [Candidate]) -> [Candidate] {
+            
+            var candidatesAIndex = 0
+            var candidatesBIndex = 0
+            let candidatesALength = candidatesA.count
+            let candidatesBLength = candidatesB.count
+            var retCandidates = [Candidate]()
+            var addedDict = [String: Bool]()
+            
+            while candidatesAIndex < candidatesALength && candidatesBIndex < candidatesBLength {
+                if candidatesA[candidatesAIndex].text.getReadingLength() <=
+                    candidatesB[candidatesBIndex].text.getReadingLength() {
+                        let historyCandidate = candidatesB[candidatesBIndex]
+                        if addedDict[historyCandidate.text] == nil {
+                            addedDict[historyCandidate.text] = true
+                            retCandidates.append(historyCandidate)
+                        }
+                        candidatesBIndex++
+                } else {
+                    let candidate = candidatesA[candidatesAIndex]
+                    if addedDict[candidate.text] == nil {
+                        addedDict[candidate.text] = true
+                        retCandidates.append(candidate)
+                    }
+                    candidatesAIndex++
+                }
+            }
+            if candidatesAIndex == candidatesALength {
+                for elem in candidatesB[candidatesBIndex..<candidatesBLength] {
+                    if addedDict[elem.text] == nil {
+                        addedDict[elem.text] = true
+                        retCandidates.append(elem)
+                    }
+                }
+            } else if candidatesBIndex == candidatesBLength {
+                for elem in candidatesA[candidatesAIndex..<candidatesALength] {
+                    if addedDict[elem.text] == nil {
+                        addedDict[elem.text] = true
+                        retCandidates.append(elem)
+                    }
+                }
+            } else {
+                assertionFailure("Something wrong")
+            }
+            
+            return retCandidates
         }
         
+        if formalizedTypingString.type == .Empty {
+            return [Candidate]()
+        }
+        
+        // Below formalizedTypingString.type == .EnglishOrShuangpin || .English || .Special
+        
+        var formalizedStr = formalizedTypingString.string
         var index = formalizedStr.getReadingLength() - 1
-        var queryArguments = [String]()
         var needTruncateCandidates = false
         var lackInternalShengmu = (contains(formalizedStr, "_"))
-        
+        var queryArguments = [String]()
+        var clauseCount = 0
         var whereStatement = ""
         
-        if formalizedTypingString.type == .English || formalizedTypingString.type == .EnglishOrShuangpin {
-            queryArguments.append(String(typingString.userTypingString[formalizedStr.startIndex]))
-            queryArguments.append(typingString.userTypingString.lowercaseString.stringByRemovingWhitespaceAndUnderscore())
+        switch formalizedTypingString.type {
+            
+        case .EnglishOrShuangpin:
+            
+            // Prepare ACCURATE query if typing may be English
+            queryArguments.append(String(typingString.userTypingString[typingString.userTypingString.startIndex]))
+            queryArguments.append(typingString.userTypingString.lowercaseString)
             whereStatement += "shengmu = ? and shuangpin = ? or "
-        }
-        
-        if formalizedTypingString.type == .EnglishOrShuangpin {
-            if index % 3 == 0 { // will query with complemented yunmu
+            
+            // Prepare query if typing may be shuangpin
+            
+            // Last shuangpin may be incomplete, handle this according to the position of current index.
+            switch index % 3 {
+            case 0:    // xx xx x
+                // will query with complemented yunmu
                 needTruncateCandidates = true
                 let strToAppend = formalizedStr + "_"
                 queryArguments.append(getShengmuString(from: strToAppend))
                 queryArguments.append(strToAppend)
+                clauseCount++
                 index -= 2
+            case 1:    // xx xx xx
+                break    // Empty statement
+            case 2:    // xx xx( )    last character is whitespace
+                assertionFailure("Bad formalizedTypingString")
+            default:    // Impossible
+                break    // Empty statement
             }
 
+            // Handle left typing
             for ; index >= 0; index-=3 {
                 let strToAppend = formalizedStr.substringToIndex(advance(formalizedStr.startIndex, index+1))
                 queryArguments.append(getShengmuString(from: strToAppend).lowercaseString)
                 queryArguments.append(strToAppend)
+                clauseCount++
             }
-        } else if formalizedTypingString.type == .English {
+        case .English:
             let strToAppend = formalizedStr.lowercaseString
             queryArguments.append(String(strToAppend[strToAppend.startIndex]))
             queryArguments.append(strToAppend + "%")
-        } else if formalizedTypingString.type == .Special {
+            clauseCount++
+        case .Special:
             let strToAppend = formalizedStr
             queryArguments.append(String(strToAppend[strToAppend.startIndex]))
             queryArguments.append(strToAppend + "%")
-            
-        } else {
-            assertionFailure("Wrong FormalizedTypingString.type")
-        }
-        
-        var clauseCount = queryArguments.count / 2
-        if formalizedTypingString.type == .English || formalizedTypingString.type == .EnglishOrShuangpin {
-            clauseCount -= 1
+            clauseCount++
+        case .Empty:
+            assertionFailure(".Empty has already returned!")
         }
         
         whereStatement += " or ".join(Array(count: clauseCount, repeatedValue: "shengmu = ? and shuangpin like ?"))
@@ -247,86 +345,13 @@ class CandidatesDataModel {
         println(queryStatement)
         println(queryArguments)
         
-        var candidates = [Candidate]()
-        
-        databaseQueue?.inDatabase() {
-            db in
-            if let rs = db.executeQuery(queryStatement, withArgumentsInArray: queryArguments) {
-                while rs.next() {
-                    let candidateString = rs.stringForColumn("candidate") as String
-                    let queryCode = rs.stringForColumn("shuangpin") as String
-                    let candidateType = rs.intForColumn("candidate_type")
-                    
-                    var candidate: Candidate?
-                    
-                    switch candidateType {
-                    case 1:    // .Chinese:
-                        candidate = Candidate(text: candidateString, withShuangpinString: queryCode)
-                    case 2:    // .English:
-                        candidate = Candidate(text: candidateString, withEnglishString: queryCode)
-                    case 3:    // .Special:
-                        candidate = Candidate(text: candidateString, withSpecialString: queryCode)
-                    default:
-                        assertionFailure("Wrong candidate type!")
-                    }
-                    if candidate != nil {
-                        candidates.append(candidate!)
-                    }
-                    
-                    if needTruncateCandidates && candidates.count >= 100 {
-                        break
-                    }
-                }
-            } else {
-                println("select failed: \(db.lastErrorMessage())")
-            }
-        }
-        
+        var candidates = databaseQueue!.getCandidates(byQueryStatement: queryStatement, byQueryArguments: queryArguments, needTruncateCandidates: needTruncateCandidates)
         let historyCandidates = inputHistory.getCandidatesByQueryArguments(queryArguments, andWhereStatement: whereStatement)
-        var candidatesIndex = 0
-        var historyCandidatesIndex = 0
-        let candidatesLength = candidates.count
-        let historyCandidatesLength = historyCandidates.count
-        var retCandidates = [Candidate]()
-        var addedDict = [String: Bool]()
-        while candidatesIndex < candidatesLength && historyCandidatesIndex < historyCandidatesLength {
-            if candidates[candidatesIndex].text.getReadingLength() <=
-                historyCandidates[historyCandidatesIndex].text.getReadingLength() {
-                    let historyCandidate = historyCandidates[historyCandidatesIndex]
-                    if addedDict[historyCandidate.text] == nil {
-                        addedDict[historyCandidate.text] = true
-                        retCandidates.append(historyCandidate)
-                    }
-                    historyCandidatesIndex++
-            } else {
-                let candidate = candidates[candidatesIndex]
-                if addedDict[candidate.text] == nil {
-                    addedDict[candidate.text] = true
-                    retCandidates.append(candidate)
-                }
-                candidatesIndex++
-            }
-        }
-        if candidatesIndex == candidatesLength {
-            for elem in historyCandidates[historyCandidatesIndex..<historyCandidatesLength] {
-                if addedDict[elem.text] == nil {
-                    addedDict[elem.text] = true
-                    retCandidates.append(elem)
-                }
-            }
-        } else if historyCandidatesIndex == historyCandidatesLength {
-            for elem in candidates[candidatesIndex..<candidatesLength] {
-                if addedDict[elem.text] == nil {
-                    addedDict[elem.text] = true
-                    retCandidates.append(elem)
-                }
-            }
-        } else {
-            assertionFailure("Something wrong")
-        }
-
-        println("\(candidates.count) candidates are returned")
-        return retCandidates
+        
+        let mergedCandidates = mergeCandidatesArrays(candidates, historyCandidates)
+        println("\(mergedCandidates.count) candidates are returned")
+        
+        return mergedCandidates
     }
     
     func hasTyping() -> Bool {
