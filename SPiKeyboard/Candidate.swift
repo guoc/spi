@@ -69,7 +69,7 @@ class Candidate: NSObject {
             case .Special:
                 return String(text[text.startIndex])
             case .English:
-                return String(text[text.startIndex])
+                return String(text[text.startIndex]).lowercaseString
             case .Chinese:
                 return getShengmuString(from: shuangpinString!)
             default:
