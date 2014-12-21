@@ -32,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let info = NSBundle.mainBundle().infoDictionary
             let shortVersion = info?["CFBundleShortVersionString"] as String
             let buildVersion = info?["CFBundleVersion"] as String
-            let version = shortVersion + "-" + buildVersion
+            let version = shortVersion + " (" + buildVersion + ")"
             NSUserDefaults.standardUserDefaults().setObject(version, forKey: "kVersion")
         }
         
