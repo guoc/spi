@@ -60,6 +60,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		BD4789431A46F7B5001381F0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BDEDF6791A2DCBF3000CC6B6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BD47893E1A46F697001381F0;
+			remoteInfo = BeforeBuild;
+		};
 		BDEDF6971A2DCBF3000CC6B6 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BDEDF6791A2DCBF3000CC6B6 /* Project object */;
@@ -97,6 +104,8 @@
 		BB1BD71E99BF370161715A4C /* libPods-SPiKeyboard.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SPiKeyboard.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD02DE3B1A3C8E9800EBC0E1 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		BD458DB31A37076B00664B2F /* TypingString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypingString.swift; sourceTree = "<group>"; };
+		BD4789421A46F76D001381F0 /* check_commit.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = check_commit.sh; sourceTree = "<group>"; };
+		BD4789451A46F896001381F0 /* check_build_number.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = check_build_number.py; sourceTree = "<group>"; };
 		BD683ACE1A3C4A5C004F17CB /* screenshot-tap-keyboard-settings-icon-5s.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "screenshot-tap-keyboard-settings-icon-5s.png"; sourceTree = "<group>"; };
 		BD683ACF1A3C4A5C004F17CB /* screenshot-tap-keyboard-settings-icon-6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "screenshot-tap-keyboard-settings-icon-6.png"; sourceTree = "<group>"; };
 		BD683AD01A3C4A5C004F17CB /* screenshot-tap-keyboard-settings-icon-6p.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "screenshot-tap-keyboard-settings-icon-6p.png"; sourceTree = "<group>"; };
@@ -255,6 +264,8 @@
 		BDEDF6781A2DCBF3000CC6B6 = {
 			isa = PBXGroup;
 			children = (
+				BD4789451A46F896001381F0 /* check_build_number.py */,
+				BD4789421A46F76D001381F0 /* check_commit.sh */,
 				BDEDF6831A2DCBF3000CC6B6 /* SPi */,
 				BDEDF6991A2DCBF3000CC6B6 /* SPiTests */,
 				BDEDF6A61A2DCC0A000CC6B6 /* Candidates */,
@@ -430,6 +441,23 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXLegacyTarget section */
+		BD47893E1A46F697001381F0 /* BeforeBuild */ = {
+			isa = PBXLegacyTarget;
+			buildArgumentsString = "$(ACTION)";
+			buildConfigurationList = BD47893F1A46F698001381F0 /* Build configuration list for PBXLegacyTarget "BeforeBuild" */;
+			buildPhases = (
+			);
+			buildToolPath = "${SRCROOT}/check_commit.sh";
+			buildWorkingDirectory = "";
+			dependencies = (
+			);
+			name = BeforeBuild;
+			passBuildSettingsInEnvironment = 1;
+			productName = BeforeBuild;
+		};
+/* End PBXLegacyTarget section */
+
 /* Begin PBXNativeTarget section */
 		BDEDF6801A2DCBF3000CC6B6 /* SPi */ = {
 			isa = PBXNativeTarget;
@@ -446,6 +474,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				BD4789441A46F7B5001381F0 /* PBXTargetDependency */,
 				BDEDF6B71A2DCC76000CC6B6 /* PBXTargetDependency */,
 			);
 			name = SPi;
@@ -499,6 +528,9 @@
 				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = guoc;
 				TargetAttributes = {
+					BD47893E1A46F697001381F0 = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
 					BDEDF6801A2DCBF3000CC6B6 = {
 						CreatedOnToolsVersion = 6.1.1;
 					};
@@ -526,6 +558,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
+				BD47893E1A46F697001381F0 /* BeforeBuild */,
 				BDEDF6801A2DCBF3000CC6B6 /* SPi */,
 				BDEDF6951A2DCBF3000CC6B6 /* SPiTests */,
 				BDEDF6AF1A2DCC76000CC6B6 /* SPiKeyboard */,
@@ -705,6 +738,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		BD4789441A46F7B5001381F0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BD47893E1A46F697001381F0 /* BeforeBuild */;
+			targetProxy = BD4789431A46F7B5001381F0 /* PBXContainerItemProxy */;
+		};
 		BDEDF6981A2DCBF3000CC6B6 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = BDEDF6801A2DCBF3000CC6B6 /* SPi */;
@@ -729,6 +767,36 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		BD4789401A46F698001381F0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEBUGGING_SYMBOLS = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		BD4789411A46F698001381F0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
 		BDEDF69E1A2DCBF3000CC6B6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -917,6 +985,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		BD47893F1A46F698001381F0 /* Build configuration list for PBXLegacyTarget "BeforeBuild" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BD4789401A46F698001381F0 /* Debug */,
+				BD4789411A46F698001381F0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		BDEDF67C1A2DCBF3000CC6B6 /* Build configuration list for PBXProject "SPi" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
