@@ -38,6 +38,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         setVersionNumber()
         
+        // Config Crittercism
+        Crittercism.enableWithAppID("5496a8423cf56b9e0457cbd7")
+        
         // Config UserVoice
         let config = UVConfig(site: "spi.uservoice.com")
         config.forumId = 278027

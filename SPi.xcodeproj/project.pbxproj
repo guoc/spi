@@ -441,6 +441,7 @@
 				BDEDF67F1A2DCBF3000CC6B6 /* Resources */,
 				BDEDF6BC1A2DCC76000CC6B6 /* Embed App Extensions */,
 				213AC6103C4C7FB8AF886CDB /* Copy Pods Resources */,
+				BDA724E31A46E71E00603B8F /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -631,6 +632,19 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
+		};
+		BDA724E31A46E71E00603B8F /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "APP_ID=\"5496a8423cf56b9e0457cbd7\"\nAPI_KEY=\"57VYGafoPy8yOafseKkfJsI7QRL31880\"\nreleaseConfig=\"Release\"\nif [ \"$releaseConfig\" = \"${CONFIGURATION}\" ]; then\n  source \"${SRCROOT}\"/Pods/CrittercismSDK/CrittercismSDK/dsym_upload.sh\nfi";
 		};
 /* End PBXShellScriptBuildPhase section */
 

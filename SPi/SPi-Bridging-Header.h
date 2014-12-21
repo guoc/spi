@@ -6,3 +6,5 @@
 #import "IASKSettingsReader.h"
 
 #import "UserVoice.h"
+
+#import "Crittercism.h"
