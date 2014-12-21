@@ -22,17 +22,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             window.rootViewController = ViewController()
         }
         
-        // Config UserVoice
-        let config = UVConfig(site: "spi.uservoice.com")
-        config.forumId = 278027
-        // [config identifyUserWithEmail:@"email@example.com" name:@"User Name", guid:@"USER_ID");
-        UserVoice.initialize(config)
-        
         if let window = window {
             if let controller = window.rootViewController as? ViewController {
                 controller.pushToTutorialIfNecessary()
             }
         }
+        
+        func setVersionNumber() {
+            let info = NSBundle.mainBundle().infoDictionary
+            let shortVersion = info?["CFBundleShortVersionString"] as String
+            let buildVersion = info?["CFBundleVersion"] as String
+            let version = shortVersion + "-" + buildVersion
+            NSUserDefaults.standardUserDefaults().setObject(version, forKey: "kVersion")
+        }
+        
+        setVersionNumber()
+        
+        // Config UserVoice
+        let config = UVConfig(site: "spi.uservoice.com")
+        config.forumId = 278027
+        // [config identifyUserWithEmail:@"email@example.com" name:@"User Name", guid:@"USER_ID");
+        UserVoice.initialize(config)
         
         return true
     }
