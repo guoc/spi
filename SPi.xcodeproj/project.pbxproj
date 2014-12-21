@@ -992,6 +992,7 @@
 				BD4789411A46F698001381F0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		BDEDF67C1A2DCBF3000CC6B6 /* Build configuration list for PBXProject "SPi" */ = {
 			isa = XCConfigurationList;
