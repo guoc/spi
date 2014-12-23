@@ -104,7 +104,7 @@
 		BB1BD71E99BF370161715A4C /* libPods-SPiKeyboard.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SPiKeyboard.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD02DE3B1A3C8E9800EBC0E1 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		BD458DB31A37076B00664B2F /* TypingString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypingString.swift; sourceTree = "<group>"; };
-		BD4789421A46F76D001381F0 /* check_commit.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = check_commit.sh; sourceTree = "<group>"; };
+		BD4789421A46F76D001381F0 /* check_no_changes_after_last_commit.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = check_no_changes_after_last_commit.sh; sourceTree = "<group>"; };
 		BD4789451A46F896001381F0 /* check_build_number.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = check_build_number.py; sourceTree = "<group>"; };
 		BD683ACE1A3C4A5C004F17CB /* screenshot-tap-keyboard-settings-icon-5s.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "screenshot-tap-keyboard-settings-icon-5s.png"; sourceTree = "<group>"; };
 		BD683ACF1A3C4A5C004F17CB /* screenshot-tap-keyboard-settings-icon-6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "screenshot-tap-keyboard-settings-icon-6.png"; sourceTree = "<group>"; };
@@ -265,7 +265,7 @@
 			isa = PBXGroup;
 			children = (
 				BD4789451A46F896001381F0 /* check_build_number.py */,
-				BD4789421A46F76D001381F0 /* check_commit.sh */,
+				BD4789421A46F76D001381F0 /* check_no_changes_after_last_commit.sh */,
 				BDEDF6831A2DCBF3000CC6B6 /* SPi */,
 				BDEDF6991A2DCBF3000CC6B6 /* SPiTests */,
 				BDEDF6A61A2DCC0A000CC6B6 /* Candidates */,
@@ -448,7 +448,7 @@
 			buildConfigurationList = BD47893F1A46F698001381F0 /* Build configuration list for PBXLegacyTarget "BeforeBuild" */;
 			buildPhases = (
 			);
-			buildToolPath = "${SRCROOT}/check_commit.sh";
+			buildToolPath = "${SRCROOT}/check_no_changes_after_last_commit.sh";
 			buildWorkingDirectory = "";
 			dependencies = (
 			);
