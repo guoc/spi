@@ -1,5 +1,6 @@
 import io
 import sqlite3
+import os
 
 # The dictionary of StandardizedShuangpin: Quanpin
 Quanpin = {
@@ -453,7 +454,7 @@ Shuangpin = dict((v,k) for k, v in Quanpin.iteritems())
 
 print "!!! Source txt file should be utf-8 encoding !!!"
 
-file = io.open("rawdict_utf8_65105_freq.txt", 'r', encoding='utf-8')
+file = io.open(os.path.join(os.path.dirname(__file__), "rawdict_utf8_65105_freq.txt"), 'r', encoding='utf-8')
 lines = file.readlines()
 
 frequenciesList = []
@@ -495,7 +496,7 @@ for line in lines:
 
 print(str(count) + " records have added into database")
 
-file = io.open("english_word_list.txt", 'r', encoding='utf-8')
+file = io.open(os.path.join(os.path.dirname(__file__), "english_word_list.txt"), 'r', encoding='utf-8')
 lines = file.readlines()
 
 count = 0
@@ -514,7 +515,7 @@ for line in lines:
 
 print(str(count) + " records have added into database")
 
-file = io.open("extra_candidates_utf8.txt", 'r', encoding='utf-8')
+file = io.open(os.path.join(os.path.dirname(__file__), "extra_candidates_utf8.txt"), 'r', encoding='utf-8')
 lines = file.readlines()
 
 count = 0
@@ -525,7 +526,7 @@ for line in lines:
 
 print(str(count) + " records have added into database")
 
-conn = sqlite3.connect('candidates.sqlite')
+conn = sqlite3.connect(os.path.join(os.path.dirname(__file__), 'candidates.sqlite'))
 c = conn.cursor()
 
 c.execute('''CREATE TABLE candidates
