@@ -616,12 +616,23 @@ let CommonYunmuLength = [
 ]
 
 
-func getShengmuString(from formalizedString: String) -> String {
+func getShengmuString(from formalizedQuanpinString: String) -> String {
     
-    let length = formalizedString.getReadingLength()
+    func isFormalizedQuanpinString(str: String) -> Bool {
+        for (i, character) in enumerate(str) {
+            if i % 3 == 2 && character != " " || i % 3 != 2 && String(character).containsLettersOrUnderscore() == false {
+                return false
+            }
+        }
+        return true
+    }
+    
+    assert(isFormalizedQuanpinString(formalizedQuanpinString), "Get shengmu from non-formalized quanpin string!")
+    
+    let length = formalizedQuanpinString.getReadingLength()
     var returnStr = ""
     for var index = 0; index < length; index+=3 {
-        returnStr += String(Array(formalizedString)[index])
+        returnStr += String(Array(formalizedQuanpinString)[index])
     }
     
     return returnStr

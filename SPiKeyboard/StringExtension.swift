@@ -56,6 +56,10 @@ extension String {
         return self.rangeOfCharacterFromSet(NSCharacterSet.letterCharacterSet()) != nil
     }
     
+    func containsLettersOrUnderscore() -> Bool {
+        return self.rangeOfCharacterFromSet(lowercaseLetterAndUnderScoreCharacterSet) != nil
+    }
+    
     func containsNonLettersOrSpace() -> Bool {
         return self.stringByRemovingCharactersInSet(letterAndSpaceCharacterSet) != ""
     }
