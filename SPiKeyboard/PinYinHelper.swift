@@ -627,12 +627,3 @@ func getShengmuString(from formalizedString: String) -> String {
     return returnStr
 }
 
-func getShuangpinString(from formalizedQuanpinString: String) -> String {
-    
-    let length = formalizedQuanpinString.getReadingLength()
-    var strComponents = formalizedQuanpinString.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
-    var retComponents = strComponents.map({(x: String) -> String in return Shuangpin[x] ?? x})
-    let retString = " ".join(retComponents)
-    
-    return retString
-}

@@ -197,23 +197,6 @@ class TypingString {
             return FormalizedTypingString()
         }
         
-        //        func getEnglishWord(str: String) -> String? {
-        //            let guessedWords = textChecker.guessesForWordRange(NSMakeRange(0, str.getReadingLength()), inString: str, language: "en")
-        //            if guessedWords!.isEmpty {
-        //                return nil
-        //            }
-        //            let guess = guessedWords![0] as String
-        //            if guess.caseInsensitiveCompare(str) == NSComparisonResult.OrderedSame {
-        //                return guess
-        //            } else {
-        //                return nil
-        //            }
-        //        }
-        //
-        //        if let word = getEnglishWord(userTypingString) {
-        //            return useForDisply ? FormalizedTypingString(type: .English, string: userTypingString) : FormalizedTypingString(type: .English, string: word)
-        //        }
-        
         if userTypingString.containsNonLetters() {    // no matter for display or not
             return FormalizedTypingString(type: .Special, string: userTypingString)
         } else if userTypingString.containsUppercaseLetters() == true {

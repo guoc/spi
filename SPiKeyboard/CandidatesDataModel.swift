@@ -1,7 +1,5 @@
 import UIKit
 
-let textChecker = UITextChecker()
-
 let lowercaseLetterAndUnderScoreCharacterSet: NSCharacterSet = {
     var characterSet: NSMutableCharacterSet = NSCharacterSet.lowercaseLetterCharacterSet().mutableCopy() as NSMutableCharacterSet
     characterSet.addCharactersInString("_")
