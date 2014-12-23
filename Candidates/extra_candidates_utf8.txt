@@ -1,7 +1,9 @@
 不知道, bu vi dk, bvd, 3, 0, bu zhi dao, 1
+候选词, hb xr ci, hxc, 3, 0, hou xuan ci, 1
 就这样, jq ve yh, jvy, 3, 0, jiu zhe yang, 1
 双拼, ud pn, up, 2, 0, shuang pin, 1
+首选项, ub xr xd, uxx, 3, 0, shou xuan xiang, 1
+微博, wz bo, wb, 2, 0, wei bo, 1
+微信, wz xn, wx, 2, 0, wei xin, 1
 小鹤, xc he, xh, 2, 0, xiao he, 1
 自然码, zi rj ma, zrm, 3, 0, zi ran ma, 1
-候选词, hb xr ci, hxc, 3, 0, hou xuan ci, 1
-首选项, ub xr xd, uxx, 3, 0, shou xuan xiang, 1
