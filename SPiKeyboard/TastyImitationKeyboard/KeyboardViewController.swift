@@ -35,7 +35,9 @@ class KeyboardViewController: UIInputViewController {
     
     var currentMode: Int {
         didSet {
-            setMode(currentMode)
+            if oldValue != currentMode {
+                setMode(currentMode)
+            }
         }
     }
     
@@ -55,31 +57,15 @@ class KeyboardViewController: UIInputViewController {
     var autoPeriodState: AutoPeriodState = .NoSpace
     var lastCharCountInBeforeContext: Int = 0
     
-    enum ShiftState {
-        case Disabled
-        case Enabled
-        case Locked
-        
-        func uppercase() -> Bool {
-            switch self {
-            case Disabled:
-                return false
-            case Enabled:
-                return true
-            case Locked:
-                return true
-            }
-        }
-    }
     var shiftState: ShiftState {
         didSet {
             switch shiftState {
             case .Disabled:
-                self.updateKeyCaps(true)
+                self.updateKeyCaps(false)
             case .Enabled:
-                self.updateKeyCaps(false)
+                self.updateKeyCaps(true)
             case .Locked:
-                self.updateKeyCaps(false)
+                self.updateKeyCaps(true)
             }
         }
     }
@@ -139,7 +125,7 @@ class KeyboardViewController: UIInputViewController {
     
     func defaultsChanged(notification: NSNotification) {
         let defaults = notification.object as NSUserDefaults
-        self.updateKeyCaps(!self.shiftState.uppercase())
+        self.updateKeyCaps(self.shiftState.uppercase())
     }
     
     // without this here kludge, the height constraint for the keyboard does not work for some reason
@@ -186,12 +172,11 @@ class KeyboardViewController: UIInputViewController {
             self.layout = self.dynamicType.layoutClass(model: self.keyboard, superview: self.forwardingView, layoutConstants: self.dynamicType.layoutConstants, globalColors: self.dynamicType.globalColors, darkMode: self.darkMode(), solidColorMode: self.solidColorMode())
             
             self.layout?.initialize()
-            self.setupKeys()
             self.setMode(0)
             
             self.setupKludge()
             
-            self.updateKeyCaps(!self.shiftState.uppercase())
+            self.updateKeyCaps(self.shiftState.uppercase())
             self.setCapsIfNeeded()
             
             self.updateAppearances(self.darkMode())
@@ -233,9 +218,13 @@ class KeyboardViewController: UIInputViewController {
             // do nothing
         }
         else {
+            let uppercase = self.shiftState.uppercase()
+            let characterUppercase = (NSUserDefaults.standardUserDefaults().boolForKey(kSmallLowercase) ? uppercase : true)
+            
             self.forwardingView.frame = orientationSavvyBounds
-            self.layout?.layoutTemp()
+            self.layout?.layoutKeys(self.currentMode, uppercase: uppercase, characterUppercase: characterUppercase, shiftState: self.shiftState)
             self.lastLayoutBounds = orientationSavvyBounds
+            self.setupKeys()
         }
         
         self.bannerView?.frame = CGRectMake(0, 0, self.view.bounds.width, metric("topBanner"))
@@ -290,109 +279,54 @@ class KeyboardViewController: UIInputViewController {
             return
         }
         
-//        for page in keyboard.pages {  // Commented by guoc for speed up
-        for page in [keyboard.pages[0]] {    // Added by guoc for speed up
+        for page in keyboard.pages {
             for rowKeys in page.rows { // TODO: quick hack
                 for key in rowKeys {
-                    var keyView = self.layout!.viewForKey(key)! // TODO: check
-                    
-                    switch key.type {
-                    case Key.KeyType.KeyboardChange:
-                        keyView.addTarget(self, action: "advanceToNextInputMode", forControlEvents: .TouchUpInside)
-                    case Key.KeyType.Backspace:
-                        let cancelEvents: UIControlEvents = UIControlEvents.TouchUpInside|UIControlEvents.TouchUpInside|UIControlEvents.TouchDragExit|UIControlEvents.TouchUpOutside|UIControlEvents.TouchCancel|UIControlEvents.TouchDragOutside
+                    if let keyView = self.layout?.viewForKey(key) {
+                        keyView.removeTarget(nil, action: nil, forControlEvents: UIControlEvents.AllEvents)
                         
-                        keyView.addTarget(self, action: "backspaceDown:", forControlEvents: .TouchDown)
-                        keyView.addTarget(self, action: "backspaceUp:", forControlEvents: cancelEvents)
-                    case Key.KeyType.Shift:
-                        keyView.addTarget(self, action: Selector("shiftDown:"), forControlEvents: .TouchUpInside)
-                        keyView.addTarget(self, action: Selector("shiftDoubleTapped:"), forControlEvents: .TouchDownRepeat)
-                    case Key.KeyType.ModeChange:
-                        keyView.addTarget(self, action: Selector("modeChangeTapped:"), forControlEvents: .TouchUpInside)
-                    case Key.KeyType.Settings:
-                        keyView.addTarget(self, action: Selector("toggleSettings"), forControlEvents: .TouchUpInside)
-                    default:
-                        break
-                    }
-                    
-                    if key.isCharacter {
-                        if UIDevice.currentDevice().userInterfaceIdiom != UIUserInterfaceIdiom.Pad {
-                            keyView.addTarget(self, action: Selector("showPopup:"), forControlEvents: .TouchDown | .TouchDragInside | .TouchDragEnter)
-                            keyView.addTarget(keyView, action: Selector("hidePopup"), forControlEvents: .TouchDragExit)
-                            keyView.addTarget(self, action: Selector("hidePopupDelay:"), forControlEvents: .TouchUpInside | .TouchUpOutside | .TouchDragOutside)
+                        switch key.type {
+                        case Key.KeyType.KeyboardChange:
+                            keyView.addTarget(self, action: "advanceToNextInputMode", forControlEvents: .TouchUpInside)
+                        case Key.KeyType.Backspace:
+                            let cancelEvents: UIControlEvents = UIControlEvents.TouchUpInside|UIControlEvents.TouchUpInside|UIControlEvents.TouchDragExit|UIControlEvents.TouchUpOutside|UIControlEvents.TouchCancel|UIControlEvents.TouchDragOutside
+                            
+                            keyView.addTarget(self, action: "backspaceDown:", forControlEvents: .TouchDown)
+                            keyView.addTarget(self, action: "backspaceUp:", forControlEvents: cancelEvents)
+                        case Key.KeyType.Shift:
+                            keyView.addTarget(self, action: Selector("shiftDown:"), forControlEvents: .TouchUpInside)
+                            keyView.addTarget(self, action: Selector("shiftDoubleTapped:"), forControlEvents: .TouchDownRepeat)
+                        case Key.KeyType.ModeChange:
+                            keyView.addTarget(self, action: Selector("modeChangeTapped:"), forControlEvents: .TouchUpInside)
+                        case Key.KeyType.Settings:
+                            keyView.addTarget(self, action: Selector("toggleSettings"), forControlEvents: .TouchUpInside)
+                        default:
+                            break
                         }
+                        
+                        if key.isCharacter {
+                            if UIDevice.currentDevice().userInterfaceIdiom != UIUserInterfaceIdiom.Pad {
+                                keyView.addTarget(self, action: Selector("showPopup:"), forControlEvents: .TouchDown | .TouchDragInside | .TouchDragEnter)
+                                keyView.addTarget(keyView, action: Selector("hidePopup"), forControlEvents: .TouchDragExit | .TouchCancel)
+                                keyView.addTarget(self, action: Selector("hidePopupDelay:"), forControlEvents: .TouchUpInside | .TouchUpOutside | .TouchDragOutside)
+                            }
+                        }
+                        
+                        if key.hasOutput {
+                            keyView.addTarget(self, action: "keyPressedHelper:", forControlEvents: .TouchUpInside)
+                        }
+                        
+                        if key.type != Key.KeyType.Shift {
+                            keyView.addTarget(self, action: Selector("highlightKey:"), forControlEvents: .TouchDown | .TouchDragInside | .TouchDragEnter)
+                            keyView.addTarget(self, action: Selector("unHighlightKey:"), forControlEvents: .TouchUpInside | .TouchUpOutside | .TouchDragOutside | .TouchDragExit | .TouchCancel)
+                        }
+                        
+                        keyView.addTarget(self, action: Selector("playKeySound"), forControlEvents: .TouchDown)
                     }
-                    
-                    if key.hasOutput {
-                        keyView.addTarget(self, action: "keyPressedHelper:", forControlEvents: .TouchUpInside)
-                    }
-                    
-                    if key.type != Key.KeyType.Shift {
-                        keyView.addTarget(self, action: Selector("highlightKey:"), forControlEvents: .TouchDown | .TouchDragInside | .TouchDragEnter)
-                        keyView.addTarget(self, action: Selector("unHighlightKey:"), forControlEvents: .TouchUpInside | .TouchUpOutside | .TouchDragOutside | .TouchDragExit)
-                    }
-                    
-                    keyView.addTarget(self, action: Selector("playKeySound"), forControlEvents: .TouchDown)
                 }
             }
         }
     }
-    
-    /* Added by guoc for speed up load */
-    
-    func lazySetupKeys() {
-        if self.layout == nil {
-            return
-        }
-        
-        for page in [keyboard.pages[1], keyboard.pages[2]] {
-            for rowKeys in page.rows { // TODO: quick hack
-                for key in rowKeys {
-                    var keyView = self.layout!.viewForKey(key)! // TODO: check
-                    
-                    switch key.type {
-                    case Key.KeyType.KeyboardChange:
-                        keyView.addTarget(self, action: "advanceToNextInputMode", forControlEvents: .TouchUpInside)
-                    case Key.KeyType.Backspace:
-                        let cancelEvents: UIControlEvents = UIControlEvents.TouchUpInside|UIControlEvents.TouchUpInside|UIControlEvents.TouchDragExit|UIControlEvents.TouchUpOutside|UIControlEvents.TouchCancel|UIControlEvents.TouchDragOutside
-                        
-                        keyView.addTarget(self, action: "backspaceDown:", forControlEvents: .TouchDown)
-                        keyView.addTarget(self, action: "backspaceUp:", forControlEvents: cancelEvents)
-                    case Key.KeyType.Shift:
-                        keyView.addTarget(self, action: Selector("shiftDown:"), forControlEvents: .TouchUpInside)
-                        keyView.addTarget(self, action: Selector("shiftDoubleTapped:"), forControlEvents: .TouchDownRepeat)
-                    case Key.KeyType.ModeChange:
-                        keyView.addTarget(self, action: Selector("modeChangeTapped:"), forControlEvents: .TouchUpInside)
-                    case Key.KeyType.Settings:
-                        keyView.addTarget(self, action: Selector("toggleSettings"), forControlEvents: .TouchUpInside)
-                    default:
-                        break
-                    }
-                    
-                    if key.isCharacter {
-                        if UIDevice.currentDevice().userInterfaceIdiom != UIUserInterfaceIdiom.Pad {
-                            keyView.addTarget(self, action: Selector("showPopup:"), forControlEvents: .TouchDown | .TouchDragInside | .TouchDragEnter)
-                            keyView.addTarget(keyView, action: Selector("hidePopup"), forControlEvents: .TouchDragExit)
-                            keyView.addTarget(self, action: Selector("hidePopupDelay:"), forControlEvents: .TouchUpInside | .TouchUpOutside | .TouchDragOutside)
-                        }
-                    }
-                    
-                    if key.hasOutput {
-                        keyView.addTarget(self, action: "keyPressedHelper:", forControlEvents: .TouchUpInside)
-                    }
-                    
-                    if key.type != Key.KeyType.Shift {
-                        keyView.addTarget(self, action: Selector("highlightKey:"), forControlEvents: .TouchDown | .TouchDragInside | .TouchDragEnter)
-                        keyView.addTarget(self, action: Selector("unHighlightKey:"), forControlEvents: .TouchUpInside | .TouchUpOutside | .TouchDragOutside | .TouchDragExit)
-                    }
-                    
-                    keyView.addTarget(self, action: Selector("playKeySound"), forControlEvents: .TouchDown)
-                }
-            }
-        }
-    }
-    
-    /* Added end */
     
     /////////////////
     // POPUP DELAY //
@@ -456,7 +390,7 @@ class KeyboardViewController: UIInputViewController {
                 attribute:NSLayoutAttribute.NotAnAttribute,
                 multiplier:0,
                 constant:height)
-            self.heightConstraint!.priority = 999
+            self.heightConstraint!.priority = 1000
             
             self.view.addConstraint(self.heightConstraint!) // TODO: what if view already has constraint added?
         }
@@ -468,7 +402,7 @@ class KeyboardViewController: UIInputViewController {
     func updateAppearances(appearanceIsDark: Bool) {
         self.layout?.solidColorMode = self.solidColorMode()
         self.layout?.darkMode = appearanceIsDark
-        self.layout?.updateKeyAppearanceTemp()
+        self.layout?.updateKeyAppearance()
         
         self.bannerView?.darkMode = appearanceIsDark
         self.settingsView?.darkMode = appearanceIsDark
@@ -485,16 +419,16 @@ class KeyboardViewController: UIInputViewController {
     func keyPressedHelper(sender: KeyboardKey) {
         if let model = self.layout?.keyForView(sender) {
             self.keyPressed(model)
-            
+
             // auto exit from special char subkeyboard
             if model.type == Key.KeyType.Space || model.type == Key.KeyType.Return {
-                self.setMode(0)
+                self.currentMode = 0
             }
             else if model.lowercaseOutput == "'" {
-                self.setMode(0)
+                self.currentMode = 0
             }
             else if model.type == Key.KeyType.Character {
-                self.setMode(0)
+                self.currentMode = 0
             }
             
             // auto period on double space
@@ -636,37 +570,9 @@ class KeyboardViewController: UIInputViewController {
         }
     }
     
-    // TODO: this should be uppercase, not lowercase
-    func updateKeyCaps(lowercase: Bool) {
-        if self.layout != nil {
-            let characterUppercase = (NSUserDefaults.standardUserDefaults().boolForKey(kSmallLowercase) ? !lowercase : true)
-            
-            for (model, key) in self.layout!.modelToView {
-                self.setKeyCapForKey(lowercase, characterLowercase: !characterUppercase, model: model, view: key)
-                
-                if model.type == Key.KeyType.Shift {
-                    switch self.shiftState {
-                    case .Disabled:
-                        key.highlighted = false
-                    case .Enabled:
-                        key.highlighted = true
-                    case .Locked:
-                        key.highlighted = true
-                    }
-                    
-                    (key.shape as? ShiftShape)?.withLock = (self.shiftState == .Locked)
-                }
-            }
-        }
-    }
-    
-    func setKeyCapForKey(lowercase: Bool, characterLowercase: Bool, model: Key, view: KeyboardKey) {
-        if model.type == .Character {
-            view.text = model.keyCapForCase(!characterLowercase)
-        }
-        else {
-            view.text = model.keyCapForCase(!lowercase)
-        }
+    func updateKeyCaps(uppercase: Bool) {
+        let characterUppercase = (NSUserDefaults.standardUserDefaults().boolForKey(kSmallLowercase) ? uppercase : true)
+        self.layout?.updateKeyCaps(false, uppercase: uppercase, characterUppercase: characterUppercase, shiftState: self.shiftState)
     }
     
     func modeChangeTapped(sender: KeyboardKey) {
@@ -675,27 +581,12 @@ class KeyboardViewController: UIInputViewController {
         }
     }
     
-    var hasLazyLoad = false    // Added by guoc for speed up
     func setMode(mode: Int) {
-        /* Added by guoc for speed up */
-        if mode != 0 && hasLazyLoad == false {
-            hasLazyLoad = true
-            self.keyboard = lazyDefaultKeyboard(withPreviousKeyboard: self.keyboard)
-            self.layout?.lazyCreateViews(self.keyboard)
-            self.lazySetupKeys()
-            self.layout?.lazyLayoutKeys(self.keyboard, views: self.layout!.modelToView, bounds: self.layout!.superview.bounds)
-        }
-        /* Added end */
-        for (pageIndex, page) in enumerate(self.keyboard.pages) {
-            for (rowIndex, row) in enumerate(page.rows) {
-                for (keyIndex, key) in enumerate(row) {
-                    if self.layout?.modelToView[key] != nil {
-                        var keyView = self.layout?.modelToView[key]
-                        keyView?.hidden = (pageIndex != mode)
-                    }
-                }
-            }
-        }
+        let uppercase = self.shiftState.uppercase()
+        let characterUppercase = (NSUserDefaults.standardUserDefaults().boolForKey(kSmallLowercase) ? uppercase : true)
+        self.layout?.layoutKeys(mode, uppercase: uppercase, characterUppercase: characterUppercase, shiftState: self.shiftState)
+        
+        self.setupKeys()
     }
     
     @IBAction func toggleSettings() {
