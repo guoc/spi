@@ -11,3 +11,5 @@ if os.path.isfile("./SPiKeyboard/candidates.sqlite"):
   for candidatesFile in candidatesFiles:
     if os.path.getmtime('./Candidates/' + candidatesFile) > os.path.getmtime("./SPiKeyboard/candidates.sqlite"):
       subprocess.call(['./update_candidates_database.sh'])
+else:
+  subprocess.call(['./update_candidates_database.sh'])
