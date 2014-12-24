@@ -1,4 +1,5 @@
-# Uncomment this line to define a global platform for your project
+workspace 'SPi'
+
 platform :ios, '8.1'
 
 target 'SPi' do
