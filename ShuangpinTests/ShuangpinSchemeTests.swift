@@ -71,7 +71,7 @@ class ShuangpinSchemeTests: XCTestCase {
         for (sourceShuangpin, targetShuangpin) in scheme {
             let sourceShengmu = String(sourceShuangpin[sourceShuangpin.startIndex])
             let targetShengmu = String(targetShuangpin[targetShuangpin.startIndex])
-            if targetShuangpin.getReadingLength() >= 1 || targetShuangpin.getReadingLength() <= 2 {
+            if targetShuangpin.getReadingLength() >= 1 && targetShuangpin.getReadingLength() <= 2 {
                 XCTAssert(scheme[sourceShengmu] == targetShengmu)
             } else {
                 XCTFail()
