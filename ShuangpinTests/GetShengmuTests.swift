@@ -1,5 +1,5 @@
 //
-//  GetShengmu.swift
+//  GetShengmuTests.swift
 //  SPi
 //
 //  Created by GuoChen on 24/12/2014.
@@ -9,7 +9,7 @@
 import UIKit
 import XCTest
 
-class GetShengmu: XCTestCase {
+class GetShengmuTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
@@ -34,12 +34,11 @@ class GetShengmu: XCTestCase {
     }
     
     func testGetShengmuFromFormalizedShuangpinString() {
-        let failMessage = "Fail in testGetShengmuFromFormalizedShuangpinString"
-        XCTAssert(getShengmuString(from: "") == "", failMessage)
-        XCTAssert(getShengmuString(from: "a") == "a", failMessage)
-        XCTAssert(getShengmuString(from: "ab") == "a", failMessage)
-        XCTAssert(getShengmuString(from: "ab c") == "ac", failMessage)
-        XCTAssert(getShengmuString(from: "ab cd") == "ac", failMessage)
+        XCTAssert(getShengmuString(from: "") == "")
+        XCTAssert(getShengmuString(from: "a") == "a")
+        XCTAssert(getShengmuString(from: "ab") == "a")
+        XCTAssert(getShengmuString(from: "ab c") == "ac")
+        XCTAssert(getShengmuString(from: "ab cd") == "ac")
     }
 
 }

@@ -10,8 +10,8 @@
 		BD02DE3C1A3C8E9800EBC0E1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BD02DE3B1A3C8E9800EBC0E1 /* Images.xcassets */; };
 		BD0508A61A49A6C900D7A7AC /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD0508A51A49A6C900D7A7AC /* StringExtension.swift */; };
 		BD458DB41A37076B00664B2F /* TypingString.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD458DB31A37076B00664B2F /* TypingString.swift */; };
+		BDA7C1CE1A4A3A3F003F14AE /* GetShengmuTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDA7C1CD1A4A3A3F003F14AE /* GetShengmuTests.swift */; };
 		BDBB56391A49AAC7006F8D5C /* ShuangpinTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDBB56381A49AAC7006F8D5C /* ShuangpinTests.swift */; };
-		BDBB563E1A49AADF006F8D5C /* GetShengmu.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDBB563D1A49AADF006F8D5C /* GetShengmu.swift */; };
 		BDBB563F1A49AB59006F8D5C /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD0508A51A49A6C900D7A7AC /* StringExtension.swift */; };
 		BDBB56401A49AB62006F8D5C /* PinYinHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDEDF7011A2DD338000CC6B6 /* PinYinHelper.swift */; };
 		BDD3E7441A383BBA00CF2CB9 /* InputHistoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDD3E7431A383BBA00CF2CB9 /* InputHistoryTableViewController.swift */; };
@@ -122,10 +122,10 @@
 		BD683AD21A3C4A5C004F17CB /* screenshot-tap-keyboard-settings-icon-5s.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "screenshot-tap-keyboard-settings-icon-5s.png"; sourceTree = "<group>"; };
 		BD683AD31A3C4A5C004F17CB /* screenshot-tap-keyboard-settings-icon-6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "screenshot-tap-keyboard-settings-icon-6.png"; sourceTree = "<group>"; };
 		BD683AD41A3C4A5C004F17CB /* screenshot-tap-keyboard-settings-icon-6p.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "screenshot-tap-keyboard-settings-icon-6p.png"; sourceTree = "<group>"; };
+		BDA7C1CD1A4A3A3F003F14AE /* GetShengmuTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetShengmuTests.swift; sourceTree = "<group>"; };
 		BDBB56341A49AAC7006F8D5C /* ShuangpinTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ShuangpinTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDBB56371A49AAC7006F8D5C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BDBB56381A49AAC7006F8D5C /* ShuangpinTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShuangpinTests.swift; sourceTree = "<group>"; };
-		BDBB563D1A49AADF006F8D5C /* GetShengmu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetShengmu.swift; sourceTree = "<group>"; };
 		BDD3E7431A383BBA00CF2CB9 /* InputHistoryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputHistoryTableViewController.swift; sourceTree = "<group>"; };
 		BDD3E7451A3846AA00CF2CB9 /* InputHistoryRowCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InputHistoryRowCell.xib; sourceTree = "<group>"; };
 		BDD3E7471A38477A00CF2CB9 /* InputHistoryRowCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputHistoryRowCell.swift; sourceTree = "<group>"; };
@@ -313,7 +313,7 @@
 		BDBB56351A49AAC7006F8D5C /* ShuangpinTests */ = {
 			isa = PBXGroup;
 			children = (
-				BDBB563D1A49AADF006F8D5C /* GetShengmu.swift */,
+				BDA7C1CD1A4A3A3F003F14AE /* GetShengmuTests.swift */,
 				BDBB56381A49AAC7006F8D5C /* ShuangpinTests.swift */,
 				BDBB56361A49AAC7006F8D5C /* Supporting Files */,
 			);
@@ -784,9 +784,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BDA7C1CE1A4A3A3F003F14AE /* GetShengmuTests.swift in Sources */,
 				BDBB56401A49AB62006F8D5C /* PinYinHelper.swift in Sources */,
 				BDBB563F1A49AB59006F8D5C /* StringExtension.swift in Sources */,
-				BDBB563E1A49AADF006F8D5C /* GetShengmu.swift in Sources */,
 				BDBB56391A49AAC7006F8D5C /* ShuangpinTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
