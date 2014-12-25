@@ -1,0 +1,1 @@
+../../../uservoice-iphone-sdk/Vendor/YOAuth/YOAuthSignatureMethod_HMAC-SHA1.h

@@ -1,0 +1,1 @@
+../../../uservoice-iphone-sdk/Classes/UVModelDelegate.h

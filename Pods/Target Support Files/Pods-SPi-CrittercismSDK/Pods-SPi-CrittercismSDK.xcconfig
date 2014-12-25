@@ -1,0 +1,2 @@
+PODS_SPI_CRITTERCISMSDK_LIBRARY_SEARCH_PATHS = "$(PODS_ROOT)/CrittercismSDK/CrittercismSDK"
+PODS_SPI_CRITTERCISMSDK_OTHER_LDFLAGS = -l"Crittercism_v5_0_7" -framework "SystemConfiguration"
