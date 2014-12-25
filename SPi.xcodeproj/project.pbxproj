@@ -73,6 +73,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		BD473DD11A4C4E0600A06760 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BDEDF6791A2DCBF3000CC6B6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BDEDF6801A2DCBF3000CC6B6;
+			remoteInfo = SPi;
+		};
 		BD4789431A46F7B5001381F0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BDEDF6791A2DCBF3000CC6B6 /* Project object */;
@@ -550,6 +557,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				BD473DD21A4C4E0600A06760 /* PBXTargetDependency */,
 			);
 			name = ShuangpinTests;
 			productName = ShuangpinTests;
@@ -630,6 +638,7 @@
 					};
 					BDBB56331A49AAC7006F8D5C = {
 						CreatedOnToolsVersion = 6.1.1;
+						TestTargetID = BDEDF6801A2DCBF3000CC6B6;
 					};
 					BDEDF6801A2DCBF3000CC6B6 = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -866,6 +875,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		BD473DD21A4C4E0600A06760 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BDEDF6801A2DCBF3000CC6B6 /* SPi */;
+			targetProxy = BD473DD11A4C4E0600A06760 /* PBXContainerItemProxy */;
+		};
 		BD4789441A46F7B5001381F0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = BD47893E1A46F697001381F0 /* BeforeBuild */;
@@ -939,6 +953,7 @@
 				INFOPLIST_FILE = ShuangpinTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SPi.app/SPi";
 			};
 			name = Debug;
 		};
@@ -952,6 +967,7 @@
 				INFOPLIST_FILE = ShuangpinTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SPi.app/SPi";
 			};
 			name = Release;
 		};
