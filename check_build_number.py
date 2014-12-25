@@ -3,6 +3,7 @@
 # This script checks if build version number is same as commit serial number.
 
 # Add the lines below in .git/hooks/pre-commit to call this script file.
+# Don't forget to chmod +x pre-commit
 
 # #!/bin/sh
 # 
