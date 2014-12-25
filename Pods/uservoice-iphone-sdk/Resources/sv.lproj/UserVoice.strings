@@ -6,31 +6,31 @@
 
 /********** Uncategorized **********/
 
-"%@ (required)" = "%@ (required)";
+"%@ (required)" = "%@ (Krävs)";
 
-"%@ ideas" = "%@ ideas";
+"%@ ideas" = "%@ idéer";
 
-"%d people" = "%d people";
+"%d people" = "%d människor";
 
-"(none)" = "(none)";
+"(none)" = "(Ingen)";
 
 "(required)" = "(obligatoriskt)";
 
-"1 idea" = "1 idea";
+"1 idea" = "En idé";
 
-"1 person" = "1 person";
+"1 person" = "En person som";
 
 "A suggestion with this title already exists. Please change the title." = "Det finns redan ett förslag med den här rubriken. Välj en annan rubrik.";
 
-"Add a comment" = "Add a comment";
+"Add a comment" = "Lägg en kommentar";
 
-"Additional Details" = "Additional Details";
+"Additional Details" = "Ytterligare detaljer";
 
 "All" = "Alla";
 
 "All Articles" = "Alla artiklar";
 
-"Are any of these helpful?" = "Are any of these helpful?";
+"Are any of these helpful?" = "Är någon av dessa användbara?";
 
 "Articles" = "Artiklar";
 
@@ -48,7 +48,7 @@
 
 "Do you still want to contact us?" = "Vill du fortfarande kontakta oss?";
 
-"Do you still want to post your own idea?" = "Do you still want to post your own idea?";
+"Do you still want to post your own idea?" = "Vill du fortfarande att posta din egen idé?";
 
 "Don't save" = "Spara inte";
 
@@ -58,7 +58,7 @@
 
 "Enter UserVoice password for %@" = "Ange UserVoice-lösenord för %@";
 
-"enter value" = "enter value";
+"enter value" = "mata in värdet";
 
 "Enter your email" = "Ange din e-postadress";
 
@@ -72,27 +72,27 @@
 
 "Forgot password" = "Glömt lösenord";
 
-"Give feedback or ask for help..." = "Give feedback or ask for help...";
+"Give feedback or ask for help..." = "Ge feedback eller be om hjälp ...";
 
-"Great! Glad we could help." = "Great! Glad we could help.";
+"Great! Glad we could help." = "Great! Glad att vi kunde hjälpa.";
 
-"I want this" = "I want this";
+"I want this" = "Jag vill ha det här";
 
-"I want this!" = "I want this!";
+"I want this!" = "Jag vill ha det här!";
 
 "Ideas" = "Idéer";
 
 "Knowledge Base" = "Kunskapsbas";
 
-"Knowledge base" = "Knowledge base";
+"Knowledge base" = "Kunskapsbas";
 
 "Load more" = "Ladda mer";
 
-"Loading..." = "Loading...";
+"Loading..." = "Laddar ...";
 
-"Message sent!" = "Message sent!";
+"Message sent!" = "Meddelandet skickat!";
 
-"more" = "more";
+"more" = "mer";
 
 "Name" = "Namn";
 
@@ -104,55 +104,59 @@
 
 "OK" = "OK";
 
-"Password reset email sent to %@" = "Password reset email sent to %@";
+"Password reset email sent to %@" = "Återställning av lösenord email som skickas till %@";
 
-"Please enter some text before submitting your comment." = "Please enter some text before submitting your comment.";
+"Please enter a valid email address." = "Ange en giltig e-postadress.";
 
-"Please enter your email address before submitting your comment." = "Please enter your email address before submitting your comment.";
+"Please enter some text before submitting your comment." = "Ange en text innan du skickar din kommentar.";
+
+"Please enter your email address before submitting your comment." = "Ange din e-postadress innan du skickar din kommentar.";
 
 "Please enter your email address before submitting your ticket." = "Ange din e-postadress innan du skickar meddelandet.";
 
-"Please fill out all required fields." = "Please fill out all required fields.";
+"Please fill out all required fields." = "Fyll i alla obligatoriska fält.";
 
 "Post" = "Skicka";
 
 "Post an idea" = "Skicka en idé";
 
-"Powered by UserVoice" = "Powered by UserVoice";
+"Powered by UserVoice" = "Powered by Uservoice";
 
-"Related articles" = "Related articles";
+"Ranked %@" = "Rankat %@";
 
-"Related feedback" = "Related feedback";
+"Related articles" = "Relaterade artiklar";
+
+"Related feedback" = "Relaterad återkoppling";
 
 "Save draft" = "Spara utkast";
 
 "Search" = "Sök";
 
-"Search forum" = "Search forum";
+"Search forum" = "Sök forum";
 
-"select" = "select";
+"select" = "välj";
 
 "Send" = "Skicka";
 
-"Send us a message" = "Send us a message";
+"Send us a message" = "Skicka oss ett meddelande";
 
 "Sign in" = "Logga in";
 
-"Skip" = "Skip";
+"Skip" = "Hoppa";
 
 "Sorry, there was an error in the application." = "Tyvärr, ett fel har uppstått i programmet.";
 
-"Thank you!" = "Thank you!";
+"Thank you!" = "Tack!";
 
 "There appears to be a problem with your network connection, please check your connectivity and try again." = "Det verkar vara ett problem med din nätverksanslutning, kolla anslutningen och försök igen.";
 
-"There was a problem logging you in." = "There was a problem logging you in.";
+"There was a problem logging you in." = "Det gick inte att logga in dig.";
 
-"this" = "this";
+"this" = "detta";
 
 "This application didn't configure UserVoice properly" = "Det här programmet konfigurerade inte UserVoice ordentligt";
 
-"this idea" = "this idea";
+"this idea" = "denna idé";
 
 "Title" = "Rubrik";
 
@@ -164,9 +168,9 @@
 
 "Was this article helpful?" = "Var den här artikeln till hjälp?";
 
-"We'll be in touch." = "We'll be in touch.";
+"We'll be in touch." = "Vi hör av.";
 
-"When you post an idea on our forum, others will be able to subscribe to it and make comments. When we respond to the idea, you'll get notified." = "When you post an idea on our forum, others will be able to subscribe to it and make comments. When we respond to the idea, you'll get notified.";
+"When you post an idea on our forum, others will be able to subscribe to it and make comments. When we respond to the idea, you'll get notified." = "När du lägger upp en idé på vårt forum, andra kommer att kunna prenumerera på den och göra kommentarer. När vi svarar på idén, kommer du få meddelande.";
 
 "Would you like to contact us?" = "Vill du kontakta oss?";
 
@@ -178,8 +182,8 @@
 
 "Yes, go to my message" = "Ja, gå till mitt meddelande";
 
-"Yes, I want to post my idea" = "Yes, I want to post my idea";
+"Yes, I want to post my idea" = "Ja, jag vill lägga min idé";
 
-"Your feedback has been posted to our feedback forum." = "Your feedback has been posted to our feedback forum.";
+"Your feedback has been posted to our feedback forum." = "Din feedback har skrivit i vår feedback forum.";
 
 "“Anonymous”" = "”Anonym”";

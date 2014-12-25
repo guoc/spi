@@ -162,6 +162,11 @@
     [_titleField becomeFirstResponder];
 }
 
+- (void)dismiss {
+    _instantAnswerManager.delegate = nil;
+    [super dismiss];
+}
+
 - (void)didUpdateInstantAnswers {
     if (_proceed) {
         _proceed = NO;

@@ -106,6 +106,8 @@
 
 "Password reset email sent to %@" = "Thư khôi phục mật khẩu đã được gửi đến %@";
 
+"Please enter a valid email address." = "Xin vui lòng nhập một địa chỉ email hợp lệ.";
+
 "Please enter some text before submitting your comment." = "Vui lòng điền một vài từ trước khi gửi đi bình luận của bạn.";
 
 "Please enter your email address before submitting your comment." = "Vui lòng cung cấp địa chỉ thư điện tử trước khi gửi đi bình luận của bạn.";
@@ -119,6 +121,8 @@
 "Post an idea" = "Đăng ý kiến";
 
 "Powered by UserVoice" = "Cung cấp bởi UserVoice";
+
+"Ranked %@" = "Xếp hạng %@";
 
 "Related articles" = "Bài viết liên quan";
 

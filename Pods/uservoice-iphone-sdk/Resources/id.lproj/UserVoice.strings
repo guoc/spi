@@ -6,31 +6,31 @@
 
 /********** Uncategorized **********/
 
-"%@ (required)" = "%@ (required)";
+"%@ (required)" = "%@ (Wajib)";
 
-"%@ ideas" = "%@ ideas";
+"%@ ideas" = "%@ ide";
 
-"%d people" = "%d people";
+"%d people" = "%d orang-orang";
 
-"(none)" = "(none)";
+"(none)" = "(None)";
 
 "(required)" = "(wajib diisi)";
 
-"1 idea" = "1 idea";
+"1 idea" = "1 Ide";
 
-"1 person" = "1 person";
+"1 person" = "1 orang";
 
 "A suggestion with this title already exists. Please change the title." = "Saran dengan judul ini sudah ada. Ubah judulnya.";
 
-"Add a comment" = "Add a comment";
+"Add a comment" = "Tambah komentar";
 
-"Additional Details" = "Additional Details";
+"Additional Details" = "Rincian Tambahan";
 
 "All" = "Semua";
 
 "All Articles" = "Semua Artikel";
 
-"Are any of these helpful?" = "Are any of these helpful?";
+"Are any of these helpful?" = "Apakah semua ini bermanfaat?";
 
 "Articles" = "Artikel";
 
@@ -48,7 +48,7 @@
 
 "Do you still want to contact us?" = "Apakah Anda masih ingin menghubungi kami?";
 
-"Do you still want to post your own idea?" = "Do you still want to post your own idea?";
+"Do you still want to post your own idea?" = "Apakah Anda masih ingin memposting ide Anda sendiri?";
 
 "Don't save" = "Jangan simpan";
 
@@ -58,7 +58,7 @@
 
 "Enter UserVoice password for %@" = "Masukkan kata sandi UserVoice untuk %@";
 
-"enter value" = "enter value";
+"enter value" = "memasukkan nilai";
 
 "Enter your email" = "Masukkan email";
 
@@ -72,31 +72,31 @@
 
 "Forgot password" = "Lupa kata sandi";
 
-"Give feedback or ask for help..." = "Give feedback or ask for help...";
+"Give feedback or ask for help..." = "Berikan umpan balik atau meminta bantuan ...";
 
-"Great! Glad we could help." = "Great! Glad we could help.";
+"Great! Glad we could help." = "Besar! Senang kami bisa membantu.";
 
-"I want this" = "I want this";
+"I want this" = "Saya ingin ini";
 
-"I want this!" = "I want this!";
+"I want this!" = "Aku ingin ini!";
 
 "Ideas" = "Ide";
 
 "Knowledge Base" = "Basis Pengetahuan";
 
-"Knowledge base" = "Knowledge base";
+"Knowledge base" = "Pengetahuan dasar";
 
 "Load more" = "Muat lainnya";
 
-"Loading..." = "Loading...";
+"Loading..." = "Loading ...";
 
-"Message sent!" = "Message sent!";
+"Message sent!" = "Pesan dikirim!";
 
-"more" = "more";
+"more" = "lebih";
 
 "Name" = "Nama";
 
-"Next" = "Next";
+"Next" = "Berikutnya";
 
 "No" = "Tidak";
 
@@ -104,55 +104,59 @@
 
 "OK" = "OK";
 
-"Password reset email sent to %@" = "Password reset email sent to %@";
+"Password reset email sent to %@" = "Email reset password yang dikirim ke %@";
 
-"Please enter some text before submitting your comment." = "Please enter some text before submitting your comment.";
+"Please enter a valid email address." = "Silakan masukkan alamat email yang valid.";
 
-"Please enter your email address before submitting your comment." = "Please enter your email address before submitting your comment.";
+"Please enter some text before submitting your comment." = "Masukkan teks sebelum mengirimkan komentar Anda.";
+
+"Please enter your email address before submitting your comment." = "Masukkan alamat email Anda sebelum mengirimkan komentar Anda.";
 
 "Please enter your email address before submitting your ticket." = "Masukkan alamat email sebelum mengirim tiket.";
 
-"Please fill out all required fields." = "Please fill out all required fields.";
+"Please fill out all required fields." = "Silahkan mengisi semua bidang yang diperlukan.";
 
 "Post" = "Posting";
 
 "Post an idea" = "Posting ide";
 
-"Powered by UserVoice" = "Powered by UserVoice";
+"Powered by UserVoice" = "Didukung oleh UserVoice";
 
-"Related articles" = "Related articles";
+"Ranked %@" = "Peringkat %@";
 
-"Related feedback" = "Related feedback";
+"Related articles" = "Artikel terkait";
+
+"Related feedback" = "Umpan balik terkait";
 
 "Save draft" = "Simpan draft";
 
 "Search" = "Cari";
 
-"Search forum" = "Search forum";
+"Search forum" = "Forum Cari";
 
-"select" = "select";
+"select" = "memilih";
 
 "Send" = "Kirim";
 
-"Send us a message" = "Send us a message";
+"Send us a message" = "Mengirim pesan";
 
-"Sign in" = "Sign in";
+"Sign in" = "Masuk";
 
-"Skip" = "Skip";
+"Skip" = "Melewatkan";
 
 "Sorry, there was an error in the application." = "Maaf, ada kesalahan pada aplikasi.";
 
-"Thank you!" = "Thank you!";
+"Thank you!" = "Terima kasih!";
 
 "There appears to be a problem with your network connection, please check your connectivity and try again." = "Tampaknya koneksi jaringan bermasalah, silakan cek konektivitas dan coba lagi.";
 
-"There was a problem logging you in." = "There was a problem logging you in.";
+"There was a problem logging you in." = "Ada masalah penebangan Anda.";
 
-"this" = "this";
+"this" = "ini";
 
 "This application didn't configure UserVoice properly" = "Aplikasi ini tidak mengonfigurasi UserVoice dengan baik";
 
-"this idea" = "this idea";
+"this idea" = "ide ini";
 
 "Title" = "Judul";
 
@@ -164,9 +168,9 @@
 
 "Was this article helpful?" = "Apakah artikel ini membantu?";
 
-"We'll be in touch." = "We'll be in touch.";
+"We'll be in touch." = "Kami akan menghubungi.";
 
-"When you post an idea on our forum, others will be able to subscribe to it and make comments. When we respond to the idea, you'll get notified." = "When you post an idea on our forum, others will be able to subscribe to it and make comments. When we respond to the idea, you'll get notified.";
+"When you post an idea on our forum, others will be able to subscribe to it and make comments. When we respond to the idea, you'll get notified." = "Ketika Anda memposting sebuah gagasan pada forum kami, orang lain akan dapat berlangganan dan membuat komentar. Ketika kita menanggapi ide, Anda akan mendapatkan pemberitahuan.";
 
 "Would you like to contact us?" = "Anda ingin menghubungi kami?";
 
@@ -178,8 +182,8 @@
 
 "Yes, go to my message" = "Ya, lihat pesan saya";
 
-"Yes, I want to post my idea" = "Yes, I want to post my idea";
+"Yes, I want to post my idea" = "Ya, saya ingin memposting ide saya";
 
-"Your feedback has been posted to our feedback forum." = "Your feedback has been posted to our feedback forum.";
+"Your feedback has been posted to our feedback forum." = "Tanggapan Anda telah diposting ke forum masukan kami.";
 
 "“Anonymous”" = "“Anonim”";

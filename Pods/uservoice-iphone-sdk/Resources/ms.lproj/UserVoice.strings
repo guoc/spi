@@ -6,31 +6,31 @@
 
 /********** Uncategorized **********/
 
-"%@ (required)" = "%@ (required)";
+"%@ (required)" = "%@ (Diperlukan)";
 
-"%@ ideas" = "%@ ideas";
+"%@ ideas" = "%@ idea";
 
-"%d people" = "%d people";
+"%d people" = "%d orang";
 
-"(none)" = "(none)";
+"(none)" = "(Tiada)";
 
 "(required)" = "(diperlukan)";
 
 "1 idea" = "1 idea";
 
-"1 person" = "1 person";
+"1 person" = "1 orang";
 
 "A suggestion with this title already exists. Please change the title." = "Cadangan dengan tajuk ini sudah wujud. Sila tukar tajuk.";
 
-"Add a comment" = "Add a comment";
+"Add a comment" = "Tambah komen";
 
-"Additional Details" = "Additional Details";
+"Additional Details" = "Butiran Tambahan";
 
 "All" = "Semua";
 
 "All Articles" = "Semua Artikel";
 
-"Are any of these helpful?" = "Are any of these helpful?";
+"Are any of these helpful?" = "Pengguna matawang ini membantu?";
 
 "Articles" = "Artikel";
 
@@ -48,7 +48,7 @@
 
 "Do you still want to contact us?" = "Adakah anda masih mahu menghubungi kami?";
 
-"Do you still want to post your own idea?" = "Do you still want to post your own idea?";
+"Do you still want to post your own idea?" = "Adakah anda masih mahu untuk menghantar idea anda sendiri?";
 
 "Don't save" = "Jangan simpan";
 
@@ -58,7 +58,7 @@
 
 "Enter UserVoice password for %@" = "Masukkan kata laluan UserVoice untuk %@";
 
-"enter value" = "enter value";
+"enter value" = "masukkan nilai";
 
 "Enter your email" = "Masukkan e-mel anda";
 
@@ -72,31 +72,31 @@
 
 "Forgot password" = "Terlupa kata laluan";
 
-"Give feedback or ask for help..." = "Give feedback or ask for help...";
+"Give feedback or ask for help..." = "Memberikan maklum balas atau meminta pertolongan ...";
 
-"Great! Glad we could help." = "Great! Glad we could help.";
+"Great! Glad we could help." = "Great! Gembira kita boleh membantu.";
 
-"I want this" = "I want this";
+"I want this" = "Saya mahu ini";
 
-"I want this!" = "I want this!";
+"I want this!" = "Saya mahu ini!";
 
 "Ideas" = "Idea";
 
 "Knowledge Base" = "Pangkalan Pengetahuan";
 
-"Knowledge base" = "Knowledge base";
+"Knowledge base" = "Pangkalan pengetahuan";
 
 "Load more" = "Muatkan lagi";
 
-"Loading..." = "Loading...";
+"Loading..." = "Loading ...";
 
-"Message sent!" = "Message sent!";
+"Message sent!" = "Mesej dihantar!";
 
-"more" = "more";
+"more" = "lebih";
 
 "Name" = "Nama";
 
-"Next" = "Next";
+"Next" = "Seterusnya";
 
 "No" = "Tidak";
 
@@ -104,55 +104,59 @@
 
 "OK" = "OK";
 
-"Password reset email sent to %@" = "Password reset email sent to %@";
+"Password reset email sent to %@" = "E-mel set semula kata laluan dihantar ke %@";
 
-"Please enter some text before submitting your comment." = "Please enter some text before submitting your comment.";
+"Please enter a valid email address." = "Sila masukkan alamat e-mel yang sah.";
 
-"Please enter your email address before submitting your comment." = "Please enter your email address before submitting your comment.";
+"Please enter some text before submitting your comment." = "Sila masukkan teks sebelum mengemukakan komen anda.";
+
+"Please enter your email address before submitting your comment." = "Sila masukkan alamat e-mel anda sebelum menghantar komen anda.";
 
 "Please enter your email address before submitting your ticket." = "Sila masukkan alamat e-mel anda sebelum menyerahkan tiket.";
 
-"Please fill out all required fields." = "Please fill out all required fields.";
+"Please fill out all required fields." = "Sila isi semua medan yang diperlukan.";
 
 "Post" = "Pos";
 
 "Post an idea" = "Pos idea";
 
-"Powered by UserVoice" = "Powered by UserVoice";
+"Powered by UserVoice" = "Dikuasakan oleh UserVoice";
 
-"Related articles" = "Related articles";
+"Ranked %@" = "Peringkat %@";
 
-"Related feedback" = "Related feedback";
+"Related articles" = "Artikel berkaitan";
+
+"Related feedback" = "Maklum balas berkaitan";
 
 "Save draft" = "Simpan draf";
 
 "Search" = "Cari";
 
-"Search forum" = "Search forum";
+"Search forum" = "Forum Cari";
 
-"select" = "select";
+"select" = "pilih";
 
 "Send" = "Hantar";
 
-"Send us a message" = "Send us a message";
+"Send us a message" = "Hantar mesej kepada kami";
 
 "Sign in" = "Daftar masuk";
 
-"Skip" = "Skip";
+"Skip" = "Langkau";
 
 "Sorry, there was an error in the application." = "Maaf, terdapat ralat dalam aplikasi.";
 
-"Thank you!" = "Thank you!";
+"Thank you!" = "Terima kasih!";
 
 "There appears to be a problem with your network connection, please check your connectivity and try again." = "Nampaknya ada masalah dengan sambungan rangkaian anda, sila semak sambungan dan cuba lagi.";
 
-"There was a problem logging you in." = "There was a problem logging you in.";
+"There was a problem logging you in." = "Terdapat masalah pembalakan anda dalam.";
 
-"this" = "this";
+"this" = "ini";
 
 "This application didn't configure UserVoice properly" = "Aplikasi ini tidak mengkonfigurasikan UserVoice dengan betul";
 
-"this idea" = "this idea";
+"this idea" = "idea ini";
 
 "Title" = "Tajuk";
 
@@ -164,9 +168,9 @@
 
 "Was this article helpful?" = "Adakah artikel ini membantu?";
 
-"We'll be in touch." = "We'll be in touch.";
+"We'll be in touch." = "Kami akan menghubungi anda.";
 
-"When you post an idea on our forum, others will be able to subscribe to it and make comments. When we respond to the idea, you'll get notified." = "When you post an idea on our forum, others will be able to subscribe to it and make comments. When we respond to the idea, you'll get notified.";
+"When you post an idea on our forum, others will be able to subscribe to it and make comments. When we respond to the idea, you'll get notified." = "Apabila anda menyiarkan idea pada forum kami, yang lain akan dapat melangganinya dan membuat komen. Apabila kita bertindak balas terhadap idea, anda akan dimaklumkan.";
 
 "Would you like to contact us?" = "Adakah anda mahu menghubungi kami?";
 
@@ -178,8 +182,8 @@
 
 "Yes, go to my message" = "Ya, pergi ke pesanan saya";
 
-"Yes, I want to post my idea" = "Yes, I want to post my idea";
+"Yes, I want to post my idea" = "Ya, saya hendak hantar idea saya";
 
-"Your feedback has been posted to our feedback forum." = "Your feedback has been posted to our feedback forum.";
+"Your feedback has been posted to our feedback forum." = "Maklum balas anda telah dihantar ke forum maklum balas kami.";
 
 "“Anonymous”" = "“Tanpa nama”";

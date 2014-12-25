@@ -106,6 +106,8 @@
 
 "Password reset email sent to %@" = "密码重置邮件已发送至 %@";
 
+"Please enter a valid email address." = "请输入有效的电子邮件地址。";
+
 "Please enter some text before submitting your comment." = "不能发表空的评论。";
 
 "Please enter your email address before submitting your comment." = "请输入您的电邮地址。";
@@ -119,6 +121,8 @@
 "Post an idea" = "发表意见";
 
 "Powered by UserVoice" = "UserVoice倾力支持";
+
+"Ranked %@" = "排名%@";
 
 "Related articles" = "相关的文章";
 

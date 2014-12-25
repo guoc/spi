@@ -7,11 +7,16 @@
 //
 
 #import "UVNavigationController.h"
+#import "UVStyleSheet.h"
 
 @implementation UVNavigationController
 
 - (BOOL)disablesAutomaticKeyboardDismissal {
     return NO;
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return [UVStyleSheet instance].preferredStatusBarStyle;
 }
 
 @end

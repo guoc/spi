@@ -12,12 +12,21 @@ DEPENDENCIES:
   - CrittercismSDK
   - FMDB (~> 2.4)
   - InAppSettingsKit (~> 2.3.2)
-  - uservoice-iphone-sdk
+  - uservoice-iphone-sdk (from `https://github.com/uservoice/uservoice-ios-sdk.git`)
+
+EXTERNAL SOURCES:
+  uservoice-iphone-sdk:
+    :git: https://github.com/uservoice/uservoice-ios-sdk.git
+
+CHECKOUT OPTIONS:
+  uservoice-iphone-sdk:
+    :commit: ed072dfbf13c3eccf1a2ec2c447af03f83bf1e6d
+    :git: https://github.com/uservoice/uservoice-ios-sdk.git
 
 SPEC CHECKSUMS:
   CrittercismSDK: 1f1a91c7a51ca8044e675765bde5d2aa97295b1d
   FMDB: 0b2fa25e5264ef177973c0cb8c02c711107979aa
   InAppSettingsKit: c870cb6095a85656ff4df42845af5c26eede4c8d
-  uservoice-iphone-sdk: 7cbc1e76dcbbc3d5ae3b4bf009fdcf355e1e83ec
+  uservoice-iphone-sdk: 3bb5c0631be38de37b9dea8d364aacda29daecd3
 
 COCOAPODS: 0.35.0

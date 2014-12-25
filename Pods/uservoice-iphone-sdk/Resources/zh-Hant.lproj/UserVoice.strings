@@ -6,31 +6,31 @@
 
 /********** Uncategorized **********/
 
-"%@ (required)" = "%@ (required)";
+"%@ (required)" = "%@ (必填)";
 
-"%@ ideas" = "%@ ideas";
+"%@ ideas" = "%@ 建議";
 
-"%d people" = "%d people";
+"%d people" = "%d 人";
 
 "(none)" = "(none)";
 
 "(required)" = "(必須填寫)";
 
-"1 idea" = "1 idea";
+"1 idea" = "1 想法";
 
-"1 person" = "1 person";
+"1 person" = "1 人";
 
 "A suggestion with this title already exists. Please change the title." = "已有一個同樣標題的建議。請更改標題。";
 
-"Add a comment" = "Add a comment";
+"Add a comment" = "增加一個意見";
 
-"Additional Details" = "Additional Details";
+"Additional Details" = "額外的詳細資訊";
 
 "All" = "全部";
 
 "All Articles" = "所有文章";
 
-"Are any of these helpful?" = "Are any of these helpful?";
+"Are any of these helpful?" = "這些文章對您有幫助嗎?";
 
 "Articles" = "文章";
 
@@ -46,9 +46,9 @@
 
 "Description (optional)" = "說明（可有可無）";
 
-"Do you still want to contact us?" = "你仍要與我們聯絡嗎？";
+"Do you still want to contact us?" = "你仍想要與我們聯繫嗎？";
 
-"Do you still want to post your own idea?" = "Do you still want to post your own idea?";
+"Do you still want to post your own idea?" = "請問你仍然要發佈你的意見嗎?";
 
 "Don't save" = "不儲存";
 
@@ -58,7 +58,7 @@
 
 "Enter UserVoice password for %@" = "輸入 %@ 的 UserVoice 密碼";
 
-"enter value" = "enter value";
+"enter value" = "請輸入資料";
 
 "Enter your email" = "輸入你的電郵地址";
 
@@ -72,31 +72,31 @@
 
 "Forgot password" = "忘記密碼";
 
-"Give feedback or ask for help..." = "Give feedback or ask for help...";
+"Give feedback or ask for help..." = "給我們建議或者尋求幫助...";
 
-"Great! Glad we could help." = "Great! Glad we could help.";
+"Great! Glad we could help." = "太好了! 很高興我們幫得上忙.";
 
-"I want this" = "I want this";
+"I want this" = "我想要這個";
 
-"I want this!" = "I want this!";
+"I want this!" = "我想要這個!";
 
 "Ideas" = "意見";
 
 "Knowledge Base" = "知識庫";
 
-"Knowledge base" = "Knowledge base";
+"Knowledge base" = "知識庫";
 
 "Load more" = "載入更多";
 
-"Loading..." = "Loading...";
+"Loading..." = "讀取中...";
 
-"Message sent!" = "Message sent!";
+"Message sent!" = "訊息已經寄出!";
 
-"more" = "more";
+"more" = "更多";
 
 "Name" = "名稱";
 
-"Next" = "Next";
+"Next" = "下一步";
 
 "No" = "否";
 
@@ -104,55 +104,59 @@
 
 "OK" = "確定";
 
-"Password reset email sent to %@" = "Password reset email sent to %@";
+"Password reset email sent to %@" = "密碼重設信已寄至 %@";
 
-"Please enter some text before submitting your comment." = "Please enter some text before submitting your comment.";
+"Please enter a valid email address." = "請輸入有效的電子郵件地址。";
 
-"Please enter your email address before submitting your comment." = "Please enter your email address before submitting your comment.";
+"Please enter some text before submitting your comment." = "送出意見前，請先輸入文字。";
+
+"Please enter your email address before submitting your comment." = "送出意見前，請先輸入你的電郵地址。";
 
 "Please enter your email address before submitting your ticket." = "投票前，請先輸入你的電郵地址。";
 
-"Please fill out all required fields." = "Please fill out all required fields.";
+"Please fill out all required fields." = "請填寫所有需要的欄位。";
 
 "Post" = "發表";
 
 "Post an idea" = "發表意見";
 
-"Powered by UserVoice" = "Powered by UserVoice";
+"Powered by UserVoice" = "本站由UserVoice";
 
-"Related articles" = "Related articles";
+"Ranked %@" = "排名%@";
 
-"Related feedback" = "Related feedback";
+"Related articles" = "相關文章";
+
+"Related feedback" = "相關回應";
 
 "Save draft" = "儲存草稿";
 
 "Search" = "搜尋";
 
-"Search forum" = "Search forum";
+"Search forum" = "搜尋論壇";
 
-"select" = "select";
+"select" = "選擇";
 
 "Send" = "傳送";
 
-"Send us a message" = "Send us a message";
+"Send us a message" = "聯絡我們";
 
 "Sign in" = "登入";
 
-"Skip" = "Skip";
+"Skip" = "略過";
 
 "Sorry, there was an error in the application." = "抱歉，應用程式出現錯誤。";
 
-"Thank you!" = "Thank you!";
+"Thank you!" = "感謝您!";
 
-"There appears to be a problem with your network connection, please check your connectivity and try again." = "所用網路連線好象有問題，請檢查一下網路連線，然後再試一次。";
+"There appears to be a problem with your network connection, please check your connectivity and try again." = "所用網路連線似乎有問題，請檢查一下網路連線，然後再試一次。";
 
-"There was a problem logging you in." = "There was a problem logging you in.";
+"There was a problem logging you in." = "遇到問題，暫時無法讓您登錄。";
 
-"this" = "this";
+"this" = "這個";
 
 "This application didn't configure UserVoice properly" = "此應用程式尚未設定，無法用於 UserVoice 論壇";
 
-"this idea" = "this idea";
+"this idea" = "這個意見";
 
 "Title" = "標題";
 
@@ -164,11 +168,11 @@
 
 "Was this article helpful?" = "這篇文章是否有幫助？";
 
-"We'll be in touch." = "We'll be in touch.";
+"We'll be in touch." = "我們會保持聯繫的。";
 
-"When you post an idea on our forum, others will be able to subscribe to it and make comments. When we respond to the idea, you'll get notified." = "When you post an idea on our forum, others will be able to subscribe to it and make comments. When we respond to the idea, you'll get notified.";
+"When you post an idea on our forum, others will be able to subscribe to it and make comments. When we respond to the idea, you'll get notified." = "當你發表意見至論壇時，其他人可以訂閱或者回覆。 當我們回應這個意見時，您將收到通知。";
 
-"Would you like to contact us?" = "是否想與我們聯絡？";
+"Would you like to contact us?" = "是否想要與我們聯絡？";
 
 "Write a comment..." = "請留言...";
 
@@ -178,8 +182,8 @@
 
 "Yes, go to my message" = "可以，前往我的信件";
 
-"Yes, I want to post my idea" = "Yes, I want to post my idea";
+"Yes, I want to post my idea" = "是的, 我想要刊登我的想法";
 
-"Your feedback has been posted to our feedback forum." = "Your feedback has been posted to our feedback forum.";
+"Your feedback has been posted to our feedback forum." = "您的意見已經發布到我們的論壇";
 
 "“Anonymous”" = "「匿名」";

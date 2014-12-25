@@ -6,31 +6,31 @@
 
 /********** Uncategorized **********/
 
-"%@ (required)" = "%@ (required)";
+"%@ (required)" = "%@ (Obrigatório)";
 
-"%@ ideas" = "%@ ideas";
+"%@ ideas" = "%@ idéias";
 
-"%d people" = "%d people";
+"%d people" = "%d pessoas";
 
-"(none)" = "(none)";
+"(none)" = "(None)";
 
 "(required)" = "(obrigatório)";
 
-"1 idea" = "1 idea";
+"1 idea" = "1 idéia";
 
-"1 person" = "1 person";
+"1 person" = "1 pessoa";
 
 "A suggestion with this title already exists. Please change the title." = "Já existe uma sugestão com este título. Altere o título, por favor.";
 
-"Add a comment" = "Add a comment";
+"Add a comment" = "Adicionar um comentário";
 
-"Additional Details" = "Additional Details";
+"Additional Details" = "Detalhes";
 
 "All" = "Todos";
 
 "All Articles" = "Todos os artigos";
 
-"Are any of these helpful?" = "Are any of these helpful?";
+"Are any of these helpful?" = "Alguma delas são úteis?";
 
 "Articles" = "Artigos";
 
@@ -48,7 +48,7 @@
 
 "Do you still want to contact us?" = "Ainda pretende contactar-nos?";
 
-"Do you still want to post your own idea?" = "Do you still want to post your own idea?";
+"Do you still want to post your own idea?" = "Você ainda quer publicar sua própria idéia?";
 
 "Don't save" = "Não guardar";
 
@@ -58,7 +58,7 @@
 
 "Enter UserVoice password for %@" = "Introduza a palavra-passe do UserVoice para %@";
 
-"enter value" = "enter value";
+"enter value" = "introduzir valor";
 
 "Enter your email" = "Introduza o e-mail";
 
@@ -72,27 +72,27 @@
 
 "Forgot password" = "Palavra-passe esquecida";
 
-"Give feedback or ask for help..." = "Give feedback or ask for help...";
+"Give feedback or ask for help..." = "Dê a sua opinião ou pedir ajuda ...";
 
-"Great! Glad we could help." = "Great! Glad we could help.";
+"Great! Glad we could help." = "Great! Fico feliz que poderia ajudar.";
 
-"I want this" = "I want this";
+"I want this" = "Eu quero isso";
 
-"I want this!" = "I want this!";
+"I want this!" = "Eu quero isso!";
 
 "Ideas" = "Ideias";
 
 "Knowledge Base" = "BD de conhecimentos";
 
-"Knowledge base" = "Knowledge base";
+"Knowledge base" = "Base de conhecimento";
 
 "Load more" = "Carregar mais";
 
-"Loading..." = "Loading...";
+"Loading..." = "Carregando ...";
 
-"Message sent!" = "Message sent!";
+"Message sent!" = "Mensagem enviada!";
 
-"more" = "more";
+"more" = "mais";
 
 "Name" = "Nome";
 
@@ -104,15 +104,17 @@
 
 "OK" = "OK";
 
-"Password reset email sent to %@" = "Password reset email sent to %@";
+"Password reset email sent to %@" = "Redefinição de senha e-mail enviado para %@";
 
-"Please enter some text before submitting your comment." = "Please enter some text before submitting your comment.";
+"Please enter a valid email address." = "Por favor insira um endereço de e-mail válido.";
 
-"Please enter your email address before submitting your comment." = "Please enter your email address before submitting your comment.";
+"Please enter some text before submitting your comment." = "Digite algum texto antes de enviar o seu comentário.";
+
+"Please enter your email address before submitting your comment." = "Digite seu endereço de e-mail antes de enviar o seu comentário.";
 
 "Please enter your email address before submitting your ticket." = "Introduza o endereço de e-mail antes de submeter o ticket.";
 
-"Please fill out all required fields." = "Please fill out all required fields.";
+"Please fill out all required fields." = "Por favor, preencha todos os campos obrigatórios.";
 
 "Post" = "Publicar";
 
@@ -120,39 +122,41 @@
 
 "Powered by UserVoice" = "Powered by UserVoice";
 
-"Related articles" = "Related articles";
+"Ranked %@" = "Classificado %@";
 
-"Related feedback" = "Related feedback";
+"Related articles" = "Artigos relacionados";
+
+"Related feedback" = "Realimentação relacionadas";
 
 "Save draft" = "Guardar rascunho";
 
 "Search" = "Procurar";
 
-"Search forum" = "Search forum";
+"Search forum" = "Pesquisa fórum";
 
-"select" = "select";
+"select" = "selecionar";
 
 "Send" = "Enviar";
 
-"Send us a message" = "Send us a message";
+"Send us a message" = "Envie-nos uma mensagem";
 
 "Sign in" = "Iniciar sessão";
 
-"Skip" = "Skip";
+"Skip" = "Pular";
 
 "Sorry, there was an error in the application." = "Lamentamos, ocorreu um erro na aplicação.";
 
-"Thank you!" = "Thank you!";
+"Thank you!" = "Obrigado!";
 
 "There appears to be a problem with your network connection, please check your connectivity and try again." = "Parece haver um problema com a ligação de rede, verifique a conectividade e tente de novo.";
 
-"There was a problem logging you in." = "There was a problem logging you in.";
+"There was a problem logging you in." = "Houve um problema log-in.";
 
-"this" = "this";
+"this" = "este";
 
 "This application didn't configure UserVoice properly" = "Esta aplicação não configurou o UserVoice devidamente";
 
-"this idea" = "this idea";
+"this idea" = "esta idéia";
 
 "Title" = "Título";
 
@@ -164,9 +168,9 @@
 
 "Was this article helpful?" = "Este artigo foi útil?";
 
-"We'll be in touch." = "We'll be in touch.";
+"We'll be in touch." = "Nós entraremos em contato.";
 
-"When you post an idea on our forum, others will be able to subscribe to it and make comments. When we respond to the idea, you'll get notified." = "When you post an idea on our forum, others will be able to subscribe to it and make comments. When we respond to the idea, you'll get notified.";
+"When you post an idea on our forum, others will be able to subscribe to it and make comments. When we respond to the idea, you'll get notified." = "Quando você postar uma ideia no nosso fórum, outros poderão subscrevê-lo e fazer comentários. Quando respondemos à idéia, você vai ser notificado.";
 
 "Would you like to contact us?" = "Pretende contactar-nos?";
 
@@ -178,8 +182,8 @@
 
 "Yes, go to my message" = "Sim, ir para a minha mensagem";
 
-"Yes, I want to post my idea" = "Yes, I want to post my idea";
+"Yes, I want to post my idea" = "Sim, eu quero deixar a minha ideia";
 
-"Your feedback has been posted to our feedback forum." = "Your feedback has been posted to our feedback forum.";
+"Your feedback has been posted to our feedback forum." = "Seu comentário foi postado em nosso fórum de feedback.";
 
 "“Anonymous”" = "“Anónimo”";

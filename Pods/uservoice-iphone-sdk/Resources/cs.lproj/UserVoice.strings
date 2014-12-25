@@ -6,31 +6,31 @@
 
 /********** Uncategorized **********/
 
-"%@ (required)" = "%@ (required)";
+"%@ (required)" = "%@ (Povinné)";
 
-"%@ ideas" = "%@ ideas";
+"%@ ideas" = "%@ nápady";
 
-"%d people" = "%d people";
+"%d people" = "%d lidé";
 
-"(none)" = "(none)";
+"(none)" = "(None)";
 
 "(required)" = "(povinné)";
 
-"1 idea" = "1 idea";
+"1 idea" = "1. idea";
 
-"1 person" = "1 person";
+"1 person" = "1 osoba";
 
 "A suggestion with this title already exists. Please change the title." = "Návrh s tímto názvem již existuje.Změňte prosím název.";
 
-"Add a comment" = "Add a comment";
+"Add a comment" = "Přidat komentář";
 
-"Additional Details" = "Additional Details";
+"Additional Details" = "Další podrobnosti";
 
 "All" = "Vše";
 
 "All Articles" = "Všechny články";
 
-"Are any of these helpful?" = "Are any of these helpful?";
+"Are any of these helpful?" = "Jsou některé z nich užitečná?";
 
 "Articles" = "Články";
 
@@ -48,7 +48,7 @@
 
 "Do you still want to contact us?" = "Přejete si nás stále kontaktovat?";
 
-"Do you still want to post your own idea?" = "Do you still want to post your own idea?";
+"Do you still want to post your own idea?" = "Myslíte si přesto chcete psát své vlastní představu?";
 
 "Don't save" = "Neukládat";
 
@@ -58,7 +58,7 @@
 
 "Enter UserVoice password for %@" = "Zadejte heslo UserVoice pro %@";
 
-"enter value" = "enter value";
+"enter value" = "zadejte hodnotu";
 
 "Enter your email" = "Zadejte svůj e-mail";
 
@@ -72,31 +72,31 @@
 
 "Forgot password" = "Zapomenuté heslo";
 
-"Give feedback or ask for help..." = "Give feedback or ask for help...";
+"Give feedback or ask for help..." = "Dejte nám zpětnou vazbu, nebo požádat o pomoc ...";
 
-"Great! Glad we could help." = "Great! Glad we could help.";
+"Great! Glad we could help." = "Skvělé! Jsem rád, že jsme mohli pomoci.";
 
-"I want this" = "I want this";
+"I want this" = "Chci, aby to";
 
-"I want this!" = "I want this!";
+"I want this!" = "Chci, aby to!";
 
 "Ideas" = "Nápady";
 
 "Knowledge Base" = "Databáze vědomostí";
 
-"Knowledge base" = "Knowledge base";
+"Knowledge base" = "Znalostní báze";
 
 "Load more" = "Načíst další";
 
-"Loading..." = "Loading...";
+"Loading..." = "Loading ...";
 
-"Message sent!" = "Message sent!";
+"Message sent!" = "Zpráva byla odeslána!";
 
-"more" = "more";
+"more" = "více";
 
 "Name" = "Jméno";
 
-"Next" = "Next";
+"Next" = "Další";
 
 "No" = "Ne";
 
@@ -104,15 +104,17 @@
 
 "OK" = "OK";
 
-"Password reset email sent to %@" = "Password reset email sent to %@";
+"Password reset email sent to %@" = "Email resetování hesla odeslán %@";
 
-"Please enter some text before submitting your comment." = "Please enter some text before submitting your comment.";
+"Please enter a valid email address." = "Zadejte prosím platnou e-mailovou adresu.";
 
-"Please enter your email address before submitting your comment." = "Please enter your email address before submitting your comment.";
+"Please enter some text before submitting your comment." = "Před odesláním svůj komentář Zadejte nějaký text.";
+
+"Please enter your email address before submitting your comment." = "Před odesláním svůj komentář, zadejte svou e-mailovou adresu.";
 
 "Please enter your email address before submitting your ticket." = "Před odesláním vašeho lístku, zadejte prosím svou e-mailovou adresu.";
 
-"Please fill out all required fields." = "Please fill out all required fields.";
+"Please fill out all required fields." = "Vyplňte prosím všechna povinná pole.";
 
 "Post" = "Zveřejnit";
 
@@ -120,39 +122,41 @@
 
 "Powered by UserVoice" = "Powered by UserVoice";
 
-"Related articles" = "Related articles";
+"Ranked %@" = "Zařadil %@";
 
-"Related feedback" = "Related feedback";
+"Related articles" = "Související články";
+
+"Related feedback" = "Související zpětná vazba";
 
 "Save draft" = "Uložit koncept";
 
 "Search" = "Vyhledat";
 
-"Search forum" = "Search forum";
+"Search forum" = "Hledat forum";
 
-"select" = "select";
+"select" = "vybrat";
 
 "Send" = "Odeslat";
 
-"Send us a message" = "Send us a message";
+"Send us a message" = "Pošlete nám zprávu";
 
 "Sign in" = "Přihlaste se";
 
-"Skip" = "Skip";
+"Skip" = "Přeskočit";
 
 "Sorry, there was an error in the application." = "Litujeme, ale v aplikaci se vyskytla chyba.";
 
-"Thank you!" = "Thank you!";
+"Thank you!" = "Děkuji vám!";
 
 "There appears to be a problem with your network connection, please check your connectivity and try again." = "Zdá se, že je problém s vaším připojením k síti. Zkontrolujte prosím své připojení a zkuste to znovu.";
 
-"There was a problem logging you in." = "There was a problem logging you in.";
+"There was a problem logging you in." = "Tam byl problém přihlášení vás.";
 
-"this" = "this";
+"this" = "to";
 
 "This application didn't configure UserVoice properly" = "Tato aplikace nenakonfigurovala UserVoice správně";
 
-"this idea" = "this idea";
+"this idea" = "tato myšlenka";
 
 "Title" = "Název";
 
@@ -164,9 +168,9 @@
 
 "Was this article helpful?" = "Pomohl vám tento článek?";
 
-"We'll be in touch." = "We'll be in touch.";
+"We'll be in touch." = "Budeme v kontaktu.";
 
-"When you post an idea on our forum, others will be able to subscribe to it and make comments. When we respond to the idea, you'll get notified." = "When you post an idea on our forum, others will be able to subscribe to it and make comments. When we respond to the idea, you'll get notified.";
+"When you post an idea on our forum, others will be able to subscribe to it and make comments. When we respond to the idea, you'll get notified." = "Při přidání představu o našem fóru, některé budou moci objednat a vznést připomínky. Když jsme se reagovat na myšlence, dostanete upozorněni.";
 
 "Would you like to contact us?" = "Přejete si nás kontaktovat?";
 
@@ -178,8 +182,8 @@
 
 "Yes, go to my message" = "Ano, přejít na mou zprávu";
 
-"Yes, I want to post my idea" = "Yes, I want to post my idea";
+"Yes, I want to post my idea" = "Ano, chci, abyste mohl psát můj nápad";
 
-"Your feedback has been posted to our feedback forum." = "Your feedback has been posted to our feedback forum.";
+"Your feedback has been posted to our feedback forum." = "Váš názor byl vyslán do naší zpětné vazby fórum.";
 
 "“Anonymous”" = "\"Anonymní\"";

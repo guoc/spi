@@ -94,7 +94,7 @@
 }
 
 - (BOOL)sectionIsArticles:(NSInteger)section {
-    return (_articlesFirst && _instantAnswerManager.articles.count > 0) ? section == 0 : section == 1;
+    return (_articlesFirst && _instantAnswerManager.articles.count > 0) || _instantAnswerManager.ideas.count == 0 ? section == 0 : section == 1;
 }
 
 @end

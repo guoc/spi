@@ -6,31 +6,31 @@
 
 /********** Uncategorized **********/
 
-"%@ (required)" = "%@ (required)";
+"%@ (required)" = "%@ (Necesar)";
 
-"%@ ideas" = "%@ ideas";
+"%@ ideas" = "%@ idei";
 
-"%d people" = "%d people";
+"%d people" = "%d oameni";
 
-"(none)" = "(none)";
+"(none)" = "(Nici unul)";
 
 "(required)" = "(obligatoriu)";
 
-"1 idea" = "1 idea";
+"1 idea" = "1 idee";
 
-"1 person" = "1 person";
+"1 person" = "1 persoană";
 
 "A suggestion with this title already exists. Please change the title." = "Există deja o sugestie cu acest titlu. Vă rugăm să modificaţi titlul.";
 
-"Add a comment" = "Add a comment";
+"Add a comment" = "Adauga un comentariu";
 
-"Additional Details" = "Additional Details";
+"Additional Details" = "Detalii suplimentare";
 
 "All" = "Toate";
 
 "All Articles" = "Toate articolele";
 
-"Are any of these helpful?" = "Are any of these helpful?";
+"Are any of these helpful?" = "Sunt oricare dintre aceste utila?";
 
 "Articles" = "Articole";
 
@@ -48,7 +48,7 @@
 
 "Do you still want to contact us?" = "Doriţi totuşi să ne contactaţi?";
 
-"Do you still want to post your own idea?" = "Do you still want to post your own idea?";
+"Do you still want to post your own idea?" = "Mai vrei să postezi propria idee?";
 
 "Don't save" = "Nu se salvează";
 
@@ -58,7 +58,7 @@
 
 "Enter UserVoice password for %@" = "Introduceţi parola UserVoice pentru %@";
 
-"enter value" = "enter value";
+"enter value" = "introduceți valoarea";
 
 "Enter your email" = "Introduceţi e-mailul dvs.";
 
@@ -72,31 +72,31 @@
 
 "Forgot password" = "Parolă uitată";
 
-"Give feedback or ask for help..." = "Give feedback or ask for help...";
+"Give feedback or ask for help..." = "Dă feedback sau cere ajutor ...";
 
-"Great! Glad we could help." = "Great! Glad we could help.";
+"Great! Glad we could help." = "Great! Mă bucur că am putut ajuta.";
 
-"I want this" = "I want this";
+"I want this" = "Vreau aceasta";
 
-"I want this!" = "I want this!";
+"I want this!" = "Vreau aceasta!";
 
 "Ideas" = "Idei";
 
 "Knowledge Base" = "Bază de cunoştinţe";
 
-"Knowledge base" = "Knowledge base";
+"Knowledge base" = "Baza de cunoștințe";
 
 "Load more" = "Încărcare mai multe";
 
-"Loading..." = "Loading...";
+"Loading..." = "Se încarcă ...";
 
-"Message sent!" = "Message sent!";
+"Message sent!" = "Mesajul a fost trimis!";
 
-"more" = "more";
+"more" = "mai mult";
 
 "Name" = "Nume";
 
-"Next" = "Next";
+"Next" = "Următorul";
 
 "No" = "Nu";
 
@@ -104,15 +104,17 @@
 
 "OK" = "OK";
 
-"Password reset email sent to %@" = "Password reset email sent to %@";
+"Password reset email sent to %@" = "E-mail de resetare a parolei trimis %@";
 
-"Please enter some text before submitting your comment." = "Please enter some text before submitting your comment.";
+"Please enter a valid email address." = "Vă rugăm să introduceți o adresă de email validă.";
 
-"Please enter your email address before submitting your comment." = "Please enter your email address before submitting your comment.";
+"Please enter some text before submitting your comment." = "Vă rugăm să introduceți un text înainte de a trimite un comentariu.";
+
+"Please enter your email address before submitting your comment." = "Te rugăm să introduci adresa ta de email înainte de a trimite un comentariu.";
 
 "Please enter your email address before submitting your ticket." = "Vă rugăm să introduceţi adresa dvs. de e-mail înainte de a trimite sesizarea dvs.";
 
-"Please fill out all required fields." = "Please fill out all required fields.";
+"Please fill out all required fields." = "Vă rugăm să completați toate câmpurile obligatorii.";
 
 "Post" = "Postare";
 
@@ -120,39 +122,41 @@
 
 "Powered by UserVoice" = "Powered by UserVoice";
 
-"Related articles" = "Related articles";
+"Ranked %@" = "Clasat %@";
 
-"Related feedback" = "Related feedback";
+"Related articles" = "Articole pe aceeași temă";
+
+"Related feedback" = "Feedback Sugestii";
 
 "Save draft" = "Salvare schiţă";
 
 "Search" = "Căutare";
 
-"Search forum" = "Search forum";
+"Search forum" = "Căutare pe forum";
 
-"select" = "select";
+"select" = "selecta";
 
 "Send" = "Trimitere";
 
-"Send us a message" = "Send us a message";
+"Send us a message" = "Trimite-ne un mesaj";
 
 "Sign in" = "Autentificare";
 
-"Skip" = "Skip";
+"Skip" = "Sări";
 
 "Sorry, there was an error in the application." = "Ne pare rău, a apărut o eroare în aplicaţie.";
 
-"Thank you!" = "Thank you!";
+"Thank you!" = "Mulțumesc!";
 
 "There appears to be a problem with your network connection, please check your connectivity and try again." = "Pare să existe o problemă cu conexiunea dvs. la reţea. Vă rugăm să verificaţi conexiunea şi să încercaţi din nou.";
 
-"There was a problem logging you in." = "There was a problem logging you in.";
+"There was a problem logging you in." = "A apărut o problemă logarea în.";
 
-"this" = "this";
+"this" = "acest";
 
 "This application didn't configure UserVoice properly" = "Această aplicaţie nu a configurat corect UserVoice";
 
-"this idea" = "this idea";
+"this idea" = "această idee";
 
 "Title" = "Titlu";
 
@@ -164,9 +168,9 @@
 
 "Was this article helpful?" = "V-a ajutat acest articol?";
 
-"We'll be in touch." = "We'll be in touch.";
+"We'll be in touch." = "Vom fi în contact.";
 
-"When you post an idea on our forum, others will be able to subscribe to it and make comments. When we respond to the idea, you'll get notified." = "When you post an idea on our forum, others will be able to subscribe to it and make comments. When we respond to the idea, you'll get notified.";
+"When you post an idea on our forum, others will be able to subscribe to it and make comments. When we respond to the idea, you'll get notified." = "Atunci când a posta o idee pe forumul nostru, alții vor putea să se aboneze la ea și a face comentarii. Când ne-am răspuns la ideea, vei fi notificat.";
 
 "Would you like to contact us?" = "Doriţi să ne contactaţi?";
 
@@ -178,8 +182,8 @@
 
 "Yes, go to my message" = "Da, mergi la mesajul meu";
 
-"Yes, I want to post my idea" = "Yes, I want to post my idea";
+"Yes, I want to post my idea" = "Da, doresc să posta ideea mea";
 
-"Your feedback has been posted to our feedback forum." = "Your feedback has been posted to our feedback forum.";
+"Your feedback has been posted to our feedback forum." = "Feedback-ul dvs. a fost postat la forumul nostru de feedback.";
 
 "“Anonymous”" = "„Anonim”";

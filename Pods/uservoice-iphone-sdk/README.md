@@ -181,6 +181,10 @@ UVConfig *config = [UVConfig configWithSite:@"yoursite.uservoice.com" andKey:@"C
 [UserVoice initialize:config];
 ```
 
+### Kids Apps
+
+The UserVoice Platform, including iOS & Android SDKs, is not COPPA compliant and should not be used in apps marketed at children.
+
 ## Upgrading from 2.0.x
 
 * You should pass your `UVConfig` to `+[UserVoice initialize:]` shortly after app launch so that we can provide you with accurate usage reports.

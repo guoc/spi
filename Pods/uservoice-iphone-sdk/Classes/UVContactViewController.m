@@ -68,6 +68,11 @@
     [super viewWillAppear:animated];
 }
 
+- (void)dismiss {
+    _instantAnswerManager.delegate = nil;
+    [super dismiss];
+}
+
 - (void)textViewDidChange:(UVTextView *)theTextEditor {
     NSString *text = [theTextEditor.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     self.navigationItem.rightBarButtonItem.enabled = (text.length > 0);

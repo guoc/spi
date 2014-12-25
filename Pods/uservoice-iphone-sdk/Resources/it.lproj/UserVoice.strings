@@ -106,6 +106,8 @@
 
 "Password reset email sent to %@" = "L'email per reimpostare la password è stata inviata a %@";
 
+"Please enter a valid email address." = "Si prega di inserire un indirizzo email valido.";
+
 "Please enter some text before submitting your comment." = "Scrivi qualcosa prima di lasciare il tuo commento.";
 
 "Please enter your email address before submitting your comment." = "Inserisci il tuo indirizzo email prima di lasciare un commento.";
@@ -119,6 +121,8 @@
 "Post an idea" = "Invia un'idea";
 
 "Powered by UserVoice" = "Powered by UserVoice";
+
+"Ranked %@" = "Classifica %@";
 
 "Related articles" = "Articoli correlati";
 

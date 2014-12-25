@@ -6,31 +6,31 @@
 
 /********** Uncategorized **********/
 
-"%@ (required)" = "%@ (required)";
+"%@ (required)" = "%@ (Απαιτείται)";
 
-"%@ ideas" = "%@ ideas";
+"%@ ideas" = "%@ ιδέες";
 
-"%d people" = "%d people";
+"%d people" = "%d άνθρωποι";
 
-"(none)" = "(none)";
+"(none)" = "(Κανένα)";
 
 "(required)" = "(απαιτείται)";
 
-"1 idea" = "1 idea";
+"1 idea" = "1 ιδέα";
 
-"1 person" = "1 person";
+"1 person" = "1 άτομο";
 
 "A suggestion with this title already exists. Please change the title." = "Υπάρχει ήδη μια πρόταση με αυτό τον τίτλο. Παρακαλούμε αλλάξτε τον τίτλο.";
 
-"Add a comment" = "Add a comment";
+"Add a comment" = "Προσθέστε ένα σχόλιο";
 
-"Additional Details" = "Additional Details";
+"Additional Details" = "Πρόσθετες λεπτομέρειες";
 
 "All" = "Όλα";
 
 "All Articles" = "Όλα τα άρθρα";
 
-"Are any of these helpful?" = "Are any of these helpful?";
+"Are any of these helpful?" = "Είναι κάποια από αυτά ήταν χρήσιμη;";
 
 "Articles" = "Άρθρα";
 
@@ -48,7 +48,7 @@
 
 "Do you still want to contact us?" = "Θέλετε ακόμα να επικοινωνήσετε μαζί μας;";
 
-"Do you still want to post your own idea?" = "Do you still want to post your own idea?";
+"Do you still want to post your own idea?" = "Θέλετε ακόμα να αναρτήσετε τη δική σας ιδέα;";
 
 "Don't save" = "Να μην αποθηκευτεί";
 
@@ -58,7 +58,7 @@
 
 "Enter UserVoice password for %@" = "Καταχωρήστε τον κωδικό πρόσβασης στο UserVoice για %@";
 
-"enter value" = "enter value";
+"enter value" = "εισάγετε αξία";
 
 "Enter your email" = "Καταχωρήστε το email σας";
 
@@ -72,13 +72,13 @@
 
 "Forgot password" = "Ξέχασα τον κωδικό πρόσβασης";
 
-"Give feedback or ask for help..." = "Give feedback or ask for help...";
+"Give feedback or ask for help..." = "Δώστε τα σχόλιά σας ή να ζητήσετε βοήθεια ...";
 
-"Great! Glad we could help." = "Great! Glad we could help.";
+"Great! Glad we could help." = "Μεγάλη! Χαίρομαι που θα μπορούσε να βοηθήσει.";
 
-"I want this" = "I want this";
+"I want this" = "Θέλω αυτό";
 
-"I want this!" = "I want this!";
+"I want this!" = "Θέλω αυτό!";
 
 "Ideas" = "Ιδέες";
 
@@ -88,15 +88,15 @@
 
 "Load more" = "Φόρτωση περισσότερων";
 
-"Loading..." = "Loading...";
+"Loading..." = "Φόρτωση ...";
 
-"Message sent!" = "Message sent!";
+"Message sent!" = "Μήνυμα εστάλη!";
 
-"more" = "more";
+"more" = "περισσότερο";
 
 "Name" = "Όνομα";
 
-"Next" = "Next";
+"Next" = "Επόμενος";
 
 "No" = "Όχι";
 
@@ -104,15 +104,17 @@
 
 "OK" = "OK";
 
-"Password reset email sent to %@" = "Password reset email sent to %@";
+"Password reset email sent to %@" = "Επαναφοράς κωδικού πρόσβασης ηλεκτρονικού ταχυδρομείου αποστέλλονται σε %@";
 
-"Please enter some text before submitting your comment." = "Please enter some text before submitting your comment.";
+"Please enter a valid email address." = "Παρακαλώ εισάγετε μια έγκυρη διεύθυνση ηλεκτρονικού ταχυδρομείου.";
 
-"Please enter your email address before submitting your comment." = "Please enter your email address before submitting your comment.";
+"Please enter some text before submitting your comment." = "Παρακαλώ εισάγετε κάποιο κείμενο πριν από την υποβολή σχόλιό σας.";
+
+"Please enter your email address before submitting your comment." = "Παρακαλώ εισάγετε το email σας προτού αποστείλετε το σχόλιό σας.";
 
 "Please enter your email address before submitting your ticket." = "Καταχωρήστε τη διεύθυνση email σας πριν υποβάλετε το αίτημά σας.";
 
-"Please fill out all required fields." = "Please fill out all required fields.";
+"Please fill out all required fields." = "Παρακαλώ συμπληρώστε όλα τα απαιτούμενα πεδία.";
 
 "Post" = "Ανάρτηση";
 
@@ -120,39 +122,41 @@
 
 "Powered by UserVoice" = "Powered by UserVoice";
 
-"Related articles" = "Related articles";
+"Ranked %@" = "Κατάταξη %@";
 
-"Related feedback" = "Related feedback";
+"Related articles" = "Σχετικά άρθρα";
+
+"Related feedback" = "Σχετικές ανατροφοδότηση";
 
 "Save draft" = "Αποθήκευση προχείρου";
 
 "Search" = "Αναζήτηση";
 
-"Search forum" = "Search forum";
+"Search forum" = "Αναζήτηση φόρουμ";
 
-"select" = "select";
+"select" = "επιλέξτε";
 
 "Send" = "Αποστολή";
 
-"Send us a message" = "Send us a message";
+"Send us a message" = "Στείλτε μας ένα μήνυμα";
 
 "Sign in" = "Είσοδος";
 
-"Skip" = "Skip";
+"Skip" = "Μεταφορά";
 
 "Sorry, there was an error in the application." = "Λυπούμαστε, υπήρξε κάποιο σφάλμα στην εφαρμογή.";
 
-"Thank you!" = "Thank you!";
+"Thank you!" = "Σας ευχαριστούμε!";
 
 "There appears to be a problem with your network connection, please check your connectivity and try again." = "Φαίνεται ότι υπάρχει πρόβλημα με τη δικτυακή σας σύνδεση, ελέγξτε τη συνδεσιμότητά σας και προσπαθήστε ξανά.";
 
-"There was a problem logging you in." = "There was a problem logging you in.";
+"There was a problem logging you in." = "Υπήρξε ένα πρόβλημα σύνδεσης σας στο.";
 
-"this" = "this";
+"this" = "αυτό";
 
 "This application didn't configure UserVoice properly" = "Αυτή η εφαρμογή δεν έκανε σωστή ρύθμιση του UserVoice";
 
-"this idea" = "this idea";
+"this idea" = "αυτή η ιδέα";
 
 "Title" = "Τίτλος";
 
@@ -164,9 +168,9 @@
 
 "Was this article helpful?" = "Ήταν χρήσιμο αυτό το άρθρο;";
 
-"We'll be in touch." = "We'll be in touch.";
+"We'll be in touch." = "Θα είμαστε σε επαφή.";
 
-"When you post an idea on our forum, others will be able to subscribe to it and make comments. When we respond to the idea, you'll get notified." = "When you post an idea on our forum, others will be able to subscribe to it and make comments. When we respond to the idea, you'll get notified.";
+"When you post an idea on our forum, others will be able to subscribe to it and make comments. When we respond to the idea, you'll get notified." = "Όταν δημοσιεύετε μια ιδέα για το φόρουμ μας, άλλοι θα είναι σε θέση να εγγραφείτε σε αυτό και να κάνει σχόλια. Όταν ανταποκρινόμαστε στην ιδέα, θα ειδοποιηθείτε.";
 
 "Would you like to contact us?" = "Θέλετε να επικοινωνήσετε μαζί μας;";
 
@@ -178,8 +182,8 @@
 
 "Yes, go to my message" = "Ναι, μετάβαση στο μήνυμά μου";
 
-"Yes, I want to post my idea" = "Yes, I want to post my idea";
+"Yes, I want to post my idea" = "Ναι, θέλω να αναρτήσετε την ιδέα μου";
 
-"Your feedback has been posted to our feedback forum." = "Your feedback has been posted to our feedback forum.";
+"Your feedback has been posted to our feedback forum." = "Η γνώμη σας έχει αναρτηθεί στο φόρουμ για τα σχόλιά μας.";
 
 "“Anonymous”" = "«Ανώνυμος»";

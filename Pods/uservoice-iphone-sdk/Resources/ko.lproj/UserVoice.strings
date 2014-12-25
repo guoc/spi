@@ -6,31 +6,31 @@
 
 /********** Uncategorized **********/
 
-"%@ (required)" = "%@ (required)";
+"%@ (required)" = "%@ (필수)";
 
-"%@ ideas" = "%@ ideas";
+"%@ ideas" = "%@ 아이디어";
 
-"%d people" = "%d people";
+"%d people" = "%d 사람들";
 
-"(none)" = "(none)";
+"(none)" = "(없음)";
 
 "(required)" = "(필수)";
 
-"1 idea" = "1 idea";
+"1 idea" = "한 생각";
 
-"1 person" = "1 person";
+"1 person" = "1 명";
 
 "A suggestion with this title already exists. Please change the title." = "같은 제목의 제안이 이미 있습니다. 제목을 변경하세요.";
 
-"Add a comment" = "Add a comment";
+"Add a comment" = "코멘트를 추가";
 
-"Additional Details" = "Additional Details";
+"Additional Details" = "추가 세부 사항";
 
 "All" = "모두";
 
 "All Articles" = "모든 문서";
 
-"Are any of these helpful?" = "Are any of these helpful?";
+"Are any of these helpful?" = "이들의 도움이 있습니까?";
 
 "Articles" = "문서";
 
@@ -48,7 +48,7 @@
 
 "Do you still want to contact us?" = "저희에게 연락하시겠습니까?";
 
-"Do you still want to post your own idea?" = "Do you still want to post your own idea?";
+"Do you still want to post your own idea?" = "당신은 여전히​​ 자신의 아이디어를 게시 하시겠습니까?";
 
 "Don't save" = "저장 안 함";
 
@@ -58,7 +58,7 @@
 
 "Enter UserVoice password for %@" = "%@의 UserVoice 비밀번호를 입력하세요";
 
-"enter value" = "enter value";
+"enter value" = "값을 입력";
 
 "Enter your email" = "이메일 입력";
 
@@ -72,31 +72,31 @@
 
 "Forgot password" = "비밀번호를 잊었습니다";
 
-"Give feedback or ask for help..." = "Give feedback or ask for help...";
+"Give feedback or ask for help..." = "피드백을 제공하거나 도움을 요청 ...";
 
-"Great! Glad we could help." = "Great! Glad we could help.";
+"Great! Glad we could help." = "좋아! 우리가 도울 수 다행.";
 
-"I want this" = "I want this";
+"I want this" = "나는이 원하는";
 
-"I want this!" = "I want this!";
+"I want this!" = "나는이 원하는!";
 
 "Ideas" = "아이디어";
 
 "Knowledge Base" = "기술 자료";
 
-"Knowledge base" = "Knowledge base";
+"Knowledge base" = "기술 자료";
 
 "Load more" = "더 로드";
 
-"Loading..." = "Loading...";
+"Loading..." = "로드 중 ...";
 
-"Message sent!" = "Message sent!";
+"Message sent!" = "메시지 전송!";
 
-"more" = "more";
+"more" = "더";
 
 "Name" = "이름";
 
-"Next" = "Next";
+"Next" = "다음에";
 
 "No" = "아니요";
 
@@ -104,37 +104,41 @@
 
 "OK" = "확인";
 
-"Password reset email sent to %@" = "Password reset email sent to %@";
+"Password reset email sent to %@" = "비밀번호 재설정 이메일로 전송 %@";
 
-"Please enter some text before submitting your comment." = "Please enter some text before submitting your comment.";
+"Please enter a valid email address." = "유효한 이메일 주소를 입력하십시오.";
 
-"Please enter your email address before submitting your comment." = "Please enter your email address before submitting your comment.";
+"Please enter some text before submitting your comment." = "댓글을 제출하기 전에 텍스트를 입력하세요.";
+
+"Please enter your email address before submitting your comment." = "댓글을 제출하기 전에 귀하의 이메일 주소를 입력하십시오.";
 
 "Please enter your email address before submitting your ticket." = "티켓을 제출하기 전에 이메일 주소를 입력하세요.";
 
-"Please fill out all required fields." = "Please fill out all required fields.";
+"Please fill out all required fields." = "모든 필수 필드를 작성하십시오.";
 
 "Post" = "올리기";
 
 "Post an idea" = "아이디어 올리기";
 
-"Powered by UserVoice" = "Powered by UserVoice";
+"Powered by UserVoice" = "UserVoice에 의해 구동";
 
-"Related articles" = "Related articles";
+"Ranked %@" = "순위 %@";
 
-"Related feedback" = "Related feedback";
+"Related articles" = "관련 기사";
+
+"Related feedback" = "관련 피드백";
 
 "Save draft" = "임시 보관함에 저장";
 
 "Search" = "검색";
 
-"Search forum" = "Search forum";
+"Search forum" = "검색 포럼";
 
-"select" = "select";
+"select" = "선택";
 
 "Send" = "보내기";
 
-"Send us a message" = "Send us a message";
+"Send us a message" = "우리에게 메시지 보내기";
 
 "Sign in" = "로그인";
 
@@ -142,17 +146,17 @@
 
 "Sorry, there was an error in the application." = "죄송합니다. 어플리케이션에 오류가 발생했습니다.";
 
-"Thank you!" = "Thank you!";
+"Thank you!" = "감사합니다!";
 
 "There appears to be a problem with your network connection, please check your connectivity and try again." = "네트워크 연결에 문제가 있는 것 같습니다. 연결을 확인하고 다시 시도하세요.";
 
-"There was a problem logging you in." = "There was a problem logging you in.";
+"There was a problem logging you in." = "당신을 로그인하는 데 문제가 발생했습니다.";
 
-"this" = "this";
+"this" = "이";
 
 "This application didn't configure UserVoice properly" = "이 어플리케이션은 UserVoice를 제대로 구성하지 않았습니다";
 
-"this idea" = "this idea";
+"this idea" = "이 아이디어";
 
 "Title" = "제목";
 
@@ -164,9 +168,9 @@
 
 "Was this article helpful?" = "이 문서가 유용했습니까?";
 
-"We'll be in touch." = "We'll be in touch.";
+"We'll be in touch." = "우리는 연락하지.";
 
-"When you post an idea on our forum, others will be able to subscribe to it and make comments. When we respond to the idea, you'll get notified." = "When you post an idea on our forum, others will be able to subscribe to it and make comments. When we respond to the idea, you'll get notified.";
+"When you post an idea on our forum, others will be able to subscribe to it and make comments. When we respond to the idea, you'll get notified." = "당신은 우리의 포럼에 아이디어를 게시하면, 다른 사람들은 구독하고 의견을 수있을 것입니다. 우리가 생각에 응답 할 때 알림을 받게됩니다.";
 
 "Would you like to contact us?" = "저희에게 연락하시겠습니까?";
 
@@ -178,8 +182,8 @@
 
 "Yes, go to my message" = "예, 내 메시지로 이동";
 
-"Yes, I want to post my idea" = "Yes, I want to post my idea";
+"Yes, I want to post my idea" = "예, 내 아이디어를 게시 할";
 
-"Your feedback has been posted to our feedback forum." = "Your feedback has been posted to our feedback forum.";
+"Your feedback has been posted to our feedback forum." = "여러분의 의견은 우리의 피드백 포럼에 게시되어 있습니다.";
 
 "“Anonymous”" = "“익명”";

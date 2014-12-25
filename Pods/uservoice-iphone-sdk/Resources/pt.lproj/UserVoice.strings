@@ -84,6 +84,8 @@
 
 "Knowledge Base" = "Base de conhecimento";
 
+"Knowledge base" = "Base de conhecimento";
+
 "Load more" = "Carregar mais";
 
 "Loading..." = "Carregando...";
@@ -104,6 +106,8 @@
 
 "Password reset email sent to %@" = "Email de recuperação de senha enviado para %@";
 
+"Please enter a valid email address." = "Por favor insira um endereço de e-mail válido.";
+
 "Please enter some text before submitting your comment." = "Por favor, digite algum texto antes de enviar seu comentário.";
 
 "Please enter your email address before submitting your comment." = "Por favor, digite seu email antes de enviar seu comentário.";
@@ -117,6 +121,8 @@
 "Post an idea" = "Publicar ideia";
 
 "Powered by UserVoice" = "Powered by UserVoice";
+
+"Ranked %@" = "Classificado %@";
 
 "Related articles" = "Artigos relacionados";
 

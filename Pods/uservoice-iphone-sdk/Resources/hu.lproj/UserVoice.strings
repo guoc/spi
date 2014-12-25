@@ -6,31 +6,31 @@
 
 /********** Uncategorized **********/
 
-"%@ (required)" = "%@ (required)";
+"%@ (required)" = "%@ (Szükséges)";
 
-"%@ ideas" = "%@ ideas";
+"%@ ideas" = "%@ ötletek";
 
-"%d people" = "%d people";
+"%d people" = "%d emberek";
 
-"(none)" = "(none)";
+"(none)" = "(Nincs)";
 
 "(required)" = "(kötelező)";
 
-"1 idea" = "1 idea";
+"1 idea" = "1 ötlet";
 
-"1 person" = "1 person";
+"1 person" = "1 fő";
 
 "A suggestion with this title already exists. Please change the title." = "Már  van javaslat ezzel a címmel. Változtassa meg a címet.";
 
-"Add a comment" = "Add a comment";
+"Add a comment" = "Hozzászólás";
 
-"Additional Details" = "Additional Details";
+"Additional Details" = "További részletek";
 
 "All" = "Minden";
 
 "All Articles" = "Minden cikk";
 
-"Are any of these helpful?" = "Are any of these helpful?";
+"Are any of these helpful?" = "Vannak-e ezeket a hasznos?";
 
 "Articles" = "Cikkek";
 
@@ -58,7 +58,7 @@
 
 "Enter UserVoice password for %@" = "Adja meg a UserVoice jelszót: %@";
 
-"enter value" = "enter value";
+"enter value" = "adja értéke";
 
 "Enter your email" = "E-mail megadása";
 
@@ -72,31 +72,31 @@
 
 "Forgot password" = "Elfelejtettem a jelszavamat";
 
-"Give feedback or ask for help..." = "Give feedback or ask for help...";
+"Give feedback or ask for help..." = "Visszajelzést adni vagy segítséget kérni ...";
 
-"Great! Glad we could help." = "Great! Glad we could help.";
+"Great! Glad we could help." = "Nagyszerű! Örülök, hogy segíthettünk.";
 
-"I want this" = "I want this";
+"I want this" = "Azt akarom, hogy ez";
 
-"I want this!" = "I want this!";
+"I want this!" = "Azt akarom ezt!";
 
 "Ideas" = "Ötletek";
 
 "Knowledge Base" = "Tudásbázis";
 
-"Knowledge base" = "Knowledge base";
+"Knowledge base" = "Tudásbázis";
 
 "Load more" = "Több betöltése";
 
-"Loading..." = "Loading...";
+"Loading..." = "Loading ...";
 
-"Message sent!" = "Message sent!";
+"Message sent!" = "Üzenet elküldve!";
 
-"more" = "more";
+"more" = "több";
 
 "Name" = "Név";
 
-"Next" = "Next";
+"Next" = "Következő";
 
 "No" = "Nem";
 
@@ -104,15 +104,17 @@
 
 "OK" = "OK";
 
-"Password reset email sent to %@" = "Password reset email sent to %@";
+"Password reset email sent to %@" = "Jelszóvisszaállító küldött e-mail %@";
 
-"Please enter some text before submitting your comment." = "Please enter some text before submitting your comment.";
+"Please enter a valid email address." = "Adjon meg egy érvényes email címet.";
 
-"Please enter your email address before submitting your comment." = "Please enter your email address before submitting your comment.";
+"Please enter some text before submitting your comment." = "Kérjük, írja be a szöveget, mielőtt elküldi comment.";
+
+"Please enter your email address before submitting your comment." = "Kérjük, adja meg email címét benyújtása előtt meg véleményét.";
 
 "Please enter your email address before submitting your ticket." = "Adja meg az e-mail címét a jegy beküldése előtt.";
 
-"Please fill out all required fields." = "Please fill out all required fields.";
+"Please fill out all required fields." = "Kérjük, töltse ki az összes szükséges mezőt.";
 
 "Post" = "Posztolás";
 
@@ -120,39 +122,41 @@
 
 "Powered by UserVoice" = "Powered by UserVoice";
 
-"Related articles" = "Related articles";
+"Ranked %@" = "Rangsorolt %@";
 
-"Related feedback" = "Related feedback";
+"Related articles" = "Kapcsolódó cikkek";
+
+"Related feedback" = "Kapcsolódó visszajelzést";
 
 "Save draft" = "Vázlat mentése";
 
 "Search" = "Keresés";
 
-"Search forum" = "Search forum";
+"Search forum" = "Keresés Fórum";
 
-"select" = "select";
+"select" = "választ";
 
 "Send" = "Küldés";
 
-"Send us a message" = "Send us a message";
+"Send us a message" = "Küldjön üzenetet";
 
 "Sign in" = "Bejelentkezés";
 
-"Skip" = "Skip";
+"Skip" = "Ugrás";
 
 "Sorry, there was an error in the application." = "Sajnos hiba van az alkalmazásban.";
 
-"Thank you!" = "Thank you!";
+"Thank you!" = "Köszönjük!";
 
 "There appears to be a problem with your network connection, please check your connectivity and try again." = "Hiba van a hálózati csatlakozásban, ellenőrizze a kapcsolatot és próbálja újra.";
 
-"There was a problem logging you in." = "There was a problem logging you in.";
+"There was a problem logging you in." = "Gond volt lépteti be.";
 
-"this" = "this";
+"this" = "ezt";
 
 "This application didn't configure UserVoice properly" = "Az alkalmazás nem jól konfigurálta a UserVoice-t";
 
-"this idea" = "this idea";
+"this idea" = "ezt az elképzelést";
 
 "Title" = "Cím";
 
@@ -164,9 +168,9 @@
 
 "Was this article helpful?" = "Hasznos volt ez a cikk?";
 
-"We'll be in touch." = "We'll be in touch.";
+"We'll be in touch." = "Mi lesz a kapcsolatot.";
 
-"When you post an idea on our forum, others will be able to subscribe to it and make comments. When we respond to the idea, you'll get notified." = "When you post an idea on our forum, others will be able to subscribe to it and make comments. When we respond to the idea, you'll get notified.";
+"When you post an idea on our forum, others will be able to subscribe to it and make comments. When we respond to the idea, you'll get notified." = "Ha küldesz egy ötlet a fórumon, mások is feliratkozni, és tegye meg észrevételeit. Amikor reagálni az ötlet, akkor kap értesítést.";
 
 "Would you like to contact us?" = "Szeretné felvenni velünk a kapcsolatot?";
 
@@ -178,8 +182,8 @@
 
 "Yes, go to my message" = "Igen, tovább az üzenetemhez";
 
-"Yes, I want to post my idea" = "Yes, I want to post my idea";
+"Yes, I want to post my idea" = "Igen, szeretném küldeni az én ötletem";
 
-"Your feedback has been posted to our feedback forum." = "Your feedback has been posted to our feedback forum.";
+"Your feedback has been posted to our feedback forum." = "Az Ön visszajelzése felkerült a visszajelzés fórumon.";
 
 "“Anonymous”" = "Névtelen";

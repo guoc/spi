@@ -6,31 +6,31 @@
 
 /********** Uncategorized **********/
 
-"%@ (required)" = "%@ (required)";
+"%@ (required)" = "%@ (Gerekli)";
 
-"%@ ideas" = "%@ ideas";
+"%@ ideas" = "%@ fikirler";
 
-"%d people" = "%d people";
+"%d people" = "%d insanlar";
 
-"(none)" = "(none)";
+"(none)" = "(Yok)";
 
 "(required)" = "(zorunlu)";
 
-"1 idea" = "1 idea";
+"1 idea" = "1 fikir";
 
-"1 person" = "1 person";
+"1 person" = "1 kişi";
 
 "A suggestion with this title already exists. Please change the title." = "Bu başlıkta bir öneri zaten var Lütfen başlığı değiştirin.";
 
-"Add a comment" = "Add a comment";
+"Add a comment" = "Yorum ekle";
 
-"Additional Details" = "Additional Details";
+"Additional Details" = "Ek Detaylar";
 
 "All" = "Tümü";
 
 "All Articles" = "Tüm Makaleler";
 
-"Are any of these helpful?" = "Are any of these helpful?";
+"Are any of these helpful?" = "Bunlardan herhangi bir yararlı mı?";
 
 "Articles" = "Makaleler";
 
@@ -48,7 +48,7 @@
 
 "Do you still want to contact us?" = "Bizimle iletişime geçmeyi yine de istiyor musunuz?";
 
-"Do you still want to post your own idea?" = "Do you still want to post your own idea?";
+"Do you still want to post your own idea?" = "Eğer hala kendi fikrini göndermek istiyor musunuz?";
 
 "Don't save" = "Kaydetme";
 
@@ -58,7 +58,7 @@
 
 "Enter UserVoice password for %@" = "%@ için UserVoice parolasını girin";
 
-"enter value" = "enter value";
+"enter value" = "değeri girin";
 
 "Enter your email" = "E-postanızı girin";
 
@@ -72,31 +72,31 @@
 
 "Forgot password" = "Parolanızı mı unuttunuz";
 
-"Give feedback or ask for help..." = "Give feedback or ask for help...";
+"Give feedback or ask for help..." = "Geribildirim vermek veya yardım isteyin ...";
 
-"Great! Glad we could help." = "Great! Glad we could help.";
+"Great! Glad we could help." = "Büyük! Biz yardımcı olabilir sevindim.";
 
-"I want this" = "I want this";
+"I want this" = "Ben bu istiyorum";
 
-"I want this!" = "I want this!";
+"I want this!" = "Ben bu istiyorum!";
 
 "Ideas" = "Görüşler";
 
 "Knowledge Base" = "Bilgi Tabanı";
 
-"Knowledge base" = "Knowledge base";
+"Knowledge base" = "Bilgi tabanı";
 
 "Load more" = "Diğerlerini yükle";
 
-"Loading..." = "Loading...";
+"Loading..." = "Yükleniyor ...";
 
-"Message sent!" = "Message sent!";
+"Message sent!" = "Mesaj gönderildi!";
 
-"more" = "more";
+"more" = "daha";
 
 "Name" = "Ad";
 
-"Next" = "Next";
+"Next" = "Sonraki";
 
 "No" = "Hayır";
 
@@ -104,55 +104,59 @@
 
 "OK" = "Tamam";
 
-"Password reset email sent to %@" = "Password reset email sent to %@";
+"Password reset email sent to %@" = "Şifre sıfırlama e-posta gönderildi %@";
 
-"Please enter some text before submitting your comment." = "Please enter some text before submitting your comment.";
+"Please enter a valid email address." = "Geçerli bir e.";
 
-"Please enter your email address before submitting your comment." = "Please enter your email address before submitting your comment.";
+"Please enter some text before submitting your comment." = "Yorumunuzu göndermeden önce bazı metni girin.";
+
+"Please enter your email address before submitting your comment." = "Yorumunuzu göndermeden önce e-posta adresinizi girin.";
 
 "Please enter your email address before submitting your ticket." = "Sorun bildiriminizi göndermek için e-posta adresinizi girin.";
 
-"Please fill out all required fields." = "Please fill out all required fields.";
+"Please fill out all required fields." = "Gerekli tüm alanları doldurunuz.";
 
 "Post" = "Gönder";
 
 "Post an idea" = "Görüş gönder";
 
-"Powered by UserVoice" = "Powered by UserVoice";
+"Powered by UserVoice" = "UserVoice tarafından desteklenmektedir";
 
-"Related articles" = "Related articles";
+"Ranked %@" = "Sırada %@";
 
-"Related feedback" = "Related feedback";
+"Related articles" = "İlgili Makaleler";
+
+"Related feedback" = "İlgili geribildirim";
 
 "Save draft" = "Taslağı kaydet";
 
 "Search" = "Ara";
 
-"Search forum" = "Search forum";
+"Search forum" = "Arama forumu";
 
-"select" = "select";
+"select" = "seçmek";
 
 "Send" = "Gönder";
 
-"Send us a message" = "Send us a message";
+"Send us a message" = "Bize bir mesaj gönder";
 
 "Sign in" = "Giriş";
 
-"Skip" = "Skip";
+"Skip" = "Atlamak";
 
 "Sorry, there was an error in the application." = "Özür dileriz, uygulamada bir hata oluştu.";
 
-"Thank you!" = "Thank you!";
+"Thank you!" = "Teşekkür ederim!";
 
 "There appears to be a problem with your network connection, please check your connectivity and try again." = "Ağ bağlantınızda bir sorun var, bağlantınızı kontrol edip tekrar deneyin.";
 
-"There was a problem logging you in." = "There was a problem logging you in.";
+"There was a problem logging you in." = "Sizi günlüğü bir sorun oluştu.";
 
-"this" = "this";
+"this" = "bu";
 
 "This application didn't configure UserVoice properly" = "Bu uygulama UserVoice'i düzgün yapılandırmadı";
 
-"this idea" = "this idea";
+"this idea" = "Bu fikir";
 
 "Title" = "Başlık";
 
@@ -164,9 +168,9 @@
 
 "Was this article helpful?" = "Bu makale faydalı oldu mu?";
 
-"We'll be in touch." = "We'll be in touch.";
+"We'll be in touch." = "Biz irtibat halinde olacağım.";
 
-"When you post an idea on our forum, others will be able to subscribe to it and make comments. When we respond to the idea, you'll get notified." = "When you post an idea on our forum, others will be able to subscribe to it and make comments. When we respond to the idea, you'll get notified.";
+"When you post an idea on our forum, others will be able to subscribe to it and make comments. When we respond to the idea, you'll get notified." = "Bizim forum bir fikir sonrası, diğerleri abone ve yorum yapmak mümkün olacak. Biz fikir cevap zaman, haberdar edeceğiz.";
 
 "Would you like to contact us?" = "Bizimle iletişime geçmek istiyor musunuz?";
 
@@ -178,8 +182,8 @@
 
 "Yes, go to my message" = "Evet, mesajıma git";
 
-"Yes, I want to post my idea" = "Yes, I want to post my idea";
+"Yes, I want to post my idea" = "Evet, benim fikrim göndermek istiyorum";
 
-"Your feedback has been posted to our feedback forum." = "Your feedback has been posted to our feedback forum.";
+"Your feedback has been posted to our feedback forum." = "Görüşleriniz bizim görüşleriniz forumu gönderilen edilmiştir.";
 
 "“Anonymous”" = "“Anonim”";

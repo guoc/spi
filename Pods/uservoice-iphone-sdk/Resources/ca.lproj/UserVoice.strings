@@ -6,31 +6,31 @@
 
 /********** Uncategorized **********/
 
-"%@ (required)" = "%@ (required)";
+"%@ (required)" = "%@ (Requerit)";
 
-"%@ ideas" = "%@ ideas";
+"%@ ideas" = "%@ Idees";
 
-"%d people" = "%d people";
+"%d people" = "%d gent";
 
-"(none)" = "(none)";
+"(none)" = "(Cap)";
 
 "(required)" = "(obligatori)";
 
 "1 idea" = "1 idea";
 
-"1 person" = "1 person";
+"1 person" = "1 persona";
 
 "A suggestion with this title already exists. Please change the title." = "Ja hi ha un suggeriment amb aquest títol. Canvieu el títol.";
 
-"Add a comment" = "Add a comment";
+"Add a comment" = "Afegir un comentari";
 
-"Additional Details" = "Additional Details";
+"Additional Details" = "Detalls addicionals";
 
 "All" = "Tot";
 
 "All Articles" = "Tots els articles";
 
-"Are any of these helpful?" = "Are any of these helpful?";
+"Are any of these helpful?" = "Algun d'aquests útil?";
 
 "Articles" = "Articles";
 
@@ -48,7 +48,7 @@
 
 "Do you still want to contact us?" = "Encara voleu contactar amb nosaltres?";
 
-"Do you still want to post your own idea?" = "Do you still want to post your own idea?";
+"Do you still want to post your own idea?" = "Encara Vol enviar la seva pròpia idea?";
 
 "Don't save" = "No desis";
 
@@ -58,7 +58,7 @@
 
 "Enter UserVoice password for %@" = "Introduïu la contrasenya de l’UserVoice per %@";
 
-"enter value" = "enter value";
+"enter value" = "introduir el valor";
 
 "Enter your email" = "Introduïu el correu electrònic";
 
@@ -72,31 +72,31 @@
 
 "Forgot password" = "He oblidat la contrasenya";
 
-"Give feedback or ask for help..." = "Give feedback or ask for help...";
+"Give feedback or ask for help..." = "Comentaris i suggeriments o demanar ajuda ...";
 
-"Great! Glad we could help." = "Great! Glad we could help.";
+"Great! Glad we could help." = "Genial! M'alegro d'haver pogut ajudar.";
 
-"I want this" = "I want this";
+"I want this" = "Vull que aquest";
 
-"I want this!" = "I want this!";
+"I want this!" = "Vull això!";
 
 "Ideas" = "Idees";
 
 "Knowledge Base" = "Base de coneixements";
 
-"Knowledge base" = "Knowledge base";
+"Knowledge base" = "Base de coneixements";
 
 "Load more" = "Carrega més";
 
-"Loading..." = "Loading...";
+"Loading..." = "Carregant ...";
 
-"Message sent!" = "Message sent!";
+"Message sent!" = "Missatge enviat!";
 
-"more" = "more";
+"more" = "més";
 
 "Name" = "Nom";
 
-"Next" = "Next";
+"Next" = "¡Següent";
 
 "No" = "No";
 
@@ -104,55 +104,59 @@
 
 "OK" = "D’acord";
 
-"Password reset email sent to %@" = "Password reset email sent to %@";
+"Password reset email sent to %@" = "Missatge de restabliment de contrasenya ha estat enviada a %@";
 
-"Please enter some text before submitting your comment." = "Please enter some text before submitting your comment.";
+"Please enter a valid email address." = "Si us plau, introdueix una adreça de correu electrònic vàlida.";
 
-"Please enter your email address before submitting your comment." = "Please enter your email address before submitting your comment.";
+"Please enter some text before submitting your comment." = "Si us plau, introdueixi algun text abans d'enviar el seu comentari.";
+
+"Please enter your email address before submitting your comment." = "Introduïu la vostra adreça de correu electrònic abans d'enviar el seu comentari.";
 
 "Please enter your email address before submitting your ticket." = "Introduïu l’adreça de correu electrònic abans d’enviar el tiquet.";
 
-"Please fill out all required fields." = "Please fill out all required fields.";
+"Please fill out all required fields." = "Si us plau, ompli tots els camps obligatoris.";
 
 "Post" = "Publica";
 
 "Post an idea" = "Publica una idea";
 
-"Powered by UserVoice" = "Powered by UserVoice";
+"Powered by UserVoice" = "Desenvolupat per UserVoice";
 
-"Related articles" = "Related articles";
+"Ranked %@" = "Classificat %@";
 
-"Related feedback" = "Related feedback";
+"Related articles" = "Articles relacionats";
+
+"Related feedback" = "Retroalimentació Relacionats";
 
 "Save draft" = "Desa esborrall";
 
 "Search" = "Cerca";
 
-"Search forum" = "Search forum";
+"Search forum" = "Fòrum";
 
-"select" = "select";
+"select" = "seleccionar";
 
 "Send" = "Envia";
 
-"Send us a message" = "Send us a message";
+"Send us a message" = "Envieu-nos un missatge";
 
 "Sign in" = "Inicia sessió";
 
-"Skip" = "Skip";
+"Skip" = "Ometre";
 
 "Sorry, there was an error in the application." = "Ho sentim. S’ha produït un error a l’aplicació.";
 
-"Thank you!" = "Thank you!";
+"Thank you!" = "Gràcies!";
 
 "There appears to be a problem with your network connection, please check your connectivity and try again." = "Sembla que hi ha problemes amb la connexió a la xarxa. Comproveu la connexió i torneu-ho a provar.";
 
-"There was a problem logging you in." = "There was a problem logging you in.";
+"There was a problem logging you in." = "Hi va haver un problema d'iniciar sessió.";
 
-"this" = "this";
+"this" = "aquest";
 
 "This application didn't configure UserVoice properly" = "Aquesta aplicació no ha configurat l’UserVoice correctament";
 
-"this idea" = "this idea";
+"this idea" = "aquesta idea";
 
 "Title" = "Títol";
 
@@ -164,9 +168,9 @@
 
 "Was this article helpful?" = "Ha estat útil aquest article?";
 
-"We'll be in touch." = "We'll be in touch.";
+"We'll be in touch." = "Estarem en contacte.";
 
-"When you post an idea on our forum, others will be able to subscribe to it and make comments. When we respond to the idea, you'll get notified." = "When you post an idea on our forum, others will be able to subscribe to it and make comments. When we respond to the idea, you'll get notified.";
+"When you post an idea on our forum, others will be able to subscribe to it and make comments. When we respond to the idea, you'll get notified." = "En publicar una idea en el nostre fòrum, altres podran subscriure a ell i fer comentaris. Quan responem a la idea, podràs rebre una notificació.";
 
 "Would you like to contact us?" = "Desitgeu contactar amb nosaltres?";
 
@@ -178,8 +182,8 @@
 
 "Yes, go to my message" = "Sí, ves al meu missatge";
 
-"Yes, I want to post my idea" = "Yes, I want to post my idea";
+"Yes, I want to post my idea" = "Sí, vull publicar la meva idea";
 
-"Your feedback has been posted to our feedback forum." = "Your feedback has been posted to our feedback forum.";
+"Your feedback has been posted to our feedback forum." = "La seva regeneració s'ha publicat en el nostre fòrum de comentaris.";
 
 "“Anonymous”" = "“Anònim”";

@@ -6,31 +6,31 @@
 
 /********** Uncategorized **********/
 
-"%@ (required)" = "%@ (required)";
+"%@ (required)" = "%@ （必須）";
 
-"%@ ideas" = "%@ ideas";
+"%@ ideas" = "%@考え";
 
-"%d people" = "%d people";
+"%d people" = "%d人々";
 
-"(none)" = "(none)";
+"(none)" = "（なし）";
 
 "(required)" = "(必須)";
 
-"1 idea" = "1 idea";
+"1 idea" = "1アイデア";
 
-"1 person" = "1 person";
+"1 person" = "1名";
 
 "A suggestion with this title already exists. Please change the title." = "同じタイトルのアドバイスは既に投稿されています。タイトルを変更してください。";
 
-"Add a comment" = "Add a comment";
+"Add a comment" = "コメントを追加";
 
-"Additional Details" = "Additional Details";
+"Additional Details" = "追加詳細";
 
 "All" = "すべて";
 
 "All Articles" = "全ての内容";
 
-"Are any of these helpful?" = "Are any of these helpful?";
+"Are any of these helpful?" = "これらのいずれかに役立ちますか？";
 
 "Articles" = "内容";
 
@@ -48,7 +48,7 @@
 
 "Do you still want to contact us?" = "まだお問い合わせをご希望ですか?";
 
-"Do you still want to post your own idea?" = "Do you still want to post your own idea?";
+"Do you still want to post your own idea?" = "あなたはまだあなた自身のアイデアを投稿しますか？";
 
 "Don't save" = "保存しない";
 
@@ -58,7 +58,7 @@
 
 "Enter UserVoice password for %@" = "%@用にUserVoiceのパスワードを入力してください";
 
-"enter value" = "enter value";
+"enter value" = "値を入力します";
 
 "Enter your email" = "Eメールを入力する";
 
@@ -72,31 +72,31 @@
 
 "Forgot password" = "パスワードを忘れました";
 
-"Give feedback or ask for help..." = "Give feedback or ask for help...";
+"Give feedback or ask for help..." = "フィードバックを与えるか、または助けを求める...";
 
-"Great! Glad we could help." = "Great! Glad we could help.";
+"Great! Glad we could help." = "すばらしい！我々は助けることがうれしい。";
 
-"I want this" = "I want this";
+"I want this" = "私はこれをしたい";
 
-"I want this!" = "I want this!";
+"I want this!" = "私はこれが欲しい！";
 
 "Ideas" = "アイデア";
 
 "Knowledge Base" = "知識データベス";
 
-"Knowledge base" = "Knowledge base";
+"Knowledge base" = "知識ベース";
 
 "Load more" = "アップロードを追加する";
 
-"Loading..." = "Loading...";
+"Loading..." = "読み込んでいます...";
 
-"Message sent!" = "Message sent!";
+"Message sent!" = "メッセージが送信された！";
 
-"more" = "more";
+"more" = "もっと";
 
 "Name" = "名";
 
-"Next" = "Next";
+"Next" = "次";
 
 "No" = "いいえ";
 
@@ -104,55 +104,59 @@
 
 "OK" = "オーケー";
 
-"Password reset email sent to %@" = "Password reset email sent to %@";
+"Password reset email sent to %@" = "パスワードリセットのメールに送信された%@";
 
-"Please enter some text before submitting your comment." = "Please enter some text before submitting your comment.";
+"Please enter a valid email address." = "有効なメールアドレスを入力してください。";
 
-"Please enter your email address before submitting your comment." = "Please enter your email address before submitting your comment.";
+"Please enter some text before submitting your comment." = "あなたのコメントを提出する前に、いくつかのテキストを入力してください。";
+
+"Please enter your email address before submitting your comment." = "あなたのコメントを提出する前に、メールアドレスを入力してください。";
 
 "Please enter your email address before submitting your ticket." = "チケットを送る前に、Eメールアドレスを入力してください。";
 
-"Please fill out all required fields." = "Please fill out all required fields.";
+"Please fill out all required fields." = "すべての必須項目にご記入ください。";
 
 "Post" = "投稿する";
 
 "Post an idea" = "アイデアを投稿する";
 
-"Powered by UserVoice" = "Powered by UserVoice";
+"Powered by UserVoice" = "ボイスを搭載";
 
-"Related articles" = "Related articles";
+"Ranked %@" = "ランク%@";
 
-"Related feedback" = "Related feedback";
+"Related articles" = "関連記事";
+
+"Related feedback" = "関連フィードバック";
 
 "Save draft" = "下書きを保存";
 
 "Search" = "検索";
 
-"Search forum" = "Search forum";
+"Search forum" = "検索フォーラム";
 
-"select" = "select";
+"select" = "選択する";
 
 "Send" = "送信";
 
-"Send us a message" = "Send us a message";
+"Send us a message" = "私達にメッセージを送る";
 
 "Sign in" = "サインイン";
 
-"Skip" = "Skip";
+"Skip" = "スキップ";
 
 "Sorry, there was an error in the application." = "アプリケーションにエラーが発生しました。";
 
-"Thank you!" = "Thank you!";
+"Thank you!" = "ありがとう！";
 
 "There appears to be a problem with your network connection, please check your connectivity and try again." = "ネットワーク接続に問題が発生したようです。接続の状況を確認し、もう一度お試しください。";
 
-"There was a problem logging you in." = "There was a problem logging you in.";
+"There was a problem logging you in." = "ログイン中に問題が発生しました。";
 
-"this" = "this";
+"this" = "この";
 
 "This application didn't configure UserVoice properly" = "このアプリケーションはUserVoiceを正しく設定できませんでした";
 
-"this idea" = "this idea";
+"this idea" = "このアイデア";
 
 "Title" = "タイトル";
 
@@ -164,9 +168,9 @@
 
 "Was this article helpful?" = "この内容はお役に立ちましたか?";
 
-"We'll be in touch." = "We'll be in touch.";
+"We'll be in touch." = "私たちは連絡させてよ。";
 
-"When you post an idea on our forum, others will be able to subscribe to it and make comments. When we respond to the idea, you'll get notified." = "When you post an idea on our forum, others will be able to subscribe to it and make comments. When we respond to the idea, you'll get notified.";
+"When you post an idea on our forum, others will be able to subscribe to it and make comments. When we respond to the idea, you'll get notified." = "あなたは私たちのフォーラムでアイデアを投稿すると、他の人はそれを購読し、コメントを作ることができるようになります。私たちはアイデアに応答するときは、通知を得るでしょう。";
 
 "Would you like to contact us?" = "弊社へのお問い合わせをご希望ですか?";
 
@@ -178,8 +182,8 @@
 
 "Yes, go to my message" = "はい、私のメッセージに行ってください";
 
-"Yes, I want to post my idea" = "Yes, I want to post my idea";
+"Yes, I want to post my idea" = "はい、私は私のアイデアを投稿したい";
 
-"Your feedback has been posted to our feedback forum." = "Your feedback has been posted to our feedback forum.";
+"Your feedback has been posted to our feedback forum." = "ご意見は私たちのフィードバックフォーラムに投稿されました。";
 
 "“Anonymous”" = "「匿名」";
