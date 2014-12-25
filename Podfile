@@ -1,4 +1,4 @@
-workspace 'SPi'
+workspace './SPi'
 
 platform :ios, '8.1'
 

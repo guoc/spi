@@ -5,7 +5,7 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>51D07718-D3EF-4472-B9EB-22CF2F9C0332</string>
+	<string>8CF16D69-1B9E-4C49-A792-6CEC19B00169</string>
 	<key>IDESourceControlProjectName</key>
 	<string>SPi</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
@@ -14,11 +14,11 @@
 		<string>https://github.com/guoc/spi/</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>SPi.xcworkspace</string>
+	<string>SPi.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>113AF697520E6FE83D2258C584620A9A5E316E83</key>
-		<string>..</string>
+		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/guoc/spi/</string>
