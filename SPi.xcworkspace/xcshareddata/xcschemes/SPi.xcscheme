@@ -28,6 +28,26 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       buildConfiguration = "Debug">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "BDEDF6951A2DCBF3000CC6B6"
+               BuildableName = "SPiTests.xctest"
+               BlueprintName = "SPiTests"
+               ReferencedContainer = "container:SPi.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "BDBB56331A49AAC7006F8D5C"
+               BuildableName = "ShuangpinTests.xctest"
+               BlueprintName = "ShuangpinTests"
+               ReferencedContainer = "container:SPi.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
