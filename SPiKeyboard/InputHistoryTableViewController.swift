@@ -33,32 +33,7 @@ class InputHistoryTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
-        let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
-        let databasePath = documentsFolder.stringByAppendingPathComponent("history.sqlite")
-        
-        let databaseQueue = FMDatabaseQueue(path: databasePath)
-        
-        if databaseQueue == nil {
-            println("Unable to open database")
-            return
-        }
-        
-        databaseQueue?.inDatabase() {
-            db in
-            if let rs = db.executeQuery("select candidate, shuangpin, shengmu, length, frequency, candidate_type from history", withArgumentsInArray: nil) {
-                while rs.next() {
-                    self.rows.append(rs.resultDictionary())
-                }
-            } else {
-                println("select failed: \(db.lastErrorMessage())")
-            }
-        }
-        
-        databaseQueue!.close()
-        
-        self.rows.sort {
-            ($0["frequency"] as NSNumber).integerValue > ($1["frequency"] as NSNumber).integerValue
-        }
+        rows = getAllRows()
         
         self.rows = self.rows.filter {
             self.candidateTextIsInCandidatesDatabase($0["candidate"] as String) == false
@@ -94,6 +69,72 @@ class InputHistoryTableViewController: UITableViewController {
         return cell
     }
     
+    lazy var _inputHistoryDatabaseQueue: FMDatabaseQueue! = {
+        let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
+        let databasePath = documentsFolder.stringByAppendingPathComponent("history.sqlite")
+        
+        let databaseQueue = FMDatabaseQueue(path: databasePath)
+        
+        if databaseQueue == nil {
+            println("Unable to open database")
+        }
+        
+        return databaseQueue
+    }()
+    
+    func getAllRows() -> [[NSObject: AnyObject]] {
+        var rows: [[NSObject: AnyObject]] = []
+        
+        _inputHistoryDatabaseQueue.inDatabase() {
+            db in
+            if let rs = db.executeQuery("select candidate, shuangpin, shengmu, length, frequency, candidate_type from history", withArgumentsInArray: nil) {
+                while rs.next() {
+                    rows.append(rs.resultDictionary())
+                }
+            } else {
+                println("select failed: \(db.lastErrorMessage())")
+            }
+        }
+        
+        rows.sort {
+            ($0["frequency"] as NSNumber).integerValue > ($1["frequency"] as NSNumber).integerValue
+        }
+        
+        return rows
+    }
+    
+    func existsInInputHistory(row: [NSObject: AnyObject]) -> Bool {
+        if (self.rows.filter {
+                $0["candidate"] as String == row["candidate"] as String && $0["shuangpin"] as String == row["shuangpin"] as String
+            }.isEmpty) {
+            return false
+        } else {
+            return true
+        }
+    }
+    
+    func insertRowInDatabase(row: [NSObject: AnyObject]) {
+        _inputHistoryDatabaseQueue.inDatabase() {
+            db in
+            let candidate = row["candidate"] as String
+            let shuangpin = row["shuangpin"] as String
+            if !db.executeUpdate("insert into history (candidate, shuangpin, shengmu, length, frequency, candidate_type) values (?, ?, ?, ?, ?, ?)", withArgumentsInArray: [candidate, shuangpin, row["shengmu"] as String, row["length"] as Int, row["frequency"] as Int, row["candidate_type"] as Int]) {
+                println("insert 1 table failed: \(db.lastErrorMessage()) \(candidate) \(shuangpin)")
+            }
+        }
+    }
+    
+    func deleteRowInDatabase(row: [NSObject: AnyObject]) {
+        _inputHistoryDatabaseQueue.inDatabase() {
+            db in
+            let candidate = row["candidate"] as String
+            let shuangpin = row["shuangpin"] as String
+            if !db.executeUpdate("delete from history where candidate == ? and shuangpin == ?", withArgumentsInArray: [candidate, shuangpin]) {
+                println("delete 1 table failed: \(db.lastErrorMessage()) \(candidate) \(shuangpin)")
+            }
+        }
+    }
+    
     lazy var _candidateDatabase: FMDatabase = {
         let databasePath = NSBundle.mainBundle().pathForResource("candidates", ofType: "sqlite")
         let database = FMDatabase(path: databasePath)
@@ -116,7 +157,52 @@ class InputHistoryTableViewController: UITableViewController {
     }
     
     deinit {
+        _inputHistoryDatabaseQueue!.close()
         _candidateDatabase.close()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: Selector("addCandidate"))
+        self.navigationItem.rightBarButtonItem = addButton
+    }
+    
+    func addCandidate() {
+        let newRowIndex = rows.count
+        
+        var row = newRow(candidate: "SPi", shuangpin: "spi", shengmu: "s", length: 2, frequency: 1, candidate_type: 2)
+
+        if existsInInputHistory(row) {
+            return
+        } else {
+            rows.append(row)
+            insertRowInDatabase(row)
+            let indexPath = NSIndexPath(forRow: newRowIndex, inSection: 0)
+            let indexPaths = [indexPath]
+            tableView.insertRowsAtIndexPaths(indexPaths,
+                withRowAnimation: .Automatic)
+        }
+    }
+    
+    func deleteCandidateInRow(indexPath: NSIndexPath) {
+        if indexPath.row >= 0 && indexPath.row < rows.count {
+            let row = rows[indexPath.row]
+            rows.removeAtIndex(indexPath.row)
+            deleteRowInDatabase(row)
+            let indexPaths = [indexPath]
+            tableView.deleteRowsAtIndexPaths(indexPaths, withRowAnimation: .Automatic)
+        }
+    }
+    
+    func newRow(#candidate: String, shuangpin: String, shengmu: String, length: Int, frequency: Int, candidate_type: Int) -> [NSObject: AnyObject] {
+        var row = [NSObject: AnyObject]()
+        row["candidate"] = candidate
+        row["shuangpin"] = shuangpin
+        row["shengmu"] = shengmu
+        row["length"] = length
+        row["frequency"] = frequency
+        row["candidate_type"] = candidate_type
+        return row
     }
 
     /*
@@ -126,18 +212,14 @@ class InputHistoryTableViewController: UITableViewController {
         return true
     }
     */
-
-    /*
-    // Override to support editing the table view.
+    
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            deleteCandidateInRow(indexPath)
         } else if editingStyle == .Insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
     }
-    */
 
     /*
     // Override to support rearranging the table view.
