@@ -163,8 +163,6 @@ class InputHistoryTableViewController: UITableViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: Selector("addCandidate"))
-        self.navigationItem.rightBarButtonItem = addButton
     }
     
     func addCandidate() {
