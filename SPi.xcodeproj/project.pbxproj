@@ -10,6 +10,7 @@
 		BD02DE3C1A3C8E9800EBC0E1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BD02DE3B1A3C8E9800EBC0E1 /* Images.xcassets */; };
 		BD0508A61A49A6C900D7A7AC /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD0508A51A49A6C900D7A7AC /* StringExtension.swift */; };
 		BD458DB41A37076B00664B2F /* TypingString.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD458DB31A37076B00664B2F /* TypingString.swift */; };
+		BD6BF31F1A4EC7E70050F50E /* Candidate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDEDF6F71A2DD338000CC6B6 /* Candidate.swift */; };
 		BD8E7EDD1A4E870800526ADB /* StringExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8E7EDC1A4E870800526ADB /* StringExtensionTests.swift */; };
 		BD8E7EDE1A4E876A00526ADB /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD0508A51A49A6C900D7A7AC /* StringExtension.swift */; };
 		BD8E7EDF1A4E88C300526ADB /* Candidate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDEDF6F71A2DD338000CC6B6 /* Candidate.swift */; };
@@ -815,6 +816,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BD6BF31F1A4EC7E70050F50E /* Candidate.swift in Sources */,
 				BDA7C1D01A4A4064003F14AE /* ShuangpinScheme.swift in Sources */,
 				BDA7C1CE1A4A3A3F003F14AE /* GetShengmuTests.swift in Sources */,
 				BDA7C1CC1A4A3A0A003F14AE /* ShuangpinSchemeTests.swift in Sources */,

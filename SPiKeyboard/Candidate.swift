@@ -3,7 +3,7 @@ enum CandidateType {
     case Empty, Special, English, Chinese, OnlyText
 }
 
-class Candidate: NSObject {
+class Candidate {
     let type: CandidateType
     let text: String
     let shuangpinString: String?
