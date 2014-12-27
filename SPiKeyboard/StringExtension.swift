@@ -32,6 +32,39 @@ let letterAndSpaceCharacterSet: NSCharacterSet = {
     }()
 
 extension String {
+    
+    func containsChinese() -> Bool {
+        let str: NSString = self
+        for (var i = 0; i < str.length; i++) {
+            let a = str.characterAtIndex(i)
+            if a >= 0x4E00 && a <= 0x9FA5 {
+                return true
+            }
+        }
+        return false
+    }
+    
+    func getCandidateType() -> CandidateType {
+        if self == "" {
+            return .Empty
+        }
+        var type: CandidateType = .English
+        let str: NSString = self
+        for (var i = 0; i < str.length; i++) {
+            let a = str.characterAtIndex(i)
+            if a >= 0x4E00 && a <= 0x9FA5 {
+                if type != .Special {
+                    type = .Chinese
+                }
+            } else if a < 0x41 || a > 0x7A {
+                type = .Special
+            } else {
+                
+            }
+        }
+        return type
+    }
+    
     func stringByRemovingCharactersInSet(characterSet: NSCharacterSet) -> String {
         return "".join(self.componentsSeparatedByCharactersInSet(characterSet))
     }

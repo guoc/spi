@@ -10,6 +10,10 @@
 		BD02DE3C1A3C8E9800EBC0E1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BD02DE3B1A3C8E9800EBC0E1 /* Images.xcassets */; };
 		BD0508A61A49A6C900D7A7AC /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD0508A51A49A6C900D7A7AC /* StringExtension.swift */; };
 		BD458DB41A37076B00664B2F /* TypingString.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD458DB31A37076B00664B2F /* TypingString.swift */; };
+		BD8E7EDD1A4E870800526ADB /* StringExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8E7EDC1A4E870800526ADB /* StringExtensionTests.swift */; };
+		BD8E7EDE1A4E876A00526ADB /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD0508A51A49A6C900D7A7AC /* StringExtension.swift */; };
+		BD8E7EDF1A4E88C300526ADB /* Candidate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDEDF6F71A2DD338000CC6B6 /* Candidate.swift */; };
+		BD8E7EE01A4E88EF00526ADB /* PinYinHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDEDF7011A2DD338000CC6B6 /* PinYinHelper.swift */; };
 		BDA7C1CC1A4A3A0A003F14AE /* ShuangpinSchemeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDA7C1CB1A4A3A0A003F14AE /* ShuangpinSchemeTests.swift */; };
 		BDA7C1CE1A4A3A3F003F14AE /* GetShengmuTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDA7C1CD1A4A3A3F003F14AE /* GetShengmuTests.swift */; };
 		BDA7C1D01A4A4064003F14AE /* ShuangpinScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDEDF7141A2DD338000CC6B6 /* ShuangpinScheme.swift */; };
@@ -137,6 +141,7 @@
 		BD683AD21A3C4A5C004F17CB /* screenshot-tap-keyboard-settings-icon-5s.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "screenshot-tap-keyboard-settings-icon-5s.png"; sourceTree = "<group>"; };
 		BD683AD31A3C4A5C004F17CB /* screenshot-tap-keyboard-settings-icon-6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "screenshot-tap-keyboard-settings-icon-6.png"; sourceTree = "<group>"; };
 		BD683AD41A3C4A5C004F17CB /* screenshot-tap-keyboard-settings-icon-6p.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "screenshot-tap-keyboard-settings-icon-6p.png"; sourceTree = "<group>"; };
+		BD8E7EDC1A4E870800526ADB /* StringExtensionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensionTests.swift; sourceTree = "<group>"; };
 		BDA7C1CB1A4A3A0A003F14AE /* ShuangpinSchemeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShuangpinSchemeTests.swift; sourceTree = "<group>"; };
 		BDA7C1CD1A4A3A3F003F14AE /* GetShengmuTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetShengmuTests.swift; sourceTree = "<group>"; };
 		BDBB56341A49AAC7006F8D5C /* ShuangpinTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ShuangpinTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -398,6 +403,7 @@
 		BDEDF6991A2DCBF3000CC6B6 /* SPiTests */ = {
 			isa = PBXGroup;
 			children = (
+				BD8E7EDC1A4E870800526ADB /* StringExtensionTests.swift */,
 				BDEDF69C1A2DCBF3000CC6B6 /* SPiTests.swift */,
 				BDEDF69A1A2DCBF3000CC6B6 /* Supporting Files */,
 			);
@@ -437,6 +443,7 @@
 				BDEDF6F81A2DD338000CC6B6 /* CandidateCell.swift */,
 				BDEDF6FE1A2DD338000CC6B6 /* MyCollectionViewFlowLayout.swift */,
 				BDD3E7431A383BBA00CF2CB9 /* InputHistoryTableViewController.swift */,
+				BDEDF7141A2DD338000CC6B6 /* ShuangpinScheme.swift */,
 				BDD3E7451A3846AA00CF2CB9 /* InputHistoryRowCell.xib */,
 				BDD3E7471A38477A00CF2CB9 /* InputHistoryRowCell.swift */,
 				BD02DE3B1A3C8E9800EBC0E1 /* Images.xcassets */,
@@ -445,7 +452,6 @@
 				BDEDF7021A2DD338000CC6B6 /* Resource */,
 				BDEDF70C1A2DD338000CC6B6 /* schemes */,
 				BDEDF7131A2DD338000CC6B6 /* Settings.bundle */,
-				BDEDF7141A2DD338000CC6B6 /* ShuangpinScheme.swift */,
 				BDEDF6B21A2DCC76000CC6B6 /* Supporting Files */,
 				BDEDF6F51A2DD337000CC6B6 /* SPiKeyboard-Bridging-Header.h */,
 			);
@@ -831,6 +837,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BD8E7EE01A4E88EF00526ADB /* PinYinHelper.swift in Sources */,
+				BD8E7EDF1A4E88C300526ADB /* Candidate.swift in Sources */,
+				BD8E7EDE1A4E876A00526ADB /* StringExtension.swift in Sources */,
+				BD8E7EDD1A4E870800526ADB /* StringExtensionTests.swift in Sources */,
 				BDEDF69D1A2DCBF3000CC6B6 /* SPiTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
