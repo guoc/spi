@@ -310,12 +310,14 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
     }
     
     @IBAction override func toggleSettings() {
+        let hideInputHistory = (candidatesDataModel.typingString.userTypingString != "history")
         candidatesUpdateQueue.resetTyping()
         let keyboardSettingsViewController = IASKAppSettingsViewController()
         keyboardSettingsViewController.delegate = self
         let aNavController = UINavigationController(rootViewController: keyboardSettingsViewController)
         keyboardSettingsViewController.showCreditsFooter = false
-        keyboardSettingsViewController.showDoneButton = true;
+        keyboardSettingsViewController.showDoneButton = true
+        keyboardSettingsViewController.hiddenKeys = hideInputHistory ? NSSet(object: "kInputHistory") : nil
         self.presentViewController(aNavController, animated: true, completion: nil)
     }
     

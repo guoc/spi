@@ -5,10 +5,6 @@
 	<key>PreferenceSpecifiers</key>
 	<array>
 		<dict>
-			<key>Type</key>
-			<string>PSGroupSpecifier</string>
-		</dict>
-		<dict>
 			<key>IASKViewControllerClass</key>
 			<string>SPiKeyboard.InputHistoryTableViewController</string>
 			<key>IASKViewControllerSelector</key>
@@ -17,6 +13,8 @@
 			<string>Input History</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
+			<key>Key</key>
+			<string>kInputHistory</string>
 		</dict>
 		<dict>
 			<key>Type</key>
