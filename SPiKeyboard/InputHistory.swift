@@ -52,6 +52,20 @@ class InputHistory {
         return frequency ?? 0
     }
     
+    func updateDatabase(#candidatesString: String) {
+        let candidatesArray = candidatesString.componentsSeparatedByString("\n")
+        for candidateStr in candidatesArray {
+            if candidateStr != "" {
+                let arr = candidateStr.componentsSeparatedByString("\t")
+                updateDatabase(candidateText: arr[0], candidateQueryString: arr[1])
+            }
+        }
+    }
+    
+    func updateDatabase(#candidateText: String, candidateQueryString: String) {
+        updateDatabase(with: Candidate(text: candidateText, queryString: candidateQueryString))
+    }
+    
     func updateDatabase(with candidate: Candidate) {
         
         let frequency = getFrequencyOf(candidate)

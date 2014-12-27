@@ -136,5 +136,10 @@ class Candidate {
             assertionFailure("Wrong candidate type!")
         }
     }
+    
+    convenience init(text: String, queryString: String) {
+        var type = text.getCandidateType()
+        self.init(text: text, type: type, queryString: queryString)
+    }
 
 }
