@@ -1,9 +1,22 @@
 
 import UIKit
 
+typealias Row = [NSObject: AnyObject]
+
 class InputHistoryTableViewController: UITableViewController {
 
-    var rows: [[NSObject: AnyObject]] = []
+    var rows: [Row] = [] {
+        didSet {
+            rowIndex = getRowIndex(rows)
+        }
+    }
+    var rowIndex: [Character: [Row]]! {
+        didSet {
+            indexNames = Array(rowIndex.keys).sorted { String($0).localizedCaseInsensitiveCompare(String($1)) == NSComparisonResult.OrderedAscending }
+        }
+    }
+    var indexNames: [Character]!
+    
     /*
     override init() {
         super.init(style: UITableViewStyle.Plain)
@@ -48,14 +61,32 @@ class InputHistoryTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return rowIndex.count
+    }
+    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return rows.count
+        return rowIndex[indexNames[section]]!.count
+    }
+    
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return String(indexNames[section])
+    }
+    
+    override func sectionIndexTitlesForTableView(tableView: UITableView) -> [AnyObject]! {
+        return indexNames.map { return String($0) }
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        func rowForIndexPath(indexPath: NSIndexPath) -> Row {
+            let indexName = indexNames[indexPath.section]
+            let rows = rowIndex[indexName]!
+            return rows[indexPath.row]
+        }
+        
         if enableAdvanceCell {
             let cell = tableView.dequeueReusableCellWithIdentifier("advanceInputHistoryRowCell", forIndexPath: indexPath) as AdvanceInputHistoryRowCell
-            let row = rows[indexPath.row]
+            let row = rowForIndexPath(indexPath)
             cell.candidateLabel.text = (row["candidate"] as String)
             cell.shuangpinLabel.text = (row["shuangpin"] as String)
             cell.shengmuLabel.text = (row["shengmu"] as String)
@@ -74,7 +105,7 @@ class InputHistoryTableViewController: UITableViewController {
             return cell
         } else {
             let cell = tableView.dequeueReusableCellWithIdentifier("inputHistoryRowCell", forIndexPath: indexPath) as InputHistoryRowCell
-            let row = rows[indexPath.row]
+            let row = rowForIndexPath(indexPath)
             cell.textLabel?.text = row["candidate"] as? String
             cell.detailTextLabel?.text = row["shuangpin"] as? String
             return cell
@@ -94,8 +125,8 @@ class InputHistoryTableViewController: UITableViewController {
         return databaseQueue
     }()
     
-    func getAllRows() -> [[NSObject: AnyObject]] {
-        var rows: [[NSObject: AnyObject]] = []
+    func getAllRows() -> [Row] {
+        var rows: [Row] = []
         
         _inputHistoryDatabaseQueue.inDatabase() {
             db in
@@ -115,7 +146,36 @@ class InputHistoryTableViewController: UITableViewController {
         return rows
     }
     
-    func existsInInputHistory(row: [NSObject: AnyObject]) -> Bool {
+    func getRowIndex(rows: [Row]) -> [Character: [Row]] {
+        
+        func distinct<T: Equatable>(source: [T]) -> [T] {
+            var unique = [T]()
+            for item in source {
+                if !contains(unique, item) {
+                    unique.append(item)
+                }
+            }
+            return unique
+        }
+        
+        func firstLetter(row: Row) -> Character {
+            let str = row["candidate"]! as String
+            return Character(str.substringToIndex(
+                advance(str.startIndex, 1)).uppercaseString)
+        }
+        
+        return distinct(rows.map(firstLetter))
+            .reduce([Character: [Row]]()) {
+                (var acc: [Character: [Row]], letter: Character) -> [Character: [Row]] in
+                acc[letter] = rows.filter {
+                    (word) -> Bool in
+                    firstLetter(word) == letter
+                    }
+                return acc
+        }
+    }
+    
+    func existsInInputHistory(row: Row) -> Bool {
         if (self.rows.filter {
                 $0["candidate"] as String == row["candidate"] as String && $0["shuangpin"] as String == row["shuangpin"] as String
             }.isEmpty) {
@@ -125,7 +185,7 @@ class InputHistoryTableViewController: UITableViewController {
         }
     }
     
-    func insertRowInDatabase(row: [NSObject: AnyObject]) {
+    func insertRowInDatabase(row: Row) {
         _inputHistoryDatabaseQueue.inDatabase() {
             db in
             let candidate = row["candidate"] as String
@@ -136,7 +196,7 @@ class InputHistoryTableViewController: UITableViewController {
         }
     }
     
-    func deleteRowInDatabase(row: [NSObject: AnyObject]) {
+    func deleteRowInDatabase(row: Row) {
         _inputHistoryDatabaseQueue.inDatabase() {
             db in
             let candidate = row["candidate"] as String
@@ -204,8 +264,8 @@ class InputHistoryTableViewController: UITableViewController {
         }
     }
     
-    func newRow(#candidate: String, shuangpin: String, shengmu: String, length: Int, frequency: Int, candidate_type: Int) -> [NSObject: AnyObject] {
-        var row = [NSObject: AnyObject]()
+    func newRow(#candidate: String, shuangpin: String, shengmu: String, length: Int, frequency: Int, candidate_type: Int) -> Row {
+        var row = Row()
         row["candidate"] = candidate
         row["shuangpin"] = shuangpin
         row["shengmu"] = shengmu
