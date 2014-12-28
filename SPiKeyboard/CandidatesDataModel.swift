@@ -21,6 +21,8 @@ extension FMDatabaseQueue {
                         candidate = Candidate(text: candidateString, withEnglishString: queryCode)
                     case 3:    // .Special:
                         candidate = Candidate(text: candidateString, withSpecialString: queryCode)
+                    case 4:    // .Custom:
+                        candidate = Candidate(text: candidateString, withCustomString: queryCode)
                     default:
                         assertionFailure("Wrong candidate type!")
                     }

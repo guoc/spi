@@ -1,6 +1,6 @@
 
 enum CandidateType {
-    case Empty, Special, English, Chinese, OnlyText
+    case Empty, Special, English, Chinese, OnlyText, Custom
 }
 
 class Candidate {
@@ -9,6 +9,7 @@ class Candidate {
     let shuangpinString: String?
     let englishString: String?
     let specialString: String?
+    let customString: String?
     
     var queryCode: String {
         get {
@@ -21,6 +22,8 @@ class Candidate {
                 return englishString!
             case .Chinese:
                 return shuangpinString!
+            case .Custom:
+                return customString!
             default:
                 assertionFailure("Wrong candidate type!")
             }
@@ -37,6 +40,8 @@ class Candidate {
             case .English:
                 return (text.getReadingLength() + 1) / 2
             case .Chinese:
+                return text.getReadingLength()
+            case .Custom:
                 return text.getReadingLength()
             default:
                 assertionFailure("Wrong candidate type!")
@@ -55,6 +60,8 @@ class Candidate {
                 return englishString!
             case .Chinese:
                 return shuangpinString!
+            case .Custom:
+                return customString!
             default:
                 assertionFailure("Wrong candidate type!")
             }
@@ -72,6 +79,8 @@ class Candidate {
                 return String(englishString![englishString!.startIndex]).lowercaseString
             case .Chinese:
                 return getShengmuString(from: shuangpinString!)
+            case .Custom:
+                return String(customString![customString!.startIndex]).lowercaseString    // For special symbol, lowercaseString does not return different value.
             default:
                 assertionFailure("Wrong candidate type!")
             }
@@ -87,6 +96,8 @@ class Candidate {
                 return String(2)
             case .Chinese:
                 return String(1)
+            case .Custom:
+                return String(4)
             default:
                 assertionFailure("Wrong candidate type!")
             }
@@ -116,6 +127,12 @@ class Candidate {
         self.specialString = special
     }
     
+    init(text: String, withCustomString custom: String) {
+        self.type = .Custom
+        self.text = text
+        self.customString = custom
+    }
+    
     init(text: String, type: CandidateType, queryString: String) {
         switch type {
         case .Empty:
@@ -132,14 +149,18 @@ class Candidate {
             self.type = .Chinese
             self.text = text
             self.shuangpinString = queryString
+        case .Custom:
+            self.type = .Custom
+            self.text = text
+            self.customString = queryString
         default:
             assertionFailure("Wrong candidate type!")
         }
     }
     
-    convenience init(text: String, queryString: String) {
+    convenience init(text: String, queryString: String, isCustomCandidate: Bool) {
         var type = text.getCandidateType()
-        self.init(text: text, type: type, queryString: queryString)
+        self.init(text: text, type: isCustomCandidate ? .Custom : type, queryString: queryString)
     }
     
 }

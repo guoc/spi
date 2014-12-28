@@ -57,13 +57,13 @@ class InputHistory {
         for candidateStr in candidatesArray {
             if candidateStr != "" {
                 let arr = candidateStr.componentsSeparatedByString("\t")
-                updateDatabase(candidateText: arr[0], candidateQueryString: arr[1])
+                updateDatabase(candidateText: arr[0], customCandidateQueryString: arr[1])
             }
         }
     }
     
-    func updateDatabase(#candidateText: String, candidateQueryString: String) {
-        updateDatabase(with: Candidate(text: candidateText, queryString: candidateQueryString))
+    func updateDatabase(#candidateText: String, customCandidateQueryString: String) {
+        updateDatabase(with: Candidate(text: candidateText, withCustomString: customCandidateQueryString))
     }
     
     func updateDatabase(with candidate: Candidate) {

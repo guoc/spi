@@ -170,7 +170,7 @@ class TypingString {
         switch candidate.type {
         case .Empty:
             assertionFailure("Wrong branch!")
-        case .English, .Special, .OnlyText:
+        case .English, .Special, .OnlyText, .Custom:
             assert(_cachedCandidatesWithCorrespondingTyping.isEmpty, "_cachedCandidatesWithCorrespondingTyping: \(_cachedCandidatesWithCorrespondingTyping) should be empty!")
             let newCandidateWithCorrespondingTyping = (candidate: candidate, typing: userTypingString)
             _cachedCandidatesWithCorrespondingTyping.append(newCandidateWithCorrespondingTyping)

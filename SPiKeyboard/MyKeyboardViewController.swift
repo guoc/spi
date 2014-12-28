@@ -318,7 +318,7 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
         } else {
             if let documentContextBeforeInput = (self.textDocumentProxy as UITextDocumentProxy).documentContextBeforeInput {
                 if typingBeforeToggleSettings != "" && documentContextBeforeInput != "" {
-                    candidatesDataModel.inputHistory.updateDatabase(candidateText: documentContextBeforeInput, candidateQueryString: typingBeforeToggleSettings)
+                    candidatesDataModel.inputHistory.updateDatabase(candidateText: documentContextBeforeInput, customCandidateQueryString: typingBeforeToggleSettings)
                 }
             }
         }
