@@ -66,23 +66,24 @@ class InputHistoryTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return rowIndex[indexNames[section]]!.count
+        return (indexNames.count != 0) ? rowIndex[indexNames[section]]!.count : 0
     }
     
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return String(indexNames[section])
+        return (indexNames.count != 0) ? String(indexNames[section]) : nil
     }
     
     override func sectionIndexTitlesForTableView(tableView: UITableView) -> [AnyObject]! {
         return indexNames.map { return String($0) }
     }
+    
+    func rowForIndexPath(indexPath: NSIndexPath) -> Row {
+        let indexName = indexNames[indexPath.section]
+        let rows = rowIndex[indexName]!
+        return rows[indexPath.row]
+    }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        func rowForIndexPath(indexPath: NSIndexPath) -> Row {
-            let indexName = indexNames[indexPath.section]
-            let rows = rowIndex[indexName]!
-            return rows[indexPath.row]
-        }
         
         if enableAdvanceCell {
             let cell = tableView.dequeueReusableCellWithIdentifier("advanceInputHistoryRowCell", forIndexPath: indexPath) as AdvanceInputHistoryRowCell
@@ -256,11 +257,21 @@ class InputHistoryTableViewController: UITableViewController {
     
     func deleteCandidateInRow(indexPath: NSIndexPath) {
         if indexPath.row >= 0 && indexPath.row < rows.count {
-            let row = rows[indexPath.row]
-            rows.removeAtIndex(indexPath.row)
-            deleteRowInDatabase(row)
-            let indexPaths = [indexPath]
-            tableView.deleteRowsAtIndexPaths(indexPaths, withRowAnimation: .Automatic)
+            let rowToDelete = rowForIndexPath(indexPath)
+            let indexName = indexNames[indexPath.section]
+            let needDeleteSection = (rowIndex[indexName]!.count == 1)
+            rows = rows.filter {
+                (row: Row) -> Bool in
+                return (row["candidate"] as String != rowToDelete["candidate"] as String
+                    || row["shuangpin"] as String != rowToDelete["shuangpin"] as String)
+            }
+            deleteRowInDatabase(rowToDelete)
+            if needDeleteSection {
+                tableView.deleteSections(NSIndexSet(index: indexPath.section), withRowAnimation: .Automatic)
+            } else {
+                let indexPaths = [indexPath]
+                tableView.deleteRowsAtIndexPaths(indexPaths, withRowAnimation: .Automatic)
+            }
         }
     }
     
