@@ -28,8 +28,8 @@
 		BDCF03631A4A74EE000BEC57 /* 智能ABC.spscheme in Resources */ = {isa = PBXBuildFile; fileRef = BDEDF7101A2DD338000CC6B6 /* 智能ABC.spscheme */; };
 		BDCF03641A4A74EE000BEC57 /* 紫光拼音.spscheme in Resources */ = {isa = PBXBuildFile; fileRef = BDEDF7111A2DD338000CC6B6 /* 紫光拼音.spscheme */; };
 		BDD3E7441A383BBA00CF2CB9 /* InputHistoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDD3E7431A383BBA00CF2CB9 /* InputHistoryTableViewController.swift */; };
-		BDD3E7461A3846AA00CF2CB9 /* InputHistoryRowCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BDD3E7451A3846AA00CF2CB9 /* InputHistoryRowCell.xib */; };
-		BDD3E7481A38477A00CF2CB9 /* InputHistoryRowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDD3E7471A38477A00CF2CB9 /* InputHistoryRowCell.swift */; };
+		BDD3E7461A3846AA00CF2CB9 /* AdvanceInputHistoryRowCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BDD3E7451A3846AA00CF2CB9 /* AdvanceInputHistoryRowCell.xib */; };
+		BDD3E7481A38477A00CF2CB9 /* AdvanceInputHistoryRowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDD3E7471A38477A00CF2CB9 /* AdvanceInputHistoryRowCell.swift */; };
 		BDEDF6871A2DCBF3000CC6B6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDEDF6861A2DCBF3000CC6B6 /* AppDelegate.swift */; };
 		BDEDF6891A2DCBF3000CC6B6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDEDF6881A2DCBF3000CC6B6 /* ViewController.swift */; };
 		BDEDF68E1A2DCBF3000CC6B6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BDEDF68D1A2DCBF3000CC6B6 /* Images.xcassets */; };
@@ -72,6 +72,7 @@
 		BDEDF7811A2DD69D000CC6B6 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BDEDF76E1A2DD69D000CC6B6 /* Media.xcassets */; };
 		BDEDF7821A2DD69D000CC6B6 /* Shapes.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDEDF76F1A2DD69D000CC6B6 /* Shapes.swift */; };
 		BDEDF7831A2DD69D000CC6B6 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDEDF7701A2DD69D000CC6B6 /* Utilities.swift */; };
+		BDF875671A4FA81400700DAF /* InputHistoryRowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF875661A4FA81400700DAF /* InputHistoryRowCell.swift */; };
 		BDFAA6B31A3C148800958D6D /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BDFAA6B21A3C148800958D6D /* Settings.bundle */; };
 		C9BD93BA718424E818463E94 /* libPods-SPi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C02615D65B03FB74D46621CE /* libPods-SPi.a */; };
 		E8103BB38134BF28C2BB94E9 /* libPods-SPiKeyboard.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BB1BD71E99BF370161715A4C /* libPods-SPiKeyboard.a */; };
@@ -149,8 +150,8 @@
 		BDBB56371A49AAC7006F8D5C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BDBB56381A49AAC7006F8D5C /* ShuangpinTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShuangpinTests.swift; sourceTree = "<group>"; };
 		BDD3E7431A383BBA00CF2CB9 /* InputHistoryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputHistoryTableViewController.swift; sourceTree = "<group>"; };
-		BDD3E7451A3846AA00CF2CB9 /* InputHistoryRowCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InputHistoryRowCell.xib; sourceTree = "<group>"; };
-		BDD3E7471A38477A00CF2CB9 /* InputHistoryRowCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputHistoryRowCell.swift; sourceTree = "<group>"; };
+		BDD3E7451A3846AA00CF2CB9 /* AdvanceInputHistoryRowCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AdvanceInputHistoryRowCell.xib; sourceTree = "<group>"; };
+		BDD3E7471A38477A00CF2CB9 /* AdvanceInputHistoryRowCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdvanceInputHistoryRowCell.swift; sourceTree = "<group>"; };
 		BDEDF6811A2DCBF3000CC6B6 /* SPi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SPi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDEDF6851A2DCBF3000CC6B6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BDEDF6861A2DCBF3000CC6B6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -209,6 +210,7 @@
 		BDEDF76F1A2DD69D000CC6B6 /* Shapes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shapes.swift; sourceTree = "<group>"; };
 		BDEDF7701A2DD69D000CC6B6 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		BDEDF7881A2DD908000CC6B6 /* icon.sketch */ = {isa = PBXFileReference; lastKnownFileType = file; path = icon.sketch; sourceTree = "<group>"; };
+		BDF875661A4FA81400700DAF /* InputHistoryRowCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputHistoryRowCell.swift; sourceTree = "<group>"; };
 		BDFAA6B21A3C148800958D6D /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		BDFAA6BC1A3C160B00958D6D /* 29@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "29@2x.png"; sourceTree = "<group>"; };
 		BDFAA6BD1A3C160B00958D6D /* 29@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "29@3x.png"; sourceTree = "<group>"; };
@@ -443,10 +445,11 @@
 				BDEDF6FA1A2DD338000CC6B6 /* CandidatesBanner.swift */,
 				BDEDF6F81A2DD338000CC6B6 /* CandidateCell.swift */,
 				BDEDF6FE1A2DD338000CC6B6 /* MyCollectionViewFlowLayout.swift */,
-				BDD3E7431A383BBA00CF2CB9 /* InputHistoryTableViewController.swift */,
 				BDEDF7141A2DD338000CC6B6 /* ShuangpinScheme.swift */,
-				BDD3E7451A3846AA00CF2CB9 /* InputHistoryRowCell.xib */,
-				BDD3E7471A38477A00CF2CB9 /* InputHistoryRowCell.swift */,
+				BDD3E7431A383BBA00CF2CB9 /* InputHistoryTableViewController.swift */,
+				BDF875661A4FA81400700DAF /* InputHistoryRowCell.swift */,
+				BDD3E7451A3846AA00CF2CB9 /* AdvanceInputHistoryRowCell.xib */,
+				BDD3E7471A38477A00CF2CB9 /* AdvanceInputHistoryRowCell.swift */,
 				BD02DE3B1A3C8E9800EBC0E1 /* Images.xcassets */,
 				BDEDF6F91A2DD338000CC6B6 /* candidates.sqlite */,
 				BDEDF75D1A2DD69D000CC6B6 /* TastyImitationKeyboard */,
@@ -721,7 +724,7 @@
 				BDEDF72D1A2DD338000CC6B6 /* Settings.bundle in Resources */,
 				BD02DE3C1A3C8E9800EBC0E1 /* Images.xcassets in Resources */,
 				BDEDF72B1A2DD338000CC6B6 /* 紫光拼音.spscheme in Resources */,
-				BDD3E7461A3846AA00CF2CB9 /* InputHistoryRowCell.xib in Resources */,
+				BDD3E7461A3846AA00CF2CB9 /* AdvanceInputHistoryRowCell.xib in Resources */,
 				BDEDF72C1A2DD338000CC6B6 /* 自然码.spscheme in Resources */,
 				BDEDF7811A2DD69D000CC6B6 /* Media.xcassets in Resources */,
 				BDEDF7291A2DD338000CC6B6 /* 拼音加加.spscheme in Resources */,
@@ -867,9 +870,10 @@
 				BD458DB41A37076B00664B2F /* TypingString.swift in Sources */,
 				BDEDF7771A2DD69D000CC6B6 /* ExtraView.swift in Sources */,
 				BDEDF7721A2DD69D000CC6B6 /* CatboardBanner.swift in Sources */,
+				BDF875671A4FA81400700DAF /* InputHistoryRowCell.swift in Sources */,
 				BDEDF71C1A2DD338000CC6B6 /* MyKeyboardViewController.swift in Sources */,
 				BDEDF7741A2DD69D000CC6B6 /* DefaultSettings.swift in Sources */,
-				BDD3E7481A38477A00CF2CB9 /* InputHistoryRowCell.swift in Sources */,
+				BDD3E7481A38477A00CF2CB9 /* AdvanceInputHistoryRowCell.swift in Sources */,
 				BDD3E7441A383BBA00CF2CB9 /* InputHistoryTableViewController.swift in Sources */,
 				BDEDF77A1A2DD69D000CC6B6 /* KeyboardConnector.swift in Sources */,
 				BDEDF77B1A2DD69D000CC6B6 /* KeyboardInputTraits.swift in Sources */,

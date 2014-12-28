@@ -22,10 +22,16 @@ class InputHistoryTableViewController: UITableViewController {
     }
 */
     
+    let enableAdvanceCell = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tableView.registerNib(UINib(nibName: "InputHistoryRowCell", bundle: nil), forCellReuseIdentifier: "inputHistoryRowCell")
+        if enableAdvanceCell {
+            tableView.registerNib(UINib(nibName: "AdvanceInputHistoryRowCell", bundle: nil), forCellReuseIdentifier: "advanceInputHistoryRowCell")
+        } else {
+            tableView.registerClass(InputHistoryRowCell.self, forCellReuseIdentifier: "inputHistoryRowCell")
+        }
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -47,26 +53,32 @@ class InputHistoryTableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("inputHistoryRowCell", forIndexPath: indexPath) as InputHistoryRowCell
-
-        let row = rows[indexPath.row]
-        cell.candidateLabel.text = (row["candidate"] as String)
-        cell.shuangpinLabel.text = (row["shuangpin"] as String)
-        cell.shengmuLabel.text = (row["shengmu"] as String)
-        cell.lengthLabel.text = String((row["length"] as NSNumber).integerValue)
-        cell.frequencyLabel.text = String((row["frequency"] as NSNumber).integerValue)
-        switch (row["candidate_type"] as NSNumber).integerValue {
-        case 1:
-            cell.typeLabel.text = "中"
-        case 2:
-            cell.typeLabel.text = "英"
-        case 3:
-            cell.typeLabel.text = "符"
-        default:
-            assertionFailure("Wrong candidate type in history.sqlite")
+        if enableAdvanceCell {
+            let cell = tableView.dequeueReusableCellWithIdentifier("advanceInputHistoryRowCell", forIndexPath: indexPath) as AdvanceInputHistoryRowCell
+            let row = rows[indexPath.row]
+            cell.candidateLabel.text = (row["candidate"] as String)
+            cell.shuangpinLabel.text = (row["shuangpin"] as String)
+            cell.shengmuLabel.text = (row["shengmu"] as String)
+            cell.lengthLabel.text = String((row["length"] as NSNumber).integerValue)
+            cell.frequencyLabel.text = String((row["frequency"] as NSNumber).integerValue)
+            switch (row["candidate_type"] as NSNumber).integerValue {
+            case 1:
+                cell.typeLabel.text = "中"
+            case 2:
+                cell.typeLabel.text = "英"
+            case 3:
+                cell.typeLabel.text = "符"
+            default:
+                assertionFailure("Wrong candidate type in history.sqlite")
+            }
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCellWithIdentifier("inputHistoryRowCell", forIndexPath: indexPath) as InputHistoryRowCell
+            let row = rows[indexPath.row]
+            cell.textLabel?.text = row["candidate"] as? String
+            cell.detailTextLabel?.text = row["shuangpin"] as? String
+            return cell
         }
-        
-        return cell
     }
     
     lazy var _inputHistoryDatabaseQueue: FMDatabaseQueue! = {
