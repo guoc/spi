@@ -30,7 +30,8 @@ class StringExtensionTests: XCTestCase {
         XCTAssert("@e".getCandidateType() == CandidateType.Special)
         XCTAssert("e@".getCandidateType() == CandidateType.Special)
         XCTAssert("ea".getCandidateType() == CandidateType.English)
-        XCTAssert("塔a".getCandidateType() == CandidateType.Chinese)
+        XCTAssert("塔a".getCandidateType() == CandidateType.Special)
+        XCTAssert("o进".getCandidateType() == CandidateType.Special)
     }
 
 }

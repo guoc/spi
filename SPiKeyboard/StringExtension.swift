@@ -48,18 +48,36 @@ extension String {
         if self == "" {
             return .Empty
         }
+        var containsSpecial = false
+        var containsChinese = false
+        var containsEnglish = false
         var type: CandidateType = .English
         let str: NSString = self
         for (var i = 0; i < str.length; i++) {
             let a = str.characterAtIndex(i)
             if a >= 0x4E00 && a <= 0x9FA5 {
-                if type != .Special {
+                containsChinese = true
+            } else if a < 0x41 || a > 0x7A {
+                containsSpecial = true
+            } else {
+                containsEnglish = true
+            }
+        }
+        if containsSpecial {
+            type = .Special
+        } else {
+            if containsChinese {
+                if containsEnglish {
+                    type = .Special
+                } else {
                     type = .Chinese
                 }
-            } else if a < 0x41 || a > 0x7A {
-                type = .Special
             } else {
-                
+                if containsEnglish {
+                    type = .English
+                } else {
+                    assertionFailure("This string does not contain Chinese, English or Special")
+                }
             }
         }
         return type
