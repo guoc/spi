@@ -310,19 +310,40 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
     }
     
     @IBAction override func toggleSettings() {
+
         let typingBeforeToggleSettings = candidatesDataModel.typingString.userTypingString
+        if typingBeforeToggleSettings != "" {
+            let lastCharacter = typingBeforeToggleSettings[typingBeforeToggleSettings.endIndex.predecessor()]
+            if lastCharacter == "+" {
+                if let documentContextBeforeInput = (self.textDocumentProxy as UITextDocumentProxy).documentContextBeforeInput {
+                    if typingBeforeToggleSettings != "" && documentContextBeforeInput != "" {
+                        let initStr = typingBeforeToggleSettings.substringToIndex(typingBeforeToggleSettings.endIndex.predecessor())
+                        candidatesDataModel.inputHistory.updateDatabase(candidateText: documentContextBeforeInput, customCandidateQueryString: initStr)
+                        candidatesUpdateQueue.resetTyping()
+                        return
+                    } else {
+                        
+                    }
+                } else {
+                    
+                }
+            } else {
+                
+            }
+        } else {
+            
+        }
+        
         var hideInputHistory = true
         if currentMode == 2 {
             currentMode = 0
             hideInputHistory = false
         } else {
-            if let documentContextBeforeInput = (self.textDocumentProxy as UITextDocumentProxy).documentContextBeforeInput {
-                if typingBeforeToggleSettings != "" && documentContextBeforeInput != "" {
-                    candidatesDataModel.inputHistory.updateDatabase(candidateText: documentContextBeforeInput, customCandidateQueryString: typingBeforeToggleSettings)
-                }
-            }
+            hideInputHistory = true
         }
+        
         candidatesUpdateQueue.resetTyping()
+        
         let keyboardSettingsViewController = IASKAppSettingsViewController()
         keyboardSettingsViewController.delegate = self
         let aNavController = UINavigationController(rootViewController: keyboardSettingsViewController)
