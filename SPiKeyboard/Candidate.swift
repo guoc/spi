@@ -50,9 +50,9 @@ class Candidate {
             case .Empty:
                 return ""
             case .Special:
-                return text
+                return specialString!
             case .English:
-                return text.lowercaseString
+                return englishString!
             case .Chinese:
                 return shuangpinString!
             default:
@@ -67,9 +67,9 @@ class Candidate {
             case .Empty:
                 return ""
             case .Special:
-                return String(text[text.startIndex])
+                return String(specialString![specialString!.startIndex])
             case .English:
-                return String(text[text.startIndex]).lowercaseString
+                return String(englishString![englishString!.startIndex]).lowercaseString
             case .Chinese:
                 return getShengmuString(from: shuangpinString!)
             default:
@@ -141,5 +141,5 @@ class Candidate {
         var type = text.getCandidateType()
         self.init(text: text, type: type, queryString: queryString)
     }
-
+    
 }
