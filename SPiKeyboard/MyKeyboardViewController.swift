@@ -312,7 +312,8 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
     @IBAction override func toggleSettings() {
         let typingBeforeToggleSettings = candidatesDataModel.typingString.userTypingString
         var hideInputHistory = true
-        if typingBeforeToggleSettings == "history" {
+        if currentMode == 2 {
+            currentMode = 0
             hideInputHistory = false
         } else {
             if let documentContextBeforeInput = (self.textDocumentProxy as UITextDocumentProxy).documentContextBeforeInput {
