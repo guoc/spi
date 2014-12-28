@@ -311,12 +311,16 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
     
     @IBAction override func toggleSettings() {
         let typingBeforeToggleSettings = candidatesDataModel.typingString.userTypingString
-        if let documentContextBeforeInput = (self.textDocumentProxy as UITextDocumentProxy).documentContextBeforeInput {
-            if typingBeforeToggleSettings != "" && documentContextBeforeInput != "" {
-                candidatesDataModel.inputHistory.updateDatabase(candidateText: documentContextBeforeInput, candidateQueryString: typingBeforeToggleSettings)
+        var hideInputHistory = true
+        if typingBeforeToggleSettings == "history" {
+            hideInputHistory = false
+        } else {
+            if let documentContextBeforeInput = (self.textDocumentProxy as UITextDocumentProxy).documentContextBeforeInput {
+                if typingBeforeToggleSettings != "" && documentContextBeforeInput != "" {
+                    candidatesDataModel.inputHistory.updateDatabase(candidateText: documentContextBeforeInput, candidateQueryString: typingBeforeToggleSettings)
+                }
             }
         }
-        let hideInputHistory = (typingBeforeToggleSettings != "history")
         candidatesUpdateQueue.resetTyping()
         let keyboardSettingsViewController = IASKAppSettingsViewController()
         keyboardSettingsViewController.delegate = self
