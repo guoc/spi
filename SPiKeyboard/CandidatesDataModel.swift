@@ -213,6 +213,7 @@ class CandidatesDataModel {
         // Below formalizedTypingString.type == .EnglishOrShuangpin || .English || .Special
         
         var formalizedStr = formalizedTypingString.string
+        let originalStr = formalizedTypingString.originalString
         var index = formalizedStr.getReadingLength() - 1
         var needTruncateCandidates = false
         var lackInternalShengmu = (contains(formalizedStr, "_"))
@@ -256,6 +257,7 @@ class CandidatesDataModel {
                 queryArguments.append(strToAppend)
                 clauseCount++
             }
+            
         case .English:
             let strToAppend = formalizedStr.lowercaseString
             queryArguments.append(String(strToAppend[strToAppend.startIndex]))

@@ -7,14 +7,17 @@ class FormalizedTypingString {
     
     let type: FormalizedTypingStringType
     let string: String
+    let originalString: String
     
     init() {
         self.type = .Empty
         self.string = ""
+        self.originalString = ""
     }
     
-    init(type: FormalizedTypingStringType, string: String) {
+    init(type: FormalizedTypingStringType, originalString: String, string: String) {
         self.type = type
+        self.originalString = originalString
         self.string = string
     }
 }
@@ -198,9 +201,9 @@ class TypingString {
         }
         
         if userTypingString.containsNonLetters() {    // no matter for display or not
-            return FormalizedTypingString(type: .Special, string: userTypingString)
+            return FormalizedTypingString(type: .Special, originalString: userTypingString, string: userTypingString)
         } else if userTypingString.containsUppercaseLetters() == true {
-            return FormalizedTypingString(type: .English, string: userTypingString)
+            return FormalizedTypingString(type: .English, originalString: userTypingString, string: userTypingString)
         } else {
             // EnglishOrShuangpin
             var userTyping = userTypingString as NSString
@@ -230,7 +233,7 @@ class TypingString {
                 formalizedStr += useForDisply ? fst : newFst
             }
             
-            return formalizedStr == "" ? FormalizedTypingString() : FormalizedTypingString(type: .EnglishOrShuangpin, string: formalizedStr)
+            return formalizedStr == "" ? FormalizedTypingString() : FormalizedTypingString(type: .EnglishOrShuangpin, originalString: userTypingString, string: formalizedStr)
         }
     }
 }
