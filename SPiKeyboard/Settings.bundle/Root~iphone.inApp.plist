@@ -10,7 +10,7 @@
 			<key>IASKViewControllerSelector</key>
 			<string>init</string>
 			<key>Title</key>
-			<string>Input History</string>
+			<string>历史输入/自定义候选词</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 			<key>Key</key>
