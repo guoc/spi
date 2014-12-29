@@ -168,8 +168,8 @@ class CandidatesDataModel {
             var addedDict = [String: Bool]()
             
             while candidatesAIndex < candidatesALength && candidatesBIndex < candidatesBLength {
-                if candidatesA[candidatesAIndex].text.getReadingLength() <=
-                    candidatesB[candidatesBIndex].text.getReadingLength() {
+                if candidatesA[candidatesAIndex].queryCode.getReadingLength() <=
+                    candidatesB[candidatesBIndex].queryCode.getReadingLength() {
                         let historyCandidate = candidatesB[candidatesBIndex]
                         if addedDict[historyCandidate.text] == nil {
                             addedDict[historyCandidate.text] = true

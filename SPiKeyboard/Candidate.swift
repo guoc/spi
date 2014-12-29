@@ -35,14 +35,8 @@ class Candidate {
             switch type {
             case .Empty:
                 return 0
-            case .Special:
-                return text.getReadingLength()
-            case .English:
-                return (text.getReadingLength() + 1) / 2
-            case .Chinese:
-                return text.getReadingLength()
-            case .Custom:
-                return text.getReadingLength()
+            case .Chinese, .English, .Special, .Custom:
+                return queryCode.getReadingLength()
             default:
                 assertionFailure("Wrong candidate type!")
             }
