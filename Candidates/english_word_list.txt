@@ -1,3 +1,4 @@
+SPi
 Apple
 iOS
 iMac
@@ -6,6 +7,3 @@ iPhone
 iPad
 iPod
 Xcode
-FMDB
-InAppSettingsKit
-IASK
