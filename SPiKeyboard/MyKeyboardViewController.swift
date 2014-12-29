@@ -315,10 +315,15 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
         if typingBeforeToggleSettings != "" {
             let lastCharacter = typingBeforeToggleSettings[typingBeforeToggleSettings.endIndex.predecessor()]
             if lastCharacter == "+" {
-                if let documentContextBeforeInput = (self.textDocumentProxy as UITextDocumentProxy).documentContextBeforeInput {
-                    if typingBeforeToggleSettings != "" && documentContextBeforeInput != "" {
+                if let documentContextAfterInput = (self.textDocumentProxy as UITextDocumentProxy).documentContextAfterInput {
+                    if typingBeforeToggleSettings != "" && documentContextAfterInput != "" {
+                        let candidateTextLength = documentContextAfterInput.getReadingLength()
+                        (self.textDocumentProxy as UITextDocumentProxy).adjustTextPositionByCharacterOffset(candidateTextLength)
+                        for _ in 0..<candidateTextLength {
+                            (textDocumentProxy as? UIKeyInput)?.deleteBackward()
+                        }
                         let initStr = typingBeforeToggleSettings.substringToIndex(typingBeforeToggleSettings.endIndex.predecessor())
-                        candidatesDataModel.inputHistory.updateDatabase(candidateText: documentContextBeforeInput, customCandidateQueryString: initStr)
+                        candidatesDataModel.inputHistory.updateDatabase(candidateText: documentContextAfterInput, customCandidateQueryString: initStr)
                         candidatesUpdateQueue.resetTyping()
                         return
                     } else {
