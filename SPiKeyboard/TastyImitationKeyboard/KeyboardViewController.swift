@@ -70,7 +70,9 @@ class KeyboardViewController: UIInputViewController {
         }
     }
     
+    // state tracking during shift tap
     var shiftWasMultitapped: Bool = false
+    var shiftStartingState: ShiftState?
     
     var keyboardHeight: CGFloat {
         get {
@@ -177,7 +179,7 @@ class KeyboardViewController: UIInputViewController {
             self.setupKludge()
             
             self.updateKeyCaps(self.shiftState.uppercase())
-            self.setCapsIfNeeded()
+            var capsWasSet = self.setCapsIfNeeded()
             
             self.updateAppearances(self.darkMode())
             self.addInputTraitsObservers()
@@ -249,6 +251,10 @@ class KeyboardViewController: UIInputViewController {
     }
     
     override func willRotateToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
+        self.forwardingView.resetTrackedViews()
+        self.shiftStartingState = nil
+        self.shiftWasMultitapped = false
+        
         // optimization: ensures smooth animation
         if let keyPool = self.layout?.keyPool {
             for view in keyPool {
@@ -310,10 +316,11 @@ class KeyboardViewController: UIInputViewController {
                             keyView.addTarget(self, action: "backspaceDown:", forControlEvents: .TouchDown)
                             keyView.addTarget(self, action: "backspaceUp:", forControlEvents: cancelEvents)
                         case Key.KeyType.Shift:
-                            keyView.addTarget(self, action: Selector("shiftDown:"), forControlEvents: .TouchUpInside)
+                            keyView.addTarget(self, action: Selector("shiftDown:"), forControlEvents: .TouchDown)
+                            keyView.addTarget(self, action: Selector("shiftUp:"), forControlEvents: .TouchUpInside)
                             keyView.addTarget(self, action: Selector("shiftDoubleTapped:"), forControlEvents: .TouchDownRepeat)
                         case Key.KeyType.ModeChange:
-                            keyView.addTarget(self, action: Selector("modeChangeTapped:"), forControlEvents: .TouchUpInside)
+                            keyView.addTarget(self, action: Selector("modeChangeTapped:"), forControlEvents: .TouchDown)
                         case Key.KeyType.Settings:
                             keyView.addTarget(self, action: Selector("toggleSettings"), forControlEvents: .TouchUpInside)
                         default:
@@ -332,7 +339,7 @@ class KeyboardViewController: UIInputViewController {
                             keyView.addTarget(self, action: "keyPressedHelper:", forControlEvents: .TouchUpInside)
                         }
                         
-                        if key.type != Key.KeyType.Shift {
+                        if key.type != Key.KeyType.Shift && key.type != Key.KeyType.ModeChange {
                             keyView.addTarget(self, action: Selector("highlightKey:"), forControlEvents: .TouchDown | .TouchDragInside | .TouchDragEnter)
                             keyView.addTarget(self, action: Selector("unHighlightKey:"), forControlEvents: .TouchUpInside | .TouchUpOutside | .TouchDragOutside | .TouchDragExit | .TouchCancel)
                         }
@@ -457,10 +464,6 @@ class KeyboardViewController: UIInputViewController {
             // TODO: reset context
         }
         
-        if self.shiftState == ShiftState.Enabled {
-            self.shiftState = ShiftState.Disabled
-        }
-        
         self.setCapsIfNeeded()
     }
     
@@ -533,6 +536,7 @@ class KeyboardViewController: UIInputViewController {
         if let textDocumentProxy = self.textDocumentProxy as? UIKeyInput {
             textDocumentProxy.deleteBackward()
         }
+        self.setCapsIfNeeded()
         
         // trigger for subsequent deletes
         self.backspaceDelayTimer = NSTimer.scheduledTimerWithTimeInterval(backspaceDelay - backspaceRepeat, target: self, selector: Selector("backspaceDelayCallback"), userInfo: nil, repeats: false)
@@ -553,24 +557,58 @@ class KeyboardViewController: UIInputViewController {
         if let textDocumentProxy = self.textDocumentProxy as? UIKeyInput {
             textDocumentProxy.deleteBackward()
         }
+        self.setCapsIfNeeded()
     }
     
     func shiftDown(sender: KeyboardKey) {
+        self.shiftStartingState = self.shiftState
+        
+        if let shiftStartingState = self.shiftStartingState {
+            if shiftStartingState.uppercase() {
+                // handled by shiftUp
+                return
+            }
+            else {
+                switch self.shiftState {
+                case .Disabled:
+                    self.shiftState = .Enabled
+                case .Enabled:
+                    self.shiftState = .Disabled
+                case .Locked:
+                    self.shiftState = .Disabled
+                }
+                
+                (sender.shape as? ShiftShape)?.withLock = false
+            }
+        }
+    }
+    
+    func shiftUp(sender: KeyboardKey) {
         if self.shiftWasMultitapped {
-            self.shiftWasMultitapped = false
-            return
+            // do nothing
         }
-        
-        switch self.shiftState {
-        case .Disabled:
-            self.shiftState = .Enabled
-        case .Enabled:
-            self.shiftState = .Disabled
-        case .Locked:
-            self.shiftState = .Disabled
+        else {
+            if let shiftStartingState = self.shiftStartingState {
+                if !shiftStartingState.uppercase() {
+                    // handled by shiftDown
+                }
+                else {
+                    switch self.shiftState {
+                    case .Disabled:
+                        self.shiftState = .Enabled
+                    case .Enabled:
+                        self.shiftState = .Disabled
+                    case .Locked:
+                        self.shiftState = .Disabled
+                    }
+                    
+                    (sender.shape as? ShiftShape)?.withLock = false
+                }
+            }
         }
-        
-        (sender.shape as? ShiftShape)?.withLock = false
+
+        self.shiftStartingState = nil
+        self.shiftWasMultitapped = false
     }
     
     func shiftDoubleTapped(sender: KeyboardKey) {
@@ -598,6 +636,10 @@ class KeyboardViewController: UIInputViewController {
     }
     
     func setMode(mode: Int) {
+        self.forwardingView.resetTrackedViews()
+        self.shiftStartingState = nil
+        self.shiftWasMultitapped = false
+        
         let uppercase = self.shiftState.uppercase()
         let characterUppercase = (NSUserDefaults.standardUserDefaults().boolForKey(kSmallLowercase) ? uppercase : true)
         self.layout?.layoutKeys(mode, uppercase: uppercase, characterUppercase: characterUppercase, shiftState: self.shiftState)
@@ -606,6 +648,10 @@ class KeyboardViewController: UIInputViewController {
     }
     
     func advanceTapped(sender: KeyboardKey) {
+        self.forwardingView.resetTrackedViews()
+        self.shiftStartingState = nil
+        self.shiftWasMultitapped = false
+        
         self.advanceToNextInputMode()
     }
     
@@ -642,8 +688,7 @@ class KeyboardViewController: UIInputViewController {
         }
     }
     
-    // TODO: make this work if cursor position is shifted
-    func setCapsIfNeeded() {
+    func setCapsIfNeeded() -> Bool {
         if self.shouldAutoCapitalize() {
             switch self.shiftState {
             case .Disabled:
@@ -653,6 +698,20 @@ class KeyboardViewController: UIInputViewController {
             case .Locked:
                 self.shiftState = .Locked
             }
+            
+            return true
+        }
+        else {
+            switch self.shiftState {
+            case .Disabled:
+                self.shiftState = .Disabled
+            case .Enabled:
+                self.shiftState = .Disabled
+            case .Locked:
+                self.shiftState = .Locked
+            }
+            
+            return false
         }
     }
     
