@@ -226,8 +226,8 @@ class CandidatesDataModel {
         case .EnglishOrShuangpin:
             
             // Prepare ACCURATE query if typing may be English
-            queryArguments.append(String(typingString.userTypingString[typingString.userTypingString.startIndex]))
-            queryArguments.append(typingString.userTypingString.lowercaseString)
+            queryArguments.append(String(typingString.remainingUserTypingString[typingString.remainingUserTypingString.startIndex]))
+            queryArguments.append(typingString.remainingUserTypingString.lowercaseString)
             whereStatement += "shengmu = ? and shuangpin = ? or "
             
             // Prepare query if typing may be shuangpin
