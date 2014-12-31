@@ -33,7 +33,8 @@ flattr_button:
 markdown:     redcarpet
 redcarpet:
   extensions: ['smart', 'tables', 'with_toc_data', 'footnotes']
-permalink:    pretty
+permalink:    /blog/:title.html
 paginate:     3
+paginate_path: "blog/page:num/"
 sass:
   compressed: true
