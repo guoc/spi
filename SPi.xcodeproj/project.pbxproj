@@ -144,6 +144,7 @@
 		BD683AD31A3C4A5C004F17CB /* screenshot-tap-keyboard-settings-icon-6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "screenshot-tap-keyboard-settings-icon-6.png"; sourceTree = "<group>"; };
 		BD683AD41A3C4A5C004F17CB /* screenshot-tap-keyboard-settings-icon-6p.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "screenshot-tap-keyboard-settings-icon-6p.png"; sourceTree = "<group>"; };
 		BD8E7EDC1A4E870800526ADB /* StringExtensionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensionTests.swift; sourceTree = "<group>"; };
+		BD9788D51A555E740073704F /* update_git_pre_commit.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = update_git_pre_commit.sh; sourceTree = "<group>"; };
 		BDA7C1CB1A4A3A0A003F14AE /* ShuangpinSchemeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShuangpinSchemeTests.swift; sourceTree = "<group>"; };
 		BDA7C1CD1A4A3A3F003F14AE /* GetShengmuTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetShengmuTests.swift; sourceTree = "<group>"; };
 		BDBB56341A49AAC7006F8D5C /* ShuangpinTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ShuangpinTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -281,6 +282,7 @@
 			isa = PBXGroup;
 			children = (
 				BD0508971A497B1400D7A7AC /* before_build.sh */,
+				BD9788D51A555E740073704F /* update_git_pre_commit.sh */,
 				BD4789421A46F76D001381F0 /* check_no_changes_after_last_commit.sh */,
 				BD0508981A497BE600D7A7AC /* update_candidates_database_if_necessary.py */,
 				BD0508991A497BE600D7A7AC /* update_candidates_database.sh */,

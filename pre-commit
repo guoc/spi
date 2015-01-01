@@ -1,0 +1,7 @@
+#!/bin/sh
+
+if [ "master" == $(git symbolic-ref --short -q HEAD) ]
+then
+  python check_build_number.py
+fi
+

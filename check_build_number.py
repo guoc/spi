@@ -2,15 +2,8 @@
 
 # This script checks if build version number is same as commit serial number.
 
-# Add the lines below in .git/hooks/pre-commit to call this script file.
-# Don't forget to chmod +x pre-commit
-
-# #!/bin/sh
-# 
-# if [ "master" == $(git symbolic-ref --short -q HEAD) ]
-# then
-#   python check_build_number.py
-# fi
+# Call update_git_pre_commit.sh to validate this script
+# Or just build the project which will call update_git_pre_commit.sh
 
 import subprocess
 import sys
