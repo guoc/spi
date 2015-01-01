@@ -1,7 +1,7 @@
 import UIKit
 
 extension FMDatabaseQueue {
-    func getCandidates(byQueryStatement queryStatement: String, byQueryArguments queryArguments: [String], needTruncateCandidates: Bool) -> [Candidate] {
+    func getCandidates(byQueryStatement queryStatement: String, byQueryArguments queryArguments: [String], withQueryCode candidateQueryCode: String, needTruncateCandidates: Bool) -> [Candidate] {
         
         var candidates = [Candidate]()
         self.inDatabase() {
@@ -22,7 +22,11 @@ extension FMDatabaseQueue {
                     case 3:    // .Special:
                         candidate = Candidate(text: candidateString, withSpecialString: queryCode)
                     case 4:    // .Custom:
-                        candidate = Candidate(text: candidateString, withCustomString: queryCode)
+                        if queryCode == candidateQueryCode {
+                            candidate = Candidate(text: candidateString, withCustomString: queryCode)
+                        } else {
+                            
+                        }
                     default:
                         assertionFailure("Wrong candidate type!")
                     }
@@ -285,8 +289,8 @@ class CandidatesDataModel {
         println(queryStatement)
         println(queryArguments)
         
-        var candidates = databaseQueue!.getCandidates(byQueryStatement: queryStatement, byQueryArguments: queryArguments, needTruncateCandidates: needTruncateCandidates)
-        let historyCandidates = inputHistory.getCandidatesByQueryArguments(queryArguments, andWhereStatement: whereStatement)
+        var candidates = databaseQueue!.getCandidates(byQueryStatement: queryStatement, byQueryArguments: queryArguments, withQueryCode: formalizedTypingString.originalString, needTruncateCandidates: needTruncateCandidates)
+        let historyCandidates = inputHistory.getCandidatesByQueryArguments(queryArguments, andWhereStatement: whereStatement, withQueryCode: formalizedTypingString.originalString)
         
         let mergedCandidates = mergeCandidatesArrays(candidates, historyCandidates)
         println("\(mergedCandidates.count) candidates are returned")

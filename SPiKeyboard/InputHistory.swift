@@ -112,11 +112,11 @@ class InputHistory {
         updateDatabase(with: candidate)
     }
     
-    func getCandidatesByQueryArguments(queryArguments: [String], andWhereStatement whereStatement: String) -> [Candidate] {
+    func getCandidatesByQueryArguments(queryArguments: [String], andWhereStatement whereStatement: String, withQueryCode queryCode: String) -> [Candidate] {
         let queryStatement = "select candidate, shuangpin, candidate_type from history where " + whereStatement + " order by length desc, frequency desc"
         println(queryStatement)
         println(queryArguments)
-        let candidates = databaseQueue!.getCandidates(byQueryStatement: queryStatement, byQueryArguments: queryArguments, needTruncateCandidates: false)
+        let candidates = databaseQueue!.getCandidates(byQueryStatement: queryStatement, byQueryArguments: queryArguments, withQueryCode: queryCode, needTruncateCandidates: false)
         
         return candidates
     }
