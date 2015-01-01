@@ -206,6 +206,12 @@ class CandidatesDataModel {
             return retCandidates
         }
         
+        func getAccurateCandidatesFirstCandidatesArray(candidates: [Candidate], withQueryCode queryCode: String) -> [Candidate] {
+            let accurateCandidates = candidates.filter { $0.queryCode == queryCode }
+            let inaccurateCandidates = candidates.filter { $0.queryCode != queryCode }
+            return accurateCandidates + inaccurateCandidates
+        }
+        
         if formalizedTypingString.type == .Empty {
             return [Candidate]()
         }
@@ -285,7 +291,9 @@ class CandidatesDataModel {
         let mergedCandidates = mergeCandidatesArrays(candidates, historyCandidates)
         println("\(mergedCandidates.count) candidates are returned")
         
-        return mergedCandidates
+        let accurateCandidatesFirstCandidates = getAccurateCandidatesFirstCandidatesArray(mergedCandidates, withQueryCode: formalizedTypingString.originalString)
+        
+        return accurateCandidatesFirstCandidates
     }
     
     func hasTyping() -> Bool {
