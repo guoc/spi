@@ -69,7 +69,16 @@ class InputHistory {
     func updateDatabase(with candidate: Candidate) {
         
         func canInsertIntoInputHistory(candidate: Candidate) -> Bool {
-            if candidate.queryCode.getReadingLength() == 2 && candidate.text == candidate.queryCode || candidate.queryCode.getReadingLength() == 1 {
+            
+            func candidateIsTooSimple(candidate: Candidate) -> Bool {
+                if candidate.queryCode.getReadingLength() == 2 && candidate.text == candidate.queryCode || candidate.queryCode.getReadingLength() == 1 {
+                    return true
+                } else {
+                    return false
+                }
+            }
+            
+            if candidateIsTooSimple(candidate) {
                 return false
             } else {
                 return true
