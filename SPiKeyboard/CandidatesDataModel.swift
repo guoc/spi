@@ -236,9 +236,16 @@ class CandidatesDataModel {
         case .EnglishOrShuangpin:
             
             // Prepare ACCURATE query if typing may be English
-            queryArguments.append(String(typingString.remainingUserTypingString[typingString.remainingUserTypingString.startIndex]))
-            queryArguments.append(typingString.remainingUserTypingString.lowercaseString)
-            whereStatement += "shengmu = ? and shuangpin = ? or "
+            if typingString.remainingUserTypingString.getReadingLength() > 2 {
+                // Accurate query should only be used when remainingUserTypingString > 2, otherwise
+                // it may confuse shuangpin query by non-ziranma scheme.
+                // e.g.
+                // In xiaohe scheme "dc" -> "dk" -> "dao", if accurate query is used,
+                // candidates of "diao" will be returned, because in ziranma scheme "dc" -> "diao"
+                queryArguments.append(String(typingString.remainingUserTypingString[typingString.remainingUserTypingString.startIndex]))
+                queryArguments.append(typingString.remainingUserTypingString.lowercaseString)
+                whereStatement += "shengmu = ? and shuangpin = ? or "
+            }
             
             // Prepare query if typing may be shuangpin
             
