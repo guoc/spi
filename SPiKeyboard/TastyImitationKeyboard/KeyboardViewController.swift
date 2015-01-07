@@ -9,8 +9,8 @@
 import UIKit
 import AudioToolbox
 
-let metrics: [String:Double] = [
-    "topBanner": 35
+var metrics: [String:Double] = [
+    "topBanner": Double(getBannerHeight())
 ]
 func metric(name: String) -> CGFloat { return CGFloat(metrics[name]!) }
 
@@ -413,7 +413,7 @@ class KeyboardViewController: UIInputViewController {
                 attribute:NSLayoutAttribute.NotAnAttribute,
                 multiplier:0,
                 constant:height)
-            self.heightConstraint!.priority = 1000
+            self.heightConstraint!.priority = 999
             
             self.view.addConstraint(self.heightConstraint!) // TODO: what if view already has constraint added?
         }

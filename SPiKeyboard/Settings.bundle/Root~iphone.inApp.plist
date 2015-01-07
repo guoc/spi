@@ -50,6 +50,22 @@
 		</dict>
 		<dict>
 			<key>FooterText</key>
+			<string>将拼音显示在候选词上方</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>DefaultValue</key>
+			<string>NO</string>
+			<key>Key</key>
+			<string>kShowTypingCellInExtraLine</string>
+			<key>Title</key>
+			<string>独立拼音显示</string>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+		</dict>
+		<dict>
+			<key>FooterText</key>
 			<string>连按两下空格键插入句号。</string>
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>

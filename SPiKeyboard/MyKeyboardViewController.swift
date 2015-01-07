@@ -1,6 +1,12 @@
 
 import UIKit
 
+func getShowTypingCellInExtraLineFromSettings() -> Bool {
+    return NSUserDefaults.standardUserDefaults().boolForKey("kShowTypingCellInExtraLine")    // If not exist, false will be returned.
+}
+
+var showTypingCellInExtraLine = getShowTypingCellInExtraLineFromSettings()
+
 var candidatesBannerAppearanceIsDark = false
 
 let indexPathZero = NSIndexPath(forRow: 0, inSection: 0)
@@ -31,6 +37,19 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
             candidatesDataModel.typingString.reset()
             candidatesDataModel.updateDataModelRaisedByTypingChange()
         }
+    }
+    
+    func updateBannerHeight() {
+        
+        func changeBannerIfNecessary(#newHeight: CGFloat) {
+            if metric("topBanner") != newHeight {
+                changeBannerHeight(newHeight)
+                candidatesBanner?.resetSubviewsWithInitAndSetDelegate()
+            }
+        }
+        
+        showTypingCellInExtraLine = getShowTypingCellInExtraLineFromSettings()
+        changeBannerIfNecessary(newHeight: (showTypingCellInExtraLine ? bannerHeightWhenShowTypingCellInExtraLineIsTrue : bannerHeightWhenShowTypingCellInExtraLineIsFalse))
     }
     
     override func keyPressed(key: Key) {
@@ -150,9 +169,13 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
             candidatesUpdateQueue.selectCandidate(indexPath)
         }
     }
+        
+    func changeBannerHeight(height: CGFloat) {
+        metrics["topBanner"] = Double(height)
+        self.keyboardHeight = self.heightForOrientation(self.interfaceOrientation, withTopBanner: true)
+    }
     
     override func createBanner() -> ExtraView? {
-//        candidatesDataModel.generateDatabaseFromTxtSource()
         
         candidatesBanner = CandidatesBanner(globalColors: self.dynamicType.globalColors, darkMode: false, solidColorMode: self.solidColorMode())
         candidatesBanner!.delegate = self
@@ -184,7 +207,7 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-//        candidatesBanner!.setCollectionViewFrame(CGRect(x: 0, y: 0, width: self.view.bounds.width, height: metric("topBanner")))
+//        candidatesBanner!.setCollectionViewFrame(CGRect(x: 0, y: 0, width: self.view.bounds.width, height: candidateCellHeight))
     }
     
     func getCellSizeAtIndex(indexPath: NSIndexPath, inDataModel dataModel: CandidatesDataModel, andSetLayout layout: UICollectionViewFlowLayout) -> CGSize {
@@ -360,6 +383,7 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
     
     func settingsViewControllerDidEnd(sender: IASKAppSettingsViewController!) {
         self.dismissViewControllerAnimated(true, completion: nil)
+        updateBannerHeight()
         ShuangpinScheme.reloadScheme()
     }
     
@@ -381,11 +405,11 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
     var candidatesTable: UICollectionView!
     func showCandidatesTable() {
         isShowingCandidatesTable = true
-        candidatesBanner!.hideCollectionView()
+        candidatesBanner!.hideTypingAndCandidatesView()
         candidatesBanner!.changeArrowUp()
         var layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .Vertical
-        candidatesTable = UICollectionView(frame: CGRect(x: view.frame.origin.x, y: view.frame.origin.y + metric("topBanner"), width: view.frame.width, height: view.frame.height - metric("topBanner")), collectionViewLayout: layout)
+        candidatesTable = UICollectionView(frame: CGRect(x: view.frame.origin.x, y: view.frame.origin.y + metric("topBanner"), width: view.frame.width, height: view.frame.height - candidatesTableCellHeight), collectionViewLayout: layout)
         candidatesTable.backgroundColor = candidatesBannerAppearanceIsDark ? UIColor.darkGrayColor() : UIColor.whiteColor()
         candidatesTable.registerClass(CandidateCell.self, forCellWithReuseIdentifier: "Cell")
         candidatesTable.delegate = self
@@ -396,7 +420,7 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
     func exitCandidatesTable() {
         isShowingCandidatesTable = false
         candidatesBanner!.scrollToFirstCandidate()
-        candidatesBanner!.unhideCollectionView()
+        candidatesBanner!.unhideTypingAndCandidatesView()
         candidatesBanner!.changeArrowDown()
         candidatesTable.removeFromSuperview()
     }
