@@ -1,16 +1,13 @@
-//
-//  CandidateCell.swift
-//  TastyImitationKeyboard
-//
-//  Created by GuoChen on 11/11/2014.
-//  Copyright (c) 2014 Apple. All rights reserved.
-//
 
 import UIKit
 
+func getCandidateCellHeight() -> CGFloat {
+    return showTypingCellInExtraLine ? typingAndCandidatesViewHeightWhenShowTypingCellInExtraLineIsTrue : typingAndCandidatesViewHeightWhenShowTypingCellInExtraLineIsFalse
+}
+
 var candidateTextFont = UIFont(descriptor: UIFontDescriptor.preferredFontDescriptorWithTextStyle(UIFontTextStyleBody), size: 20)
 
-let oneChineseGlyphWidth = ("镜" as NSString).boundingRectWithSize(CGSize(width: CGFloat.infinity, height: metric("topBanner")), options: .UsesLineFragmentOrigin, attributes: [NSFontAttributeName: candidateTextFont], context: nil).width
+let oneChineseGlyphWidth = ("镜" as NSString).boundingRectWithSize(CGSize(width: CGFloat.infinity, height: candidatesTableCellHeight), options: .UsesLineFragmentOrigin, attributes: [NSFontAttributeName: candidateTextFont], context: nil).width
 
 class CandidateCell: UICollectionViewCell {
     
@@ -45,13 +42,14 @@ class CandidateCell: UICollectionViewCell {
         if candidatesBannerAppearanceIsDark == true {
             textLabel.textColor = UIColor.whiteColor()
         } else {
-            textLabel.textColor = UIColor.darkTextColor()        }
+            textLabel.textColor = UIColor.darkTextColor()
+        }
     }
     
     class func getCellSizeByText(text: String, needAccuracy: Bool) -> CGSize {
         
         func accurateWidth() -> CGFloat {
-            return (text as NSString).boundingRectWithSize(CGSize(width: CGFloat.infinity, height: metric("topBanner")), options: .UsesLineFragmentOrigin, attributes: [NSFontAttributeName: candidateTextFont], context: nil).width + 20
+            return (text as NSString).boundingRectWithSize(CGSize(width: CGFloat.infinity, height: getCandidateCellHeight()), options: .UsesLineFragmentOrigin, attributes: [NSFontAttributeName: candidateTextFont], context: nil).width + 20
         }
         
         var textWidth: CGFloat = 0
@@ -72,6 +70,6 @@ class CandidateCell: UICollectionViewCell {
         } else {
             returnWidth = textWidth
         }
-        return CGSize(width: returnWidth, height: metric("topBanner"))
+        return CGSize(width: returnWidth, height: getCandidateCellHeight())
     }
 }

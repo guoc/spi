@@ -10,6 +10,7 @@
 		BD02DE3C1A3C8E9800EBC0E1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BD02DE3B1A3C8E9800EBC0E1 /* Images.xcassets */; };
 		BD0508A61A49A6C900D7A7AC /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD0508A51A49A6C900D7A7AC /* StringExtension.swift */; };
 		BD458DB41A37076B00664B2F /* TypingString.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD458DB31A37076B00664B2F /* TypingString.swift */; };
+		BD6202201A5C9EB60038D388 /* TypingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD62021F1A5C9EB60038D388 /* TypingLabel.swift */; };
 		BD6BF31F1A4EC7E70050F50E /* Candidate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDEDF6F71A2DD338000CC6B6 /* Candidate.swift */; };
 		BD8E7EDD1A4E870800526ADB /* StringExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8E7EDC1A4E870800526ADB /* StringExtensionTests.swift */; };
 		BD8E7EDE1A4E876A00526ADB /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD0508A51A49A6C900D7A7AC /* StringExtension.swift */; };
@@ -137,6 +138,7 @@
 		BD0508B51A49A98A00D7A7AC /* PinYinTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinYinTests.swift; sourceTree = "<group>"; };
 		BD458DB31A37076B00664B2F /* TypingString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypingString.swift; sourceTree = "<group>"; };
 		BD4789421A46F76D001381F0 /* check_no_changes_after_last_commit.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = check_no_changes_after_last_commit.sh; sourceTree = "<group>"; };
+		BD62021F1A5C9EB60038D388 /* TypingLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypingLabel.swift; sourceTree = "<group>"; };
 		BD683ACE1A3C4A5C004F17CB /* screenshot-tap-keyboard-settings-icon-5s.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "screenshot-tap-keyboard-settings-icon-5s.png"; sourceTree = "<group>"; };
 		BD683ACF1A3C4A5C004F17CB /* screenshot-tap-keyboard-settings-icon-6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "screenshot-tap-keyboard-settings-icon-6.png"; sourceTree = "<group>"; };
 		BD683AD01A3C4A5C004F17CB /* screenshot-tap-keyboard-settings-icon-6p.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "screenshot-tap-keyboard-settings-icon-6p.png"; sourceTree = "<group>"; };
@@ -440,6 +442,7 @@
 				BDEDF6FF1A2DD338000CC6B6 /* MyKeyboardViewController.swift */,
 				BDEDF6FB1A2DD338000CC6B6 /* CandidatesDataModel.swift */,
 				BD458DB31A37076B00664B2F /* TypingString.swift */,
+				BD62021F1A5C9EB60038D388 /* TypingLabel.swift */,
 				BDEDF6F71A2DD338000CC6B6 /* Candidate.swift */,
 				BDEDF7011A2DD338000CC6B6 /* PinYinHelper.swift */,
 				BDEDF6FD1A2DD338000CC6B6 /* InputHistory.swift */,
@@ -863,6 +866,7 @@
 				BDEDF7151A2DD338000CC6B6 /* Candidate.swift in Sources */,
 				BDEDF7831A2DD69D000CC6B6 /* Utilities.swift in Sources */,
 				BDEDF7731A2DD69D000CC6B6 /* DefaultKeyboard.swift in Sources */,
+				BD6202201A5C9EB60038D388 /* TypingLabel.swift in Sources */,
 				BDEDF72E1A2DD338000CC6B6 /* ShuangpinScheme.swift in Sources */,
 				BDEDF7761A2DD69D000CC6B6 /* DirectionEnum.swift in Sources */,
 				BDEDF7801A2DD69D000CC6B6 /* KeyboardViewController.swift in Sources */,

@@ -16,7 +16,7 @@ class MyCollectionViewFlowLayout: UICollectionViewFlowLayout {
 
         super.init()
         scrollDirection = .Horizontal
-        itemSize = CGSize(width: defaultCandidateCellWidth, height: metric("topBanner"))
+        itemSize = CGSize(width: defaultCandidateCellWidth, height: getCandidateCellHeight())
         minimumLineSpacing = 0
         resetLayoutAttributeFrames()
     }
@@ -41,7 +41,7 @@ class MyCollectionViewFlowLayout: UICollectionViewFlowLayout {
         
         layoutAttributesS = [UICollectionViewLayoutAttributes]()
         let zerothLayoutAttributes = UICollectionViewLayoutAttributes(forCellWithIndexPath: NSIndexPath(forRow: 0, inSection: 0))
-        zerothLayoutAttributes.frame = CGRect(x: 0, y: 0, width: candidateCellWidths[0], height: metric("topBanner"))
+        zerothLayoutAttributes.frame = CGRect(x: 0, y: 0, width: candidateCellWidths[0], height: getCandidateCellHeight())
         layoutAttributesS.append(zerothLayoutAttributes)
         let lastIndex = self.candidateCellWidths.count - 1
         if lastIndex >= 1 {
@@ -54,7 +54,7 @@ class MyCollectionViewFlowLayout: UICollectionViewFlowLayout {
                     var frame = currentLayoutAttributes.frame
                     frame.origin.x = origin + maximumSpacing
                     frame.size.width = candidateCellWidths[index]
-                    frame.size.height = metric("topBanner")
+                    frame.size.height = getCandidateCellHeight()
                     currentLayoutAttributes.frame = frame
                 } else {
                     // TODO
@@ -99,6 +99,10 @@ class MyCollectionViewFlowLayout: UICollectionViewFlowLayout {
     
     func updateLayoutRaisedByCellAt(indexPath: NSIndexPath, withCellSize size: CGSize) {
         
+        if showTypingCellInExtraLine == true && indexPath == indexPathZero {
+            return
+        }
+        
         if indexPath.row < candidateCellWidths.count {
             let originalWidth = candidateCellWidths[indexPath.row]
             if ceil(originalWidth) != ceil(size.width) {
@@ -115,8 +119,11 @@ class MyCollectionViewFlowLayout: UICollectionViewFlowLayout {
     }
     
     func resetLayoutWithAllCellSize(sizes: [CGSize]) {
-        
-        resetAllCellWidth(sizes.map({x in x.width}))
+        var sizes = sizes.map({x in x.width})
+        if showTypingCellInExtraLine == true {
+            sizes[0] = 0
+        }
+        resetAllCellWidth(sizes)
         resetLayoutAttributeFrames()
     }
 }
