@@ -499,7 +499,8 @@ class KeyboardViewController: UIInputViewController {
                 
                 index = index.predecessor()
                 let char = previousContext![index]
-                if self.characterIsWhitespace(char) || self.characterIsPunctuation(char) || char == "," {
+//                if self.characterIsWhitespace(char) || self.characterIsPunctuation(char) || char == "," {    // Commented by guoc
+                if self.characterIsWhitespace(char) || char == "。" || char == "！" || char == "？" || char == "，" {    // Added by guoc
                     return false
                 }
                 
