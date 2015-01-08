@@ -9,10 +9,10 @@ PODS:
   - uservoice-iphone-sdk (3.2.2)
 
 DEPENDENCIES:
-  - CrittercismSDK
-  - FMDB (~> 2.4)
-  - InAppSettingsKit (~> 2.3.2)
-  - uservoice-iphone-sdk
+  - CrittercismSDK (= 5.0.7)
+  - FMDB (= 2.4)
+  - InAppSettingsKit (= 2.3.3)
+  - uservoice-iphone-sdk (= 3.2.2)
 
 SPEC CHECKSUMS:
   CrittercismSDK: 1f1a91c7a51ca8044e675765bde5d2aa97295b1d
