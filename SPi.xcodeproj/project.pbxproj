@@ -73,6 +73,7 @@
 		BDEDF7811A2DD69D000CC6B6 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BDEDF76E1A2DD69D000CC6B6 /* Media.xcassets */; };
 		BDEDF7821A2DD69D000CC6B6 /* Shapes.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDEDF76F1A2DD69D000CC6B6 /* Shapes.swift */; };
 		BDEDF7831A2DD69D000CC6B6 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDEDF7701A2DD69D000CC6B6 /* Utilities.swift */; };
+		BDF136FB1A5E432B0052D7A9 /* AppearanceConfigure.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF136FA1A5E432B0052D7A9 /* AppearanceConfigure.swift */; };
 		BDF875671A4FA81400700DAF /* InputHistoryRowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF875661A4FA81400700DAF /* InputHistoryRowCell.swift */; };
 		BDFAA6B31A3C148800958D6D /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BDFAA6B21A3C148800958D6D /* Settings.bundle */; };
 		C9BD93BA718424E818463E94 /* libPods-SPi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C02615D65B03FB74D46621CE /* libPods-SPi.a */; };
@@ -213,6 +214,7 @@
 		BDEDF76F1A2DD69D000CC6B6 /* Shapes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shapes.swift; sourceTree = "<group>"; };
 		BDEDF7701A2DD69D000CC6B6 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		BDEDF7881A2DD908000CC6B6 /* icon.sketch */ = {isa = PBXFileReference; lastKnownFileType = file; path = icon.sketch; sourceTree = "<group>"; };
+		BDF136FA1A5E432B0052D7A9 /* AppearanceConfigure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppearanceConfigure.swift; sourceTree = "<group>"; };
 		BDF875661A4FA81400700DAF /* InputHistoryRowCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputHistoryRowCell.swift; sourceTree = "<group>"; };
 		BDFAA6B21A3C148800958D6D /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		BDFAA6BC1A3C160B00958D6D /* 29@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "29@2x.png"; sourceTree = "<group>"; };
@@ -450,6 +452,7 @@
 				BDEDF6FA1A2DD338000CC6B6 /* CandidatesBanner.swift */,
 				BDEDF6F81A2DD338000CC6B6 /* CandidateCell.swift */,
 				BDEDF6FE1A2DD338000CC6B6 /* MyCollectionViewFlowLayout.swift */,
+				BDF136FA1A5E432B0052D7A9 /* AppearanceConfigure.swift */,
 				BDEDF7141A2DD338000CC6B6 /* ShuangpinScheme.swift */,
 				BDD3E7431A383BBA00CF2CB9 /* InputHistoryTableViewController.swift */,
 				BDF875661A4FA81400700DAF /* InputHistoryRowCell.swift */,
@@ -887,6 +890,7 @@
 				BDEDF71D1A2DD338000CC6B6 /* PinYinHelper.swift in Sources */,
 				BDEDF7161A2DD338000CC6B6 /* CandidateCell.swift in Sources */,
 				BDEDF7781A2DD69D000CC6B6 /* ForwardingView.swift in Sources */,
+				BDF136FB1A5E432B0052D7A9 /* AppearanceConfigure.swift in Sources */,
 				BDEDF77E1A2DD69D000CC6B6 /* KeyboardLayout.swift in Sources */,
 				BDEDF71B1A2DD338000CC6B6 /* MyCollectionViewFlowLayout.swift in Sources */,
 				BDEDF7191A2DD338000CC6B6 /* CandidatesDataModel.swift in Sources */,
