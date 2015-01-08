@@ -20,7 +20,7 @@
 			<key>Key</key>
 			<string>kFeedback</string>
 			<key>Title</key>
-			<string>联系作者</string>
+			<string>联系作者/相关支持</string>
 			<key>Type</key>
 			<string>IASKButtonSpecifier</string>
 		</dict>
