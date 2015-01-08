@@ -20,7 +20,7 @@
 			<key>Key</key>
 			<string>kFeedback</string>
 			<key>Title</key>
-			<string>写给作者</string>
+			<string>联系作者</string>
 			<key>Type</key>
 			<string>IASKButtonSpecifier</string>
 		</dict>
@@ -32,7 +32,7 @@
 			<key>File</key>
 			<string>About</string>
 			<key>Title</key>
-			<string>关于SPi</string>
+			<string>关于 SPi</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
