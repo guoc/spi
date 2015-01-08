@@ -13,7 +13,7 @@
  */
 
 #import "YOAuthConsumer.h"
-#import "YOAUthToken.h"
+#import "YOAuthToken.h"
 #import "YOAuthRequest.h"
 #import "YOAuthUtil.h"
 #import "YOAuthSignatureMethod.h"
