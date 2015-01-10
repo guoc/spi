@@ -418,7 +418,11 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
     }
     
     var isShowingCandidatesTable = false
-    @IBAction func toggleCandidatesTable() {
+    @IBAction func toggleCandidatesTableOrDismissKeyboard() {
+        if !candidatesDataModel.hasTyping() {
+            self.dismissKeyboard()
+            return
+        }
         if isShowingCandidatesTable == false {
             isShowingCandidatesTable = true
             showCandidatesTable()
