@@ -50,7 +50,7 @@ class CandidatesBanner: ExtraView {
         collectionView.registerClass(CandidateCell.self, forCellWithReuseIdentifier: "Cell")
         
         moreCandidatesButton = UIButton.buttonWithType(.Custom) as UIButton
-        moreCandidatesButton.addTarget(delegate, action: Selector("toggleCandidatesTable"), forControlEvents: .TouchUpInside)
+        moreCandidatesButton.addTarget(delegate, action: Selector("toggleCandidatesTableOrDismissKeyboard"), forControlEvents: .TouchUpInside)
         
         // Above part should be same as func initSubviews()
         
@@ -173,7 +173,6 @@ class CandidatesBanner: ExtraView {
             typingLabel.text = (delegate as MyKeyboardViewController).candidatesDataModel.textAt(indexPathZero)    // FIXME
         }
         collectionView.reloadData()
-        updateAppearance()
     }
     
     func setCollectionViewFrame(frame: CGRect) {
@@ -181,11 +180,12 @@ class CandidatesBanner: ExtraView {
     }
     
     func initAppearance() {
-        hasInitAppearance = true
-        
-        if let separatorLine = separatorLine {
-            separatorLine.removeFromSuperlayer()
+        var needUpdateAppearance = false
+        if hasInitAppearance == false {
+            needUpdateAppearance = true
         }
+        
+        hasInitAppearance = true
         
         if let typingLabel = typingLabel {
             typingLabel.font = extraLineTypingTextFont
@@ -199,6 +199,10 @@ class CandidatesBanner: ExtraView {
         
         moreCandidatesButton.layer.shadowColor = UIColor.blackColor().CGColor
         moreCandidatesButton.layer.shadowOffset = CGSizeMake(-2.0, 0.0)
+        
+        if needUpdateAppearance == true {
+            updateAppearance()
+        }
     }
     
     func updateAppearance() {
@@ -206,42 +210,59 @@ class CandidatesBanner: ExtraView {
             initAppearance()
         }
         
+        updateSeparatorBars()
+        
         typingLabel?.updateAppearance()
         
         self.backgroundColor = candidatesBannerAppearanceIsDark ? darkModeBannerColor : UIColor.whiteColor()
 
         moreCandidatesButton.setImage(candidatesBannerAppearanceIsDark ? UIImage(named: "arrow-down-white") : UIImage(named: "arrow-down-black"), forState: .Normal)
         
-        if collectionView.numberOfItemsInSection(0) <= 1 {
-            self.layer.borderWidth = 0.5
-            self.layer.borderColor = candidatesBannerAppearanceIsDark ? darkModeBannerBorderColor.CGColor : lightModeBannerBorderColor.CGColor
-            moreCandidatesButton.hidden = true
-            moreCandidatesButton.layer.shadowOpacity = 0.0
-        } else {
-            moreCandidatesButton.hidden = false
-            addSeparatorLine()
-            moreCandidatesButton.layer.shadowOpacity = 0.2
+        self.layer.borderWidth = 0.5
+        self.layer.borderColor = candidatesBannerAppearanceIsDark ? darkModeBannerBorderColor.CGColor : lightModeBannerBorderColor.CGColor
+        
+        moreCandidatesButton.layer.shadowOpacity = 0.2        
+    }
+    
+    var separatorHorizontalBar: CALayer?
+    var separatorVerticalBar: CALayer?
+
+    func updateSeparatorBars() {
+        removeSeparatorBars()
+        addSeparatorBars()
+    }
+    
+    func addSeparatorBars() {
+        if separatorVerticalBar == nil {
+            separatorVerticalBar = CALayer(layer: moreCandidatesButton.layer)
+            separatorVerticalBar!.backgroundColor = candidatesBannerAppearanceIsDark ? darkModeBannerBorderColor.CGColor : lightModeBannerBorderColor.CGColor
+            separatorVerticalBar!.frame = CGRectMake(0, 0, 0.5, CGRectGetHeight(moreCandidatesButton.frame))
+            moreCandidatesButton.layer.addSublayer(separatorVerticalBar)
+        }
+        
+        if separatorHorizontalBar == nil {
+            if showTypingCellInExtraLine == true {
+                if let typingLabel = typingLabel {
+                    if separatorHorizontalBar != nil {
+                        separatorHorizontalBar!.removeFromSuperlayer()
+                    }
+                    separatorHorizontalBar = CALayer(layer: self.layer)
+                    separatorHorizontalBar!.backgroundColor = candidatesBannerAppearanceIsDark ? darkModeBannerBorderColor.CGColor : lightModeBannerBorderColor.CGColor
+                    separatorHorizontalBar!.frame = CGRectMake(0, CGRectGetHeight(typingLabel.frame), CGRectGetWidth(typingLabel.frame), 0.5)
+                    self.layer.addSublayer(separatorHorizontalBar!)
+                }
+            }
         }
     }
     
-    var separatorLine: CALayer?
-
-    func addSeparatorLine() {
-        var leftBorder = CALayer(layer: moreCandidatesButton.layer)
-        leftBorder.backgroundColor = candidatesBannerAppearanceIsDark ? darkModeBannerBorderColor.CGColor : lightModeBannerBorderColor.CGColor
-        leftBorder.frame = CGRectMake(0, 0, 0.5, CGRectGetHeight(moreCandidatesButton.frame))
-        moreCandidatesButton.layer.addSublayer(leftBorder)
-        
-        if showTypingCellInExtraLine == true {
-            if let typingLabel = typingLabel {
-                if separatorLine != nil {
-                    separatorLine!.removeFromSuperlayer()
-                }
-                separatorLine = CALayer(layer: self.layer)
-                separatorLine!.backgroundColor = candidatesBannerAppearanceIsDark ? darkModeBannerBorderColor.CGColor : lightModeBannerBorderColor.CGColor
-                separatorLine!.frame = CGRectMake(0, CGRectGetHeight(typingLabel.frame), CGRectGetWidth(typingLabel.frame), 0.5)
-                self.layer.addSublayer(separatorLine!)
-            }
+    func removeSeparatorBars() {
+        if separatorVerticalBar != nil {
+            separatorVerticalBar!.removeFromSuperlayer()
+            separatorVerticalBar = nil
+        }
+        if separatorHorizontalBar != nil {
+            separatorHorizontalBar!.removeFromSuperlayer()
+            separatorHorizontalBar = nil
         }
     }
     

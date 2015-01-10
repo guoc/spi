@@ -1,11 +1,15 @@
 
 import UIKit
 
+var showTypingCellInExtraLine = getShowTypingCellInExtraLineFromSettings()
+
+func updateShowTypingCellInExtraLine() {
+    showTypingCellInExtraLine = getShowTypingCellInExtraLineFromSettings()
+}
+
 func getShowTypingCellInExtraLineFromSettings() -> Bool {
     return NSUserDefaults.standardUserDefaults().boolForKey("kShowTypingCellInExtraLine")    // If not exist, false will be returned.
 }
-
-var showTypingCellInExtraLine = getShowTypingCellInExtraLineFromSettings()
 
 var candidatesBannerAppearanceIsDark = false
 
@@ -25,10 +29,15 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         self.candidatesUpdateQueue = CandidatesUpdateQueue(controller: self)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("settingDidChange:"), name: "kAppSettingChanged", object: nil)
     }
     
     required init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
     func insertCandidateAutomaticallyIfNecessary() {
@@ -48,7 +57,6 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
             }
         }
         
-        showTypingCellInExtraLine = getShowTypingCellInExtraLineFromSettings()
         changeBannerIfNecessary(newHeight: (showTypingCellInExtraLine ? bannerHeightWhenShowTypingCellInExtraLineIsTrue : bannerHeightWhenShowTypingCellInExtraLineIsFalse))
     }
     
@@ -332,6 +340,13 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
         candidatesBanner?.updateAppearance()
     }
     
+    func settingDidChange(notification: NSNotification) {
+        if (notification.object?.isEqual("kShowTypingCellInExtraLine") != nil) {
+            updateShowTypingCellInExtraLine()
+            self.updateBannerHeight()
+        }
+    }
+    
     @IBAction override func toggleSettings() {
 
         let typingBeforeToggleSettings = candidatesDataModel.typingString.userTypingString
@@ -382,8 +397,19 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
     }
     
     func settingsViewControllerDidEnd(sender: IASKAppSettingsViewController!) {
+        func delay(delay:Double, closure:()->()) {
+            dispatch_after(
+                dispatch_time(
+                    DISPATCH_TIME_NOW,
+                    Int64(delay * Double(NSEC_PER_SEC))
+                ),
+                dispatch_get_main_queue(), closure)
+        }
+        
         self.dismissViewControllerAnimated(true, completion: nil)
-        updateBannerHeight()
+        delay(0.1) {
+            self.candidatesBanner!.updateAppearance()
+        }
         ShuangpinScheme.reloadScheme()
     }
     
@@ -392,7 +418,11 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
     }
     
     var isShowingCandidatesTable = false
-    @IBAction func toggleCandidatesTable() {
+    @IBAction func toggleCandidatesTableOrDismissKeyboard() {
+        if !candidatesDataModel.hasTyping() {
+            self.dismissKeyboard()
+            return
+        }
         if isShowingCandidatesTable == false {
             isShowingCandidatesTable = true
             showCandidatesTable()
@@ -409,7 +439,7 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
         candidatesBanner!.changeArrowUp()
         var layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .Vertical
-        candidatesTable = UICollectionView(frame: CGRect(x: view.frame.origin.x, y: view.frame.origin.y + metric("topBanner"), width: view.frame.width, height: view.frame.height - candidatesTableCellHeight), collectionViewLayout: layout)
+        candidatesTable = UICollectionView(frame: CGRect(x: view.frame.origin.x, y: view.frame.origin.y + getBannerHeight(), width: view.frame.width, height: view.frame.height - getBannerHeight()), collectionViewLayout: layout)
         candidatesTable.backgroundColor = candidatesBannerAppearanceIsDark ? UIColor.darkGrayColor() : UIColor.whiteColor()
         candidatesTable.registerClass(CandidateCell.self, forCellWithReuseIdentifier: "Cell")
         candidatesTable.delegate = self
