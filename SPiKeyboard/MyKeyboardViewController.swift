@@ -409,7 +409,7 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
         candidatesBanner!.changeArrowUp()
         var layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .Vertical
-        candidatesTable = UICollectionView(frame: CGRect(x: view.frame.origin.x, y: view.frame.origin.y + metric("topBanner"), width: view.frame.width, height: view.frame.height - candidatesTableCellHeight), collectionViewLayout: layout)
+        candidatesTable = UICollectionView(frame: CGRect(x: view.frame.origin.x, y: view.frame.origin.y + getBannerHeight(), width: view.frame.width, height: view.frame.height - getBannerHeight()), collectionViewLayout: layout)
         candidatesTable.backgroundColor = candidatesBannerAppearanceIsDark ? UIColor.darkGrayColor() : UIColor.whiteColor()
         candidatesTable.registerClass(CandidateCell.self, forCellWithReuseIdentifier: "Cell")
         candidatesTable.delegate = self
