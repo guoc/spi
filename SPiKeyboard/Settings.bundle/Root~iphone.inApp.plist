@@ -50,7 +50,7 @@
 		</dict>
 		<dict>
 			<key>FooterText</key>
-			<string>将拼音显示在候选词上方</string>
+			<string>开启该选项使拼音显示在候选词上方（更改后请重新打开键盘）</string>
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 		</dict>

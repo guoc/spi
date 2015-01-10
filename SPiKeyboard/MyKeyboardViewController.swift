@@ -340,8 +340,10 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
         candidatesBanner?.updateAppearance()
     }
     
+    var showTypingCellInExtraLineChanged = false
     func settingDidChange(notification: NSNotification) {
         if (notification.object?.isEqual("kShowTypingCellInExtraLine") != nil) {
+            showTypingCellInExtraLineChanged = true
             updateShowTypingCellInExtraLine()
             self.updateBannerHeight()
         }
@@ -397,19 +399,13 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
     }
     
     func settingsViewControllerDidEnd(sender: IASKAppSettingsViewController!) {
-        func delay(delay:Double, closure:()->()) {
-            dispatch_after(
-                dispatch_time(
-                    DISPATCH_TIME_NOW,
-                    Int64(delay * Double(NSEC_PER_SEC))
-                ),
-                dispatch_get_main_queue(), closure)
+        if self.showTypingCellInExtraLineChanged == true {
+            self.dismissKeyboard()    // Dismiss keyboard to reload candidates banner appearance.
         }
+        self.showTypingCellInExtraLineChanged = false
         
         self.dismissViewControllerAnimated(true, completion: nil)
-        delay(0.1) {
-            self.candidatesBanner!.updateAppearance()
-        }
+        
         ShuangpinScheme.reloadScheme()
     }
     
