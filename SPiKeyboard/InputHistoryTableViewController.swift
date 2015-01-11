@@ -131,7 +131,7 @@ class InputHistoryTableViewController: UITableViewController {
         
         _inputHistoryDatabaseQueue.inDatabase() {
             db in
-            if let rs = db.executeQuery("select candidate, shuangpin, shengmu, length, frequency, candidate_type from history", withArgumentsInArray: nil) {
+            if let rs = db.executeQuery("select candidate, shuangpin, shengmu, length, frequency, candidate_type from history order by shengmu", withArgumentsInArray: nil) {
                 while rs.next() {
                     rows.append(rs.resultDictionary())
                 }
@@ -160,7 +160,7 @@ class InputHistoryTableViewController: UITableViewController {
         }
         
         func firstLetter(row: Row) -> Character {
-            let str = row["candidate"]! as String
+            let str = row["shengmu"]! as String
             return Character(str.substringToIndex(
                 advance(str.startIndex, 1)).uppercaseString)
         }
