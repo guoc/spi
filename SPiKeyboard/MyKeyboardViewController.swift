@@ -11,6 +11,16 @@ func getShowTypingCellInExtraLineFromSettings() -> Bool {
     return NSUserDefaults.standardUserDefaults().boolForKey("kShowTypingCellInExtraLine")    // If not exist, false will be returned.
 }
 
+var cornerBracketEnabled = getCornerBracketEnabledFromSettings()
+
+func updateCornerBracketEnabled() {
+    cornerBracketEnabled = getCornerBracketEnabledFromSettings()
+}
+
+func getCornerBracketEnabledFromSettings() -> Bool {
+    return NSUserDefaults.standardUserDefaults().boolForKey("kCornerBracket")    // If not exist, false will be returned.
+}
+
 var candidatesBannerAppearanceIsDark = false
 
 let indexPathZero = NSIndexPath(forRow: 0, inSection: 0)
@@ -346,6 +356,9 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
         if (notification.object?.isEqual("kShowTypingCellInExtraLine") != nil) {
             updateShowTypingCellInExtraLine()
             self.updateBannerHeight()
+        }
+        if (notification.object?.isEqual("kCornerBracket") != nil) {
+            updateCornerBracketEnabled()
         }
     }
     

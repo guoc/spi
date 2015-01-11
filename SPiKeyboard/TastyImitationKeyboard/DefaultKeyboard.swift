@@ -65,7 +65,8 @@ func defaultKeyboard() -> Keyboard {
     }
     
 //    for key in ["-", "/", ":", ";", "(", ")", "$", "&", "@", "\""] {
-    for key in ["-", "/", "：", "；", "（", "）", "$", "@", "“", "”"] {
+    let row = cornerBracketEnabled ? ["-", "/", "：", "；", "（", "）", "$", "@", "「", "」"] : ["-", "/", "：", "；", "（", "）", "$", "@", "“", "”"]
+    for key in row {
         var keyModel = Key(.SpecialCharacter)
         keyModel.setLetter(key)
         defaultKeyboard.addKey(keyModel, row: 1, page: 1)
