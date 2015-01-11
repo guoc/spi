@@ -158,9 +158,7 @@ class TypingString {
     }
     
     func getCandidate() -> Candidate {
-        if userTypingString.containsNonLetters() == true {
-            return Candidate(text: userTypingString, withSpecialString: userTypingString)
-        } else if typeOfRemainingFormalizedTyping == .Empty && _cachedCandidatesWithCorrespondingTyping.isEmpty == false {
+        if typeOfRemainingFormalizedTyping == .Empty && _cachedCandidatesWithCorrespondingTyping.isEmpty == false {
             return Candidate(text: "".join(_cachedCandidatesWithCorrespondingTyping.map({x -> String in return x.candidate.text})), withShuangpinString: " ".join(_cachedCandidatesWithCorrespondingTyping.map({x -> String in return x.candidate.queryCode})))
         } else if hasSelectedPartialCandidates() {
             return Candidate(text: "".join(_cachedCandidatesWithCorrespondingTyping.map({x -> String in return x.candidate.text})))
