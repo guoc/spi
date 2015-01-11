@@ -17,6 +17,12 @@
 			<string>kInputHistory</string>
 		</dict>
 		<dict>
+			<key>FooterText</key>
+			<string>部分设置更改后请重新打开键盘</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 		</dict>
@@ -50,7 +56,7 @@
 		</dict>
 		<dict>
 			<key>FooterText</key>
-			<string>开启该选项使拼音显示在候选词上方（更改后请重新打开键盘）</string>
+			<string>开启该选项使拼音显示在候选词上方</string>
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 		</dict>

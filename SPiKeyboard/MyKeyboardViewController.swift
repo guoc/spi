@@ -340,10 +340,10 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
         candidatesBanner?.updateAppearance()
     }
     
-    var showTypingCellInExtraLineChanged = false
+    var needDismissKeyboard = false
     func settingDidChange(notification: NSNotification) {
+        needDismissKeyboard = true
         if (notification.object?.isEqual("kShowTypingCellInExtraLine") != nil) {
-            showTypingCellInExtraLineChanged = true
             updateShowTypingCellInExtraLine()
             self.updateBannerHeight()
         }
@@ -399,10 +399,10 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
     }
     
     func settingsViewControllerDidEnd(sender: IASKAppSettingsViewController!) {
-        if self.showTypingCellInExtraLineChanged == true {
+        if self.needDismissKeyboard == true {
             self.dismissKeyboard()    // Dismiss keyboard to reload candidates banner appearance.
         }
-        self.showTypingCellInExtraLineChanged = false
+        self.needDismissKeyboard = false
         
         self.dismissViewControllerAnimated(true, completion: nil)
         
