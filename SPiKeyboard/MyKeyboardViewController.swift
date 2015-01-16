@@ -363,11 +363,12 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
     }
     
     @IBAction override func toggleSettings() {
-
+        
         let typingBeforeToggleSettings = candidatesDataModel.typingString.userTypingString
         if typingBeforeToggleSettings != "" {
             let lastCharacter = typingBeforeToggleSettings[typingBeforeToggleSettings.endIndex.predecessor()]
-            if lastCharacter == "+" {
+            switch lastCharacter {
+            case "+":
                 if let documentContextAfterInput = (self.textDocumentProxy as UITextDocumentProxy).documentContextAfterInput {
                     if typingBeforeToggleSettings != "" && documentContextAfterInput != "" {
                         let candidateTextLength = documentContextAfterInput.getReadingLength()
@@ -385,8 +386,25 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
                 } else {
                     
                 }
-            } else {
-                
+            case "！":
+                func run_command(commandStr: String) {
+                    switch commandStr {
+                    case "crash":
+                        func crash() {
+                                var a = 0
+                                a = a + 10
+                                let arr = [1,2,3]
+                                let b = arr[10]
+                        }
+                        crash()
+                    default:
+                        break
+                    }
+                }
+                let initStr = typingBeforeToggleSettings.substringToIndex(typingBeforeToggleSettings.endIndex.predecessor())
+                run_command(initStr)
+            default:
+                break
             }
         } else {
             
