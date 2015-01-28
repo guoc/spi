@@ -15,8 +15,8 @@
 // InAppSettingsKit
 #define COCOAPODS_POD_AVAILABLE_InAppSettingsKit
 #define COCOAPODS_VERSION_MAJOR_InAppSettingsKit 2
-#define COCOAPODS_VERSION_MINOR_InAppSettingsKit 3
-#define COCOAPODS_VERSION_PATCH_InAppSettingsKit 3
+#define COCOAPODS_VERSION_MINOR_InAppSettingsKit 4
+#define COCOAPODS_VERSION_PATCH_InAppSettingsKit 1
 
 // uservoice-iphone-sdk
 #define COCOAPODS_POD_AVAILABLE_uservoice_iphone_sdk
