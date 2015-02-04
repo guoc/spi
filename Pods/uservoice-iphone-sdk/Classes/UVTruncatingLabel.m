@@ -31,6 +31,7 @@
         _moreLabel.text = NSLocalizedStringFromTableInBundle(@"more", @"UserVoice", [UserVoice bundle], nil);
         _moreLabel.font = [UIFont systemFontOfSize:12];
         _moreLabel.backgroundColor = [UIColor clearColor];
+        _moreLabel.hidden = YES;
         if (IOS7) {
             // TODO hardcode blue for ios6 ??
             _moreLabel.textColor = self.tintColor;

@@ -5,7 +5,7 @@ The UserVoice iOS SDK allows you to integrate a native UserVoice experience dire
 To get started, you will need to have a free UserVoice account to connect to. Go to [uservoice.com/mobile/](https://uservoice.com/mobile/) to sign up for free.
 
 Binary builds of the SDK are available for download:
-* Current release is iOS 8 compatible: [3.2.2](https://github.com/uservoice/uservoice-ios-sdk/releases/tag/3.2.2) (updated 2015-01-06)
+* Current release is iOS 8 compatible: [3.2.3](https://github.com/uservoice/uservoice-ios-sdk/releases/tag/3.2.3) (updated 2015-01-30)
 * See [Releases](https://github.com/uservoice/uservoice-ios-sdk/releases) for release notes and previous versions
 
 Example apps:

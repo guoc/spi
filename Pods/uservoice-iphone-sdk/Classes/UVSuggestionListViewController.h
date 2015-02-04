@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "UVBaseViewController.h"
+#import "UVPostIdeaViewController.h"
 
 @class UVForum;
 
-@interface UVSuggestionListViewController : UVBaseViewController <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
+@interface UVSuggestionListViewController : UVBaseViewController <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UVPostIdeaDelegate>
 
 @property (nonatomic, retain) UVForum *forum;
 @property (nonatomic, retain) UITextField *textEditor;

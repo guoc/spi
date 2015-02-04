@@ -141,6 +141,9 @@
 }
 
 - (void)dealloc {
+    if (_fieldsView) {
+        _fieldsView.textViewDelegate = nil;
+    }
     [_signInCallback invalidate];
 }
 

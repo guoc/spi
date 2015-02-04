@@ -73,6 +73,7 @@
     UITableView *theTableView = [[UITableView alloc] initWithFrame:[self contentFrame] style:UITableViewStylePlain];
     theTableView.dataSource = self;
     theTableView.delegate = self;
+    _tableView = theTableView;
     self.view = theTableView;
 }
 

@@ -357,4 +357,17 @@
     [super viewWillAppear:animated];
 }
 
+- (void)dealloc {
+    if (_instantAnswerManager) {
+        _instantAnswerManager.delegate = nil;
+    }
+    if (_searchBar) {
+        _searchBar.delegate = nil;
+    }
+    if (_searchController) {
+        _searchController.searchResultsDelegate = nil;
+        _searchController.searchResultsDataSource = nil;
+    }
+}
+
 @end

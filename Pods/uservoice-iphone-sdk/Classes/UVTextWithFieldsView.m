@@ -106,4 +106,10 @@
     return field;
 }
 
+- (void)dealloc {
+    if (_textView) {
+        _textView.delegate = nil;
+    }
+}
+
 @end

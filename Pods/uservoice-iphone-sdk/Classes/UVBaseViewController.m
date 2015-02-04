@@ -531,6 +531,13 @@
 }
 
 - (void)dealloc {
+    if (self.tableView) {
+        self.tableView.dataSource = nil;
+        self.tableView.delegate = nil;
+    }
+    if (_signinManager) {
+        _signinManager.delegate = nil;
+    }
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 

@@ -82,7 +82,7 @@
     [self.view bringSubviewToFront:footer];
 }
 
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
     if (_helpfulPrompt) {
         if (buttonIndex == 0) {
             [self.navigationController popViewControllerAnimated:YES];
