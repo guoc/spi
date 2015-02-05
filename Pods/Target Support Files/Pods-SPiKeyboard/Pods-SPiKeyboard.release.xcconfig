@@ -1,6 +1,6 @@
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
 HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/CrittercismSDK" "${PODS_ROOT}/Headers/Public/FMDB" "${PODS_ROOT}/Headers/Public/InAppSettingsKit" "${PODS_ROOT}/Headers/Public/uservoice-iphone-sdk"
 OTHER_CFLAGS = $(inherited) -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/CrittercismSDK" -isystem "${PODS_ROOT}/Headers/Public/FMDB" -isystem "${PODS_ROOT}/Headers/Public/InAppSettingsKit" -isystem "${PODS_ROOT}/Headers/Public/uservoice-iphone-sdk"
-OTHER_LDFLAGS = -ObjC -l"Pods-SPiKeyboard-FMDB" -l"Pods-SPiKeyboard-InAppSettingsKit" -l"sqlite3" -framework "MessageUI"
+OTHER_LDFLAGS = -ObjC -l"Pods-SPiKeyboard-FMDB" -l"Pods-SPiKeyboard-InAppSettingsKit" -l"sqlite3" -framework "MessageUI" -framework "UIKit"
 OTHER_LIBTOOLFLAGS = $(OTHER_LDFLAGS)
 PODS_ROOT = ${SRCROOT}/Pods
