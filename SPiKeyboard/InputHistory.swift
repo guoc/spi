@@ -25,6 +25,10 @@ class InputHistory {
             if !db.executeUpdate("create table if not exists history(candidate text, shuangpin text, shengmu text, length integer, frequency integer, candidate_type integer, primary key (candidate, shuangpin))", withArgumentsInArray: nil) {
                 println("create table failed: \(db.lastErrorMessage())")
             }
+            
+            if !db.executeUpdate("CREATE INDEX IF NOT EXISTS idx_shengmu on history(shengmu)", withArgumentsInArray: nil) {
+                println("create index failed: \(db.lastErrorMessage())")
+            }
         }
     }
     
