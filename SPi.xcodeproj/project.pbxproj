@@ -819,7 +819,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "APP_ID=\"5496a8423cf56b9e0457cbd7\"\nAPI_KEY=\"57VYGafoPy8yOafseKkfJsI7QRL31880\"\nreleaseConfig=\"Release\"\nif [ \"$releaseConfig\" = \"${CONFIGURATION}\" ]; then\n  source \"${SRCROOT}\"/Pods/CrittercismSDK/CrittercismSDK/dsym_upload.sh\nfi";
+			shellScript = "APP_ID=\"5496a8423cf56b9e0457cbd7\"\nAPI_KEY=\"57VYGafoPy8yOafseKkfJsI7QRL31880\"\nreleaseConfig=\"Release\"\n#if [ \"$releaseConfig\" = \"${CONFIGURATION}\" ]; then\n#  source \"${SRCROOT}\"/Pods/CrittercismSDK/CrittercismSDK/dsym_upload.sh\n#fi";
 		};
 /* End PBXShellScriptBuildPhase section */
 
