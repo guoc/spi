@@ -452,6 +452,11 @@ class KeyboardViewController: UIInputViewController {
             }
             else if model.type == Key.KeyType.Character {
                 self.currentMode = 0
+            } else if let keyLetter = model.lowercaseOutput {
+                let keysNeedSetModeZero = NSSet(array: ["：", "；", "（", "）", "@", "「", "」", "“", "”", "。", "，", "、", "？", "！", "［", "］", "｛", "｝", "#", "%", "^", "*", "+", "=", "_", "\\", "|", "《", "》", "&", "·", ",", /*"、",*/ "?", "!", "'"])
+                if keysNeedSetModeZero.containsObject(keyLetter) {
+                    self.currentMode = 0
+                }
             }
             
             // auto period on double space
