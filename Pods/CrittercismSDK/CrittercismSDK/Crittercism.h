@@ -7,6 +7,7 @@
 #import <Foundation/Foundation.h>
 #import "CrittercismDelegate.h"
 #import "CRFilter.h"
+#import "CrittercismConfig.h"
 
 // Operating System Support
 //
@@ -27,6 +28,7 @@
 // [Crittercism enableWithAppID:@"YOURAPPIDGOESHERE"];
 
 @class CLLocation;
+@class CrittercismConfig;
 
 @interface Crittercism : NSObject
 
@@ -53,20 +55,29 @@
 + (void)enableWithAppID:(NSString *)appId;
 
 + (void)enableWithAppID:(NSString *)appId
-            andDelegate:(id <CrittercismDelegate>)critterDelegate;
-
-+ (void)enableWithAppID:(NSString *)appId
             andDelegate:(id <CrittercismDelegate>)critterDelegate
-          andURLFilters:(NSArray *)filters;
+  DEPRECATED_MSG_ATTRIBUTE("Use enableWithAppID:andConfig instead");
 
-+ (void)enableWithAppID:(NSString *)appId
-          andURLFilters:(NSArray *)filters;
-
-// Designated "initializer"
 + (void)enableWithAppID:(NSString *)appId
             andDelegate:(id <CrittercismDelegate>)critterDelegate
           andURLFilters:(NSArray *)filters
- disableInstrumentation:(BOOL)disableInstrumentation;
+  DEPRECATED_MSG_ATTRIBUTE("Use enableWithAppID:andConfig instead");
+
++ (void)enableWithAppID:(NSString *)appId
+          andURLFilters:(NSArray *)filters
+  DEPRECATED_MSG_ATTRIBUTE("Use enableWithAppID:andConfig instead");
+
+
++ (void)enableWithAppID:(NSString *)appId
+            andDelegate:(id <CrittercismDelegate>)critterDelegate
+          andURLFilters:(NSArray *)filters
+ disableInstrumentation:(BOOL)disableInstrumentation
+  DEPRECATED_MSG_ATTRIBUTE("Use enableWithAppID:andConfig instead");
+
+// Initializes Crittercism with the given App ID (found on the Crittercism web portal)
+// After this call completes, changes to the config object will have no affect on
+// the behavior of Crittercism.
++ (void)enableWithAppID:(NSString *)appId andConfig:(CrittercismConfig *)config;
 
 // Adds an additional filter for network instrumentation.
 // See CRFilter.h for additional details.

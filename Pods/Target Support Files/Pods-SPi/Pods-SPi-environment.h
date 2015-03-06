@@ -9,8 +9,8 @@
 // CrittercismSDK
 #define COCOAPODS_POD_AVAILABLE_CrittercismSDK
 #define COCOAPODS_VERSION_MAJOR_CrittercismSDK 5
-#define COCOAPODS_VERSION_MINOR_CrittercismSDK 0
-#define COCOAPODS_VERSION_PATCH_CrittercismSDK 7
+#define COCOAPODS_VERSION_MINOR_CrittercismSDK 1
+#define COCOAPODS_VERSION_PATCH_CrittercismSDK 3
 
 // InAppSettingsKit
 #define COCOAPODS_POD_AVAILABLE_InAppSettingsKit

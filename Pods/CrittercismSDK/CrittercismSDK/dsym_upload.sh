@@ -73,7 +73,7 @@ if [ "$EFFECTIVE_PLATFORM_NAME" == "-iphonesimulator" ]; then
 fi
 
 DSYM_SRC=${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}
-DSYM_ZIP_FPATH="/tmp/$DWARF_DSYM_FILE_NAME.zip"
+DSYM_ZIP_FPATH="${TARGET_TEMP_DIR}/$DWARF_DSYM_FILE_NAME.zip"
 
 # create dSYM .zip file
 echo "dSYM location: ${DSYM_SRC}"
