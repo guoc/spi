@@ -463,7 +463,7 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
                             for candidate in historyCandidates {
                                 let candidateParts = split(candidate) { $0 == "," }
                                 if candidateParts.count == 2 {
-                                    candidatesDataModel.inputHistory.updateDatabase(candidateText: candidateParts[0], customCandidateQueryString: candidateParts[1])
+                                    candidatesDataModel.inputHistory.updateDatabase(candidateText: candidateParts[0], customCandidateQueryString: candidateParts[1].stringByRemovingWhitespace())
                                     imported = true
                                 } else {
                                     imported = false
