@@ -27,7 +27,7 @@ class CandidatesBanner: ExtraView {
     var moreCandidatesButton: UIButton
     var hasInitAppearance = false
     
-    var delegate: protocol<UICollectionViewDataSource, UICollectionViewDelegate>! {
+    weak var delegate: protocol<UICollectionViewDataSource, UICollectionViewDelegate>! {
         didSet {
             collectionView.dataSource = delegate
             collectionView.delegate = delegate
