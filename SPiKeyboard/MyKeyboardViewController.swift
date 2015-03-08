@@ -443,9 +443,13 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
                             }
                             
                             let stringRows = rows.map { (row: Row) -> String in
-                                let candidate = row["candidate"] as String
                                 let shuangpin = row["shuangpin"] as String
-                                return "\(candidate),\(shuangpin);"
+                                let shengmu = row["shengmu"] as String
+                                let length = row["length"] as Int
+                                let frequency = row["frequency"] as Int
+                                let candidate = row["candidate"] as String
+                                let candidateType = row["candidate_type"] as Int
+                                return "\(candidate),\(shuangpin),\(shengmu),\(length),\(frequency),\(candidateType);"
                             }
                             
                             (self.textDocumentProxy as? UIKeyInput)!.insertText("".join(stringRows))
@@ -462,9 +466,19 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
                             let historyCandidates = split(historyLine) { $0 == ";" }
                             for candidate in historyCandidates {
                                 let candidateParts = split(candidate) { $0 == "," }
-                                if candidateParts.count == 2 {
-                                    candidatesDataModel.inputHistory.updateDatabase(candidateText: candidateParts[0], customCandidateQueryString: candidateParts[1].stringByRemovingWhitespace())
-                                    imported = true
+                                if candidateParts.count == 6 {
+                                    let candidateText = candidateParts[0]
+                                    let shuangpin = candidateParts[1]
+                                    let shengmu = candidateParts[2]
+                                    let length: Int? = candidateParts[3].toInt()
+                                    let frequency: Int? = candidateParts[4].toInt()
+                                    let candidateType: Int? = candidateParts[5].toInt()
+                                    if length != nil && frequency != nil && candidateType != nil {
+                                        candidatesDataModel.inputHistory.updateDatabase(candidateText: candidateText, shuangpin: shuangpin, shengmu: shengmu, length: NSNumber(long: length!), frequency: NSNumber(long: frequency!), candidateType: String(candidateType!))
+                                        imported = true
+                                    } else {
+                                        imported = false
+                                    }
                                 } else {
                                     imported = false
                                     break

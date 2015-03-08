@@ -37,14 +37,17 @@ class InputHistory {
     }
     
     func getFrequencyOf(candidate: Candidate) -> Int {
-
+        return getFrequencyOf(candidateText: candidate.text, queryCode: candidate.queryCode)
+    }
+    
+    func getFrequencyOf(#candidateText: String, queryCode: String) -> Int {
         var frequency: Int? = nil
         var whereStatement = "candidate = ? and shuangpin = ?"
         let queryStatement = "select frequency from history where " + whereStatement + " order by length desc, frequency desc"
-
+        
         databaseQueue?.inDatabase() {
             db in
-            if let rs = db.executeQuery(queryStatement, withArgumentsInArray: [candidate.text, candidate.queryCode]) {
+            if let rs = db.executeQuery(queryStatement, withArgumentsInArray: [candidateText, queryCode]) {
                 while rs.next() {
                     frequency = Int(rs.intForColumn("frequency"))
                     break
@@ -66,8 +69,39 @@ class InputHistory {
         }
     }
     
+    func updateDatabase(#candidateText: String, queryString: String, candidateType: String) -> Bool {
+        switch candidateType {
+        case "1":
+            updateDatabase(candidateText: candidateText, shuangpinString: queryString)
+            return true
+        case "2":
+            updateDatabase(candidateText: candidateText, englishString: queryString)
+            return true
+        case "3":
+            updateDatabase(candidateText: candidateText, specialString: queryString)
+            return true
+        case "4":
+            updateDatabase(candidateText: candidateText, customCandidateQueryString: queryString)
+            return true
+        default:
+            return false
+        }
+    }
+    
     func updateDatabase(#candidateText: String, customCandidateQueryString: String) {
         updateDatabase(with: Candidate(text: candidateText, withCustomString: customCandidateQueryString))
+    }
+    
+    func updateDatabase(#candidateText: String, shuangpinString: String) {
+        updateDatabase(with: Candidate(text: candidateText, withShuangpinString: shuangpinString))
+    }
+
+    func updateDatabase(#candidateText: String, englishString: String) {
+        updateDatabase(with: Candidate(text: candidateText, withEnglishString: englishString))
+    }
+    
+    func updateDatabase(#candidateText: String, specialString: String) {
+        updateDatabase(with: Candidate(text: candidateText, withSpecialString: specialString))
     }
     
     func updateDatabase(with candidate: Candidate) {
@@ -93,17 +127,21 @@ class InputHistory {
             return
         }
         
-        let frequency = getFrequencyOf(candidate)
+        updateDatabase(candidateText: candidate.text, shuangpin: candidate.shuangpinAttributeString, shengmu: candidate.shengmuAttributeString, length: candidate.lengthAttribute as NSNumber, frequency: 1 as NSNumber, candidateType: candidate.typeAttributeString)
+    }
+    
+    func updateDatabase(#candidateText: String, shuangpin: String, shengmu: String, length: NSNumber, frequency: NSNumber, candidateType: String) {
+        let previousFrequency = getFrequencyOf(candidateText: candidateText, queryCode: shuangpin)
         
         databaseQueue?.inDatabase() {
             db in
-            if frequency == 0 {
-                if !db.executeUpdate("insert into history (candidate, shuangpin, shengmu, length, frequency, candidate_type) values (?, ?, ?, ?, ?, ?)", withArgumentsInArray: [candidate.text, candidate.shuangpinAttributeString, candidate.shengmuAttributeString, candidate.lengthAttribute as NSNumber, 1, candidate.typeAttributeString]) {
-                    println("insert 1 table failed: \(db.lastErrorMessage()) \(candidate.text) \(candidate.shuangpinAttributeString)")
+            if previousFrequency == 0 {
+                if !db.executeUpdate("insert into history (candidate, shuangpin, shengmu, length, frequency, candidate_type) values (?, ?, ?, ?, ?, ?)", withArgumentsInArray: [candidateText, shuangpin, shengmu, length, frequency, candidateType]) {
+                    println("insert 1 table failed: \(db.lastErrorMessage()) \(candidateText) \(shuangpin)")
                 }
             } else {
-                if !db.executeUpdate("update history set frequency = ? where shuangpin = ? and candidate = ?", withArgumentsInArray: [frequency + 1, candidate.shuangpinAttributeString, candidate.text]) {
-                    println("update 1 table failed: \(db.lastErrorMessage()) \(candidate.text) \(candidate.shuangpinAttributeString)")
+                if !db.executeUpdate("update history set frequency = ? where shuangpin = ? and candidate = ?", withArgumentsInArray: [NSNumber(long: previousFrequency + frequency.longValue), shuangpin, candidateText]) {
+                    println("update 1 table failed: \(db.lastErrorMessage()) \(candidateText) \(shuangpin)")
                 }
             }
         }
