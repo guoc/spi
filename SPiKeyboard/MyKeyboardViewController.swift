@@ -387,7 +387,7 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
                 } else {
                     
                 }
-            case "！":
+            case "!":
                 func run_command(commandStr: String) {
                     switch commandStr {
                     case "crash":
