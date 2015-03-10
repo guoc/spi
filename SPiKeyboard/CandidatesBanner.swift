@@ -259,7 +259,7 @@ class CandidatesBanner: ExtraView {
                     }
                     separatorHorizontalBar = CALayer(layer: self.layer)
                     separatorHorizontalBar!.backgroundColor = candidatesBannerAppearanceIsDark ? darkModeBannerBorderColor.CGColor : lightModeBannerBorderColor.CGColor
-                    separatorHorizontalBar!.frame = CGRectMake(0, CGRectGetHeight(typingLabel.frame), CGRectGetWidth(typingLabel.frame), 0.5)
+                    separatorHorizontalBar!.frame = CGRectMake(0, CGRectGetHeight(typingLabel.frame), (UIScreen.mainScreen().nativeBounds.size.height / UIScreen.mainScreen().nativeScale), 0.5)
                     self.layer.addSublayer(separatorHorizontalBar!)
                 }
             }
