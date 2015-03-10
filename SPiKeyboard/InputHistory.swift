@@ -154,6 +154,15 @@ class InputHistory {
         updateDatabase(with: candidate)
     }
     
+    func cleanAllCandidates() {    // Drop table in database.
+        databaseQueue?.inDatabase() {
+            db in
+            if !db.executeUpdate("drop table history", withArgumentsInArray: []) {
+                println("drop table history failed: \(db.lastErrorMessage())")
+            }
+        }
+    }
+    
     func getCandidatesByQueryArguments(queryArguments: [String], andWhereStatement whereStatement: String, withQueryCode queryCode: String) -> [Candidate] {
         let queryStatement = "select candidate, shuangpin, candidate_type from history where " + whereStatement + " order by length desc, frequency desc"
         println(queryStatement)

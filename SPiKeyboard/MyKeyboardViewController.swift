@@ -490,6 +490,8 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
                         } else {
                             (self.textDocumentProxy as? UIKeyInput)!.insertText("导入失败 :[[")
                         }
+                    case "clean":
+                        candidatesDataModel.inputHistory.cleanAllCandidates()
                     default:
                         break
                     }
