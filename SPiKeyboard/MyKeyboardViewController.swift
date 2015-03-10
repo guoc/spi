@@ -486,9 +486,9 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
                             }
                         }
                         if imported == true {
-                            (self.textDocumentProxy as? UIKeyInput)!.insertText("\n导入成功！ :]]\n")
+                            (self.textDocumentProxy as? UIKeyInput)!.insertText("导入成功 :]]")
                         } else {
-                            (self.textDocumentProxy as? UIKeyInput)!.insertText("\n导入失败！ :[[\n")
+                            (self.textDocumentProxy as? UIKeyInput)!.insertText("导入失败 :[[")
                         }
                     default:
                         break
