@@ -144,6 +144,8 @@
 	<string>fu</string>
 	<key>fw</key>
 	<string>fz</string>
+	<key>fy</key>
+	<string>fs</string>
 	<key>g</key>
 	<string>g</string>
 	<key>ga</key>
@@ -428,6 +430,34 @@
 	<string>mz</string>
 	<key>n</key>
 	<string>n</string>
+	<key>na</key>
+	<string>na</string>
+	<key>nb</key>
+	<string>nw</string>
+	<key>nc</key>
+	<string>nr</string>
+	<key>nd</key>
+	<string>nk</string>
+	<key>ne</key>
+	<string>ne</string>
+	<key>nf</key>
+	<string>nj</string>
+	<key>ng</key>
+	<string>nh</string>
+	<key>nh</key>
+	<string>nd</string>
+	<key>ni</key>
+	<string>ni</string>
+	<key>nj</key>
+	<string>nm</string>
+	<key>nk</key>
+	<string>nc</string>
+	<key>nl</key>
+	<string>nn</string>
+	<key>nm</key>
+	<string>nx</string>
+	<key>nn</key>
+	<string>nq</string>
 	<key>no</key>
 	<string>no</string>
 	<key>np</key>
@@ -604,6 +634,8 @@
 	<string>su</string>
 	<key>sv</key>
 	<string>sv</string>
+	<key>sw</key>
+	<string>sz</string>
 	<key>sy</key>
 	<string>ss</string>
 	<key>sz</key>
@@ -806,6 +838,8 @@
 	<string>yb</string>
 	<key>yq</key>
 	<string>yy</string>
+	<key>ys</key>
+	<string>yl</string>
 	<key>yu</key>
 	<string>yu</string>
 	<key>yx</key>
