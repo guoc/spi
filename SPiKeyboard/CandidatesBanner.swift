@@ -26,11 +26,15 @@ class CandidatesBanner: ExtraView {
     var collectionView: UICollectionView
     var moreCandidatesButton: UIButton
     var hasInitAppearance = false
+
+    var potraitBannerWidthConstraints: [AnyObject]? = nil
+    var landscapeBannerWidthConstraints: [AnyObject]? = nil
     
     weak var delegate: protocol<UICollectionViewDataSource, UICollectionViewDelegate>! {
         didSet {
             collectionView.dataSource = delegate
             collectionView.delegate = delegate
+            configureSubviews()
         }
     }
     
@@ -55,9 +59,6 @@ class CandidatesBanner: ExtraView {
         // Above part should be same as func initSubviews()
         
         super.init(globalColors: globalColors, darkMode: darkMode, solidColorMode: solidColorMode)
-        
-        configureSubviews()
-        
     }
 
     required init(coder aDecoder: NSCoder) {
@@ -67,7 +68,6 @@ class CandidatesBanner: ExtraView {
     func resetSubviewsWithInitAndSetDelegate() {
         self.subviews.map({$0.removeFromSuperview()})
         initSubviews()
-        configureSubviews()
         // Call delegate's didSet()
         let delegate = self.delegate
         self.delegate = delegate
@@ -103,8 +103,19 @@ class CandidatesBanner: ExtraView {
         
         self.removeConstraints(self.constraints())
         let actualScreenWidth = (UIScreen.mainScreen().nativeBounds.size.width / UIScreen.mainScreen().nativeScale)
-        constraints = NSLayoutConstraint.constraintsWithVisualFormat("H:[banner(==\(actualScreenWidth)@1000)]", options: nil, metrics: nil, views: ["banner": self])
-        self.addConstraints(constraints)
+        let actualScreenHeight = (UIScreen.mainScreen().nativeBounds.size.height / UIScreen.mainScreen().nativeScale)
+        if potraitBannerWidthConstraints == nil {
+            potraitBannerWidthConstraints = NSLayoutConstraint.constraintsWithVisualFormat("H:[banner(==\(actualScreenWidth)@1000)]", options: nil, metrics: nil, views: ["banner": self])
+        }
+        if landscapeBannerWidthConstraints == nil {
+            landscapeBannerWidthConstraints = NSLayoutConstraint.constraintsWithVisualFormat("H:[banner(==\(actualScreenHeight)@1000)]", options: nil, metrics: nil, views: ["banner": self])
+        }
+        switch((self.delegate as MyKeyboardViewController).interfaceOrientation) {    // FIXME delegate should not be casted.
+        case .Unknown, .Portrait, .PortraitUpsideDown:
+            self.addConstraints(potraitBannerWidthConstraints!)
+        case .LandscapeLeft, .LandscapeRight:
+            self.addConstraints(landscapeBannerWidthConstraints!)
+        }
         let bannerHeight = getBannerHeight()
         constraints = NSLayoutConstraint.constraintsWithVisualFormat("V:[banner(==\(bannerHeight)@1000)]", options: nil, metrics: nil, views: ["banner": self])
         self.addConstraints(constraints)

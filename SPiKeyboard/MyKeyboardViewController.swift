@@ -350,6 +350,22 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
         candidatesBanner?.updateAppearance()
     }
     
+    var currentOrientation: UIInterfaceOrientation? = nil
+    override func willRotateToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
+        super.willRotateToInterfaceOrientation(toInterfaceOrientation, duration: duration)
+        if currentOrientation == nil || currentOrientation! != toInterfaceOrientation {
+            switch(toInterfaceOrientation) {
+            case .Unknown, .Portrait, .PortraitUpsideDown:
+                candidatesBanner?.removeConstraints(candidatesBanner!.landscapeBannerWidthConstraints!)
+                candidatesBanner?.addConstraints(candidatesBanner!.potraitBannerWidthConstraints!)
+            case .LandscapeLeft, .LandscapeRight:
+                candidatesBanner?.removeConstraints(candidatesBanner!.potraitBannerWidthConstraints!)
+                candidatesBanner?.addConstraints(candidatesBanner!.landscapeBannerWidthConstraints!)
+            }
+        }
+        currentOrientation = toInterfaceOrientation
+    }
+    
     var needDismissKeyboard = false
     func settingDidChange(notification: NSNotification) {
         needDismissKeyboard = true
