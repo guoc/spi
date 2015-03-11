@@ -11,6 +11,10 @@ func getShowTypingCellInExtraLineFromSettings() -> Bool {
     return NSUserDefaults.standardUserDefaults().boolForKey("kShowTypingCellInExtraLine")    // If not exist, false will be returned.
 }
 
+func getEnableGestureFromSettings() -> Bool {
+    return NSUserDefaults.standardUserDefaults().boolForKey("kGesture")    // If not exist, false will be returned.
+}
+
 var cornerBracketEnabled = getCornerBracketEnabledFromSettings()
 
 func updateCornerBracketEnabled() {
@@ -623,6 +627,9 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
     }
     
     func didPan(from beginView: UIView, to endView: UIView) {
+        if getEnableGestureFromSettings() == false {
+            return
+        }
         if let beginKeyView = beginView as? KeyboardKey {
             if let beginKey = self.layout?.keyForView(beginKeyView) {
                 if beginKey.type == .Space {
