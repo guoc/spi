@@ -8,9 +8,20 @@
 
 import UIKit
 
+// Added by guoc for swiping gesture command
+protocol ForwardingViewDelegate: class {
+    func didPan(from beginView: UIView, to endView: UIView)
+}
+// End
+
 class ForwardingView: UIView {
     
     var touchToView: [UITouch:UIView]
+    
+    // Added by guoc for swiping gesture command
+    weak var delegate: ForwardingViewDelegate?
+    var touchBeginView: UIView? = nil
+    // End
     
     override init(frame: CGRect) {
         self.touchToView = [:]
@@ -155,6 +166,14 @@ class ForwardingView: UIView {
             let touch = obj as UITouch
             let position = touch.locationInView(self)
             var view = findNearestView(position)
+
+            // Added by guoc for swiping gesture command
+            if touches.count == 1 {
+                self.touchBeginView = view
+            } else {
+                self.touchBeginView = nil
+            }
+            // End
             
             var viewChangedOwnership = self.ownView(touch, viewToOwn: view)
             
@@ -204,6 +223,12 @@ class ForwardingView: UIView {
             let touchPosition = obj.locationInView(self)
             
             if self.bounds.contains(touchPosition) {
+                // Added by guoc for swiping gesture command
+                if touches.count == 1 && self.touchBeginView != nil && view != nil {
+                    delegate?.didPan(from: self.touchBeginView!, to: view!)
+                }
+                self.touchBeginView = nil
+                // End
                 self.handleControl(view, controlEvent: .TouchUpInside)
             }
             else {

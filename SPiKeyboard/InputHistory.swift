@@ -8,6 +8,22 @@ class InputHistory {
     
     var databaseQueue: FMDatabaseQueue?
     
+    var recentCreatedCandidate: (text: String, querycode: String)? {
+        set {
+            NSUserDefaults.standardUserDefaults().setObject(newValue?.text, forKey: "InputHistory.recentCreatedCandidate.text")
+            NSUserDefaults.standardUserDefaults().setObject(newValue?.querycode, forKey: "InputHistory.recentCreatedCandidate.querycode")
+        }
+        get {
+            let text = NSUserDefaults.standardUserDefaults().objectForKey("InputHistory.recentCreatedCandidate.text") as String?
+            let querycode = NSUserDefaults.standardUserDefaults().objectForKey("InputHistory.recentCreatedCandidate.querycode") as String?
+            if text != nil && querycode != nil {
+                return (text: text!, querycode: querycode!)
+            } else {
+                return nil
+            }
+        }
+    }
+    
     init() {
         let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
         let databasePath = documentsFolder.stringByAppendingPathComponent("history.sqlite")
@@ -139,6 +155,7 @@ class InputHistory {
                 if !db.executeUpdate("insert into history (candidate, shuangpin, shengmu, length, frequency, candidate_type) values (?, ?, ?, ?, ?, ?)", withArgumentsInArray: [candidateText, shuangpin, shengmu, length, frequency, candidateType]) {
                     println("insert 1 table failed: \(db.lastErrorMessage()) \(candidateText) \(shuangpin)")
                 }
+                self.recentCreatedCandidate = (text: candidateText, querycode: shuangpin)
             } else {
                 if !db.executeUpdate("update history set frequency = ? where shuangpin = ? and candidate = ?", withArgumentsInArray: [NSNumber(long: previousFrequency + frequency.longValue), shuangpin, candidateText]) {
                     println("update 1 table failed: \(db.lastErrorMessage()) \(candidateText) \(shuangpin)")
@@ -152,6 +169,18 @@ class InputHistory {
             return
         }
         updateDatabase(with: candidate)
+    }
+    
+    func deleteRecentCreatedCandidate() {
+        databaseQueue?.inDatabase() {
+            db in
+            if let candidate = self.recentCreatedCandidate {
+                if !db.executeUpdate("delete from history where candidate == ? and shuangpin == ?", withArgumentsInArray: [candidate.text, candidate.querycode]) {
+                    println("delete 1 table failed: \(db.lastErrorMessage()) \(candidate.text) \(candidate.querycode)")
+                }
+                self.recentCreatedCandidate = nil
+            }
+        }
     }
     
     func cleanAllCandidates() {    // Drop table in database.

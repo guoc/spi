@@ -28,7 +28,7 @@ let indexPathFirst = NSIndexPath(forRow: 1, inSection: 0)
 
 var startTime: NSDate?
 
-class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, IASKSettingsDelegate {
+class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, IASKSettingsDelegate, ForwardingViewDelegate {
 
     let candidatesDataModel = CandidatesDataModel()
 
@@ -36,8 +36,11 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
     
     let candidatesUpdateQueue: CandidatesUpdateQueue!
     
+    var ignoreKeyPressOnce: Bool = false
+    
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        self.forwardingView.delegate = self
         self.candidatesUpdateQueue = CandidatesUpdateQueue(controller: self)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("settingDidChange:"), name: "kAppSettingChanged", object: nil)
     }
@@ -78,6 +81,11 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
             proxy.insertText(key.outputForCase(self.shiftState.uppercase()))
         }
         */
+        
+        if ignoreKeyPressOnce {
+            ignoreKeyPressOnce = false
+            return
+        }
         
         // Scroll back to first candidate
         candidatesBanner!.scrollToFirstCandidate()
@@ -597,6 +605,42 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
             return
         }
         exitCandidatesTable()
+    }
+    
+    private func commandForKey(key: Key) -> (() -> ())? {
+        if let character = key.lowercaseOutput {
+            switch(character) {
+            case "d":
+                return { () in return
+                    self.candidatesDataModel.inputHistory.deleteRecentCreatedCandidate()
+                }
+            default:
+                return nil
+            }
+        } else {
+            return nil
+        }
+    }
+    
+    func didPan(from beginView: UIView, to endView: UIView) {
+        if let beginKeyView = beginView as? KeyboardKey {
+            if let beginKey = self.layout?.keyForView(beginKeyView) {
+                if beginKey.type == .Space {
+                    if let endKeyView = endView as? KeyboardKey {
+                        if let endKey = self.layout?.keyForView(endKeyView) {
+                            if endKey.type != .Space {
+                                if let command = commandForKey(endKey) {
+                                    if endKey.hasOutput {
+                                        ignoreKeyPressOnce = true
+                                    }
+                                    command()
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
     
 }
