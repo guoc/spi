@@ -4,6 +4,16 @@
 <dict>
 	<key>a</key>
 	<string>o</string>
+	<key>aa</key>
+	<string>oa</string>
+	<key>ad</key>
+	<string>ok</string>
+	<key>af</key>
+	<string>oj</string>
+	<key>ag</key>
+	<string>oh</string>
+	<key>as</key>
+	<string>ol</string>
 	<key>b</key>
 	<string>b</string>
 	<key>ba</key>
@@ -122,6 +132,16 @@
 	<string>dp</string>
 	<key>e</key>
 	<string>o</string>
+	<key>ee</key>
+	<string>oe</string>
+	<key>eq</key>
+	<string>or</string>
+	<key>er</key>
+	<string>of</string>
+	<key>et</key>
+	<string>og</string>
+	<key>ew</key>
+	<string>oz</string>
 	<key>f</key>
 	<string>f</string>
 	<key>fa</key>
