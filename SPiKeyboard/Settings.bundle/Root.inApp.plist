@@ -104,7 +104,7 @@
 		</dict>
 		<dict>
 			<key>FooterText</key>
-			<string>“空格”滑动到“D”：删除最近一个误添加的自造词</string>
+			<string>“空格”滑动到“D”：删除最近一个误添加的自造词或选错的候选词</string>
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 		</dict>
