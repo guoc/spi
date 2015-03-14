@@ -18,6 +18,24 @@
 		</dict>
 		<dict>
 			<key>FooterText</key>
+			<string>“空格”滑动到“D”：删除最近一个误添加的自造词或选错的候选词</string>
+			<key>Key</key>
+			<string>kGestureComment</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>DefaultValue</key>
+			<string>NO</string>
+			<key>Key</key>
+			<string>kGesture</string>
+			<key>Title</key>
+			<string>滑动按键功能</string>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+		</dict>
+		<dict>
+			<key>FooterText</key>
 			<string>部分设置更改后请重新打开键盘</string>
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
@@ -99,22 +117,6 @@
 			<string>kCornerBracket</string>
 			<key>Title</key>
 			<string>直角引号「」</string>
-			<key>Type</key>
-			<string>PSToggleSwitchSpecifier</string>
-		</dict>
-		<dict>
-			<key>FooterText</key>
-			<string>“空格”滑动到“D”：删除最近一个误添加的自造词或选错的候选词</string>
-			<key>Type</key>
-			<string>PSGroupSpecifier</string>
-		</dict>
-		<dict>
-			<key>DefaultValue</key>
-			<string>NO</string>
-			<key>Key</key>
-			<string>kGesture</string>
-			<key>Title</key>
-			<string>滑动按键功能</string>
 			<key>Type</key>
 			<string>PSToggleSwitchSpecifier</string>
 		</dict>

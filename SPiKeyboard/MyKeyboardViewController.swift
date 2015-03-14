@@ -547,7 +547,7 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
         let aNavController = UINavigationController(rootViewController: keyboardSettingsViewController)
         keyboardSettingsViewController.showCreditsFooter = false
         keyboardSettingsViewController.showDoneButton = true
-        keyboardSettingsViewController.hiddenKeys = hideInputHistory ? NSSet(object: "kInputHistory") : nil
+        keyboardSettingsViewController.hiddenKeys = hideInputHistory ? NSSet(objects: "kInputHistory", "kGesture", "kGestureComment") : nil
         self.presentViewController(aNavController, animated: true, completion: nil)
     }
     
