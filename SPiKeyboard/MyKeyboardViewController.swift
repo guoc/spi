@@ -77,6 +77,44 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
         changeBannerIfNecessary(newHeight: (showTypingCellInExtraLine ? bannerHeightWhenShowTypingCellInExtraLineIsTrue : bannerHeightWhenShowTypingCellInExtraLineIsFalse))
     }
     
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        
+        func getMemoryUsageReport() -> String {
+            // from http://stackoverflow.com/questions/27556807/swift-pointer-problems-with-mach-task-basic-info/27559770#27559770
+            
+            // constant
+            let MACH_TASK_BASIC_INFO_COUNT = (sizeof(mach_task_basic_info_data_t) / sizeof(natural_t))
+            
+            // prepare parameters
+            let name   = mach_task_self_
+            let flavor = task_flavor_t(MACH_TASK_BASIC_INFO)
+            var size   = mach_msg_type_number_t(MACH_TASK_BASIC_INFO_COUNT)
+            
+            // allocate pointer to mach_task_basic_info
+            var infoPointer = UnsafeMutablePointer<mach_task_basic_info>.alloc(1)
+            
+            // call task_info - note extra UnsafeMutablePointer(...) call
+            let kerr = task_info(name, flavor, UnsafeMutablePointer(infoPointer), &size)
+            
+            // get mach_task_basic_info struct out of pointer
+            let info = infoPointer.move()
+            
+            // deallocate pointer
+            infoPointer.dealloc(1)
+            
+            // check return value for success / failure
+            if kerr == KERN_SUCCESS {
+                return ("Memory in use (in bytes): \(info.resident_size)")
+            } else {
+                let errorString = String(CString: mach_error_string(kerr), encoding: NSASCIIStringEncoding)
+                return (errorString ?? "Error: couldn't parse error string")
+            }
+        }
+        
+        (self.textDocumentProxy as? UIKeyInput)!.insertText(getMemoryUsageReport())
+    }
+    
     override func keyPressed(key: Key) {
         /* Make sure the implementation is same as its super class' function except the folloing part */
         /* For this function, it's all part */
