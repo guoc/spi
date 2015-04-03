@@ -28,6 +28,7 @@
 		BDCF03621A4A74EE000BEC57 /* 拼音加加.spscheme in Resources */ = {isa = PBXBuildFile; fileRef = BDEDF70F1A2DD338000CC6B6 /* 拼音加加.spscheme */; };
 		BDCF03631A4A74EE000BEC57 /* 智能ABC.spscheme in Resources */ = {isa = PBXBuildFile; fileRef = BDEDF7101A2DD338000CC6B6 /* 智能ABC.spscheme */; };
 		BDCF03641A4A74EE000BEC57 /* 紫光拼音.spscheme in Resources */ = {isa = PBXBuildFile; fileRef = BDEDF7111A2DD338000CC6B6 /* 紫光拼音.spscheme */; };
+		BDD3184B1ACE2A6600BE174F /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDD3184A1ACE2A6600BE174F /* Logger.swift */; };
 		BDD3E7441A383BBA00CF2CB9 /* InputHistoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDD3E7431A383BBA00CF2CB9 /* InputHistoryTableViewController.swift */; };
 		BDD3E7461A3846AA00CF2CB9 /* AdvanceInputHistoryRowCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BDD3E7451A3846AA00CF2CB9 /* AdvanceInputHistoryRowCell.xib */; };
 		BDD3E7481A38477A00CF2CB9 /* AdvanceInputHistoryRowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDD3E7471A38477A00CF2CB9 /* AdvanceInputHistoryRowCell.swift */; };
@@ -153,6 +154,7 @@
 		BDBB56341A49AAC7006F8D5C /* ShuangpinTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ShuangpinTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDBB56371A49AAC7006F8D5C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BDBB56381A49AAC7006F8D5C /* ShuangpinTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShuangpinTests.swift; sourceTree = "<group>"; };
+		BDD3184A1ACE2A6600BE174F /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		BDD3E7431A383BBA00CF2CB9 /* InputHistoryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputHistoryTableViewController.swift; sourceTree = "<group>"; };
 		BDD3E7451A3846AA00CF2CB9 /* AdvanceInputHistoryRowCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AdvanceInputHistoryRowCell.xib; sourceTree = "<group>"; };
 		BDD3E7471A38477A00CF2CB9 /* AdvanceInputHistoryRowCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdvanceInputHistoryRowCell.swift; sourceTree = "<group>"; };
@@ -458,6 +460,7 @@
 				BDF875661A4FA81400700DAF /* InputHistoryRowCell.swift */,
 				BDD3E7451A3846AA00CF2CB9 /* AdvanceInputHistoryRowCell.xib */,
 				BDD3E7471A38477A00CF2CB9 /* AdvanceInputHistoryRowCell.swift */,
+				BDD3184A1ACE2A6600BE174F /* Logger.swift */,
 				BD02DE3B1A3C8E9800EBC0E1 /* Images.xcassets */,
 				BDEDF6F91A2DD338000CC6B6 /* candidates.sqlite */,
 				BDEDF75D1A2DD69D000CC6B6 /* TastyImitationKeyboard */,
@@ -887,6 +890,7 @@
 				BDEDF77A1A2DD69D000CC6B6 /* KeyboardConnector.swift in Sources */,
 				BDEDF77B1A2DD69D000CC6B6 /* KeyboardInputTraits.swift in Sources */,
 				BDEDF7821A2DD69D000CC6B6 /* Shapes.swift in Sources */,
+				BDD3184B1ACE2A6600BE174F /* Logger.swift in Sources */,
 				BDEDF71D1A2DD338000CC6B6 /* PinYinHelper.swift in Sources */,
 				BDEDF7161A2DD338000CC6B6 /* CandidateCell.swift in Sources */,
 				BDEDF7781A2DD69D000CC6B6 /* ForwardingView.swift in Sources */,

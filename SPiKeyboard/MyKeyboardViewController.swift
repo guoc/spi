@@ -44,6 +44,9 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        
+        Logger.sharedInstance.writeLogLine(filledString: "MyKeyboardViewController inited")
+        
         self.forwardingView.delegate = self
         self.candidatesUpdateQueue = CandidatesUpdateQueue(controller: self)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("settingDidChange:"), name: "kAppSettingChanged", object: nil)
@@ -54,6 +57,8 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
     }
     
     deinit {
+        Logger.sharedInstance.writeLogLine(filledString: "MyKeyboardViewController deinited")
+        
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
@@ -77,47 +82,14 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
         changeBannerIfNecessary(newHeight: (showTypingCellInExtraLine ? bannerHeightWhenShowTypingCellInExtraLineIsTrue : bannerHeightWhenShowTypingCellInExtraLineIsFalse))
     }
     
-    func getMemoryUsageReport() -> String {
-        // from http://stackoverflow.com/questions/27556807/swift-pointer-problems-with-mach-task-basic-info/27559770#27559770
-        
-        // constant
-        let MACH_TASK_BASIC_INFO_COUNT = (sizeof(mach_task_basic_info_data_t) / sizeof(natural_t))
-        
-        // prepare parameters
-        let name   = mach_task_self_
-        let flavor = task_flavor_t(MACH_TASK_BASIC_INFO)
-        var size   = mach_msg_type_number_t(MACH_TASK_BASIC_INFO_COUNT)
-        
-        // allocate pointer to mach_task_basic_info
-        var infoPointer = UnsafeMutablePointer<mach_task_basic_info>.alloc(1)
-        
-        // call task_info - note extra UnsafeMutablePointer(...) call
-        let kerr = task_info(name, flavor, UnsafeMutablePointer(infoPointer), &size)
-        
-        // get mach_task_basic_info struct out of pointer
-        let info = infoPointer.move()
-        
-        // deallocate pointer
-        infoPointer.dealloc(1)
-        
-        // check return value for success / failure
-        if kerr == KERN_SUCCESS {
-            let numberFormatter = NSNumberFormatter()
-            numberFormatter.groupingSize = 3
-            numberFormatter.groupingSeparator = ","
-            numberFormatter.usesGroupingSeparator = true
-            let usageStr = numberFormatter.stringFromNumber(NSNumber(unsignedLongLong: info.resident_size))
-            return ("Memory in use (in bytes): \(usageStr)")
-        } else {
-            let errorString = String(CString: mach_error_string(kerr), encoding: NSASCIIStringEncoding)
-            return (errorString ?? "Error: couldn't parse error string")
-        }
-    }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
-        (self.textDocumentProxy as? UIKeyInput)!.insertText(getMemoryUsageReport())
+        let memoryUsageReport = Logger.sharedInstance.getMemoryUsageReport()
+        (self.textDocumentProxy as? UIKeyInput)!.insertText("MEMORY LOW")
+        Logger.sharedInstance.writeLogLine(filledString: memoryUsageReport)
     }
     
     override func keyPressed(key: Key) {
@@ -128,6 +100,8 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
             proxy.insertText(key.outputForCase(self.shiftState.uppercase()))
         }
         */
+        
+        Logger.sharedInstance.writeLogLine(tappedKey: key)
         
         if ignoreKeyPressOnce {
             ignoreKeyPressOnce = false
@@ -190,6 +164,9 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
         textDocumentProxy.deleteBackward()
         }
         */
+        
+        Logger.sharedInstance.writeLogLine(filledString: "Backspace Down")
+        
         isDeletingTyping = false    // Reset
         if candidatesDataModel.hasTyping() {
             candidatesUpdateQueue.deleteBackwardTyping()
@@ -200,6 +177,12 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
         
         // trigger for subsequent deletes
         self.backspaceDelayTimer = NSTimer.scheduledTimerWithTimeInterval(backspaceDelay - backspaceRepeat, target: self, selector: Selector("backspaceDelayCallback"), userInfo: nil, repeats: false)
+    }
+    
+    override func backspaceUp(sender: KeyboardKey) {
+        super.backspaceUp(sender)
+        
+        Logger.sharedInstance.writeLogLine(filledString: "Backspace Up")
     }
     
     override func backspaceRepeatCallback() {
@@ -222,8 +205,42 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
         /* */
     }
     
+    override func shiftDown(sender: KeyboardKey) {
+        super.shiftDown(sender)
+        
+        Logger.sharedInstance.writeLogLine(filledString: "Shift Down")
+    }
+    
+    override func shiftUp(sender: KeyboardKey) {
+        super.shiftUp(sender)
+        
+        Logger.sharedInstance.writeLogLine(filledString: "Shift Up")
+    }
+    
+    override func shiftDoubleTapped(sender: KeyboardKey) {
+        super.shiftDoubleTapped(sender)
+        
+        Logger.sharedInstance.writeLogLine(filledString: "Shift Double Tapped")
+    }
+    
+    override func modeChangeTapped(sender: KeyboardKey) {
+        let tappedKeyText = sender.label.text
+        
+        super.modeChangeTapped(sender)
+
+        Logger.sharedInstance.writeLogLine(filledString: "\(tappedKeyText) is tapped")
+    }
+    
+    override func advanceTapped(sender: KeyboardKey) {
+        super.advanceTapped(sender)
+        
+        Logger.sharedInstance.writeLogLine(filledString: "Advance to next input mode")
+    }
+    
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         collectionView.deselectItemAtIndexPath(indexPath, animated: true)
+        
+        Logger.sharedInstance.writeLogLine(selectedCellIndex: indexPath.row, selectedCellText: (collectionView.cellForItemAtIndexPath(indexPath) as CandidateCell).textLabel.text!)
         
         if indexPath == indexPathZero {
             if candidatesDataModel.hasTyping() {
@@ -434,6 +451,7 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
     }
     
     @IBAction override func toggleSettings() {
+        Logger.sharedInstance.writeLogLine(filledString: "Toggle settings key tapped")
         
         let typingBeforeToggleSettings = candidatesDataModel.typingString.userTypingString
         candidatesUpdateQueue.resetTyping()
@@ -563,6 +581,11 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
                         }
                     case "clean":
                         candidatesDataModel.inputHistory.cleanAllCandidates()
+                    case "log":
+                        let logString = Logger.sharedInstance.getLogFileContent()
+                        (self.textDocumentProxy as? UIKeyInput)!.insertText(logString)
+                    case "cllog":
+                        Logger.sharedInstance.clearLogFile()
                     default:
                         break
                     }
@@ -612,13 +635,16 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
     var isShowingCandidatesTable = false
     @IBAction func toggleCandidatesTableOrDismissKeyboard() {
         if !candidatesDataModel.hasTyping() {
+            Logger.sharedInstance.writeLogLine(filledString: "Down/Up arrow key tapped for Manually dismiss keyboard")
             self.dismissKeyboard()
             return
         }
         if isShowingCandidatesTable == false {
+            Logger.sharedInstance.writeLogLine(filledString: "Down/Up arrow key tapped for Show candidates table")
             isShowingCandidatesTable = true
             showCandidatesTable()
         } else {
+            Logger.sharedInstance.writeLogLine(filledString: "Down/Up arrow key tapped for Exit candidates table")
             isShowingCandidatesTable = false
             exitCandidatesTable()
         }
@@ -691,6 +717,24 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
                 }
             }
         }
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        Logger.sharedInstance.writeLogLine(filledString: "View Did Load")
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        Logger.sharedInstance.writeLogLine(filledString: "View Did Appear")
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        Logger.sharedInstance.writeLogLine(filledString: "View Did Disappear")
     }
     
 }
