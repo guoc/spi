@@ -45,7 +45,7 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         
-        Logger.sharedInstance.writeLogLine(filledString: "MyKeyboardViewController inited")
+        Logger.sharedInstance.writeLogLine(filledString: "<<<<<<<<<\n")
         
         self.forwardingView.delegate = self
         self.candidatesUpdateQueue = CandidatesUpdateQueue(controller: self)
@@ -57,7 +57,7 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
     }
     
     deinit {
-        Logger.sharedInstance.writeLogLine(filledString: "MyKeyboardViewController deinited")
+        Logger.sharedInstance.writeLogLine(filledString: ">>>>>>>>>\n")
         
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
@@ -89,7 +89,7 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
         
         let memoryUsageReport = Logger.sharedInstance.getMemoryUsageReport()
         (self.textDocumentProxy as? UIKeyInput)!.insertText("MEMORY LOW")
-        Logger.sharedInstance.writeLogLine(filledString: memoryUsageReport)
+        Logger.sharedInstance.writeLogLine(filledString: "!!!!!!!!!\n! \(memoryUsageReport)")
     }
     
     override func keyPressed(key: Key) {
@@ -165,7 +165,7 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
         }
         */
         
-        Logger.sharedInstance.writeLogLine(filledString: "Backspace Down")
+        Logger.sharedInstance.writeLogLine(filledString: "[DELETE] <")
         
         isDeletingTyping = false    // Reset
         if candidatesDataModel.hasTyping() {
@@ -182,7 +182,7 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
     override func backspaceUp(sender: KeyboardKey) {
         super.backspaceUp(sender)
         
-        Logger.sharedInstance.writeLogLine(filledString: "Backspace Up")
+        Logger.sharedInstance.writeLogLine(filledString: "[DELETE] >")
     }
     
     override func backspaceRepeatCallback() {
@@ -208,33 +208,33 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
     override func shiftDown(sender: KeyboardKey) {
         super.shiftDown(sender)
         
-        Logger.sharedInstance.writeLogLine(filledString: "Shift Down")
+        Logger.sharedInstance.writeLogLine(filledString: "[SHIFT] <")
     }
     
     override func shiftUp(sender: KeyboardKey) {
         super.shiftUp(sender)
         
-        Logger.sharedInstance.writeLogLine(filledString: "Shift Up")
+        Logger.sharedInstance.writeLogLine(filledString: "[SHIFT] >")
     }
     
     override func shiftDoubleTapped(sender: KeyboardKey) {
         super.shiftDoubleTapped(sender)
         
-        Logger.sharedInstance.writeLogLine(filledString: "Shift Double Tapped")
+        Logger.sharedInstance.writeLogLine(filledString: "[SHIFT] <><")
     }
     
     override func modeChangeTapped(sender: KeyboardKey) {
-        let tappedKeyText = sender.label.text ?? "Mode changed with unknown key"
+        let tappedKeyText = sender.label.text ?? "[MODE] ???"
         
         super.modeChangeTapped(sender)
 
-        Logger.sharedInstance.writeLogLine(filledString: "\(tappedKeyText) tapped")
+        Logger.sharedInstance.writeLogLine(filledString: "[\(tappedKeyText)] <>")
     }
     
     override func advanceTapped(sender: KeyboardKey) {
         super.advanceTapped(sender)
         
-        Logger.sharedInstance.writeLogLine(filledString: "Advance to next input mode")
+        Logger.sharedInstance.writeLogLine(filledString: "[NEXT IM]")
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
@@ -451,7 +451,7 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
     }
     
     @IBAction override func toggleSettings() {
-        Logger.sharedInstance.writeLogLine(filledString: "Toggle settings key tapped")
+        Logger.sharedInstance.writeLogLine(filledString: "[SETTINGS] <>")
         
         let typingBeforeToggleSettings = candidatesDataModel.typingString.userTypingString
         candidatesUpdateQueue.resetTyping()
@@ -635,16 +635,16 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
     var isShowingCandidatesTable = false
     @IBAction func toggleCandidatesTableOrDismissKeyboard() {
         if !candidatesDataModel.hasTyping() {
-            Logger.sharedInstance.writeLogLine(filledString: "Down/Up arrow key tapped for Manually dismiss keyboard")
+            Logger.sharedInstance.writeLogLine(filledString: "[DOWN] <> DISMISS")
             self.dismissKeyboard()
             return
         }
         if isShowingCandidatesTable == false {
-            Logger.sharedInstance.writeLogLine(filledString: "Down/Up arrow key tapped for Show candidates table")
+            Logger.sharedInstance.writeLogLine(filledString: "[DOWN] <>")
             isShowingCandidatesTable = true
             showCandidatesTable()
         } else {
-            Logger.sharedInstance.writeLogLine(filledString: "Down/Up arrow key tapped for Exit candidates table")
+            Logger.sharedInstance.writeLogLine(filledString: "[UP] <>")
             isShowingCandidatesTable = false
             exitCandidatesTable()
         }
@@ -722,19 +722,18 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        Logger.sharedInstance.writeLogLine(filledString: "View Did Load")
+        Logger.sharedInstance.writeLogLine(filledString: "--------- VDL\n")
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        Logger.sharedInstance.writeLogLine(filledString: "View Did Appear")
+        Logger.sharedInstance.writeLogLine(filledString: "--------- VDA\n")
     }
     
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
-        
-        Logger.sharedInstance.writeLogLine(filledString: "View Did Disappear")
+        Logger.sharedInstance.writeLogLine(filledString: "--------- VDDA\n")
     }
     
 }

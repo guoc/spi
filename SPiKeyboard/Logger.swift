@@ -33,12 +33,12 @@ class Logger {
     }
     
     func writeLogLine(#selectedCellIndex: Int, selectedCellText: String) {
-        writeLogLine(filledString: "Candidate cell \(selectedCellText) at \(selectedCellIndex) selected")
+        writeLogLine(filledString: "@\(selectedCellIndex) \(selectedCellText)")
     }
     
     func writeLogLine(#tappedKey: Key) {
-        let tappedKeyText = tappedKey.uppercaseKeyCap ?? (tappedKey.lowercaseKeyCap ?? "AKeyWithoutCap")
-        writeLogLine(filledString: "\(tappedKeyText) tapped")
+        let tappedKeyText = tappedKey.uppercaseKeyCap ?? (tappedKey.lowercaseKeyCap ?? "???")
+        writeLogLine(filledString: "\(tappedKeyText) <>")
     }
         
     func writeLogLine(#filledString: String) {
