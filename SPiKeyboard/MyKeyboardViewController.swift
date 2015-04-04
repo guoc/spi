@@ -224,11 +224,11 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
     }
     
     override func modeChangeTapped(sender: KeyboardKey) {
-        let tappedKeyText = sender.label.text
+        let tappedKeyText = sender.label.text ?? "Mode changed with unknown key"
         
         super.modeChangeTapped(sender)
 
-        Logger.sharedInstance.writeLogLine(filledString: "\(tappedKeyText) is tapped")
+        Logger.sharedInstance.writeLogLine(filledString: "\(tappedKeyText) tapped")
     }
     
     override func advanceTapped(sender: KeyboardKey) {

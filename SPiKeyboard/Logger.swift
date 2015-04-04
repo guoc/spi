@@ -38,12 +38,17 @@ class Logger {
     
     func writeLogLine(#tappedKey: Key) {
         let tappedKeyText = tappedKey.uppercaseKeyCap ?? (tappedKey.lowercaseKeyCap ?? "AKeyWithoutCap")
-        writeLogLine(filledString: "\(tappedKeyText) is tapped")
+        writeLogLine(filledString: "\(tappedKeyText) tapped")
     }
         
     func writeLogLine(#filledString: String) {
         let currentTime = NSDate()
-        writeLogFileWith("\(filledString)\t\(currentTime)\n")
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.timeZone = NSTimeZone.localTimeZone()
+        dateFormatter.dateStyle = .ShortStyle
+        dateFormatter.timeStyle = .LongStyle
+        let currentTimeStr = dateFormatter.stringFromDate(currentTime)
+        writeLogFileWith("\(filledString)\t\(currentTimeStr)\n")
     }
     
     func writeLogFileWith(string: String) {
