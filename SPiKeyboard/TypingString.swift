@@ -159,6 +159,13 @@ class TypingString {
     
     func getCandidate() -> Candidate {
         if typeOfRemainingFormalizedTyping == .Empty && _cachedCandidatesWithCorrespondingTyping.isEmpty == false {
+            if _cachedCandidatesWithCorrespondingTyping.count == 1 {
+                let (candidate, queryString) = _cachedCandidatesWithCorrespondingTyping[0]
+                let type = candidate.type
+                if type != .Chinese {
+                    return Candidate(text: candidate.text, type: type, queryString: queryString)
+                }
+            }
             return Candidate(text: "".join(_cachedCandidatesWithCorrespondingTyping.map({x -> String in return x.candidate.text})), withShuangpinString: " ".join(_cachedCandidatesWithCorrespondingTyping.map({x -> String in return x.candidate.queryCode})))
         } else if hasSelectedPartialCandidates() {
             return Candidate(text: "".join(_cachedCandidatesWithCorrespondingTyping.map({x -> String in return x.candidate.text})))
