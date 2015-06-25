@@ -581,6 +581,10 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
                         }
                     case "clean":
                         candidatesDataModel.inputHistory.cleanAllCandidates()
+                    case "turnonlog":
+                        NSUserDefaults.standardUserDefaults().setBool(true, forKey: "kLogging")
+                    case "turnofflog":
+                        NSUserDefaults.standardUserDefaults().setBool(false, forKey: "kLogging")
                     case "log":
                         let logString = Logger.sharedInstance.getLogFileContent()
                         (self.textDocumentProxy as? UIKeyInput)!.insertText(logString)

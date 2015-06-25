@@ -52,6 +52,9 @@ class Logger {
     }
     
     func writeLogFileWith(string: String) {
+        if !NSUserDefaults.standardUserDefaults().boolForKey("kLogging") {
+            return
+        }
         let qos = Int(QOS_CLASS_BACKGROUND.value)
         let queue = dispatch_get_global_queue(qos, 0)
         dispatch_async(queue) { () -> Void in
