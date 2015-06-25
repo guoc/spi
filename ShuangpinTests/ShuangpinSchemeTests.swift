@@ -60,7 +60,7 @@ class ShuangpinSchemeTests: XCTestCase {
         let path = NSBundle(forClass: ShuangpinScheme.self).pathForResource(schemeName, ofType: "spscheme")
         var scheme: [String: String]!
         if NSFileManager.defaultManager().fileExistsAtPath(path!) {
-            scheme = NSDictionary(contentsOfFile: path!) as [String: String]!
+            scheme = NSDictionary(contentsOfFile: path!) as! [String: String]!
         } else {
             println("scheme is not found")
         }

@@ -29,11 +29,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         func setVersionNumber() {
-            let info = NSBundle.mainBundle().infoDictionary
-            let shortVersion = info?["CFBundleShortVersionString"] as String
-            let buildVersion = info?["CFBundleVersion"] as String
-            let version = shortVersion + " (" + buildVersion + ")"
-            NSUserDefaults.standardUserDefaults().setObject(version, forKey: "kVersion")
+            if let info = NSBundle.mainBundle().infoDictionary {
+                let shortVersion = info["CFBundleShortVersionString"] as! String
+                let buildVersion = info["CFBundleVersion"] as! String
+                let version = shortVersion + " (" + buildVersion + ")"
+                NSUserDefaults.standardUserDefaults().setObject(version, forKey: "kVersion")
+            } else {
+                assertionFailure("Fail to get version information")
+            }
         }
         
         setVersionNumber()

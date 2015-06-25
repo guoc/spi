@@ -187,7 +187,7 @@ class TypingString {
             let numberOfWords = candidate.text.getReadingLength()
             // Get how many "_" in the pinyin of candidate
             let candidateShuangpinArray = remainingFormalizedTypingStringForQuery.string.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
-            let numberOfUnderscore = candidateShuangpinArray[0..<min(numberOfWords, candidateShuangpinArray.count)].reduce(0, { $0 + (contains($1, "_") ? 1 : 0) })
+            let numberOfUnderscore = candidateShuangpinArray[0..<min(numberOfWords, candidateShuangpinArray.count)].reduce(0, combine: { $0 + (contains($1, "_") ? 1 : 0) })
             // Get end
             let truncatingLength = numberOfWords * 2 - numberOfUnderscore
             if  truncatingLength < remainingUserTypingString.getReadingLength() {

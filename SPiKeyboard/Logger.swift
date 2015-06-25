@@ -9,7 +9,7 @@ class Logger {
     }
     
     let path = { () -> String in
-        let folder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
+        let folder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! String
         return folder.stringByAppendingPathComponent("log")
     }()
     

@@ -6,10 +6,10 @@ enum CandidateType {
 class Candidate {
     let type: CandidateType
     let text: String
-    let shuangpinString: String?
-    let englishString: String?
-    let specialString: String?
-    let customString: String?
+    var shuangpinString: String?
+    var englishString: String?
+    var specialString: String?
+    var customString: String?
     
     var queryCode: String {
         get {
@@ -25,7 +25,7 @@ class Candidate {
             case .Custom:
                 return customString!
             default:
-                assertionFailure("Wrong candidate type!")
+                fatalError("Wrong candidate type!")
             }
         }
     }
@@ -38,7 +38,7 @@ class Candidate {
             case .Chinese, .English, .Special, .Custom:
                 return queryCode.getReadingLength()
             default:
-                assertionFailure("Wrong candidate type!")
+                fatalError("Wrong candidate type!")
             }
         }
     }
@@ -57,7 +57,7 @@ class Candidate {
             case .Custom:
                 return customString!
             default:
-                assertionFailure("Wrong candidate type!")
+                fatalError("Wrong candidate type!")
             }
         }
     }
@@ -76,7 +76,7 @@ class Candidate {
             case .Custom:
                 return String(customString![customString!.startIndex]).lowercaseString    // For special symbol, lowercaseString does not return different value.
             default:
-                assertionFailure("Wrong candidate type!")
+                fatalError("Wrong candidate type!")
             }
         }
     }
@@ -93,7 +93,7 @@ class Candidate {
             case .Custom:
                 return String(4)
             default:
-                assertionFailure("Wrong candidate type!")
+                fatalError("Wrong candidate type!")
             }
         }
     }
@@ -130,7 +130,7 @@ class Candidate {
     init(text: String, type: CandidateType, queryString: String) {
         switch type {
         case .Empty:
-            assertionFailure("Candidate init fail!")
+            fatalError("Candidate init fail!")
         case .Special:
             self.type = .Special
             self.text = text
@@ -148,7 +148,7 @@ class Candidate {
             self.text = text
             self.customString = queryString
         default:
-            assertionFailure("Wrong candidate type!")
+            fatalError("Wrong candidate type!")
         }
     }
     

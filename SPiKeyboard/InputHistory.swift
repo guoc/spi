@@ -14,10 +14,8 @@ class InputHistory {
             NSUserDefaults.standardUserDefaults().setObject(newValue?.querycode, forKey: "InputHistory.recentCreatedCandidate.querycode")
         }
         get {
-            let text = NSUserDefaults.standardUserDefaults().objectForKey("InputHistory.recentCreatedCandidate.text") as String?
-            let querycode = NSUserDefaults.standardUserDefaults().objectForKey("InputHistory.recentCreatedCandidate.querycode") as String?
-            if text != nil && querycode != nil {
-                return (text: text!, querycode: querycode!)
+            if let text = NSUserDefaults.standardUserDefaults().objectForKey("InputHistory.recentCreatedCandidate.text") as? String, querycode = NSUserDefaults.standardUserDefaults().objectForKey("InputHistory.recentCreatedCandidate.querycode") as? String {
+                return (text: text, querycode: querycode)
             } else {
                 return nil
             }
@@ -25,7 +23,7 @@ class InputHistory {
     }
     
     init() {
-        let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
+        let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! String
         let databasePath = documentsFolder.stringByAppendingPathComponent("history.sqlite")
         println(databasePath)
         

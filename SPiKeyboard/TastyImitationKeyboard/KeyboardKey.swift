@@ -486,7 +486,7 @@ class KeyboardKey: UIControl {
 
 class ShapeView: UIView {
     
-    let shapeLayer: CAShapeLayer?
+    var shapeLayer: CAShapeLayer?
 
     override class func layerClass() -> AnyClass {
         return CAShapeLayer.self
@@ -538,16 +538,14 @@ class ShapeView: UIView {
         }
     }
     
-    override convenience init() {
+    convenience init() {
         self.init(frame: CGRectZero)
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        if let myLayer = self.layer as? CAShapeLayer {
-            self.shapeLayer = myLayer
-        }
+        self.shapeLayer = self.layer as? CAShapeLayer
         
         // optimization: off by default to ensure quick mode transitions; re-enable during rotations
         //self.layer.shouldRasterize = true

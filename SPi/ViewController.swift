@@ -12,7 +12,7 @@ class ViewController: UINavigationController, IASKSettingsDelegate {
     
     var appSettingsViewController: IASKAppSettingsViewController!
     
-    override init() {
+    init() {
         var appSettingsViewController = IASKAppSettingsViewController()
         super.init(rootViewController: appSettingsViewController)
         appSettingsViewController.delegate = self

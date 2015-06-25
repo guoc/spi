@@ -53,7 +53,7 @@ class CandidatesBanner: ExtraView {
         collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: collectionViewLayout)
         collectionView.registerClass(CandidateCell.self, forCellWithReuseIdentifier: "Cell")
         
-        moreCandidatesButton = UIButton.buttonWithType(.Custom) as UIButton
+        moreCandidatesButton = UIButton.buttonWithType(.Custom) as! UIButton
         moreCandidatesButton.addTarget(delegate, action: Selector("toggleCandidatesTableOrDismissKeyboard"), forControlEvents: .TouchUpInside)
         
         // Above part should be same as func initSubviews()
@@ -85,7 +85,7 @@ class CandidatesBanner: ExtraView {
         collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: collectionViewLayout)
         collectionView.registerClass(CandidateCell.self, forCellWithReuseIdentifier: "Cell")
         
-        moreCandidatesButton = UIButton.buttonWithType(.Custom) as UIButton
+        moreCandidatesButton = UIButton.buttonWithType(.Custom) as! UIButton
         moreCandidatesButton.addTarget(delegate, action: Selector("toggleCandidatesTable"), forControlEvents: .TouchUpInside)
     }
     
@@ -110,7 +110,7 @@ class CandidatesBanner: ExtraView {
         if landscapeBannerWidthConstraints == nil {
             landscapeBannerWidthConstraints = NSLayoutConstraint.constraintsWithVisualFormat("H:[banner(==\(actualScreenHeight)@1000)]", options: nil, metrics: nil, views: ["banner": self])
         }
-        switch((self.delegate as MyKeyboardViewController).interfaceOrientation) {    // FIXME delegate should not be casted.
+        switch((self.delegate as! MyKeyboardViewController).interfaceOrientation) {    // FIXME delegate should not be casted.
         case .Unknown, .Portrait, .PortraitUpsideDown:
             self.addConstraints(potraitBannerWidthConstraints!)
         case .LandscapeLeft, .LandscapeRight:
@@ -181,7 +181,7 @@ class CandidatesBanner: ExtraView {
     
     func reloadData() {
         if let typingLabel = typingLabel {
-            typingLabel.text = (delegate as MyKeyboardViewController).candidatesDataModel.textAt(indexPathZero)    // FIXME
+            typingLabel.text = (delegate as! MyKeyboardViewController).candidatesDataModel.textAt(indexPathZero)    // FIXME
         }
         collectionView.reloadData()
     }

@@ -2,31 +2,31 @@
 import Foundation
 
 let lowercaseLetterAndUnderScoreCharacterSet: NSCharacterSet = {
-    var characterSet: NSMutableCharacterSet = NSCharacterSet.lowercaseLetterCharacterSet().mutableCopy() as NSMutableCharacterSet
+    var characterSet: NSMutableCharacterSet = NSCharacterSet.lowercaseLetterCharacterSet().mutableCopy() as! NSMutableCharacterSet
     characterSet.addCharactersInString("_")
     return characterSet as NSCharacterSet
     }()
 
 let lowercaseLetterAndSpaceCharacterSet: NSCharacterSet = {
-    var characterSet: NSMutableCharacterSet = NSCharacterSet.lowercaseLetterCharacterSet().mutableCopy() as NSMutableCharacterSet
+    var characterSet: NSMutableCharacterSet = NSCharacterSet.lowercaseLetterCharacterSet().mutableCopy() as! NSMutableCharacterSet
     characterSet.addCharactersInString(" ")
     return characterSet as NSCharacterSet
     }()
 
 let lowercaseLetterAndUnderScoreAndSpaceCharacterSet: NSCharacterSet = {
-    var characterSet: NSMutableCharacterSet = NSCharacterSet.lowercaseLetterCharacterSet().mutableCopy() as NSMutableCharacterSet
+    var characterSet: NSMutableCharacterSet = NSCharacterSet.lowercaseLetterCharacterSet().mutableCopy() as! NSMutableCharacterSet
     characterSet.addCharactersInString(" _")
     return characterSet as NSCharacterSet
     }()
 
 let whitespaceAndUnderscoreCharacterSet: NSCharacterSet = {
-    var characterSet: NSMutableCharacterSet = NSCharacterSet.whitespaceCharacterSet().mutableCopy() as NSMutableCharacterSet
+    var characterSet: NSMutableCharacterSet = NSCharacterSet.whitespaceCharacterSet().mutableCopy() as! NSMutableCharacterSet
     characterSet.addCharactersInString("_")
     return characterSet as NSCharacterSet
     }()
 
 let letterAndSpaceCharacterSet: NSCharacterSet = {
-    var characterSet: NSMutableCharacterSet = NSCharacterSet.letterCharacterSet().mutableCopy() as NSMutableCharacterSet
+    var characterSet: NSMutableCharacterSet = NSCharacterSet.letterCharacterSet().mutableCopy() as! NSMutableCharacterSet
     characterSet.addCharactersInString(" ")
     return characterSet as NSCharacterSet
     }()

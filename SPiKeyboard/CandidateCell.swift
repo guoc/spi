@@ -11,7 +11,7 @@ let oneChineseGlyphWidth = ("镜" as NSString).boundingRectWithSize(CGSize(width
 
 class CandidateCell: UICollectionViewCell {
     
-    let textLabel: UILabel!
+    var textLabel: UILabel!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
