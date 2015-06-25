@@ -262,6 +262,7 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
         
     func changeBannerHeight(height: CGFloat) {
         metrics["topBanner"] = Double(height)
+        
         self.keyboardHeight = self.heightForOrientation(self.interfaceOrientation, withTopBanner: true)
     }
     
@@ -450,6 +451,119 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
         }
     }
     
+    private func outputUserHistory() {
+        let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! String
+        let historyDatabasePath = documentsFolder.stringByAppendingPathComponent("history.sqlite")
+        
+        let historyDatabase = FMDatabase(path: historyDatabasePath)
+        
+        if !historyDatabase.open() {
+            println("Unable to open database")
+            return
+        }
+        
+        let candidatesDatabasePath = NSBundle.mainBundle().pathForResource("candidates", ofType: "sqlite")
+        let candidatesDatabase = FMDatabase(path: candidatesDatabasePath)
+        if !candidatesDatabase.open() {
+            assertionFailure("Unable to open database")
+        }
+        
+        var rows: [Row] = []
+        
+        if let rs = historyDatabase.executeQuery("select candidate, shuangpin, shengmu, length, frequency, candidate_type from history order by shengmu", withArgumentsInArray: nil) {
+            while rs.next() {
+                let row = rs.resultDictionary()
+                if let rs = candidatesDatabase.executeQuery("select * from candidates where candidate == ?", withArgumentsInArray: [row["candidate"] as! String]) {
+                    if !rs.next() {
+                        rows.append(row)
+                    }
+                } else {
+                    fatalError("select failed: \(candidatesDatabase.lastErrorMessage())")
+                }
+                
+            }
+        } else {
+            println("select failed: \(historyDatabase.lastErrorMessage())")
+        }
+        
+        let orderedRows: [Row] = rows.sorted { (lhs: Row, rhs: Row) -> Bool in
+            return (lhs["frequency"] as! NSNumber).integerValue > (rhs["frequency"] as! NSNumber).integerValue
+        }
+        
+        for row in orderedRows {
+            let shuangpin = row["shuangpin"] as! String
+            let shengmu = row["shengmu"] as! String
+            let length = row["length"] as! Int
+            let frequency = row["frequency"] as! Int
+            let candidate = row["candidate"] as! String
+            let candidateType = row["candidate_type"] as! Int
+            (self.textDocumentProxy as? UIKeyInput)!.insertText("\(candidate),\(shuangpin),\(shengmu),\(length),\(frequency),\(candidateType);")
+        }
+        
+        historyDatabase.close()
+        candidatesDatabase.close()
+    }
+
+    private func run_command(commandStr: String) {
+        switch commandStr {
+        case "crash":
+            func crash() {
+                var a = 0
+                a = a + 10
+                let arr = [1,2,3]
+                let b = arr[10]
+            }
+            crash()
+        case "export":
+            outputUserHistory()
+        case "import":
+            var imported = false
+            let previousContext = (self.textDocumentProxy as? UITextDocumentProxy)?.documentContextBeforeInput
+            if previousContext != nil {
+                let historyLine = previousContext!
+                let historyCandidates = split(historyLine) { $0 == ";" }
+                for candidate in historyCandidates {
+                    let candidateParts = split(candidate) { $0 == "," }
+                    if candidateParts.count == 6 {
+                        let candidateText = candidateParts[0]
+                        let shuangpin = candidateParts[1]
+                        let shengmu = candidateParts[2]
+                        let length: Int? = candidateParts[3].toInt()
+                        let frequency: Int? = candidateParts[4].toInt()
+                        let candidateType: Int? = candidateParts[5].toInt()
+                        if length != nil && frequency != nil && candidateType != nil {
+                            candidatesDataModel.inputHistory.updateDatabase(candidateText: candidateText, shuangpin: shuangpin, shengmu: shengmu, length: NSNumber(long: length!), frequency: NSNumber(long: frequency!), candidateType: String(candidateType!))
+                            imported = true
+                        } else {
+                            imported = false
+                        }
+                    } else {
+                        imported = false
+                        break
+                    }
+                }
+            }
+            if imported == true {
+                (self.textDocumentProxy as? UIKeyInput)!.insertText("导入成功 :]]")
+            } else {
+                (self.textDocumentProxy as? UIKeyInput)!.insertText("导入失败 :[[")
+            }
+        case "clean":
+            candidatesDataModel.inputHistory.cleanAllCandidates()
+        case "turnonlog":
+            NSUserDefaults.standardUserDefaults().setBool(true, forKey: "kLogging")
+        case "turnofflog":
+            NSUserDefaults.standardUserDefaults().setBool(false, forKey: "kLogging")
+        case "log":
+            let logString = Logger.sharedInstance.getLogFileContent()
+            (self.textDocumentProxy as? UIKeyInput)!.insertText(logString)
+        case "cllog":
+            Logger.sharedInstance.clearLogFile()
+        default:
+            break
+        }
+    }
+    
     @IBAction override func toggleSettings() {
         Logger.sharedInstance.writeLogLine(filledString: "[SETTINGS] <>")
         
@@ -477,123 +591,6 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
                     
                 }
             case "!":
-                func run_command(commandStr: String) {
-                    switch commandStr {
-                    case "crash":
-                        func crash() {
-                            var a = 0
-                            a = a + 10
-                            let arr = [1,2,3]
-                            let b = arr[10]
-                        }
-                        crash()
-                    case "export":
-                        func outputUserHistory() {
-                            let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! String
-                            let historyDatabasePath = documentsFolder.stringByAppendingPathComponent("history.sqlite")
-                            
-                            let historyDatabase = FMDatabase(path: historyDatabasePath)
-                            
-                            if !historyDatabase.open() {
-                                println("Unable to open database")
-                                return
-                            }
-                            
-                            let candidatesDatabasePath = NSBundle.mainBundle().pathForResource("candidates", ofType: "sqlite")
-                            let candidatesDatabase = FMDatabase(path: candidatesDatabasePath)
-                            if !candidatesDatabase.open() {
-                                assertionFailure("Unable to open database")
-                            }
-                            
-                            var rows: [Row] = []
-                            
-                            if let rs = historyDatabase.executeQuery("select candidate, shuangpin, shengmu, length, frequency, candidate_type from history order by shengmu", withArgumentsInArray: nil) {
-                                while rs.next() {
-                                    rows.append(rs.resultDictionary())
-                                }
-                            } else {
-                                println("select failed: \(historyDatabase.lastErrorMessage())")
-                            }
-                            
-                            rows = rows.filter { (row: Row) -> Bool in
-                                if let rs = candidatesDatabase.executeQuery("select * from candidates where candidate == ?", withArgumentsInArray: [row["candidate"] as! String]) {
-                                    if rs.next() {
-                                        return false
-                                    } else {
-                                        return true
-                                    }
-                                } else {
-                                    fatalError("select failed: \(candidatesDatabase.lastErrorMessage())")
-                                }
-                            }
-                            
-                            rows.sort {
-                                ($0["frequency"] as! NSNumber).integerValue > ($1["frequency"] as! NSNumber).integerValue
-                            }
-                            
-                            let stringRows = rows.map { (row: Row) -> String in
-                                let shuangpin = row["shuangpin"] as! String
-                                let shengmu = row["shengmu"] as! String
-                                let length = row["length"] as! Int
-                                let frequency = row["frequency"] as! Int
-                                let candidate = row["candidate"] as! String
-                                let candidateType = row["candidate_type"] as! Int
-                                return "\(candidate),\(shuangpin),\(shengmu),\(length),\(frequency),\(candidateType);"
-                            }
-                            
-                            (self.textDocumentProxy as? UIKeyInput)!.insertText("".join(stringRows))
-                            
-                            historyDatabase.close()
-                            candidatesDatabase.close()
-                        }
-                        outputUserHistory()
-                    case "import":
-                        var imported = false
-                        let previousContext = (self.textDocumentProxy as? UITextDocumentProxy)?.documentContextBeforeInput
-                        if previousContext != nil {
-                            let historyLine = previousContext!
-                            let historyCandidates = split(historyLine) { $0 == ";" }
-                            for candidate in historyCandidates {
-                                let candidateParts = split(candidate) { $0 == "," }
-                                if candidateParts.count == 6 {
-                                    let candidateText = candidateParts[0]
-                                    let shuangpin = candidateParts[1]
-                                    let shengmu = candidateParts[2]
-                                    let length: Int? = candidateParts[3].toInt()
-                                    let frequency: Int? = candidateParts[4].toInt()
-                                    let candidateType: Int? = candidateParts[5].toInt()
-                                    if length != nil && frequency != nil && candidateType != nil {
-                                        candidatesDataModel.inputHistory.updateDatabase(candidateText: candidateText, shuangpin: shuangpin, shengmu: shengmu, length: NSNumber(long: length!), frequency: NSNumber(long: frequency!), candidateType: String(candidateType!))
-                                        imported = true
-                                    } else {
-                                        imported = false
-                                    }
-                                } else {
-                                    imported = false
-                                    break
-                                }
-                            }
-                        }
-                        if imported == true {
-                            (self.textDocumentProxy as? UIKeyInput)!.insertText("导入成功 :]]")
-                        } else {
-                            (self.textDocumentProxy as? UIKeyInput)!.insertText("导入失败 :[[")
-                        }
-                    case "clean":
-                        candidatesDataModel.inputHistory.cleanAllCandidates()
-                    case "turnonlog":
-                        NSUserDefaults.standardUserDefaults().setBool(true, forKey: "kLogging")
-                    case "turnofflog":
-                        NSUserDefaults.standardUserDefaults().setBool(false, forKey: "kLogging")
-                    case "log":
-                        let logString = Logger.sharedInstance.getLogFileContent()
-                        (self.textDocumentProxy as? UIKeyInput)!.insertText(logString)
-                    case "cllog":
-                        Logger.sharedInstance.clearLogFile()
-                    default:
-                        break
-                    }
-                }
                 let initStr = typingBeforeToggleSettings.substringToIndex(typingBeforeToggleSettings.endIndex.predecessor())
                 run_command(initStr)
                 return
