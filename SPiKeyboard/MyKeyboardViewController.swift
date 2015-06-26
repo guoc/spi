@@ -87,9 +87,11 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
-        let memoryUsageReport = Logger.sharedInstance.getMemoryUsageReport()
-        (self.textDocumentProxy as? UIKeyInput)!.insertText("MEMORY LOW")
-        Logger.sharedInstance.writeLogLine(filledString: "!!!!!!!!!\n! \(memoryUsageReport)")
+        if NSUserDefaults.standardUserDefaults().boolForKey("kLogging") {
+            let memoryUsageReport = Logger.sharedInstance.getMemoryUsageReport()
+            (self.textDocumentProxy as? UIKeyInput)!.insertText("MEMORY LOW")
+            Logger.sharedInstance.writeLogLine(filledString: "!!!!!!!!!\n! \(memoryUsageReport)")
+        }
     }
     
     override func keyPressed(key: Key) {
