@@ -688,7 +688,7 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
             switch(character) {
             case "d":
                 return { () in return
-                    self.candidatesDataModel.inputHistory.deleteRecentCreatedCandidate()
+                    self.candidatesDataModel.inputHistory.deleteRecentCandidate()
                 }
             default:
                 return nil

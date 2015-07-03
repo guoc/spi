@@ -8,13 +8,13 @@ class InputHistory {
     
     var databaseQueue: FMDatabaseQueue?
     
-    var recentCreatedCandidate: (text: String, querycode: String)? {
+    var recentCandidate: (text: String, querycode: String)? {
         set {
-            NSUserDefaults.standardUserDefaults().setObject(newValue?.text, forKey: "InputHistory.recentCreatedCandidate.text")
-            NSUserDefaults.standardUserDefaults().setObject(newValue?.querycode, forKey: "InputHistory.recentCreatedCandidate.querycode")
+            NSUserDefaults.standardUserDefaults().setObject(newValue?.text, forKey: "InputHistory.recentCandidate.text")
+            NSUserDefaults.standardUserDefaults().setObject(newValue?.querycode, forKey: "InputHistory.recentCandidate.querycode")
         }
         get {
-            if let text = NSUserDefaults.standardUserDefaults().objectForKey("InputHistory.recentCreatedCandidate.text") as? String, querycode = NSUserDefaults.standardUserDefaults().objectForKey("InputHistory.recentCreatedCandidate.querycode") as? String {
+            if let text = NSUserDefaults.standardUserDefaults().objectForKey("InputHistory.recentCandidate.text") as? String, querycode = NSUserDefaults.standardUserDefaults().objectForKey("InputHistory.recentCandidate.querycode") as? String {
                 return (text: text, querycode: querycode)
             } else {
                 return nil
@@ -137,6 +137,8 @@ class InputHistory {
             }
         }
         
+        self.recentCandidate = (text: candidate.text, querycode: candidate.shuangpinAttributeString)
+
         if canInsertIntoInputHistory(candidate) == false {
             return
         }
@@ -153,7 +155,6 @@ class InputHistory {
                 if !db.executeUpdate("insert into history (candidate, shuangpin, shengmu, length, frequency, candidate_type) values (?, ?, ?, ?, ?, ?)", withArgumentsInArray: [candidateText, shuangpin, shengmu, length, frequency, candidateType]) {
                     println("insert 1 table failed: \(db.lastErrorMessage()) \(candidateText) \(shuangpin)")
                 }
-                self.recentCreatedCandidate = (text: candidateText, querycode: shuangpin)
             } else {
                 if !db.executeUpdate("update history set frequency = ? where shuangpin = ? and candidate = ?", withArgumentsInArray: [NSNumber(long: previousFrequency + frequency.longValue), shuangpin, candidateText]) {
                     println("update 1 table failed: \(db.lastErrorMessage()) \(candidateText) \(shuangpin)")
@@ -169,14 +170,14 @@ class InputHistory {
         updateDatabase(with: candidate)
     }
     
-    func deleteRecentCreatedCandidate() {
+    func deleteRecentCandidate() {
         databaseQueue?.inDatabase() {
             db in
-            if let candidate = self.recentCreatedCandidate {
+            if let candidate = self.recentCandidate {
                 if !db.executeUpdate("delete from history where candidate == ? and shuangpin == ?", withArgumentsInArray: [candidate.text, candidate.querycode]) {
                     println("delete 1 table failed: \(db.lastErrorMessage()) \(candidate.text) \(candidate.querycode)")
                 }
-                self.recentCreatedCandidate = nil
+                self.recentCandidate = nil
             }
         }
     }
