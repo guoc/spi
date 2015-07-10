@@ -7,3 +7,6 @@
 微信, wz xn, wx, 2, 0, wei xin, 1
 小鹤, xc he, xh, 2, 0, xiao he, 1
 自然码, zi rj ma, zrm, 3, 0, zi ran ma, 1
+呾, da, d, 1, 0, da, 1
+呾, ta, t, 1, 0, ta, 1
+呾, dj, d, 1, 0, dan, 1
