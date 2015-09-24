@@ -153,7 +153,7 @@ class Candidate {
     }
     
     convenience init(text: String, queryString: String, isCustomCandidate: Bool) {
-        var type = text.getCandidateType()
+        let type = text.getCandidateType()
         self.init(text: text, type: isCustomCandidate ? .Custom : type, queryString: queryString)
     }
     

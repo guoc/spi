@@ -1,0 +1,1 @@
+USERVOICE_IPHONE_SDK_OTHER_LDFLAGS = -framework "QuartzCore" -framework "SystemConfiguration"

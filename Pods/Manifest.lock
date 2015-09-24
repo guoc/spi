@@ -1,23 +1,20 @@
 PODS:
-  - CrittercismSDK (5.1.3)
   - FMDB (2.5):
     - FMDB/standard (= 2.5)
   - FMDB/common (2.5)
   - FMDB/standard (2.5):
     - FMDB/common
-  - InAppSettingsKit (2.4.4)
+  - InAppSettingsKit (2.6)
   - uservoice-iphone-sdk (3.2.3)
 
 DEPENDENCIES:
-  - CrittercismSDK (= 5.1.3)
   - FMDB (= 2.5)
-  - InAppSettingsKit (= 2.4.4)
+  - InAppSettingsKit (= 2.6)
   - uservoice-iphone-sdk (= 3.2.3)
 
 SPEC CHECKSUMS:
-  CrittercismSDK: 0b1a479b3cd419f437411a08b5c8b8e09106a8cf
-  FMDB: 0efa188cf0dd1ce82c27a478cd5f5fa245308677
-  InAppSettingsKit: e78aee9fc41b44bcc5c70d7abd79cff730a0a0d3
-  uservoice-iphone-sdk: 02d974352f04d8457ee39b8514d1c58ef0e2c860
+  FMDB: 96e8f1bcc1329e269330f99770ad4285d9003e52
+  InAppSettingsKit: cc56d3ec45f11352a16d5b210da8a3fa1b9d05ed
+  uservoice-iphone-sdk: 349d9ef36d3c43939d28390b9e86bb32b65fe983
 
-COCOAPODS: 0.35.0
+COCOAPODS: 0.38.2

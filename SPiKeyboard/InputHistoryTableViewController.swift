@@ -12,7 +12,7 @@ class InputHistoryTableViewController: UITableViewController {
     }
     var rowIndex: [Character: [Row]]! {
         didSet {
-            indexNames = Array(rowIndex.keys).sorted { String($0).localizedCaseInsensitiveCompare(String($1)) == NSComparisonResult.OrderedAscending }
+            indexNames = Array(rowIndex.keys).sort { String($0).localizedCaseInsensitiveCompare(String($1)) == NSComparisonResult.OrderedAscending }
         }
     }
     var indexNames: [Character]!
@@ -73,7 +73,7 @@ class InputHistoryTableViewController: UITableViewController {
         return (indexNames.count != 0) ? String(indexNames[section]) : nil
     }
     
-    override func sectionIndexTitlesForTableView(tableView: UITableView) -> [AnyObject]! {
+    override func sectionIndexTitlesForTableView(tableView: UITableView) -> [String]? {
         return indexNames.map { return String($0) }
     }
     
@@ -114,13 +114,13 @@ class InputHistoryTableViewController: UITableViewController {
     }
     
     lazy var _inputHistoryDatabaseQueue: FMDatabaseQueue! = {
-        let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! String
-        let databasePath = documentsFolder.stringByAppendingPathComponent("history.sqlite")
+        let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] 
+        let databasePath = NSURL(string: documentsFolder)!.URLByAppendingPathComponent("history.sqlite")
         
-        let databaseQueue = FMDatabaseQueue(path: databasePath)
+        let databaseQueue = FMDatabaseQueue(path: databasePath.absoluteString)
         
         if databaseQueue == nil {
-            println("Unable to open database")
+            print("Unable to open database")
         }
         
         return databaseQueue
@@ -136,11 +136,11 @@ class InputHistoryTableViewController: UITableViewController {
                     rows.append(rs.resultDictionary())
                 }
             } else {
-                println("select failed: \(db.lastErrorMessage())")
+                print("select failed: \(db.lastErrorMessage())")
             }
         }
         
-        rows.sort {
+        rows.sortInPlace {
             ($0["frequency"] as! NSNumber).integerValue > ($1["frequency"] as! NSNumber).integerValue
         }
         
@@ -152,7 +152,7 @@ class InputHistoryTableViewController: UITableViewController {
         func distinct<T: Equatable>(source: [T]) -> [T] {
             var unique = [T]()
             for item in source {
-                if !contains(unique, item) {
+                if !unique.contains(item) {
                     unique.append(item)
                 }
             }
@@ -162,7 +162,7 @@ class InputHistoryTableViewController: UITableViewController {
         func firstLetter(row: Row) -> Character {
             let str = row["shengmu"]! as! String
             return Character(str.substringToIndex(
-                advance(str.startIndex, 1)).uppercaseString)
+                str.startIndex.advancedBy(1)).uppercaseString)
         }
         
         return distinct(rows.map(firstLetter))
@@ -192,7 +192,7 @@ class InputHistoryTableViewController: UITableViewController {
             let candidate = row["candidate"] as! String
             let shuangpin = row["shuangpin"] as! String
             if !db.executeUpdate("insert into history (candidate, shuangpin, shengmu, length, frequency, candidate_type) values (?, ?, ?, ?, ?, ?)", withArgumentsInArray: [candidate, shuangpin, row["shengmu"] as! String, row["length"] as! Int, row["frequency"] as! Int, row["candidate_type"] as! Int]) {
-                println("insert 1 table failed: \(db.lastErrorMessage()) \(candidate) \(shuangpin)")
+                print("insert 1 table failed: \(db.lastErrorMessage()) \(candidate) \(shuangpin)")
             }
         }
     }
@@ -203,7 +203,7 @@ class InputHistoryTableViewController: UITableViewController {
             let candidate = row["candidate"] as! String
             let shuangpin = row["shuangpin"] as! String
             if !db.executeUpdate("delete from history where candidate == ? and shuangpin == ?", withArgumentsInArray: [candidate, shuangpin]) {
-                println("delete 1 table failed: \(db.lastErrorMessage()) \(candidate) \(shuangpin)")
+                print("delete 1 table failed: \(db.lastErrorMessage()) \(candidate) \(shuangpin)")
             }
         }
     }
@@ -241,7 +241,7 @@ class InputHistoryTableViewController: UITableViewController {
     func addCandidate() {
         let newRowIndex = rows.count
         
-        var row = newRow(candidate: "SPi", shuangpin: "spi", shengmu: "s", length: 2, frequency: 1, candidate_type: 2)
+        let row = newRow(candidate: "SPi", shuangpin: "spi", shengmu: "s", length: 2, frequency: 1, candidate_type: 2)
 
         if existsInInputHistory(row) {
             return
@@ -275,7 +275,7 @@ class InputHistoryTableViewController: UITableViewController {
         }
     }
     
-    func newRow(#candidate: String, shuangpin: String, shengmu: String, length: Int, frequency: Int, candidate_type: Int) -> Row {
+    func newRow(candidate candidate: String, shuangpin: String, shengmu: String, length: Int, frequency: Int, candidate_type: Int) -> Row {
         var row = Row()
         row["candidate"] = candidate
         row["shuangpin"] = shuangpin

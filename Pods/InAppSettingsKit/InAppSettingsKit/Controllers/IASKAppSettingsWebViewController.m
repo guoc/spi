@@ -126,9 +126,9 @@
 		IASK_IF_IOS7_OR_GREATER(mailViewController.navigationBar.tintColor = self.navigationController.navigationBar.tintColor;);
 		mailViewController.navigationBar.titleTextAttributes =  self.navigationController.navigationBar.titleTextAttributes;
 
-		UIStatusBarStyle savedStatusBarStyle = [UIApplication sharedApplication].statusBarStyle;
+//		UIStatusBarStyle savedStatusBarStyle = [UIApplication sharedApplication].statusBarStyle;
 		[self presentViewController:mailViewController animated:YES completion:^{
-			[UIApplication sharedApplication].statusBarStyle = savedStatusBarStyle;
+//			[UIApplication sharedApplication].statusBarStyle = savedStatusBarStyle;
 		}];
 		return NO;
 	}
@@ -137,7 +137,7 @@
 	if (![newURL host] || [[newURL host] isEqualToString:[self.url host]]) {
 		return YES;
 	}
-	[[UIApplication sharedApplication] openURL:newURL];
+//	[[UIApplication sharedApplication] openURL:newURL];
 	return NO;
 }
 

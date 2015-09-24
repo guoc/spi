@@ -14,14 +14,6 @@
 		</dict>
 		<dict>
 			<key>FooterText</key>
-			<string>See http://www.crittercism.com/terms-services/</string>
-			<key>Title</key>
-			<string>CrittercismSDK</string>
-			<key>Type</key>
-			<string>PSGroupSpecifier</string>
-		</dict>
-		<dict>
-			<key>FooterText</key>
 			<string>Copyright (c) 2009-2014:
 Luc Vandal, Edovia Inc., http://www.edovia.com
 Ortwin Gentz, FutureTap GmbH, http://www.futuretap.com

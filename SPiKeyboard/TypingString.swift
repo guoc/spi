@@ -71,7 +71,7 @@ class TypingString {
         get {
             if _remainingUserTypingString == nil {
                 let wordLengthOfAllCachedCandidateTypings = _cachedCandidatesWithCorrespondingTyping.reduce(0, combine: {(s: Int, x: (candidate: Candidate, typing: String)) -> Int in return s + x.typing.getReadingLength()})
-                _remainingUserTypingString = userTypingString.substringFromIndex(advance(userTypingString.startIndex, wordLengthOfAllCachedCandidateTypings))
+                _remainingUserTypingString = userTypingString.substringFromIndex(userTypingString.startIndex.advancedBy(wordLengthOfAllCachedCandidateTypings))
             }
             return _remainingUserTypingString!
         }
@@ -89,7 +89,7 @@ class TypingString {
     var joinedCandidate: String {
         get {
             if _joinedCandidate == nil {
-                _joinedCandidate = "".join(_cachedCandidatesWithCorrespondingTyping.map({x in return x.candidate.text}))
+                _joinedCandidate = _cachedCandidatesWithCorrespondingTyping.map({x in return x.candidate.text}).joinWithSeparator("")
             }
             return _joinedCandidate!
         }
@@ -119,7 +119,7 @@ class TypingString {
     }
     
     func popOneCachedCandidate() {
-        let cachedTyping = (_cachedCandidatesWithCorrespondingTyping.last as (candidate: Candidate, typing: String)?)!.typing
+        let _ = (_cachedCandidatesWithCorrespondingTyping.last as (candidate: Candidate, typing: String)?)!.typing
         _cachedCandidatesWithCorrespondingTyping.removeLast()
     }
     
@@ -131,7 +131,7 @@ class TypingString {
     
     func deleteLast() {
         if _cachedCandidatesWithCorrespondingTyping.isEmpty {
-            userTypingString = dropLast(userTypingString)
+            userTypingString = String(userTypingString.characters.dropLast())
         } else {
             popOneCachedCandidate()
         }
@@ -166,9 +166,9 @@ class TypingString {
                     return Candidate(text: candidate.text, type: type, queryString: queryString)
                 }
             }
-            return Candidate(text: "".join(_cachedCandidatesWithCorrespondingTyping.map({x -> String in return x.candidate.text})), withShuangpinString: " ".join(_cachedCandidatesWithCorrespondingTyping.map({x -> String in return x.candidate.queryCode})))
+            return Candidate(text: _cachedCandidatesWithCorrespondingTyping.map({x -> String in return x.candidate.text}).joinWithSeparator(""), withShuangpinString: _cachedCandidatesWithCorrespondingTyping.map({x -> String in return x.candidate.queryCode}).joinWithSeparator(" "))
         } else if hasSelectedPartialCandidates() {
-            return Candidate(text: "".join(_cachedCandidatesWithCorrespondingTyping.map({x -> String in return x.candidate.text})))
+            return Candidate(text: _cachedCandidatesWithCorrespondingTyping.map({x -> String in return x.candidate.text}).joinWithSeparator(""))
         } else {
             return Candidate(text: userTypingString, withEnglishString: userTypingString.lowercaseString)
         }
@@ -187,11 +187,11 @@ class TypingString {
             let numberOfWords = candidate.text.getReadingLength()
             // Get how many "_" in the pinyin of candidate
             let candidateShuangpinArray = remainingFormalizedTypingStringForQuery.string.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
-            let numberOfUnderscore = candidateShuangpinArray[0..<min(numberOfWords, candidateShuangpinArray.count)].reduce(0, combine: { $0 + (contains($1, "_") ? 1 : 0) })
+            let numberOfUnderscore = candidateShuangpinArray[0..<min(numberOfWords, candidateShuangpinArray.count)].reduce(0, combine: { $0 + ($1.characters.contains("_") ? 1 : 0) })
             // Get end
             let truncatingLength = numberOfWords * 2 - numberOfUnderscore
             if  truncatingLength < remainingUserTypingString.getReadingLength() {
-                let index = advance(remainingUserTypingString.startIndex, truncatingLength)
+                let index = remainingUserTypingString.startIndex.advancedBy(truncatingLength)
                 _cachedCandidatesWithCorrespondingTyping.append((candidate: candidate, typing: remainingUserTypingString.substringToIndex(index)))
             } else {
                 _cachedCandidatesWithCorrespondingTyping.append((candidate: candidate, typing: remainingUserTypingString.substringToIndex(remainingUserTypingString.endIndex)))
@@ -211,7 +211,7 @@ class TypingString {
             return FormalizedTypingString(type: .English, originalString: userTypingString, string: userTypingString)
         } else {
             // EnglishOrShuangpin
-            var userTyping = userTypingString as NSString
+            let userTyping = userTypingString as NSString
             let length = userTyping.length
             var formalizedStr = ""
             var index = 0

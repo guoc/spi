@@ -27,7 +27,7 @@ class MyCollectionViewFlowLayout: UICollectionViewFlowLayout {
         resetLayoutWithAllCellSize(allCellSize)
     }
     
-    required init(coder: NSCoder) {
+    required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -71,7 +71,7 @@ class MyCollectionViewFlowLayout: UICollectionViewFlowLayout {
         return CGSize(width: widthOfAllCandidateCells, height: itemSize.height)
     }
     
-    override func layoutAttributesForElementsInRect(rect: CGRect) -> [AnyObject]? {
+    override func layoutAttributesForElementsInRect(rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         
         var index = 0
         let lengthOfLayoutAttributesS = layoutAttributesS.count
@@ -87,7 +87,7 @@ class MyCollectionViewFlowLayout: UICollectionViewFlowLayout {
         return returnAttributesS
     }
     
-    override func layoutAttributesForItemAtIndexPath(indexPath: NSIndexPath) -> UICollectionViewLayoutAttributes! {
+    override func layoutAttributesForItemAtIndexPath(indexPath: NSIndexPath) -> UICollectionViewLayoutAttributes? {
         
         return layoutAttributesS[indexPath.row]
     }

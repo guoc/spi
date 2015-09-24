@@ -41,17 +41,17 @@ class ShuangpinSchemeTests: XCTestCase {
     }
     
     func testShuangpinScheme() {
-        println("Check XiaoHe ...")
+        print("Check XiaoHe ...")
         checkShuangpinScheme(xiaoheScheme)
-        println("Check ZiRanMa ...")
+        print("Check ZiRanMa ...")
         checkShuangpinScheme(ziranmaScheme)
-        println("Check PinYinJiaJia ...")
+        print("Check PinYinJiaJia ...")
         checkShuangpinScheme(pinyinjiajiaScheme)
-        println("Check WeiRuanPinYin2003 ...")
+        print("Check WeiRuanPinYin2003 ...")
         checkShuangpinScheme(weiruanpinyin2003Scheme)
-        println("Check ZiGuangPinYin ...")
+        print("Check ZiGuangPinYin ...")
         checkShuangpinScheme(ziguangpinyinScheme)
-        println("Check ZhiNengABC ...")
+        print("Check ZhiNengABC ...")
         checkShuangpinScheme(zhinengabcScheme)
     }
     
@@ -62,7 +62,7 @@ class ShuangpinSchemeTests: XCTestCase {
         if NSFileManager.defaultManager().fileExistsAtPath(path!) {
             scheme = NSDictionary(contentsOfFile: path!) as! [String: String]!
         } else {
-            println("scheme is not found")
+            print("scheme is not found")
         }
         return scheme
     }
@@ -77,10 +77,10 @@ class ShuangpinSchemeTests: XCTestCase {
                 XCTFail()
             }
             if targetShuangpin.getReadingLength() == 2 {
-                let sourceYunmu = String(sourceShuangpin[sourceShuangpin.startIndex.successor()])
+                _ = String(sourceShuangpin[sourceShuangpin.startIndex.successor()])    // sourceYunmu
                 let targetYunmu = String(targetShuangpin[targetShuangpin.startIndex.successor()])
                 if let yunmuS = YunmusAfterShengmu[targetShengmu] {
-                    XCTAssert(contains(yunmuS, targetYunmu))
+                    XCTAssert(yunmuS.contains(targetYunmu))
                 } else {
                     XCTFail()
                 }

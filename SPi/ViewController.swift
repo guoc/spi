@@ -13,7 +13,7 @@ class ViewController: UINavigationController, IASKSettingsDelegate {
     var appSettingsViewController: IASKAppSettingsViewController!
     
     init() {
-        var appSettingsViewController = IASKAppSettingsViewController()
+        let appSettingsViewController = IASKAppSettingsViewController()
         super.init(rootViewController: appSettingsViewController)
         appSettingsViewController.delegate = self
         appSettingsViewController.showCreditsFooter = false
@@ -22,7 +22,7 @@ class ViewController: UINavigationController, IASKSettingsDelegate {
         self.appSettingsViewController = appSettingsViewController
     }
 
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -46,7 +46,7 @@ class ViewController: UINavigationController, IASKSettingsDelegate {
     func settingsViewController(settingsViewController: IASKViewController!, tableView: UITableView!, viewForHeaderForSection section: Int) -> UIView! {
         if let key = settingsViewController.settingsReader.keyForSection(section) {
             if key == "kScreenshotTapKeyboardSettingsIcon" {
-                var imageView = UIImageView(image: UIImage(named: "Screenshot tap keyboard settings icon"))
+                let imageView = UIImageView(image: UIImage(named: "Screenshot tap keyboard settings icon"))
                 imageView.contentMode = .ScaleAspectFit
                 return imageView
             }

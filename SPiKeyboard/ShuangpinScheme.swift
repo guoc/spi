@@ -18,7 +18,7 @@ class ShuangpinScheme {
         if NSFileManager.defaultManager().fileExistsAtPath(path!) {
             _scheme = NSDictionary(contentsOfFile: path!) as! [String: String]!
         } else {
-            println("scheme is not found")
+            print("scheme is not found")
         }
     }
     

@@ -9,8 +9,8 @@ class Logger {
     }
     
     let path = { () -> String in
-        let folder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! String
-        return folder.stringByAppendingPathComponent("log")
+        let folder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] 
+        return NSURL(string: folder)!.URLByAppendingPathComponent("log").absoluteString
     }()
     
     var outputStream: NSOutputStream!
@@ -32,16 +32,16 @@ class Logger {
         outputStream.close()
     }
     
-    func writeLogLine(#selectedCellIndex: Int, selectedCellText: String) {
+    func writeLogLine(selectedCellIndex selectedCellIndex: Int, selectedCellText: String) {
         writeLogLine(filledString: "@\(selectedCellIndex) \(selectedCellText)")
     }
     
-    func writeLogLine(#tappedKey: Key) {
+    func writeLogLine(tappedKey tappedKey: Key) {
         let tappedKeyText = tappedKey.uppercaseKeyCap ?? (tappedKey.lowercaseKeyCap ?? "???")
         writeLogLine(filledString: "\(tappedKeyText) <>")
     }
         
-    func writeLogLine(#filledString: String) {
+    func writeLogLine(filledString filledString: String) {
         let currentTime = NSDate()
         let dateFormatter = NSDateFormatter()
         dateFormatter.timeZone = NSTimeZone.localTimeZone()
@@ -55,7 +55,7 @@ class Logger {
         if !NSUserDefaults.standardUserDefaults().boolForKey("kLogging") {
             return
         }
-        let qos = Int(QOS_CLASS_BACKGROUND.value)
+        let qos = Int(QOS_CLASS_BACKGROUND.rawValue)
         let queue = dispatch_get_global_queue(qos, 0)
         dispatch_async(queue) { () -> Void in
             self.outputStream.write(string)
@@ -64,11 +64,14 @@ class Logger {
     }
     
     func getLogFileContent() -> String {
-        return String(contentsOfFile: path, encoding: NSUTF8StringEncoding, error: nil) ?? "can not open log file"
+        return (try? String(contentsOfFile: path, encoding: NSUTF8StringEncoding)) ?? "can not open log file"
     }
     
     func clearLogFile() {
-        NSFileManager.defaultManager().removeItemAtPath(path, error: nil)
+        do {
+            try NSFileManager.defaultManager().removeItemAtPath(path)
+        } catch _ {
+        }
         initOutputStream()
     }
     
@@ -84,7 +87,7 @@ class Logger {
         var size   = mach_msg_type_number_t(MACH_TASK_BASIC_INFO_COUNT)
         
         // allocate pointer to mach_task_basic_info
-        var infoPointer = UnsafeMutablePointer<mach_task_basic_info>.alloc(1)
+        let infoPointer = UnsafeMutablePointer<mach_task_basic_info>.alloc(1)
         
         // call task_info - note extra UnsafeMutablePointer(...) call
         let kerr = task_info(name, flavor, UnsafeMutablePointer(infoPointer), &size)
@@ -114,11 +117,11 @@ extension NSOutputStream {
     
     /// Write String to outputStream
     ///
-    /// :param: string                The string to write.
-    /// :param: encoding              The NSStringEncoding to use when writing the string. This will default to UTF8.
-    /// :param: allowLossyConversion  Whether to permit lossy conversion when writing the string.
+    /// - parameter string:                The string to write.
+    /// - parameter encoding:              The NSStringEncoding to use when writing the string. This will default to UTF8.
+    /// - parameter allowLossyConversion:  Whether to permit lossy conversion when writing the string.
     ///
-    /// :returns:                     Return total number of bytes written upon success. Return -1 upon failure.
+    /// - returns:                     Return total number of bytes written upon success. Return -1 upon failure.
     
     func write(string: String, encoding: NSStringEncoding = NSUTF8StringEncoding, allowLossyConversion: Bool = true) -> Int {
         if let data = string.dataUsingEncoding(encoding, allowLossyConversion: allowLossyConversion) {
