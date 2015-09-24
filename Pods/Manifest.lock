@@ -17,4 +17,4 @@ SPEC CHECKSUMS:
   InAppSettingsKit: cc56d3ec45f11352a16d5b210da8a3fa1b9d05ed
   uservoice-iphone-sdk: 349d9ef36d3c43939d28390b9e86bb32b65fe983
 
-COCOAPODS: 0.38.2
+COCOAPODS: 0.39.0.beta.3

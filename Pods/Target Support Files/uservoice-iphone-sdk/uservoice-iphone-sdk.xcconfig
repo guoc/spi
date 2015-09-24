@@ -1,1 +1,5 @@
-USERVOICE_IPHONE_SDK_OTHER_LDFLAGS = -framework "QuartzCore" -framework "SystemConfiguration"
+GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
+HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers/Private" "${PODS_ROOT}/Headers/Private/uservoice-iphone-sdk" "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/FMDB" "${PODS_ROOT}/Headers/Public/InAppSettingsKit" "${PODS_ROOT}/Headers/Public/uservoice-iphone-sdk"
+OTHER_LDFLAGS = -framework "QuartzCore" -framework "SystemConfiguration"
+PODS_ROOT = ${SRCROOT}
+SKIP_INSTALL = YES
