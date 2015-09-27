@@ -413,8 +413,14 @@ class KeyboardViewController: UIInputViewController {
             self.view.addConstraint(self.heightConstraint!) // TODO: what if view already has constraint added?
         }
         else {
+            // Added by guoc
+            if self.heightConstraint?.constant == height {
+                return
+            }
+            // End
             self.heightConstraint?.constant = height
         }
+        self.inputView?.setNeedsUpdateConstraints()    // Added by guoc
     }
     
     func updateAppearances(appearanceIsDark: Bool) {

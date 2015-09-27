@@ -731,6 +731,8 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
+        self.inputView?.setNeedsUpdateConstraints()
+        
         Logger.sharedInstance.writeLogLine(filledString: "--------- VDA\n")
     }
     
