@@ -1,10 +1,6 @@
 # Acknowledgements
 This application makes use of the following third party libraries:
 
-## CrittercismSDK
-
-See http://www.crittercism.com/terms-services/
-
 ## InAppSettingsKit
 
 Copyright (c) 2009-2014:

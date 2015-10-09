@@ -39,7 +39,7 @@ extension FMDatabaseQueue {
                     }
                 }
             } else {
-                println("select failed: \(db.lastErrorMessage())")
+                print("select failed: \(db.lastErrorMessage())")
             }
         }
         return candidates
@@ -63,7 +63,7 @@ class CandidatesDataModel {
         databaseQueue = FMDatabaseQueue(path: databasePath)
         
         if databaseQueue == nil {
-            println("Unable to open database")
+            print("Unable to open database")
             return
         }
     }
@@ -222,11 +222,11 @@ class CandidatesDataModel {
         
         // Below formalizedTypingString.type == .EnglishOrShuangpin || .English || .Special
         
-        var formalizedStr = formalizedTypingString.string
-        let originalStr = formalizedTypingString.originalString
+        let formalizedStr = formalizedTypingString.string
+        _ = formalizedTypingString.originalString    // originalStr
         var index = formalizedStr.getReadingLength() - 1
         var needTruncateCandidates = false
-        var lackInternalShengmu = (contains(formalizedStr, "_"))
+        _ = (formalizedStr.characters.contains("_"))    // lackInternalShengmu
         var queryArguments = [String]()
         var clauseCount = 0
         var whereStatement = ""
@@ -269,7 +269,7 @@ class CandidatesDataModel {
 
             // Handle left typing
             for ; index >= 0; index-=3 {
-                let strToAppend = formalizedStr.substringToIndex(advance(formalizedStr.startIndex, index+1))
+                let strToAppend = formalizedStr.substringToIndex(formalizedStr.startIndex.advancedBy(index+1))
                 queryArguments.append(getShengmuString(from: strToAppend).lowercaseString)
                 queryArguments.append(strToAppend)
                 clauseCount++
@@ -289,18 +289,18 @@ class CandidatesDataModel {
             assertionFailure(".Empty has already returned!")
         }
         
-        whereStatement += " or ".join(Array(count: clauseCount, repeatedValue: "shengmu = ? and shuangpin like ?"))
+        whereStatement += Array(count: clauseCount, repeatedValue: "shengmu = ? and shuangpin like ?").joinWithSeparator(" or ")
         
         let queryStatement = "select candidate, shuangpin, candidate_type from candidates where " + whereStatement + " order by length desc, frequency desc"
         
-        println(queryStatement)
-        println(queryArguments)
+        print(queryStatement)
+        print(queryArguments)
         
-        var candidates = databaseQueue!.getCandidates(byQueryStatement: queryStatement, byQueryArguments: queryArguments, withQueryCode: formalizedTypingString.originalString, needTruncateCandidates: needTruncateCandidates)
+        let candidates = databaseQueue!.getCandidates(byQueryStatement: queryStatement, byQueryArguments: queryArguments, withQueryCode: formalizedTypingString.originalString, needTruncateCandidates: needTruncateCandidates)
         let historyCandidates = inputHistory.getCandidatesByQueryArguments(queryArguments, andWhereStatement: whereStatement, withQueryCode: formalizedTypingString.originalString)
         
-        let mergedCandidates = mergeCandidatesArrays(candidates, historyCandidates)
-        println("\(mergedCandidates.count) candidates are returned")
+        let mergedCandidates = mergeCandidatesArrays(candidates, candidatesB: historyCandidates)
+        print("\(mergedCandidates.count) candidates are returned")
         
         let accurateCandidatesFirstCandidates = getAccurateCandidatesFirstCandidatesArray(mergedCandidates, withQueryCode: formalizedTypingString.originalString)
         

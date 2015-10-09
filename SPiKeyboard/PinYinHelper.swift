@@ -488,7 +488,7 @@ let Shuangpin: [String: String] = {
     for s in Quanpin.keys {
         var y: String = Quanpin[s]!
         if let existS = newDict[y]  {
-            println("\(existS): \(y) -> \(s): \(y)")
+            print("\(existS): \(y) -> \(s): \(y)")
         } else {
             newDict[y] = s
         }
@@ -619,7 +619,7 @@ let CommonYunmuLength = [
 func getShengmuString(from formalizedQuanpinString: String) -> String {
     
     func isFormalizedQuanpinString(str: String) -> Bool {
-        for (i, character) in enumerate(str) {
+        for (i, character) in str.characters.enumerate() {
             if i % 3 == 2 && character != " " || i % 3 != 2 && String(character).containsLettersOrUnderscore() == false {
                 return false
             }
@@ -632,7 +632,7 @@ func getShengmuString(from formalizedQuanpinString: String) -> String {
     let length = formalizedQuanpinString.getReadingLength()
     var returnStr = ""
     for var index = 0; index < length; index+=3 {
-        returnStr += String(Array(formalizedQuanpinString)[index])
+        returnStr += String(Array(formalizedQuanpinString.characters)[index])
     }
     
     return returnStr

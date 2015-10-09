@@ -17,8 +17,8 @@ class CandidateCell: UICollectionViewCell {
         super.init(frame: frame)
                 
         selectedBackgroundView = UIView(frame: frame)
-        selectedBackgroundView.autoresizingMask = .FlexibleWidth
-        selectedBackgroundView.backgroundColor = UIColor.lightGrayColor()
+        selectedBackgroundView?.autoresizingMask = .FlexibleWidth
+        selectedBackgroundView?.backgroundColor = UIColor.lightGrayColor()
 
         textLabel = UILabel()
         textLabel.font = candidateTextFont
@@ -27,14 +27,14 @@ class CandidateCell: UICollectionViewCell {
         textLabel.lineBreakMode = .ByTruncatingTail
         contentView.addSubview(textLabel)
         
-        textLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
-        let constraints = NSLayoutConstraint.constraintsWithVisualFormat("|-8-[textLabel]-8-|", options: nil, metrics: nil, views: ["textLabel": textLabel])
+        textLabel.translatesAutoresizingMaskIntoConstraints = false
+        let constraints = NSLayoutConstraint.constraintsWithVisualFormat("|-8-[textLabel]-8-|", options: [], metrics: nil, views: ["textLabel": textLabel])
         self.contentView.addConstraints(constraints)
         let constraint = NSLayoutConstraint(item: textLabel, attribute: .CenterY, relatedBy: .Equal, toItem: contentView, attribute: .CenterY, multiplier: 1, constant: 0)
         self.contentView.addConstraint(constraint)
     }
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     

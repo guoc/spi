@@ -84,15 +84,15 @@ extension String {
     }
     
     func stringByRemovingCharactersInSet(characterSet: NSCharacterSet) -> String {
-        return "".join(self.componentsSeparatedByCharactersInSet(characterSet))
+        return self.componentsSeparatedByCharactersInSet(characterSet).joinWithSeparator("")
     }
     
     func stringByRemovingWhitespace() -> String {
-        return "".join(self.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet()))
+        return self.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet()).joinWithSeparator("")
     }
     
     func stringByRemovingWhitespaceAndUnderscore() -> String {
-        return "".join(self.componentsSeparatedByCharactersInSet(whitespaceAndUnderscoreCharacterSet))
+        return self.componentsSeparatedByCharactersInSet(whitespaceAndUnderscoreCharacterSet).joinWithSeparator("")
     }
     
     func onlyContainsLowercaseLetters() -> Bool {

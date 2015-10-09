@@ -52,7 +52,7 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("settingDidChange:"), name: "kAppSettingChanged", object: nil)
     }
     
-    required init(coder: NSCoder) {
+    required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -64,7 +64,7 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
     
     func insertCandidateAutomaticallyIfNecessary() {
         if let candidate = candidatesDataModel.getTypingCompleteCachedCandidate() {
-            (self.textDocumentProxy as? UIKeyInput)!.insertText(candidate)
+            self.textDocumentProxy.insertText(candidate)
             candidatesDataModel.typingString.reset()
             candidatesDataModel.updateDataModelRaisedByTypingChange()
         }
@@ -72,7 +72,7 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
     
     func updateBannerHeight() {
         
-        func changeBannerIfNecessary(#newHeight: CGFloat) {
+        func changeBannerIfNecessary(newHeight newHeight: CGFloat) {
             if metric("topBanner") != newHeight {
                 changeBannerHeight(newHeight)
                 candidatesBanner?.resetSubviewsWithInitAndSetDelegate()
@@ -89,7 +89,7 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
         
         if NSUserDefaults.standardUserDefaults().boolForKey("kLogging") {
             let memoryUsageReport = Logger.sharedInstance.getMemoryUsageReport()
-            (self.textDocumentProxy as? UIKeyInput)!.insertText("MEMORY LOW")
+            self.textDocumentProxy.insertText("MEMORY LOW")
             Logger.sharedInstance.writeLogLine(filledString: "!!!!!!!!!\n! \(memoryUsageReport)")
         }
     }
@@ -115,26 +115,26 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
                 
         if key.type == .Space {
             if candidatesDataModel.hasTyping() {
-                if let firstCandidate = candidatesDataModel.textAt(indexPathFirst) {
+                if candidatesDataModel.textAt(indexPathFirst) != nil {
                     candidatesUpdateQueue.selectCandidate(indexPathFirst)
                 } else {
                     let typingStringAsCandidate = candidatesDataModel.getUserTypingString()
-                    (self.textDocumentProxy as? UIKeyInput)!.insertText(typingStringAsCandidate)
+                    self.textDocumentProxy.insertText(typingStringAsCandidate)
                     candidatesUpdateQueue.selectCandidate(indexPathZero)
                 }
             } else {
                 // Insert Space
-                (self.textDocumentProxy as? UIKeyInput)!.insertText(key.outputForCase(self.shiftState.uppercase()))
+                self.textDocumentProxy.insertText(key.outputForCase(self.shiftState.uppercase()))
             }
             return
         } else if key.type == .Return {
             if candidatesDataModel.hasTyping() {
                 let typingStringAsCandidate = candidatesDataModel.getUserTypingString()
-                (self.textDocumentProxy as? UIKeyInput)!.insertText(typingStringAsCandidate)
+                self.textDocumentProxy.insertText(typingStringAsCandidate)
                 candidatesUpdateQueue.selectCandidate(indexPathZero)
             } else {
                 // Insert Return
-                (self.textDocumentProxy as? UIKeyInput)!.insertText(key.outputForCase(self.shiftState.uppercase()))
+                self.textDocumentProxy.insertText(key.outputForCase(self.shiftState.uppercase()))
             }
         } else if key.type == .Character {    // Letters
             candidatesUpdateQueue.appendTyping(key.outputForCase(self.shiftState.uppercase()))
@@ -142,7 +142,7 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
             if candidatesDataModel.hasTyping() {
                 candidatesUpdateQueue.appendTyping(key.outputForCase(self.shiftState.uppercase()))
             } else {
-                (self.textDocumentProxy as? UIKeyInput)!.insertText(key.outputForCase(self.shiftState.uppercase()))
+                self.textDocumentProxy.insertText(key.outputForCase(self.shiftState.uppercase()))
             }
         }
         /* */
@@ -173,7 +173,7 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
         if candidatesDataModel.hasTyping() {
             candidatesUpdateQueue.deleteBackwardTyping()
         } else {
-            (textDocumentProxy as? UIKeyInput)?.deleteBackward()
+            textDocumentProxy.deleteBackward()
         }
         /* */
         
@@ -201,7 +201,7 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
             candidatesUpdateQueue.deleteBackwardTyping()
         } else {
             if isDeletingTyping == false {
-                (textDocumentProxy as? UIKeyInput)?.deleteBackward()
+                textDocumentProxy.deleteBackward()
             }
         }
         /* */
@@ -248,16 +248,16 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
             if candidatesDataModel.hasTyping() {
                 if candidatesDataModel.typingString.hasSelectedPartialCandidates() {
                     let displayedTypingStringAsCandidate = candidatesDataModel.textAt(indexPathZero)
-                    (self.textDocumentProxy as? UIKeyInput)!.insertText(displayedTypingStringAsCandidate!)
+                    self.textDocumentProxy.insertText(displayedTypingStringAsCandidate!)
                     candidatesUpdateQueue.selectCandidate(indexPathZero)
                 } else {
                     let typingStringAsCandidate = candidatesDataModel.getUserTypingString()
-                    (self.textDocumentProxy as? UIKeyInput)!.insertText(typingStringAsCandidate)
+                    self.textDocumentProxy.insertText(typingStringAsCandidate)
                     candidatesUpdateQueue.selectCandidate(indexPathZero)
                 }
             }
         } else {
-            let selectedCandidate = candidatesDataModel.textAt(indexPath)!
+            let _ = candidatesDataModel.textAt(indexPath)!
             candidatesUpdateQueue.selectCandidate(indexPath)
         }
     }
@@ -338,15 +338,15 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
             
         } else {    // For candidates banner scroll
         
-            var mostLeftCellIndexPathRow = visibleItems.reduce(Int.max) {
+            let mostLeftCellIndexPathRow = visibleItems.reduce(Int.max) {
                 min($0, $1.row)
             }
             
-            var mostRightCellIndexPathRow = visibleItems.reduce(Int.min) {
+            let mostRightCellIndexPathRow = visibleItems.reduce(Int.min) {
                 max($0, $1.row)
             }
             
-            var mostLeftCellIndexPath = NSIndexPath(forItem: mostLeftCellIndexPathRow, inSection: 0)
+            let mostLeftCellIndexPath = NSIndexPath(forItem: mostLeftCellIndexPathRow, inSection: 0)
             var mostRightCellIndexPath = NSIndexPath(forItem: mostRightCellIndexPathRow, inSection: 0)
             
             // Avoid wrong calculation when candidate cell is wider than the width of collectionView
@@ -454,13 +454,13 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
     }
     
     private func outputUserHistory() {
-        let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! String
-        let historyDatabasePath = documentsFolder.stringByAppendingPathComponent("history.sqlite")
+        let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] 
+        let historyDatabasePath = NSURL(string: documentsFolder)!.URLByAppendingPathComponent("history.sqlite")
         
-        let historyDatabase = FMDatabase(path: historyDatabasePath)
+        let historyDatabase = FMDatabase(path: historyDatabasePath.absoluteString)
         
         if !historyDatabase.open() {
-            println("Unable to open database")
+            print("Unable to open database")
             return
         }
         
@@ -485,10 +485,10 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
                 
             }
         } else {
-            println("select failed: \(historyDatabase.lastErrorMessage())")
+            print("select failed: \(historyDatabase.lastErrorMessage())")
         }
         
-        let orderedRows: [Row] = rows.sorted { (lhs: Row, rhs: Row) -> Bool in
+        let orderedRows: [Row] = rows.sort { (lhs: Row, rhs: Row) -> Bool in
             return (lhs["frequency"] as! NSNumber).integerValue > (rhs["frequency"] as! NSNumber).integerValue
         }
         
@@ -499,7 +499,7 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
             let frequency = row["frequency"] as! Int
             let candidate = row["candidate"] as! String
             let candidateType = row["candidate_type"] as! Int
-            (self.textDocumentProxy as? UIKeyInput)!.insertText("\(candidate),\(shuangpin),\(shengmu),\(length),\(frequency),\(candidateType);")
+            self.textDocumentProxy.insertText("\(candidate),\(shuangpin),\(shengmu),\(length),\(frequency),\(candidateType);")
         }
         
         historyDatabase.close()
@@ -513,26 +513,26 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
                 var a = 0
                 a = a + 10
                 let arr = [1,2,3]
-                let b = arr[10]
+                let _ = arr[10]
             }
             crash()
         case "export":
             outputUserHistory()
         case "import":
             var imported = false
-            let previousContext = (self.textDocumentProxy as? UITextDocumentProxy)?.documentContextBeforeInput
+            let previousContext = self.textDocumentProxy.documentContextBeforeInput
             if previousContext != nil {
                 let historyLine = previousContext!
-                let historyCandidates = split(historyLine) { $0 == ";" }
+                let historyCandidates = historyLine.characters.split { $0 == ";" }.map { String($0) }
                 for candidate in historyCandidates {
-                    let candidateParts = split(candidate) { $0 == "," }
+                    let candidateParts = candidate.characters.split { $0 == "," }.map { String($0) }
                     if candidateParts.count == 6 {
                         let candidateText = candidateParts[0]
                         let shuangpin = candidateParts[1]
                         let shengmu = candidateParts[2]
-                        let length: Int? = candidateParts[3].toInt()
-                        let frequency: Int? = candidateParts[4].toInt()
-                        let candidateType: Int? = candidateParts[5].toInt()
+                        let length: Int? = Int(candidateParts[3])
+                        let frequency: Int? = Int(candidateParts[4])
+                        let candidateType: Int? = Int(candidateParts[5])
                         if length != nil && frequency != nil && candidateType != nil {
                             candidatesDataModel.inputHistory.updateDatabase(candidateText: candidateText, shuangpin: shuangpin, shengmu: shengmu, length: NSNumber(long: length!), frequency: NSNumber(long: frequency!), candidateType: String(candidateType!))
                             imported = true
@@ -546,9 +546,9 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
                 }
             }
             if imported == true {
-                (self.textDocumentProxy as? UIKeyInput)!.insertText("导入成功 :]]")
+                self.textDocumentProxy.insertText("导入成功 :]]")
             } else {
-                (self.textDocumentProxy as? UIKeyInput)!.insertText("导入失败 :[[")
+                self.textDocumentProxy.insertText("导入失败 :[[")
             }
         case "clean":
             candidatesDataModel.inputHistory.cleanAllCandidates()
@@ -558,7 +558,7 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
             NSUserDefaults.standardUserDefaults().setBool(false, forKey: "kLogging")
         case "log":
             let logString = Logger.sharedInstance.getLogFileContent()
-            (self.textDocumentProxy as? UIKeyInput)!.insertText(logString)
+            self.textDocumentProxy.insertText(logString)
         case "cllog":
             Logger.sharedInstance.clearLogFile()
         default:
@@ -575,12 +575,12 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
             let lastCharacter = typingBeforeToggleSettings[typingBeforeToggleSettings.endIndex.predecessor()]
             switch lastCharacter {
             case "+":
-                if let documentContextAfterInput = (self.textDocumentProxy as! UITextDocumentProxy).documentContextAfterInput {
+                if let documentContextAfterInput = (self.textDocumentProxy ).documentContextAfterInput {
                     if typingBeforeToggleSettings != "" && documentContextAfterInput != "" {
                         let candidateTextLength = documentContextAfterInput.getReadingLength()
-                        (self.textDocumentProxy as! UITextDocumentProxy).adjustTextPositionByCharacterOffset(candidateTextLength)
+                        (self.textDocumentProxy ).adjustTextPositionByCharacterOffset(candidateTextLength)
                         for _ in 0..<candidateTextLength {
-                            (textDocumentProxy as? UIKeyInput)?.deleteBackward()
+                            textDocumentProxy.deleteBackward()
                         }
                         let initStr = typingBeforeToggleSettings.substringToIndex(typingBeforeToggleSettings.endIndex.predecessor())
                         candidatesDataModel.inputHistory.updateDatabase(candidateText: documentContextAfterInput, customCandidateQueryString: initStr)
@@ -658,7 +658,7 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
         isShowingCandidatesTable = true
         candidatesBanner!.hideTypingAndCandidatesView()
         candidatesBanner!.changeArrowUp()
-        var layout = UICollectionViewFlowLayout()
+        let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .Vertical
         candidatesTable = UICollectionView(frame: CGRect(x: view.frame.origin.x, y: view.frame.origin.y + getBannerHeight(), width: view.frame.width, height: view.frame.height - getBannerHeight()), collectionViewLayout: layout)
         candidatesTable.backgroundColor = candidatesBannerAppearanceIsDark ? UIColor.darkGrayColor() : UIColor.whiteColor()
@@ -731,6 +731,8 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
+        self.inputView?.setNeedsUpdateConstraints()
+        
         Logger.sharedInstance.writeLogLine(filledString: "--------- VDA\n")
     }
     
@@ -792,7 +794,7 @@ class CandidatesUpdateQueue {
         addCommonUpdateOperation(controller: controller)
     }
     
-    func addCommonUpdateOperation(#controller: MyKeyboardViewController) {
+    func addCommonUpdateOperation(controller controller: MyKeyboardViewController) {
         let commonUpdateOperation = CommonUpdateOperation(controller: controller)
         commonUpdateOperation.completionBlock = {
             if commonUpdateOperation.cancelled {

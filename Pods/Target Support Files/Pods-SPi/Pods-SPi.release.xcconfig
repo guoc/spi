@@ -1,7 +1,5 @@
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/CrittercismSDK" "${PODS_ROOT}/Headers/Public/FMDB" "${PODS_ROOT}/Headers/Public/InAppSettingsKit" "${PODS_ROOT}/Headers/Public/uservoice-iphone-sdk"
-LIBRARY_SEARCH_PATHS = "$(PODS_ROOT)/CrittercismSDK/CrittercismSDK"
-OTHER_CFLAGS = $(inherited) -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/CrittercismSDK" -isystem "${PODS_ROOT}/Headers/Public/FMDB" -isystem "${PODS_ROOT}/Headers/Public/InAppSettingsKit" -isystem "${PODS_ROOT}/Headers/Public/uservoice-iphone-sdk"
-OTHER_LDFLAGS = -ObjC -l"Crittercism_v5_1_3" -l"Pods-SPi-CrittercismSDK" -l"Pods-SPi-InAppSettingsKit" -l"Pods-SPi-uservoice-iphone-sdk" -framework "MessageUI" -framework "QuartzCore" -framework "SystemConfiguration" -framework "UIKit"
-OTHER_LIBTOOLFLAGS = $(OTHER_LDFLAGS)
+HEADER_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/FMDB" "${PODS_ROOT}/Headers/Public/InAppSettingsKit" "${PODS_ROOT}/Headers/Public/uservoice-iphone-sdk"
+OTHER_CFLAGS = $(inherited) -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/FMDB" -isystem "${PODS_ROOT}/Headers/Public/InAppSettingsKit" -isystem "${PODS_ROOT}/Headers/Public/uservoice-iphone-sdk"
+OTHER_LDFLAGS = $(inherited) -ObjC -l"InAppSettingsKit" -l"uservoice-iphone-sdk" -framework "MessageUI" -framework "QuartzCore" -framework "SystemConfiguration" -framework "UIKit"
 PODS_ROOT = ${SRCROOT}/Pods

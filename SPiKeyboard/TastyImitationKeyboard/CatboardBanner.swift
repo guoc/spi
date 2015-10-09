@@ -31,7 +31,7 @@ class CatboardBanner: ExtraView {
         self.updateAppearance()
     }
 
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -52,7 +52,9 @@ class CatboardBanner: ExtraView {
         self.updateAppearance()
     }
     
-    func updateAppearance() {
+    override func updateAppearance() {
+        super.updateAppearance()
+        
         if self.catSwitch.on {
             self.catLabel.text = "😺"
             self.catLabel.alpha = 1
