@@ -17,6 +17,6 @@ let keyboardKeyDisplayText: [String: String] = [
     "］": "]",
     "｛": "{",
     "｝": "}",
-    "《": "<",
-    "》": ">"
+    "《": "《",
+    "》": "》"
 ]
