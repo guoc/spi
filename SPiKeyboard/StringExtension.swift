@@ -35,7 +35,7 @@ extension String {
     
     func containsChinese() -> Bool {
         let str: NSString = self
-        for (var i = 0; i < str.length; i++) {
+        for i in 0 ..< str.length {
             let a = str.characterAtIndex(i)
             if a >= 0x4E00 && a <= 0x9FA5 {
                 return true
@@ -53,7 +53,7 @@ extension String {
         var containsEnglish = false
         var type: CandidateType = .English
         let str: NSString = self
-        for (var i = 0; i < str.length; i++) {
+        for i in 0 ..< str.length {
             let a = str.characterAtIndex(i)
             if a >= 0x4E00 && a <= 0x9FA5 {
                 containsChinese = true

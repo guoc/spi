@@ -54,7 +54,7 @@ class CandidatesBanner: ExtraView {
         collectionView.registerClass(CandidateCell.self, forCellWithReuseIdentifier: "Cell")
         
         moreCandidatesButton = UIButton(type: .Custom)
-        moreCandidatesButton.addTarget(delegate, action: Selector("toggleCandidatesTableOrDismissKeyboard"), forControlEvents: .TouchUpInside)
+        moreCandidatesButton.addTarget(delegate, action: #selector(MyKeyboardViewController.toggleCandidatesTableOrDismissKeyboard), forControlEvents: .TouchUpInside)
         
         // Above part should be same as func initSubviews()
         
@@ -88,7 +88,7 @@ class CandidatesBanner: ExtraView {
         collectionView.registerClass(CandidateCell.self, forCellWithReuseIdentifier: "Cell")
         
         moreCandidatesButton = UIButton(type: .Custom)
-        moreCandidatesButton.addTarget(delegate, action: Selector("toggleCandidatesTable"), forControlEvents: .TouchUpInside)
+        moreCandidatesButton.addTarget(delegate, action: #selector(MyKeyboardViewController.toggleCandidatesTableOrDismissKeyboard), forControlEvents: .TouchUpInside)
     }
     
     func configureSubviews() {

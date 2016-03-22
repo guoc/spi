@@ -77,11 +77,11 @@ class MyCollectionViewFlowLayout: UICollectionViewFlowLayout {
         let lengthOfLayoutAttributesS = layoutAttributesS.count
         var returnAttributesS = [UICollectionViewLayoutAttributes]()
         while index < lengthOfLayoutAttributesS && layoutAttributesS[index].frame.maxX < rect.minX {
-            ++index
+            index += 1
         }
         while index < lengthOfLayoutAttributesS && layoutAttributesS[index].frame.minX <= rect.maxX {
             returnAttributesS.append(layoutAttributesS[index])
-            ++index
+            index += 1
         }
         
         return returnAttributesS

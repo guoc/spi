@@ -49,7 +49,7 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
         
         self.forwardingView.delegate = self
         self.candidatesUpdateQueue = CandidatesUpdateQueue(controller: self)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("settingDidChange:"), name: "kAppSettingChanged", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(settingDidChange(_:)), name: "kAppSettingChanged", object: nil)
     }
     
     required init?(coder: NSCoder) {
@@ -178,7 +178,7 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
         /* */
         
         // trigger for subsequent deletes
-        self.backspaceDelayTimer = NSTimer.scheduledTimerWithTimeInterval(backspaceDelay - backspaceRepeat, target: self, selector: Selector("backspaceDelayCallback"), userInfo: nil, repeats: false)
+        self.backspaceDelayTimer = NSTimer.scheduledTimerWithTimeInterval(backspaceDelay - backspaceRepeat, target: self, selector: #selector(backspaceDelayCallback), userInfo: nil, repeats: false)
     }
     
     override func backspaceUp(sender: KeyboardKey) {
@@ -810,7 +810,7 @@ class CandidatesUpdateQueue {
     }
     
     class CommonUpdateOperation: NSOperation {
-        let controller: MyKeyboardViewController
+        weak var controller: MyKeyboardViewController!
         
         init(controller: MyKeyboardViewController) {
             self.controller = controller

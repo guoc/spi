@@ -100,7 +100,7 @@ func defaultKeyboard() -> Keyboard {
     defaultKeyboard.addKey(Key(returnKey), row: 3, page: 1)
     
 //    for key in ["[", "]", "{", "}", "#", "%", "^", "*", "+", "="] {
-    for key in ["［", "］", "｛", "｝", "#", "%", "^", "*", "+", "="] {
+    for key in ["【", "】", "｛", "｝", "#", "%", "^", "*", "+", "="] {
         let keyModel = Key(.SpecialCharacter)
         keyModel.setLetter(key)
         defaultKeyboard.addKey(keyModel, row: 0, page: 2)
