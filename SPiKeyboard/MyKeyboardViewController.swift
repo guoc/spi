@@ -810,7 +810,7 @@ class CandidatesUpdateQueue {
     }
     
     class CommonUpdateOperation: NSOperation {
-        let controller: MyKeyboardViewController
+        weak var controller: MyKeyboardViewController!
         
         init(controller: MyKeyboardViewController) {
             self.controller = controller
