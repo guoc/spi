@@ -179,14 +179,14 @@ class CandidatesDataModel {
                             addedDict[historyCandidate.text] = true
                             retCandidates.append(historyCandidate)
                         }
-                        candidatesBIndex++
+                        candidatesBIndex += 1
                 } else {
                     let candidate = candidatesA[candidatesAIndex]
                     if addedDict[candidate.text] == nil {
                         addedDict[candidate.text] = true
                         retCandidates.append(candidate)
                     }
-                    candidatesAIndex++
+                    candidatesAIndex += 1
                 }
             }
             if candidatesAIndex == candidatesALength {
@@ -257,7 +257,7 @@ class CandidatesDataModel {
                 let strToAppend = formalizedStr + "_"
                 queryArguments.append(getShengmuString(from: strToAppend))
                 queryArguments.append(strToAppend)
-                clauseCount++
+                clauseCount += 1
                 index -= 2
             case 1:    // xx xx xx
                 break    // Empty statement
@@ -272,19 +272,19 @@ class CandidatesDataModel {
                 let strToAppend = formalizedStr.substringToIndex(formalizedStr.startIndex.advancedBy(index+1))
                 queryArguments.append(getShengmuString(from: strToAppend).lowercaseString)
                 queryArguments.append(strToAppend)
-                clauseCount++
+                clauseCount += 1
             }
             
         case .English:
             let strToAppend = formalizedStr.lowercaseString
             queryArguments.append(String(strToAppend[strToAppend.startIndex]))
             queryArguments.append(strToAppend + "%")
-            clauseCount++
+            clauseCount += 1
         case .Special:
             let strToAppend = formalizedStr
             queryArguments.append(String(strToAppend[strToAppend.startIndex]))
             queryArguments.append(strToAppend + "%")
-            clauseCount++
+            clauseCount += 1
         case .Empty:
             assertionFailure(".Empty has already returned!")
         }

@@ -167,7 +167,8 @@ class InputHistoryTableViewController: UITableViewController {
         
         return distinct(rows.map(firstLetter))
             .reduce([Character: [Row]]()) {
-                (var acc: [Character: [Row]], letter: Character) -> [Character: [Row]] in
+                (acc: [Character: [Row]], letter: Character) -> [Character: [Row]] in
+                var acc = acc
                 acc[letter] = rows.filter {
                     (word) -> Bool in
                     firstLetter(word) == letter
