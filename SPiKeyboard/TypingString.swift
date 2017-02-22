@@ -1,6 +1,6 @@
 
 enum FormalizedTypingStringType {
-    case Empty, EnglishOrShuangpin, English, Special
+    case empty, englishOrShuangpin, english, special
 }
 
 class FormalizedTypingString {
@@ -10,7 +10,7 @@ class FormalizedTypingString {
     let originalString: String
     
     init() {
-        self.type = .Empty
+        self.type = .empty
         self.string = ""
         self.originalString = ""
     }
@@ -70,8 +70,8 @@ class TypingString {
     var remainingUserTypingString: String {
         get {
             if _remainingUserTypingString == nil {
-                let wordLengthOfAllCachedCandidateTypings = _cachedCandidatesWithCorrespondingTyping.reduce(0, combine: {(s: Int, x: (candidate: Candidate, typing: String)) -> Int in return s + x.typing.getReadingLength()})
-                _remainingUserTypingString = userTypingString.substringFromIndex(userTypingString.startIndex.advancedBy(wordLengthOfAllCachedCandidateTypings))
+                let wordLengthOfAllCachedCandidateTypings = _cachedCandidatesWithCorrespondingTyping.reduce(0, {(s: Int, x: (candidate: Candidate, typing: String)) -> Int in return s + x.typing.getReadingLength()})
+                _remainingUserTypingString = userTypingString.substring(from: userTypingString.characters.index(userTypingString.startIndex, offsetBy: wordLengthOfAllCachedCandidateTypings))
             }
             return _remainingUserTypingString!
         }
@@ -89,7 +89,7 @@ class TypingString {
     var joinedCandidate: String {
         get {
             if _joinedCandidate == nil {
-                _joinedCandidate = _cachedCandidatesWithCorrespondingTyping.map({x in return x.candidate.text}).joinWithSeparator("")
+                _joinedCandidate = _cachedCandidatesWithCorrespondingTyping.map({x in return x.candidate.text}).joined(separator: "")
             }
             return _joinedCandidate!
         }
@@ -114,7 +114,7 @@ class TypingString {
         _cachedCandidatesWithCorrespondingTyping = []
     }
     
-    func append(newString: String) {
+    func append(_ newString: String) {
         userTypingString += newString
     }
     
@@ -158,57 +158,57 @@ class TypingString {
     }
     
     func getCandidate() -> Candidate {
-        if typeOfRemainingFormalizedTyping == .Empty && _cachedCandidatesWithCorrespondingTyping.isEmpty == false {
+        if typeOfRemainingFormalizedTyping == .empty && _cachedCandidatesWithCorrespondingTyping.isEmpty == false {
             if _cachedCandidatesWithCorrespondingTyping.count == 1 {
                 let (candidate, queryString) = _cachedCandidatesWithCorrespondingTyping[0]
                 let type = candidate.type
-                if type != .Chinese {
+                if type != .chinese {
                     return Candidate(text: candidate.text, type: type, queryString: queryString)
                 }
             }
-            return Candidate(text: _cachedCandidatesWithCorrespondingTyping.map({x -> String in return x.candidate.text}).joinWithSeparator(""), withShuangpinString: _cachedCandidatesWithCorrespondingTyping.map({x -> String in return x.candidate.queryCode}).joinWithSeparator(" "))
+            return Candidate(text: _cachedCandidatesWithCorrespondingTyping.map({x -> String in return x.candidate.text}).joined(separator: ""), withShuangpinString: _cachedCandidatesWithCorrespondingTyping.map({x -> String in return x.candidate.queryCode}).joined(separator: " "))
         } else if hasSelectedPartialCandidates() {
-            return Candidate(text: _cachedCandidatesWithCorrespondingTyping.map({x -> String in return x.candidate.text}).joinWithSeparator(""))
+            return Candidate(text: _cachedCandidatesWithCorrespondingTyping.map({x -> String in return x.candidate.text}).joined(separator: ""))
         } else {
-            return Candidate(text: userTypingString, withEnglishString: userTypingString.lowercaseString)
+            return Candidate(text: userTypingString, withEnglishString: userTypingString.lowercased())
         }
     }
     
-    func updateBySelectedCandidate(candidate: Candidate) {
+    func updateBySelectedCandidate(_ candidate: Candidate) {
         switch candidate.type {
-        case .Empty:
+        case .empty:
             assertionFailure("Wrong branch!")
-        case .English, .Special, .OnlyText, .Custom:
+        case .english, .special, .onlyText, .custom:
             assert(_cachedCandidatesWithCorrespondingTyping.isEmpty, "_cachedCandidatesWithCorrespondingTyping: \(_cachedCandidatesWithCorrespondingTyping) should be empty!")
             let newCandidateWithCorrespondingTyping = (candidate: candidate, typing: userTypingString)
             _cachedCandidatesWithCorrespondingTyping.append(newCandidateWithCorrespondingTyping)
-        case .Chinese:
-            assert(self.typeOfRemainingFormalizedTyping == .EnglishOrShuangpin, "typeOfRemainingFormalizedTyping should be .EnglishOrShuangpin")
+        case .chinese:
+            assert(self.typeOfRemainingFormalizedTyping == .englishOrShuangpin, "typeOfRemainingFormalizedTyping should be .EnglishOrShuangpin")
             let numberOfWords = candidate.text.getReadingLength()
             // Get how many "_" in the pinyin of candidate
-            let candidateShuangpinArray = remainingFormalizedTypingStringForQuery.string.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
-            let numberOfUnderscore = candidateShuangpinArray[0..<min(numberOfWords, candidateShuangpinArray.count)].reduce(0, combine: { $0 + ($1.characters.contains("_") ? 1 : 0) })
+            let candidateShuangpinArray = remainingFormalizedTypingStringForQuery.string.components(separatedBy: CharacterSet.whitespaces)
+            let numberOfUnderscore = candidateShuangpinArray[0..<min(numberOfWords, candidateShuangpinArray.count)].reduce(0, { $0 + ($1.characters.contains("_") ? 1 : 0) })
             // Get end
             let truncatingLength = numberOfWords * 2 - numberOfUnderscore
             if  truncatingLength < remainingUserTypingString.getReadingLength() {
-                let index = remainingUserTypingString.startIndex.advancedBy(truncatingLength)
-                _cachedCandidatesWithCorrespondingTyping.append((candidate: candidate, typing: remainingUserTypingString.substringToIndex(index)))
+                let index = remainingUserTypingString.characters.index(remainingUserTypingString.startIndex, offsetBy: truncatingLength)
+                _cachedCandidatesWithCorrespondingTyping.append((candidate: candidate, typing: remainingUserTypingString.substring(to: index)))
             } else {
-                _cachedCandidatesWithCorrespondingTyping.append((candidate: candidate, typing: remainingUserTypingString.substringToIndex(remainingUserTypingString.endIndex)))
+                _cachedCandidatesWithCorrespondingTyping.append((candidate: candidate, typing: remainingUserTypingString.substring(to: remainingUserTypingString.endIndex)))
             }
         }
     }
     
-    func getFormalizedTypingString(userTypingString: String, byScheme scheme: [String: String], forDisplay useForDisply: Bool) -> FormalizedTypingString {
+    func getFormalizedTypingString(_ userTypingString: String, byScheme scheme: [String: String], forDisplay useForDisply: Bool) -> FormalizedTypingString {
         
         if userTypingString == "" {
             return FormalizedTypingString()
         }
         
         if userTypingString.containsNonLetters() {    // no matter for display or not
-            return FormalizedTypingString(type: .Special, originalString: userTypingString, string: userTypingString)
+            return FormalizedTypingString(type: .special, originalString: userTypingString, string: userTypingString)
         } else if userTypingString.containsUppercaseLetters() == true {
-            return FormalizedTypingString(type: .English, originalString: userTypingString, string: userTypingString)
+            return FormalizedTypingString(type: .english, originalString: userTypingString, string: userTypingString)
         } else {
             // EnglishOrShuangpin
             let userTyping = userTypingString as NSString
@@ -216,13 +216,13 @@ class TypingString {
             var formalizedStr = ""
             var index = 0
             while index < length - 1 {
-                let twoLetters = userTyping.substringWithRange(NSMakeRange(index,2))
+                let twoLetters = userTyping.substring(with: NSMakeRange(index,2))
                 let newTwoLetters = scheme[twoLetters]
                 if newTwoLetters != nil {
                     formalizedStr += useForDisply ? twoLetters : newTwoLetters!
                     index += 2
                 } else {
-                    let fst = userTyping.substringWithRange(NSMakeRange(index,1))
+                    let fst = userTyping.substring(with: NSMakeRange(index,1))
                     let newFst = scheme[String(fst)]!
                     formalizedStr += useForDisply ? fst: newFst
                     formalizedStr += useForDisply ? "" : "_"
@@ -233,12 +233,12 @@ class TypingString {
                 }
             }
             if index < length {
-                let fst = userTyping.substringWithRange(NSMakeRange(index,1))
+                let fst = userTyping.substring(with: NSMakeRange(index,1))
                 let newFst = scheme[String(fst)]!
                 formalizedStr += useForDisply ? fst : newFst
             }
             
-            return formalizedStr == "" ? FormalizedTypingString() : FormalizedTypingString(type: .EnglishOrShuangpin, originalString: userTypingString, string: formalizedStr)
+            return formalizedStr == "" ? FormalizedTypingString() : FormalizedTypingString(type: .englishOrShuangpin, originalString: userTypingString, string: formalizedStr)
         }
     }
 }

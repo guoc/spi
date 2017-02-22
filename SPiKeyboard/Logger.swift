@@ -9,18 +9,18 @@ class Logger {
     }
     
     let path = { () -> String in
-        let folder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] 
-        return NSURL(string: folder)!.URLByAppendingPathComponent("log").absoluteString
+        let folder = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] 
+        return URL(string: folder)!.appendingPathComponent("log").absoluteString
     }()
     
-    var outputStream: NSOutputStream!
+    var outputStream: OutputStream!
     
     init() {
         initOutputStream()
     }
     
     func initOutputStream() {
-        outputStream = NSOutputStream(toFileAtPath: path, append: true)
+        outputStream = OutputStream(toFileAtPath: path, append: true)
         if outputStream != nil {
             outputStream.open()
         } else {
@@ -32,44 +32,44 @@ class Logger {
         outputStream.close()
     }
     
-    func writeLogLine(selectedCellIndex selectedCellIndex: Int, selectedCellText: String) {
+    func writeLogLine(selectedCellIndex: Int, selectedCellText: String) {
         writeLogLine(filledString: "@\(selectedCellIndex) \(selectedCellText)")
     }
     
-    func writeLogLine(tappedKey tappedKey: Key) {
+    func writeLogLine(tappedKey: Key) {
         let tappedKeyText = tappedKey.uppercaseKeyCap ?? (tappedKey.lowercaseKeyCap ?? "???")
         writeLogLine(filledString: "\(tappedKeyText) <>")
     }
         
-    func writeLogLine(filledString filledString: String) {
-        let currentTime = NSDate()
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.timeZone = NSTimeZone.localTimeZone()
-        dateFormatter.dateStyle = .ShortStyle
-        dateFormatter.timeStyle = .LongStyle
-        let currentTimeStr = dateFormatter.stringFromDate(currentTime)
+    func writeLogLine(filledString: String) {
+        let currentTime = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = TimeZone.autoupdatingCurrent
+        dateFormatter.dateStyle = .short
+        dateFormatter.timeStyle = .long
+        let currentTimeStr = dateFormatter.string(from: currentTime)
         writeLogFileWith("\(filledString)\t\(currentTimeStr)\n")
     }
     
-    func writeLogFileWith(string: String) {
-        if !NSUserDefaults.standardUserDefaults().boolForKey("kLogging") {
+    func writeLogFileWith(_ string: String) {
+        if !UserDefaults.standard.bool(forKey: "kLogging") {
             return
         }
-        let qos = Int(QOS_CLASS_BACKGROUND.rawValue)
-        let queue = dispatch_get_global_queue(qos, 0)
-        dispatch_async(queue) { () -> Void in
+        let qos = Int(DispatchQoS.QoSClass.background.rawValue)
+        let queue = DispatchQueue.global(priority: qos)
+        queue.async { () -> Void in
             self.outputStream.write(string)
             return
         }
     }
     
     func getLogFileContent() -> String {
-        return (try? String(contentsOfFile: path, encoding: NSUTF8StringEncoding)) ?? "can not open log file"
+        return (try? String(contentsOfFile: path, encoding: String.Encoding.utf8)) ?? "can not open log file"
     }
     
     func clearLogFile() {
         do {
-            try NSFileManager.defaultManager().removeItemAtPath(path)
+            try FileManager.default.removeItem(atPath: path)
         } catch _ {
         }
         initOutputStream()
@@ -79,7 +79,7 @@ class Logger {
         // from http://stackoverflow.com/questions/27556807/swift-pointer-problems-with-mach-task-basic-info/27559770#27559770
         
         // constant
-        let MACH_TASK_BASIC_INFO_COUNT = (sizeof(mach_task_basic_info_data_t) / sizeof(natural_t))
+        let MACH_TASK_BASIC_INFO_COUNT = (MemoryLayout<mach_task_basic_info_data_t>.size / MemoryLayout<natural_t>.size)
         
         // prepare parameters
         let name   = mach_task_self_
@@ -87,7 +87,7 @@ class Logger {
         var size   = mach_msg_type_number_t(MACH_TASK_BASIC_INFO_COUNT)
         
         // allocate pointer to mach_task_basic_info
-        let infoPointer = UnsafeMutablePointer<mach_task_basic_info>.alloc(1)
+        let infoPointer = UnsafeMutablePointer<mach_task_basic_info>.allocate(capacity: 1)
         
         // call task_info - note extra UnsafeMutablePointer(...) call
         let kerr = task_info(name, flavor, UnsafeMutablePointer(infoPointer), &size)
@@ -96,24 +96,24 @@ class Logger {
         let info = infoPointer.move()
         
         // deallocate pointer
-        infoPointer.dealloc(1)
+        infoPointer.deallocate(capacity: 1)
         
         // check return value for success / failure
         if kerr == KERN_SUCCESS {
-            let numberFormatter = NSNumberFormatter()
+            let numberFormatter = NumberFormatter()
             numberFormatter.groupingSize = 3
             numberFormatter.groupingSeparator = ","
             numberFormatter.usesGroupingSeparator = true
-            let usageStr = numberFormatter.stringFromNumber(NSNumber(unsignedLongLong: info.resident_size)) ?? "not available"
+            let usageStr = numberFormatter.string(from: NSNumber(value: info.resident_size as UInt64)) ?? "not available"
             return ("Memory in use (in bytes): \(usageStr)")
         } else {
-            let errorString = String(CString: mach_error_string(kerr), encoding: NSASCIIStringEncoding)
+            let errorString = String(CString: mach_error_string(kerr), encoding: String.Encoding.ascii)
             return (errorString ?? "Error: couldn't parse error string")
         }
     }
 }
 
-extension NSOutputStream {
+extension OutputStream {
     
     /// Write String to outputStream
     ///
@@ -123,10 +123,10 @@ extension NSOutputStream {
     ///
     /// - returns:                     Return total number of bytes written upon success. Return -1 upon failure.
     
-    func write(string: String, encoding: NSStringEncoding = NSUTF8StringEncoding, allowLossyConversion: Bool = true) -> Int {
-        if let data = string.dataUsingEncoding(encoding, allowLossyConversion: allowLossyConversion) {
-            var bytes = UnsafePointer<UInt8>(data.bytes)
-            var bytesRemaining = data.length
+    func write(_ string: String, encoding: String.Encoding = String.Encoding.utf8, allowLossyConversion: Bool = true) -> Int {
+        if let data = string.data(using: encoding, allowLossyConversion: allowLossyConversion) {
+            var bytes = (data as NSData).bytes.bindMemory(to: UInt8.self, capacity: data.count)
+            var bytesRemaining = data.count
             var totalBytesWritten = 0
             
             while bytesRemaining > 0 {

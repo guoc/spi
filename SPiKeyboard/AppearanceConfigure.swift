@@ -1,5 +1,5 @@
 
-func getKeyboardKeyDisplayText(keyText: String) -> String {
+func getKeyboardKeyDisplayText(_ keyText: String) -> String {
     return keyboardKeyDisplayText[keyText] ?? keyText
 }
 

@@ -1,42 +1,42 @@
 
 import Foundation
 
-let lowercaseLetterAndUnderScoreCharacterSet: NSCharacterSet = {
-    var characterSet: NSMutableCharacterSet = NSCharacterSet.lowercaseLetterCharacterSet().mutableCopy() as! NSMutableCharacterSet
-    characterSet.addCharactersInString("_")
-    return characterSet as NSCharacterSet
+let lowercaseLetterAndUnderScoreCharacterSet: CharacterSet = {
+    var characterSet: NSMutableCharacterSet = (CharacterSet.lowercaseLetters as NSCharacterSet).mutableCopy() as! NSMutableCharacterSet
+    characterSet.addCharacters(in: "_")
+    return characterSet as CharacterSet
     }()
 
-let lowercaseLetterAndSpaceCharacterSet: NSCharacterSet = {
-    var characterSet: NSMutableCharacterSet = NSCharacterSet.lowercaseLetterCharacterSet().mutableCopy() as! NSMutableCharacterSet
-    characterSet.addCharactersInString(" ")
-    return characterSet as NSCharacterSet
+let lowercaseLetterAndSpaceCharacterSet: CharacterSet = {
+    var characterSet: NSMutableCharacterSet = (CharacterSet.lowercaseLetters as NSCharacterSet).mutableCopy() as! NSMutableCharacterSet
+    characterSet.addCharacters(in: " ")
+    return characterSet as CharacterSet
     }()
 
-let lowercaseLetterAndUnderScoreAndSpaceCharacterSet: NSCharacterSet = {
-    var characterSet: NSMutableCharacterSet = NSCharacterSet.lowercaseLetterCharacterSet().mutableCopy() as! NSMutableCharacterSet
-    characterSet.addCharactersInString(" _")
-    return characterSet as NSCharacterSet
+let lowercaseLetterAndUnderScoreAndSpaceCharacterSet: CharacterSet = {
+    var characterSet: NSMutableCharacterSet = (CharacterSet.lowercaseLetters as NSCharacterSet).mutableCopy() as! NSMutableCharacterSet
+    characterSet.addCharacters(in: " _")
+    return characterSet as CharacterSet
     }()
 
-let whitespaceAndUnderscoreCharacterSet: NSCharacterSet = {
-    var characterSet: NSMutableCharacterSet = NSCharacterSet.whitespaceCharacterSet().mutableCopy() as! NSMutableCharacterSet
-    characterSet.addCharactersInString("_")
-    return characterSet as NSCharacterSet
+let whitespaceAndUnderscoreCharacterSet: CharacterSet = {
+    var characterSet: NSMutableCharacterSet = (CharacterSet.whitespaces as NSCharacterSet).mutableCopy() as! NSMutableCharacterSet
+    characterSet.addCharacters(in: "_")
+    return characterSet as CharacterSet
     }()
 
-let letterAndSpaceCharacterSet: NSCharacterSet = {
-    var characterSet: NSMutableCharacterSet = NSCharacterSet.letterCharacterSet().mutableCopy() as! NSMutableCharacterSet
-    characterSet.addCharactersInString(" ")
-    return characterSet as NSCharacterSet
+let letterAndSpaceCharacterSet: CharacterSet = {
+    var characterSet: NSMutableCharacterSet = (CharacterSet.letters as NSCharacterSet).mutableCopy() as! NSMutableCharacterSet
+    characterSet.addCharacters(in: " ")
+    return characterSet as CharacterSet
     }()
 
 extension String {
     
     func containsChinese() -> Bool {
-        let str: NSString = self
+        let str: NSString = self as NSString
         for i in 0 ..< str.length {
-            let a = str.characterAtIndex(i)
+            let a = str.character(at: i)
             if a >= 0x4E00 && a <= 0x9FA5 {
                 return true
             }
@@ -46,15 +46,15 @@ extension String {
     
     func getCandidateType() -> CandidateType {
         if self == "" {
-            return .Empty
+            return .empty
         }
         var containsSpecial = false
         var containsChinese = false
         var containsEnglish = false
-        var type: CandidateType = .English
-        let str: NSString = self
+        var type: CandidateType = .english
+        let str: NSString = self as NSString
         for i in 0 ..< str.length {
-            let a = str.characterAtIndex(i)
+            let a = str.character(at: i)
             if a >= 0x4E00 && a <= 0x9FA5 {
                 containsChinese = true
             } else if a < 0x41 || a > 0x7A {
@@ -64,17 +64,17 @@ extension String {
             }
         }
         if containsSpecial {
-            type = .Special
+            type = .special
         } else {
             if containsChinese {
                 if containsEnglish {
-                    type = .Special
+                    type = .special
                 } else {
-                    type = .Chinese
+                    type = .chinese
                 }
             } else {
                 if containsEnglish {
-                    type = .English
+                    type = .english
                 } else {
                     assertionFailure("This string does not contain Chinese, English or Special")
                 }
@@ -83,32 +83,32 @@ extension String {
         return type
     }
     
-    func stringByRemovingCharactersInSet(characterSet: NSCharacterSet) -> String {
-        return self.componentsSeparatedByCharactersInSet(characterSet).joinWithSeparator("")
+    func stringByRemovingCharactersInSet(_ characterSet: CharacterSet) -> String {
+        return self.components(separatedBy: characterSet).joined(separator: "")
     }
     
     func stringByRemovingWhitespace() -> String {
-        return self.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet()).joinWithSeparator("")
+        return self.components(separatedBy: CharacterSet.whitespaces).joined(separator: "")
     }
     
     func stringByRemovingWhitespaceAndUnderscore() -> String {
-        return self.componentsSeparatedByCharactersInSet(whitespaceAndUnderscoreCharacterSet).joinWithSeparator("")
+        return self.components(separatedBy: whitespaceAndUnderscoreCharacterSet).joined(separator: "")
     }
     
     func onlyContainsLowercaseLetters() -> Bool {
-        return self.stringByRemovingCharactersInSet(NSCharacterSet.lowercaseLetterCharacterSet()) == ""
+        return self.stringByRemovingCharactersInSet(CharacterSet.lowercaseLetters) == ""
     }
     
     func containsUppercaseLetters() -> Bool {
-        return self.rangeOfCharacterFromSet(NSCharacterSet.uppercaseLetterCharacterSet()) != nil
+        return self.rangeOfCharacter(from: CharacterSet.uppercaseLetters) != nil
     }
     
     func containsLetters() -> Bool {
-        return self.rangeOfCharacterFromSet(NSCharacterSet.letterCharacterSet()) != nil
+        return self.rangeOfCharacter(from: CharacterSet.letters) != nil
     }
     
     func containsLettersOrUnderscore() -> Bool {
-        return self.rangeOfCharacterFromSet(lowercaseLetterAndUnderScoreCharacterSet) != nil
+        return self.rangeOfCharacter(from: lowercaseLetterAndUnderScoreCharacterSet) != nil
     }
     
     func containsNonLettersOrSpace() -> Bool {
@@ -116,10 +116,10 @@ extension String {
     }
     
     func containsNonLetters() -> Bool {
-        return self.stringByRemovingCharactersInSet(NSCharacterSet.letterCharacterSet()) != ""
+        return self.stringByRemovingCharactersInSet(CharacterSet.letters) != ""
     }
     
     func getReadingLength() -> Int {
-        return self.lengthOfBytesUsingEncoding(NSUTF32StringEncoding) / 4
+        return self.lengthOfBytes(using: String.Encoding.utf32) / 4
     }
 }

@@ -19,8 +19,8 @@ class Catboard: KeyboardViewController {
     
     let takeDebugScreenshot: Bool = false
     
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
-        NSUserDefaults.standardUserDefaults().registerDefaults([kCatTypeEnabled: true])
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        UserDefaults.standard.register(defaults: [kCatTypeEnabled: true])
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
 
@@ -28,15 +28,15 @@ class Catboard: KeyboardViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func keyPressed(key: Key) {
+    override func keyPressed(_ key: Key) {
         let keyOutput = key.outputForCase(self.shiftState.uppercase())
         
-        if !NSUserDefaults.standardUserDefaults().boolForKey(kCatTypeEnabled) {
+        if !UserDefaults.standard.bool(forKey: kCatTypeEnabled) {
             textDocumentProxy.insertText(keyOutput)
             return
         }
         
-        if key.type == .Character || key.type == .SpecialCharacter {
+        if key.type == .character || key.type == .specialCharacter {
             let context = textDocumentProxy.documentContextBeforeInput
             if context != nil {
                 if context!.characters.count < 2 {
@@ -46,13 +46,13 @@ class Catboard: KeyboardViewController {
                 
                 var index = context!.endIndex
                 
-                index = index.predecessor()
+                index = <#T##Collection corresponding to `index`##Collection#>.index(before: index)
                 if context?.characters[index] != " " {
                     textDocumentProxy.insertText(keyOutput)
                     return
                 }
                 
-                index = index.predecessor()
+                index = <#T##Collection corresponding to `index`##Collection#>.index(before: index)
                 if context?.characters[index] == " " {
                     textDocumentProxy.insertText(keyOutput)
                     return
@@ -86,7 +86,7 @@ class Catboard: KeyboardViewController {
                 for rowKeys in page.rows {
                     for key in rowKeys {
                         if let keyView = self.layout!.viewForKey(key) {
-                            keyView.addTarget(self, action: #selector(takeScreenshotDelay), forControlEvents: .TouchDown)
+                            keyView.addTarget(self, action: #selector(takeScreenshotDelay), for: .touchDown)
                         }
                     }
                 }
@@ -95,16 +95,16 @@ class Catboard: KeyboardViewController {
     }
     
     override func createBanner() -> ExtraView? {
-        return CatboardBanner(globalColors: self.dynamicType.globalColors, darkMode: false, solidColorMode: self.solidColorMode())
+        return CatboardBanner(globalColors: type(of: self).globalColors, darkMode: false, solidColorMode: self.solidColorMode())
     }
     
     func takeScreenshotDelay() {
-        NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: #selector(takeScreenshot), userInfo: nil, repeats: false)
+        Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(takeScreenshot), userInfo: nil, repeats: false)
     }
     
     func takeScreenshot() {
-        if !CGRectIsEmpty(self.view.bounds) {
-            UIDevice.currentDevice().beginGeneratingDeviceOrientationNotifications()
+        if !self.view.bounds.isEmpty {
+            UIDevice.current.beginGeneratingDeviceOrientationNotifications()
             
             let oldViewColor = self.view.backgroundColor
             self.view.backgroundColor = UIColor(hue: (216/360.0), saturation: 0.05, brightness: 0.86, alpha: 1)
@@ -112,12 +112,12 @@ class Catboard: KeyboardViewController {
             let rect = self.view.bounds
             UIGraphicsBeginImageContextWithOptions(rect.size, true, 0)
             var _ = UIGraphicsGetCurrentContext()
-            self.view.drawViewHierarchyInRect(self.view.bounds, afterScreenUpdates: true)
+            self.view.drawHierarchy(in: self.view.bounds, afterScreenUpdates: true)
             let capturedImage = UIGraphicsGetImageFromCurrentImageContext()
             UIGraphicsEndImageContext()
             let name = (self.interfaceOrientation.isPortrait ? "Screenshot-Portrait" : "Screenshot-Landscape")
             let imagePath = "/Users/archagon/Documents/Programming/OSX/RussianPhoneticKeyboard/External/tasty-imitation-keyboard/\(name).png"
-            UIImagePNGRepresentation(capturedImage)!.writeToFile(imagePath, atomically: true)
+            try? UIImagePNGRepresentation(capturedImage!)!.write(to: URL(fileURLWithPath: imagePath), options: [.atomic])
             
             self.view.backgroundColor = oldViewColor
         }
@@ -130,7 +130,7 @@ func randomCat() -> String {
     let numCats = cats.characters.count
     let randomCat = arc4random() % UInt32(numCats)
     
-    let index = cats.startIndex.advancedBy(Int(randomCat))
+    let index = cats.characters.index(cats.startIndex, offsetBy: Int(randomCat))
     let character = cats[index]
     
     return String(character)

@@ -2,11 +2,11 @@
 import UIKit
 
 let darkModeBannerColor = UIColor(red: 89, green: 92, blue: 95, alpha: 0.2)
-let lightModeBannerColor = UIColor.whiteColor()
+let lightModeBannerColor = UIColor.white
 let darkModeBannerBorderColor = UIColor(white: 0.3, alpha: 1)
 let lightModeBannerBorderColor = UIColor(white: 0.6, alpha: 1)
 
-let extraLineTypingTextFont = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
+let extraLineTypingTextFont = UIFont.preferredFont(forTextStyle: UIFontTextStyle.subheadline)
 let typingAndCandidatesViewHeightWhenShowTypingCellInExtraLineIsTrue = 28 as CGFloat
 let bannerHeightWhenShowTypingCellInExtraLineIsTrue = 50 as CGFloat
 
@@ -30,7 +30,7 @@ class CandidatesBanner: ExtraView {
     var potraitBannerWidthConstraints: [NSLayoutConstraint]? = nil
     var landscapeBannerWidthConstraints: [NSLayoutConstraint]? = nil
     
-    weak var delegate: protocol<UICollectionViewDataSource, UICollectionViewDelegate>! {
+    weak var delegate: (UICollectionViewDataSource & UICollectionViewDelegate)! {
         didSet {
             collectionView.dataSource = delegate
             collectionView.delegate = delegate
@@ -50,11 +50,11 @@ class CandidatesBanner: ExtraView {
         
         collectionViewLayout = MyCollectionViewFlowLayout()
 
-        collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: collectionViewLayout)
-        collectionView.registerClass(CandidateCell.self, forCellWithReuseIdentifier: "Cell")
+        collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: collectionViewLayout)
+        collectionView.register(CandidateCell.self, forCellWithReuseIdentifier: "Cell")
         
-        moreCandidatesButton = UIButton(type: .Custom)
-        moreCandidatesButton.addTarget(delegate, action: #selector(MyKeyboardViewController.toggleCandidatesTableOrDismissKeyboard), forControlEvents: .TouchUpInside)
+        moreCandidatesButton = UIButton(type: .custom)
+        moreCandidatesButton.addTarget(delegate, action: #selector(MyKeyboardViewController.toggleCandidatesTableOrDismissKeyboard), for: .touchUpInside)
         
         // Above part should be same as func initSubviews()
         
@@ -84,11 +84,11 @@ class CandidatesBanner: ExtraView {
         
         collectionViewLayout = MyCollectionViewFlowLayout()
         
-        collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: collectionViewLayout)
-        collectionView.registerClass(CandidateCell.self, forCellWithReuseIdentifier: "Cell")
+        collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: collectionViewLayout)
+        collectionView.register(CandidateCell.self, forCellWithReuseIdentifier: "Cell")
         
-        moreCandidatesButton = UIButton(type: .Custom)
-        moreCandidatesButton.addTarget(delegate, action: #selector(MyKeyboardViewController.toggleCandidatesTableOrDismissKeyboard), forControlEvents: .TouchUpInside)
+        moreCandidatesButton = UIButton(type: .custom)
+        moreCandidatesButton.addTarget(delegate, action: #selector(MyKeyboardViewController.toggleCandidatesTableOrDismissKeyboard), for: .touchUpInside)
     }
     
     func configureSubviews() {
@@ -104,46 +104,46 @@ class CandidatesBanner: ExtraView {
         var constraints: [NSLayoutConstraint]
         
         self.removeConstraints(self.constraints)
-        let actualScreenWidth = (UIScreen.mainScreen().nativeBounds.size.width / UIScreen.mainScreen().nativeScale)
-        let actualScreenHeight = (UIScreen.mainScreen().nativeBounds.size.height / UIScreen.mainScreen().nativeScale)
+        let actualScreenWidth = (UIScreen.main.nativeBounds.size.width / UIScreen.main.nativeScale)
+        let actualScreenHeight = (UIScreen.main.nativeBounds.size.height / UIScreen.main.nativeScale)
         if potraitBannerWidthConstraints == nil {
-            potraitBannerWidthConstraints = NSLayoutConstraint.constraintsWithVisualFormat("H:[banner(==\(actualScreenWidth)@1000)]", options: [], metrics: nil, views: ["banner": self])
+            potraitBannerWidthConstraints = NSLayoutConstraint.constraints(withVisualFormat: "H:[banner(==\(actualScreenWidth)@1000)]", options: [], metrics: nil, views: ["banner": self])
         }
         if landscapeBannerWidthConstraints == nil {
-            landscapeBannerWidthConstraints = NSLayoutConstraint.constraintsWithVisualFormat("H:[banner(==\(actualScreenHeight)@1000)]", options: [], metrics: nil, views: ["banner": self])
+            landscapeBannerWidthConstraints = NSLayoutConstraint.constraints(withVisualFormat: "H:[banner(==\(actualScreenHeight)@1000)]", options: [], metrics: nil, views: ["banner": self])
         }
         switch((self.delegate as! MyKeyboardViewController).interfaceOrientation) {    // FIXME delegate should not be casted.
-        case .Unknown, .Portrait, .PortraitUpsideDown:
+        case .unknown, .portrait, .portraitUpsideDown:
             self.addConstraints(potraitBannerWidthConstraints!)
-        case .LandscapeLeft, .LandscapeRight:
+        case .landscapeLeft, .landscapeRight:
             self.addConstraints(landscapeBannerWidthConstraints!)
         }
         let bannerHeight = getBannerHeight()
-        constraints = NSLayoutConstraint.constraintsWithVisualFormat("V:[banner(==\(bannerHeight)@1000)]", options: [], metrics: nil, views: ["banner": self])
+        constraints = NSLayoutConstraint.constraints(withVisualFormat: "V:[banner(==\(bannerHeight)@1000)]", options: [], metrics: nil, views: ["banner": self])
         self.addConstraints(constraints)
         
-        constraints = NSLayoutConstraint.constraintsWithVisualFormat("H:[button]-0-|", options: [], metrics: nil, views: ["button": moreCandidatesButton])
+        constraints = NSLayoutConstraint.constraints(withVisualFormat: "H:[button]-0-|", options: [], metrics: nil, views: ["button": moreCandidatesButton])
         self.addConstraints(constraints)
         if showTypingCellInExtraLine == true {
-            constraints = NSLayoutConstraint.constraintsWithVisualFormat("V:[button]-0-|", options: [], metrics: nil, views: ["button": moreCandidatesButton])
+            constraints = NSLayoutConstraint.constraints(withVisualFormat: "V:[button]-0-|", options: [], metrics: nil, views: ["button": moreCandidatesButton])
         } else {
-            constraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[button]-0-|", options: [], metrics: nil, views: ["button": moreCandidatesButton])
+            constraints = NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[button]-0-|", options: [], metrics: nil, views: ["button": moreCandidatesButton])
         }
         self.addConstraints(constraints)
-        let constraint = NSLayoutConstraint(item: moreCandidatesButton, attribute: .Height, relatedBy: .Equal, toItem: moreCandidatesButton, attribute: .Width, multiplier: 0.8, constant: 0)
+        let constraint = NSLayoutConstraint(item: moreCandidatesButton, attribute: .height, relatedBy: .equal, toItem: moreCandidatesButton, attribute: .width, multiplier: 0.8, constant: 0)
         self.addConstraint(constraint)
         
-        constraints = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[collectionView]", options: [], metrics: nil, views: ["collectionView": collectionView])
+        constraints = NSLayoutConstraint.constraints(withVisualFormat: "H:|-0-[collectionView]", options: [], metrics: nil, views: ["collectionView": collectionView])
         self.addConstraints(constraints)
         let candidateCellHeight = getCandidateCellHeight()
         if showTypingCellInExtraLine == true {
-            constraints = NSLayoutConstraint.constraintsWithVisualFormat("V:[collectionView(==\(candidateCellHeight)@1000)]-0-|", options: [], metrics: nil, views: ["collectionView": collectionView])
+            constraints = NSLayoutConstraint.constraints(withVisualFormat: "V:[collectionView(==\(candidateCellHeight)@1000)]-0-|", options: [], metrics: nil, views: ["collectionView": collectionView])
         } else {
-            constraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[collectionView]-0-|", options: [], metrics: nil, views: ["collectionView": collectionView])
+            constraints = NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[collectionView]-0-|", options: [], metrics: nil, views: ["collectionView": collectionView])
         }
         self.addConstraints(constraints)
         
-        constraints = NSLayoutConstraint.constraintsWithVisualFormat("H:[collectionView]-0-[button]", options: [], metrics: nil, views: ["collectionView": collectionView, "button": moreCandidatesButton])
+        constraints = NSLayoutConstraint.constraints(withVisualFormat: "H:[collectionView]-0-[button]", options: [], metrics: nil, views: ["collectionView": collectionView, "button": moreCandidatesButton])
         self.addConstraints(constraints)
         
         if showTypingCellInExtraLine == true {
@@ -153,14 +153,14 @@ class CandidatesBanner: ExtraView {
                 
                 typingLabel.translatesAutoresizingMaskIntoConstraints = false
                 
-                constraints = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[typingView]-0-|", options: [], metrics: nil, views: ["typingView": typingLabel])
+                constraints = NSLayoutConstraint.constraints(withVisualFormat: "H:|-0-[typingView]-0-|", options: [], metrics: nil, views: ["typingView": typingLabel])
                 self.addConstraints(constraints)
-                constraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[typingView]", options: [], metrics: nil, views: ["typingView": typingLabel])
+                constraints = NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[typingView]", options: [], metrics: nil, views: ["typingView": typingLabel])
                 self.addConstraints(constraints)
                 
-                constraints = NSLayoutConstraint.constraintsWithVisualFormat("V:[typingView]-0-[button]", options: [], metrics: nil, views: ["typingView": typingLabel, "button": moreCandidatesButton])
+                constraints = NSLayoutConstraint.constraints(withVisualFormat: "V:[typingView]-0-[button]", options: [], metrics: nil, views: ["typingView": typingLabel, "button": moreCandidatesButton])
                 self.addConstraints(constraints)
-                constraints = NSLayoutConstraint.constraintsWithVisualFormat("V:[typingView]-0-[collectionView]", options: [], metrics: nil, views: ["typingView": typingLabel, "collectionView": collectionView])
+                constraints = NSLayoutConstraint.constraints(withVisualFormat: "V:[typingView]-0-[collectionView]", options: [], metrics: nil, views: ["typingView": typingLabel, "collectionView": collectionView])
                 self.addConstraints(constraints)
             }
         }
@@ -169,16 +169,16 @@ class CandidatesBanner: ExtraView {
     }
     
     func scrollToFirstCandidate() {
-        collectionView.scrollToItemAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: .Left, animated: false)
+        collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .left, animated: false)
     }
     
-    func resetLayoutWithAllCellSize(sizes: [CGSize]) {
+    func resetLayoutWithAllCellSize(_ sizes: [CGSize]) {
         collectionViewLayout.resetLayoutWithAllCellSize(sizes)
     }
     
-    func updateCellAt(cellIndex: NSIndexPath, withCellSize size: CGSize) {
+    func updateCellAt(_ cellIndex: IndexPath, withCellSize size: CGSize) {
         collectionViewLayout.updateLayoutRaisedByCellAt(cellIndex, withCellSize: size)
-        collectionView.reloadItemsAtIndexPaths([cellIndex])
+        collectionView.reloadItems(at: [cellIndex])
     }
     
     func reloadData() {
@@ -188,7 +188,7 @@ class CandidatesBanner: ExtraView {
         collectionView.reloadData()
     }
     
-    func setCollectionViewFrame(frame: CGRect) {
+    func setCollectionViewFrame(_ frame: CGRect) {
         collectionView.frame = frame
     }
     
@@ -202,16 +202,16 @@ class CandidatesBanner: ExtraView {
         
         if let typingLabel = typingLabel {
             typingLabel.font = extraLineTypingTextFont
-            typingLabel.backgroundColor = UIColor.clearColor()
+            typingLabel.backgroundColor = UIColor.clear
         }
 
-        collectionView.backgroundColor = UIColor.clearColor()
+        collectionView.backgroundColor = UIColor.clear
         
-        moreCandidatesButton.backgroundColor = UIColor.clearColor()
+        moreCandidatesButton.backgroundColor = UIColor.clear
 //        moreCandidatesButton.layer.borderColor = collectionView.layer.borderColor
         
-        moreCandidatesButton.layer.shadowColor = UIColor.blackColor().CGColor
-        moreCandidatesButton.layer.shadowOffset = CGSizeMake(-2.0, 0.0)
+        moreCandidatesButton.layer.shadowColor = UIColor.black.cgColor
+        moreCandidatesButton.layer.shadowOffset = CGSize(width: -2.0, height: 0.0)
         
         if needUpdateAppearance == true {
             updateAppearance()
@@ -227,12 +227,12 @@ class CandidatesBanner: ExtraView {
         
         typingLabel?.updateAppearance()
         
-        self.backgroundColor = candidatesBannerAppearanceIsDark ? darkModeBannerColor : UIColor.whiteColor()
+        self.backgroundColor = candidatesBannerAppearanceIsDark ? darkModeBannerColor : UIColor.white
 
-        moreCandidatesButton.setImage(candidatesBannerAppearanceIsDark ? UIImage(named: "arrow-down-white") : UIImage(named: "arrow-down-black"), forState: .Normal)
+        moreCandidatesButton.setImage(candidatesBannerAppearanceIsDark ? UIImage(named: "arrow-down-white") : UIImage(named: "arrow-down-black"), for: UIControlState())
         
         self.layer.borderWidth = 0.5
-        self.layer.borderColor = candidatesBannerAppearanceIsDark ? darkModeBannerBorderColor.CGColor : lightModeBannerBorderColor.CGColor
+        self.layer.borderColor = candidatesBannerAppearanceIsDark ? darkModeBannerBorderColor.cgColor : lightModeBannerBorderColor.cgColor
         
         moreCandidatesButton.layer.shadowOpacity = 0.2        
     }
@@ -248,8 +248,8 @@ class CandidatesBanner: ExtraView {
     func addSeparatorBars() {
         if separatorVerticalBar == nil {
             separatorVerticalBar = CALayer(layer: moreCandidatesButton.layer)
-            separatorVerticalBar!.backgroundColor = candidatesBannerAppearanceIsDark ? darkModeBannerBorderColor.CGColor : lightModeBannerBorderColor.CGColor
-            separatorVerticalBar!.frame = CGRectMake(0, 0, 0.5, CGRectGetHeight(moreCandidatesButton.frame))
+            separatorVerticalBar!.backgroundColor = candidatesBannerAppearanceIsDark ? darkModeBannerBorderColor.cgColor : lightModeBannerBorderColor.cgColor
+            separatorVerticalBar!.frame = CGRect(x: 0, y: 0, width: 0.5, height: moreCandidatesButton.frame.height)
             if let separatorVerticalBar = separatorVerticalBar {
                 moreCandidatesButton.layer.addSublayer(separatorVerticalBar)
             }
@@ -262,8 +262,8 @@ class CandidatesBanner: ExtraView {
                         separatorHorizontalBar!.removeFromSuperlayer()
                     }
                     separatorHorizontalBar = CALayer(layer: self.layer)
-                    separatorHorizontalBar!.backgroundColor = candidatesBannerAppearanceIsDark ? darkModeBannerBorderColor.CGColor : lightModeBannerBorderColor.CGColor
-                    separatorHorizontalBar!.frame = CGRectMake(0, CGRectGetHeight(typingLabel.frame), (UIScreen.mainScreen().nativeBounds.size.height / UIScreen.mainScreen().nativeScale), 0.5)
+                    separatorHorizontalBar!.backgroundColor = candidatesBannerAppearanceIsDark ? darkModeBannerBorderColor.cgColor : lightModeBannerBorderColor.cgColor
+                    separatorHorizontalBar!.frame = CGRect(x: 0, y: typingLabel.frame.height, width: (UIScreen.main.nativeBounds.size.height / UIScreen.main.nativeScale), height: 0.5)
                     self.layer.addSublayer(separatorHorizontalBar!)
                 }
             }
@@ -282,21 +282,21 @@ class CandidatesBanner: ExtraView {
     }
     
     func hideTypingAndCandidatesView() {
-        typingLabel?.hidden = true
-        collectionView.hidden = true
+        typingLabel?.isHidden = true
+        collectionView.isHidden = true
     }
 
     func unhideTypingAndCandidatesView() {
-        typingLabel?.hidden = false
-        collectionView.hidden = false
+        typingLabel?.isHidden = false
+        collectionView.isHidden = false
     }
 
     func changeArrowUp() {
-        moreCandidatesButton.setImage(candidatesBannerAppearanceIsDark ? UIImage(named: "arrow-up-white") : UIImage(named: "arrow-up-black"), forState: .Normal)
+        moreCandidatesButton.setImage(candidatesBannerAppearanceIsDark ? UIImage(named: "arrow-up-white") : UIImage(named: "arrow-up-black"), for: UIControlState())
     }
 
     func changeArrowDown() {
-        moreCandidatesButton.setImage(candidatesBannerAppearanceIsDark ? UIImage(named: "arrow-down-white") : UIImage(named: "arrow-down-black"), forState: .Normal)
+        moreCandidatesButton.setImage(candidatesBannerAppearanceIsDark ? UIImage(named: "arrow-down-white") : UIImage(named: "arrow-down-black"), for: UIControlState())
     }
     
 }

@@ -13,9 +13,9 @@ class ShuangpinScheme {
     }
     
     class func loadScheme() {
-        let schemeName = NSUserDefaults.standardUserDefaults().stringForKey("kScheme") ?? "自然码"
-        let path = NSBundle.mainBundle().pathForResource(schemeName, ofType: "spscheme")
-        if NSFileManager.defaultManager().fileExistsAtPath(path!) {
+        let schemeName = UserDefaults.standard.string(forKey: "kScheme") ?? "自然码"
+        let path = Bundle.main.path(forResource: schemeName, ofType: "spscheme")
+        if FileManager.default.fileExists(atPath: path!) {
             _scheme = NSDictionary(contentsOfFile: path!) as! [String: String]!
         } else {
             print("scheme is not found")

@@ -6,11 +6,11 @@ extension FMDatabaseQueue {
         var candidates = [Candidate]()
         self.inDatabase() {
             db in
-            if let rs = db.executeQuery(queryStatement, withArgumentsInArray: queryArguments) {
+            if let rs = db?.executeQuery(queryStatement, withArgumentsIn: queryArguments) {
                 while rs.next() {
-                    let candidateString = rs.stringForColumn("candidate") as String
-                    let queryCode = rs.stringForColumn("shuangpin") as String
-                    let candidateType = rs.intForColumn("candidate_type")
+                    let candidateString = rs.string(forColumn: "candidate") as String
+                    let queryCode = rs.string(forColumn: "shuangpin") as String
+                    let candidateType = rs.int(forColumn: "candidate_type")
                     
                     var candidate: Candidate?
                     
@@ -39,7 +39,7 @@ extension FMDatabaseQueue {
                     }
                 }
             } else {
-                print("select failed: \(db.lastErrorMessage())")
+                print("select failed: \(db?.lastErrorMessage())")
             }
         }
         return candidates
@@ -58,7 +58,7 @@ class CandidatesDataModel {
     
     init() {
         
-        let databasePath = NSBundle.mainBundle().pathForResource("candidates", ofType: "sqlite")
+        let databasePath = Bundle.main.path(forResource: "candidates", ofType: "sqlite")
         
         databaseQueue = FMDatabaseQueue(path: databasePath)
         
@@ -80,7 +80,7 @@ class CandidatesDataModel {
         inputHistory = InputHistory()
     }
     
-    func appendTypingStringBy(newString: String, needCandidatesUpdate needUpdate: Bool = true) {
+    func appendTypingStringBy(_ newString: String, needCandidatesUpdate needUpdate: Bool = true) {
         
         typingString.append(newString)
         if needUpdate {
@@ -96,14 +96,14 @@ class CandidatesDataModel {
         }
     }
     
-    func updateTypingWithSelectedCandidateAt(candidateIndexPath: NSIndexPath, needCandidatesUpdate needUpdate: Bool = true) {
+    func updateTypingWithSelectedCandidateAt(_ candidateIndexPath: IndexPath, needCandidatesUpdate needUpdate: Bool = true) {
         
         let candidateText = textAt(candidateIndexPath)
         let candidate = candidateAt(candidateIndexPath)
 
-        func substringContainingFirstSpecialCharacterOf(string: String) -> String {
-            let range = string.rangeOfCharacterFromSet(NSCharacterSet.lowercaseLetterCharacterSet().invertedSet)
-            return string.substringWithRange(string.startIndex...range!.startIndex)
+        func substringContainingFirstSpecialCharacterOf(_ string: String) -> String {
+            let range = string.rangeOfCharacter(from: CharacterSet.lowercaseLetters.inverted)
+            return string.substring(with: string.startIndex...range!.lowerBound)
         }
         
         if candidateIndexPath == indexPathZero {
@@ -111,7 +111,7 @@ class CandidatesDataModel {
             reset()
         } else {
             typingString.updateBySelectedCandidate(candidate)
-            if typingString.typeOfRemainingFormalizedTyping == .Empty {
+            if typingString.typeOfRemainingFormalizedTyping == .empty {
                 inputHistory.updateHistoryWith(typingString.getCandidate())
             } else {
 
@@ -134,13 +134,13 @@ class CandidatesDataModel {
     func prepareUpdateDataModelRaisedByTypingChange() {
         let formalizedTypingString = typingString.remainingFormalizedTypingStringForQuery
         switch formalizedTypingString.type {
-        case .Empty:
+        case .empty:
             if typingString.readyToInsert() == true {
                 
             } else {
                 reset()
             }
-        case .EnglishOrShuangpin, .English, .Special:
+        case .englishOrShuangpin, .english, .special:
             cachedCandidates = getCandidatesByFormalizedTypingString(typingString.remainingFormalizedTypingStringForQuery)
         }
     }
@@ -148,9 +148,9 @@ class CandidatesDataModel {
     func commitUpdate() {
         let formalizedTypingString = typingString.remainingFormalizedTypingStringForQuery
         switch formalizedTypingString.type {
-        case .Empty:
+        case .empty:
             break
-        case .EnglishOrShuangpin, .English, .Special:
+        case .englishOrShuangpin, .english, .special:
             candidates = cachedCandidates
         }
     }
@@ -160,9 +160,9 @@ class CandidatesDataModel {
         commitUpdate()
     }
     
-    func getCandidatesByFormalizedTypingString(formalizedTypingString: FormalizedTypingString) -> [Candidate] {
+    func getCandidatesByFormalizedTypingString(_ formalizedTypingString: FormalizedTypingString) -> [Candidate] {
         
-        func mergeCandidatesArrays(candidatesA: [Candidate], candidatesB: [Candidate]) -> [Candidate] {
+        func mergeCandidatesArrays(_ candidatesA: [Candidate], candidatesB: [Candidate]) -> [Candidate] {
             
             var candidatesAIndex = 0
             var candidatesBIndex = 0
@@ -210,13 +210,13 @@ class CandidatesDataModel {
             return retCandidates
         }
         
-        func getAccurateCandidatesFirstCandidatesArray(candidates: [Candidate], withQueryCode queryCode: String) -> [Candidate] {
+        func getAccurateCandidatesFirstCandidatesArray(_ candidates: [Candidate], withQueryCode queryCode: String) -> [Candidate] {
             let accurateCandidates = candidates.filter { $0.queryCode == queryCode }
             let inaccurateCandidates = candidates.filter { $0.queryCode != queryCode }
             return accurateCandidates + inaccurateCandidates
         }
         
-        if formalizedTypingString.type == .Empty {
+        if formalizedTypingString.type == .empty {
             return [Candidate]()
         }
         
@@ -233,7 +233,7 @@ class CandidatesDataModel {
         
         switch formalizedTypingString.type {
             
-        case .EnglishOrShuangpin:
+        case .englishOrShuangpin:
             
             // Prepare ACCURATE query if typing may be English
             if typingString.remainingUserTypingString.getReadingLength() > 2 {
@@ -243,7 +243,7 @@ class CandidatesDataModel {
                 // In xiaohe scheme "dc" -> "dk" -> "dao", if accurate query is used,
                 // candidates of "diao" will be returned, because in ziranma scheme "dc" -> "diao"
                 queryArguments.append(String(typingString.remainingUserTypingString[typingString.remainingUserTypingString.startIndex]))
-                queryArguments.append(typingString.remainingUserTypingString.lowercaseString)
+                queryArguments.append(typingString.remainingUserTypingString.lowercased())
                 whereStatement += "shengmu = ? and shuangpin = ? or "
             }
             
@@ -269,27 +269,27 @@ class CandidatesDataModel {
 
             // Handle left typing
             for ; index >= 0; index-=3 {
-                let strToAppend = formalizedStr.substringToIndex(formalizedStr.startIndex.advancedBy(index+1))
-                queryArguments.append(getShengmuString(from: strToAppend).lowercaseString)
+                let strToAppend = formalizedStr.substring(to: formalizedStr.characters.index(formalizedStr.startIndex, offsetBy: index+1))
+                queryArguments.append(getShengmuString(from: strToAppend).lowercased())
                 queryArguments.append(strToAppend)
                 clauseCount += 1
             }
             
-        case .English:
-            let strToAppend = formalizedStr.lowercaseString
+        case .english:
+            let strToAppend = formalizedStr.lowercased()
             queryArguments.append(String(strToAppend[strToAppend.startIndex]))
             queryArguments.append(strToAppend + "%")
             clauseCount += 1
-        case .Special:
+        case .special:
             let strToAppend = formalizedStr
             queryArguments.append(String(strToAppend[strToAppend.startIndex]))
             queryArguments.append(strToAppend + "%")
             clauseCount += 1
-        case .Empty:
+        case .empty:
             assertionFailure(".Empty has already returned!")
         }
         
-        whereStatement += Array(count: clauseCount, repeatedValue: "shengmu = ? and shuangpin like ?").joinWithSeparator(" or ")
+        whereStatement += Array(repeating: "shengmu = ? and shuangpin like ?", count: clauseCount).joined(separator: " or ")
         
         let queryStatement = "select candidate, shuangpin, candidate_type from candidates where " + whereStatement + " order by length desc, frequency desc"
         
@@ -323,7 +323,7 @@ class CandidatesDataModel {
         return typingString.userTypingString
     }
     
-    func textAt(indexPath: NSIndexPath) -> String? {
+    func textAt(_ indexPath: IndexPath) -> String? {
         if indexPath.row >= numberOfTypingAndCandidates() {
             return nil
         }
@@ -334,7 +334,7 @@ class CandidatesDataModel {
         }
     }
     
-    func candidateAt(indexPath: NSIndexPath) -> Candidate {
+    func candidateAt(_ indexPath: IndexPath) -> Candidate {
         if indexPath == indexPathZero {
             return typingString.getCandidate()
         } else {

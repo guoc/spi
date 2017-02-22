@@ -24,14 +24,14 @@ class StringExtensionTests: XCTestCase {
     }
     
     func testGetCandidateType() {
-        XCTAssert("天天".getCandidateType() == CandidateType.Chinese)
-        XCTAssert("天@".getCandidateType() == CandidateType.Special)
-        XCTAssert("@天".getCandidateType() == CandidateType.Special)
-        XCTAssert("@e".getCandidateType() == CandidateType.Special)
-        XCTAssert("e@".getCandidateType() == CandidateType.Special)
-        XCTAssert("ea".getCandidateType() == CandidateType.English)
-        XCTAssert("塔a".getCandidateType() == CandidateType.Special)
-        XCTAssert("o进".getCandidateType() == CandidateType.Special)
+        XCTAssert("天天".getCandidateType() == CandidateType.chinese)
+        XCTAssert("天@".getCandidateType() == CandidateType.special)
+        XCTAssert("@天".getCandidateType() == CandidateType.special)
+        XCTAssert("@e".getCandidateType() == CandidateType.special)
+        XCTAssert("e@".getCandidateType() == CandidateType.special)
+        XCTAssert("ea".getCandidateType() == CandidateType.english)
+        XCTAssert("塔a".getCandidateType() == CandidateType.special)
+        XCTAssert("o进".getCandidateType() == CandidateType.special)
     }
 
 }
