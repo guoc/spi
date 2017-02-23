@@ -1,7 +1,7 @@
 
 import UIKit
 
-let darkModeBannerColor = UIColor(red: 89, green: 92, blue: 95, alpha: 0.2)
+let darkModeBannerColor = UIColor(red: CGFloat(89)/CGFloat(255), green: CGFloat(92)/CGFloat(255), blue: CGFloat(95)/CGFloat(255), alpha: 0.2)
 let lightModeBannerColor = UIColor.white
 let darkModeBannerBorderColor = UIColor(white: 0.3, alpha: 1)
 let lightModeBannerBorderColor = UIColor(white: 0.6, alpha: 1)
