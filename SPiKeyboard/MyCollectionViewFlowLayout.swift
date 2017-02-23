@@ -15,7 +15,7 @@ class MyCollectionViewFlowLayout: UICollectionViewFlowLayout {
     override init() {
 
         super.init()
-        scrollDirection = .Horizontal
+        scrollDirection = .horizontal
         itemSize = CGSize(width: defaultCandidateCellWidth, height: getCandidateCellHeight())
         minimumLineSpacing = 0
         resetLayoutAttributeFrames()
@@ -31,26 +31,26 @@ class MyCollectionViewFlowLayout: UICollectionViewFlowLayout {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func resetAllCellWidth(widths: [CGFloat]) {
+    func resetAllCellWidth(_ widths: [CGFloat]) {
         
         candidateCellWidths = widths
-        widthOfAllCandidateCells = candidateCellWidths.reduce(0, combine: +)
+        widthOfAllCandidateCells = candidateCellWidths.reduce(0, +)
     }
     
     func resetLayoutAttributeFrames() {
         
         layoutAttributesS = [UICollectionViewLayoutAttributes]()
-        let zerothLayoutAttributes = UICollectionViewLayoutAttributes(forCellWithIndexPath: NSIndexPath(forRow: 0, inSection: 0))
+        let zerothLayoutAttributes = UICollectionViewLayoutAttributes(forCellWith: IndexPath(row: 0, section: 0))
         zerothLayoutAttributes.frame = CGRect(x: 0, y: 0, width: candidateCellWidths[0], height: getCandidateCellHeight())
         layoutAttributesS.append(zerothLayoutAttributes)
         let lastIndex = self.candidateCellWidths.count - 1
         if lastIndex >= 1 {
             for index in 1...lastIndex {
-                let currentLayoutAttributes = UICollectionViewLayoutAttributes(forCellWithIndexPath: NSIndexPath(forRow: index, inSection: 0))
+                let currentLayoutAttributes = UICollectionViewLayoutAttributes(forCellWith: IndexPath(row: index, section: 0))
                 let prevLayoutAttributes = layoutAttributesS[index - 1]
                 let maximumSpacing: CGFloat = 0
-                let origin = CGRectGetMaxX(prevLayoutAttributes.frame)
-                if origin + maximumSpacing + currentLayoutAttributes.frame.size.width < self.collectionViewContentSize().width {
+                let origin = prevLayoutAttributes.frame.maxX
+                if origin + maximumSpacing + currentLayoutAttributes.frame.size.width < self.collectionViewContentSize.width {
                     var frame = currentLayoutAttributes.frame
                     frame.origin.x = origin + maximumSpacing
                     frame.size.width = candidateCellWidths[index]
@@ -66,12 +66,12 @@ class MyCollectionViewFlowLayout: UICollectionViewFlowLayout {
     
 
     
-    override func collectionViewContentSize() -> CGSize {
+    override var collectionViewContentSize : CGSize {
         
         return CGSize(width: widthOfAllCandidateCells, height: itemSize.height)
     }
     
-    override func layoutAttributesForElementsInRect(rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
+    override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         
         var index = 0
         let lengthOfLayoutAttributesS = layoutAttributesS.count
@@ -87,17 +87,17 @@ class MyCollectionViewFlowLayout: UICollectionViewFlowLayout {
         return returnAttributesS
     }
     
-    override func layoutAttributesForItemAtIndexPath(indexPath: NSIndexPath) -> UICollectionViewLayoutAttributes? {
+    override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
         
         return layoutAttributesS[indexPath.row]
     }
     
-    override func shouldInvalidateLayoutForBoundsChange(newBounds: CGRect) -> Bool {
+    override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
         // TODO
         return false
     }
     
-    func updateLayoutRaisedByCellAt(indexPath: NSIndexPath, withCellSize size: CGSize) {
+    func updateLayoutRaisedByCellAt(_ indexPath: IndexPath, withCellSize size: CGSize) {
         
         if showTypingCellInExtraLine == true && indexPath == indexPathZero {
             return
@@ -118,7 +118,7 @@ class MyCollectionViewFlowLayout: UICollectionViewFlowLayout {
         }
     }
     
-    func resetLayoutWithAllCellSize(sizes: [CGSize]) {
+    func resetLayoutWithAllCellSize(_ sizes: [CGSize]) {
         var sizes = sizes.map({x in x.width})
         if showTypingCellInExtraLine == true {
             sizes[0] = 0

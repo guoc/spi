@@ -26,16 +26,16 @@ class ViewController: UINavigationController, IASKSettingsDelegate {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
     
-    func settingsViewControllerDidEnd(sender: IASKAppSettingsViewController!) {
+    func settingsViewControllerDidEnd(_ sender: IASKAppSettingsViewController!) {
         
     }
     
-    func settingsViewController(settingsViewController: IASKViewController!, tableView: UITableView!, heightForHeaderForSection section: Int) -> CGFloat {
-        if let key = settingsViewController.settingsReader.keyForSection(section) {
+    func settingsViewController(_ settingsViewController: IASKViewController!, tableView: UITableView!, heightForHeaderForSection section: Int) -> CGFloat {
+        if let key = settingsViewController.settingsReader.key(forSection: section) {
             if key == "kScreenshotTapKeyboardSettingsIcon" {
                 return UIImage(named: "Screenshot tap keyboard settings icon")!.size.height
             }
@@ -43,32 +43,32 @@ class ViewController: UINavigationController, IASKSettingsDelegate {
         return 0
     }
 
-    func settingsViewController(settingsViewController: IASKViewController!, tableView: UITableView!, viewForHeaderForSection section: Int) -> UIView! {
-        if let key = settingsViewController.settingsReader.keyForSection(section) {
+    func settingsViewController(_ settingsViewController: IASKViewController!, tableView: UITableView!, viewForHeaderForSection section: Int) -> UIView! {
+        if let key = settingsViewController.settingsReader.key(forSection: section) {
             if key == "kScreenshotTapKeyboardSettingsIcon" {
                 let imageView = UIImageView(image: UIImage(named: "Screenshot tap keyboard settings icon"))
-                imageView.contentMode = .ScaleAspectFit
+                imageView.contentMode = .scaleAspectFit
                 return imageView
             }
         }
         return nil
     }
     
-    func settingsViewController(sender: IASKAppSettingsViewController!, buttonTappedForSpecifier specifier: IASKSpecifier!) {
+    func settingsViewController(_ sender: IASKAppSettingsViewController!, buttonTappedFor specifier: IASKSpecifier!) {
         if specifier.key() == "kFeedback" {
-            UserVoice.presentUserVoiceInterfaceForParentViewController(self)
+            UserVoice.presentInterface(forParentViewController: self)
         }
     }
     
     func pushToTutorialIfNecessary() {
         if isCustomKeyboardEnabled() == false {
-            self.appSettingsViewController.tableView(self.appSettingsViewController.tableView, didSelectRowAtIndexPath: NSIndexPath(forItem: 0, inSection: 0))
+            self.appSettingsViewController.tableView(self.appSettingsViewController.tableView, didSelectRowAt: IndexPath(item: 0, section: 0))
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.blueColor()
+        view.backgroundColor = UIColor.blue
     }
 
     override func didReceiveMemoryWarning() {
@@ -78,7 +78,7 @@ class ViewController: UINavigationController, IASKSettingsDelegate {
     
     func isCustomKeyboardEnabled() -> Bool {
         let bundleID = "name.guoc.SPi.SPiKeyboard"
-        if let keyboards: [String] = NSUserDefaults.standardUserDefaults().dictionaryRepresentation()["AppleKeyboards"] as? [String] {   // Array of all active keyboards
+        if let keyboards: [String] = UserDefaults.standard.dictionaryRepresentation()["AppleKeyboards"] as? [String] {   // Array of all active keyboards
             for keyboard in keyboards {
                 if keyboard == bundleID {
                     return true

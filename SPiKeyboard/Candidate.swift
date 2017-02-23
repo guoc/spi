@@ -1,6 +1,6 @@
 
 enum CandidateType {
-    case Empty, Special, English, Chinese, OnlyText, Custom
+    case empty, special, english, chinese, onlyText, custom
 }
 
 class Candidate {
@@ -14,15 +14,15 @@ class Candidate {
     var queryCode: String {
         get {
             switch type {
-            case .Empty:
+            case .empty:
                 return ""
-            case .Special:
+            case .special:
                 return specialString!
-            case .English:
+            case .english:
                 return englishString!
-            case .Chinese:
+            case .chinese:
                 return shuangpinString!
-            case .Custom:
+            case .custom:
                 return customString!
             default:
                 fatalError("Wrong candidate type!")
@@ -33,9 +33,9 @@ class Candidate {
     var lengthAttribute: Int {
         get {
             switch type {
-            case .Empty:
+            case .empty:
                 return 0
-            case .Chinese, .English, .Special, .Custom:
+            case .chinese, .english, .special, .custom:
                 return queryCode.getReadingLength()
             default:
                 fatalError("Wrong candidate type!")
@@ -46,15 +46,15 @@ class Candidate {
     var shuangpinAttributeString: String {
         get {
             switch type {
-            case .Empty:
+            case .empty:
                 return ""
-            case .Special:
+            case .special:
                 return specialString!
-            case .English:
+            case .english:
                 return englishString!
-            case .Chinese:
+            case .chinese:
                 return shuangpinString!
-            case .Custom:
+            case .custom:
                 return customString!
             default:
                 fatalError("Wrong candidate type!")
@@ -65,16 +65,16 @@ class Candidate {
     var shengmuAttributeString: String {
         get {
             switch type {
-            case .Empty:
+            case .empty:
                 return ""
-            case .Special:
+            case .special:
                 return String(specialString![specialString!.startIndex])
-            case .English:
-                return String(englishString![englishString!.startIndex]).lowercaseString
-            case .Chinese:
+            case .english:
+                return String(englishString![englishString!.startIndex]).lowercased()
+            case .chinese:
                 return getShengmuString(from: shuangpinString!)
-            case .Custom:
-                return String(customString![customString!.startIndex]).lowercaseString    // For special symbol, lowercaseString does not return different value.
+            case .custom:
+                return String(customString![customString!.startIndex]).lowercased()    // For special symbol, lowercaseString does not return different value.
             default:
                 fatalError("Wrong candidate type!")
             }
@@ -84,13 +84,13 @@ class Candidate {
     var typeAttributeString: String {
         get {
             switch type {
-            case .Special:
+            case .special:
                 return String(3)
-            case .English:
+            case .english:
                 return String(2)
-            case .Chinese:
+            case .chinese:
                 return String(1)
-            case .Custom:
+            case .custom:
                 return String(4)
             default:
                 fatalError("Wrong candidate type!")
@@ -99,52 +99,52 @@ class Candidate {
     }
     
     init(text: String) {
-        self.type = .OnlyText
+        self.type = .onlyText
         self.text = text
     }
     
     init(text: String, withShuangpinString shuangpin: String) {
-        self.type = .Chinese
+        self.type = .chinese
         self.text = text
         self.shuangpinString = shuangpin
     }
     
     init(text: String, withEnglishString english: String) {
-        self.type = .English
+        self.type = .english
         self.text = text
         self.englishString = english
     }
     
     init(text: String, withSpecialString special: String) {
-        self.type = .Special
+        self.type = .special
         self.text = text
         self.specialString = special
     }
     
     init(text: String, withCustomString custom: String) {
-        self.type = .Custom
+        self.type = .custom
         self.text = text
         self.customString = custom
     }
     
     init(text: String, type: CandidateType, queryString: String) {
         switch type {
-        case .Empty:
+        case .empty:
             fatalError("Candidate init fail!")
-        case .Special:
-            self.type = .Special
+        case .special:
+            self.type = .special
             self.text = text
             self.specialString = queryString
-        case .English:
-            self.type = .English
+        case .english:
+            self.type = .english
             self.text = text
             self.englishString = queryString
-        case .Chinese:
-            self.type = .Chinese
+        case .chinese:
+            self.type = .chinese
             self.text = text
             self.shuangpinString = queryString
-        case .Custom:
-            self.type = .Custom
+        case .custom:
+            self.type = .custom
             self.text = text
             self.customString = queryString
         default:
@@ -154,7 +154,7 @@ class Candidate {
     
     convenience init(text: String, queryString: String, isCustomCandidate: Bool) {
         let type = text.getCandidateType()
-        self.init(text: text, type: isCustomCandidate ? .Custom : type, queryString: queryString)
+        self.init(text: text, type: isCustomCandidate ? .custom : type, queryString: queryString)
     }
     
 }

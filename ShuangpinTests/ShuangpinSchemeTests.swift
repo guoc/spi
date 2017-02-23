@@ -35,7 +35,7 @@ class ShuangpinSchemeTests: XCTestCase {
 
     func testPerformanceExample() {
         // This is an example of a performance test case.
-        self.measureBlock() {
+        self.measure() {
             // Put the code you want to measure the time of here.
         }
     }
@@ -55,11 +55,11 @@ class ShuangpinSchemeTests: XCTestCase {
         checkShuangpinScheme(zhinengabcScheme)
     }
     
-    class func getScheme(schemeName: String) -> [String: String]? {
-        NSUserDefaults.standardUserDefaults().setObject(schemeName, forKey: "kScheme")
-        let path = NSBundle(forClass: ShuangpinScheme.self).pathForResource(schemeName, ofType: "spscheme")
+    class func getScheme(_ schemeName: String) -> [String: String]? {
+        UserDefaults.standard.set(schemeName, forKey: "kScheme")
+        let path = Bundle(for: ShuangpinScheme.self).path(forResource: schemeName, ofType: "spscheme")
         var scheme: [String: String]!
-        if NSFileManager.defaultManager().fileExistsAtPath(path!) {
+        if FileManager.default.fileExists(atPath: path!) {
             scheme = NSDictionary(contentsOfFile: path!) as! [String: String]!
         } else {
             print("scheme is not found")
@@ -67,7 +67,7 @@ class ShuangpinSchemeTests: XCTestCase {
         return scheme
     }
     
-    func checkShuangpinScheme(scheme: [String: String]) {
+    func checkShuangpinScheme(_ scheme: [String: String]) {
         for (sourceShuangpin, targetShuangpin) in scheme {
             let sourceShengmu = String(sourceShuangpin[sourceShuangpin.startIndex])
             let targetShengmu = String(targetShuangpin[targetShuangpin.startIndex])
@@ -77,8 +77,8 @@ class ShuangpinSchemeTests: XCTestCase {
                 XCTFail()
             }
             if targetShuangpin.getReadingLength() == 2 {
-                _ = String(sourceShuangpin[sourceShuangpin.startIndex.successor()])    // sourceYunmu
-                let targetYunmu = String(targetShuangpin[targetShuangpin.startIndex.successor()])
+                _ = String(sourceShuangpin[sourceShuangpin.characters.index(after: sourceShuangpin.startIndex)])    // sourceYunmu
+                let targetYunmu = String(targetShuangpin[targetShuangpin.characters.index(after: targetShuangpin.startIndex)])
                 if let yunmuS = YunmusAfterShengmu[targetShengmu] {
                     XCTAssert(yunmuS.contains(targetYunmu))
                 } else {
