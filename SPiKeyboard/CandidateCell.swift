@@ -5,9 +5,9 @@ func getCandidateCellHeight() -> CGFloat {
     return showTypingCellInExtraLine ? typingAndCandidatesViewHeightWhenShowTypingCellInExtraLineIsTrue : typingAndCandidatesViewHeightWhenShowTypingCellInExtraLineIsFalse
 }
 
-var candidateTextFont = UIFont(descriptor: UIFontDescriptor.preferredFontDescriptorWithTextStyle(UIFontTextStyleBody), size: 20)
+var candidateTextFont = UIFont(descriptor: UIFontDescriptor.preferredFontDescriptor(withTextStyle: UIFontTextStyle.body), size: 20)
 
-let oneChineseGlyphWidth = ("镜" as NSString).boundingRectWithSize(CGSize(width: CGFloat.infinity, height: candidatesTableCellHeight), options: .UsesLineFragmentOrigin, attributes: [NSFontAttributeName: candidateTextFont], context: nil).width
+let oneChineseGlyphWidth = ("镜" as NSString).boundingRect(with: CGSize(width: CGFloat.infinity, height: candidatesTableCellHeight), options: .usesLineFragmentOrigin, attributes: [NSFontAttributeName: candidateTextFont], context: nil).width
 
 class CandidateCell: UICollectionViewCell {
     
@@ -17,20 +17,20 @@ class CandidateCell: UICollectionViewCell {
         super.init(frame: frame)
                 
         selectedBackgroundView = UIView(frame: frame)
-        selectedBackgroundView?.autoresizingMask = .FlexibleWidth
-        selectedBackgroundView?.backgroundColor = UIColor.lightGrayColor()
+        selectedBackgroundView?.autoresizingMask = .flexibleWidth
+        selectedBackgroundView?.backgroundColor = UIColor.lightGray
 
         textLabel = UILabel()
         textLabel.font = candidateTextFont
-        textLabel.textAlignment = .Center
-        textLabel.baselineAdjustment = .AlignCenters
-        textLabel.lineBreakMode = .ByTruncatingTail
+        textLabel.textAlignment = .center
+        textLabel.baselineAdjustment = .alignCenters
+        textLabel.lineBreakMode = .byTruncatingTail
         contentView.addSubview(textLabel)
         
         textLabel.translatesAutoresizingMaskIntoConstraints = false
-        let constraints = NSLayoutConstraint.constraintsWithVisualFormat("|-8-[textLabel]-8-|", options: [], metrics: nil, views: ["textLabel": textLabel])
+        let constraints = NSLayoutConstraint.constraints(withVisualFormat: "|-8-[textLabel]-8-|", options: [], metrics: nil, views: ["textLabel": textLabel])
         self.contentView.addConstraints(constraints)
-        let constraint = NSLayoutConstraint(item: textLabel, attribute: .CenterY, relatedBy: .Equal, toItem: contentView, attribute: .CenterY, multiplier: 1, constant: 0)
+        let constraint = NSLayoutConstraint(item: textLabel, attribute: .centerY, relatedBy: .equal, toItem: contentView, attribute: .centerY, multiplier: 1, constant: 0)
         self.contentView.addConstraint(constraint)
     }
     
@@ -40,16 +40,16 @@ class CandidateCell: UICollectionViewCell {
     
     func updateAppearance() {
         if candidatesBannerAppearanceIsDark == true {
-            textLabel.textColor = UIColor.whiteColor()
+            textLabel.textColor = UIColor.white
         } else {
-            textLabel.textColor = UIColor.darkTextColor()
+            textLabel.textColor = UIColor.darkText
         }
     }
     
-    class func getCellSizeByText(text: String, needAccuracy: Bool) -> CGSize {
+    class func getCellSizeByText(_ text: String, needAccuracy: Bool) -> CGSize {
         
         func accurateWidth() -> CGFloat {
-            return (text as NSString).boundingRectWithSize(CGSize(width: CGFloat.infinity, height: getCandidateCellHeight()), options: .UsesLineFragmentOrigin, attributes: [NSFontAttributeName: candidateTextFont], context: nil).width + 20
+            return (text as NSString).boundingRect(with: CGSize(width: CGFloat.infinity, height: getCandidateCellHeight()), options: .usesLineFragmentOrigin, attributes: [NSFontAttributeName: candidateTextFont], context: nil).width + 20
         }
         
         var textWidth: CGFloat = 0
@@ -57,7 +57,7 @@ class CandidateCell: UICollectionViewCell {
             textWidth = accurateWidth()
         } else {
             let length = text.getReadingLength()
-            let utf8Length = text.lengthOfBytesUsingEncoding(NSUTF8StringEncoding)
+            let utf8Length = text.lengthOfBytes(using: String.Encoding.utf8)
             if utf8Length == length * 3 {
                 textWidth = oneChineseGlyphWidth * CGFloat(text.getReadingLength()) + 20
             } else {

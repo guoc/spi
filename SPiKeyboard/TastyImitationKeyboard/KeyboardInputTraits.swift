@@ -24,13 +24,13 @@ extension KeyboardViewController {
     func addInputTraitsObservers() {
         // note that KVO doesn't work on textDocumentProxy, so we have to poll
         traitPollingTimer?.invalidate()
-        traitPollingTimer = UIScreen.mainScreen().displayLinkWithTarget(self, selector: #selector(pollTraits))
-        traitPollingTimer?.addToRunLoop(NSRunLoop.currentRunLoop(), forMode: NSDefaultRunLoopMode)
+        traitPollingTimer = UIScreen.main.displayLink(withTarget: self, selector: #selector(pollTraits))
+        traitPollingTimer?.add(to: RunLoop.current, forMode: RunLoopMode.defaultRunLoopMode)
     }
     
     func pollTraits() {
         if let layout = self.layout {
-            let appearanceIsDark = (textDocumentProxy.keyboardAppearance == UIKeyboardAppearance.Dark)
+            let appearanceIsDark = (textDocumentProxy.keyboardAppearance == UIKeyboardAppearance.dark)
             if appearanceIsDark != layout.darkMode {
                 self.updateAppearances(appearanceIsDark)
             }

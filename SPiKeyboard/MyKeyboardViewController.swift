@@ -8,11 +8,11 @@ func updateShowTypingCellInExtraLine() {
 }
 
 func getShowTypingCellInExtraLineFromSettings() -> Bool {
-    return NSUserDefaults.standardUserDefaults().boolForKey("kShowTypingCellInExtraLine")    // If not exist, false will be returned.
+    return UserDefaults.standard.bool(forKey: "kShowTypingCellInExtraLine")    // If not exist, false will be returned.
 }
 
 func getEnableGestureFromSettings() -> Bool {
-    return NSUserDefaults.standardUserDefaults().boolForKey("kGesture")    // If not exist, false will be returned.
+    return UserDefaults.standard.bool(forKey: "kGesture")    // If not exist, false will be returned.
 }
 
 var cornerBracketEnabled = getCornerBracketEnabledFromSettings()
@@ -22,15 +22,15 @@ func updateCornerBracketEnabled() {
 }
 
 func getCornerBracketEnabledFromSettings() -> Bool {
-    return NSUserDefaults.standardUserDefaults().boolForKey("kCornerBracket")    // If not exist, false will be returned.
+    return UserDefaults.standard.bool(forKey: "kCornerBracket")    // If not exist, false will be returned.
 }
 
 var candidatesBannerAppearanceIsDark = false
 
-let indexPathZero = NSIndexPath(forRow: 0, inSection: 0)
-let indexPathFirst = NSIndexPath(forRow: 1, inSection: 0)
+let indexPathZero = IndexPath(row: 0, section: 0)
+let indexPathFirst = IndexPath(row: 1, section: 0)
 
-var startTime: NSDate?
+var startTime: Date?
 
 class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, IASKSettingsDelegate, ForwardingViewDelegate {
 
@@ -42,14 +42,14 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
     
     var ignoreKeyPressOnce: Bool = false
     
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         
         Logger.sharedInstance.writeLogLine(filledString: "<<<<<<<<<\n")
         
         self.forwardingView.delegate = self
         self.candidatesUpdateQueue = CandidatesUpdateQueue(controller: self)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(settingDidChange(_:)), name: "kAppSettingChanged", object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(settingDidChange(_:)), name: NSNotification.Name(rawValue: "kAppSettingChanged"), object: nil)
     }
     
     required init?(coder: NSCoder) {
@@ -59,7 +59,7 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
     deinit {
         Logger.sharedInstance.writeLogLine(filledString: ">>>>>>>>>\n")
         
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
     
     func insertCandidateAutomaticallyIfNecessary() {
@@ -72,7 +72,7 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
     
     func updateBannerHeight() {
         
-        func changeBannerIfNecessary(newHeight newHeight: CGFloat) {
+        func changeBannerIfNecessary(newHeight: CGFloat) {
             if metric("topBanner") != newHeight {
                 changeBannerHeight(newHeight)
                 candidatesBanner?.resetSubviewsWithInitAndSetDelegate()
@@ -87,14 +87,14 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
-        if NSUserDefaults.standardUserDefaults().boolForKey("kLogging") {
+        if UserDefaults.standard.bool(forKey: "kLogging") {
             let memoryUsageReport = Logger.sharedInstance.getMemoryUsageReport()
             self.textDocumentProxy.insertText("MEMORY LOW")
             Logger.sharedInstance.writeLogLine(filledString: "!!!!!!!!!\n! \(memoryUsageReport)")
         }
     }
     
-    override func keyPressed(key: Key) {
+    override func keyPressed(_ key: Key) {
         /* Make sure the implementation is same as its super class' function except the folloing part */
         /* For this function, it's all part */
         /* Original implementation
@@ -113,7 +113,7 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
         // Scroll back to first candidate
         candidatesBanner!.scrollToFirstCandidate()
                 
-        if key.type == .Space {
+        if key.type == .space {
             if candidatesDataModel.hasTyping() {
                 if candidatesDataModel.textAt(indexPathFirst) != nil {
                     candidatesUpdateQueue.selectCandidate(indexPathFirst)
@@ -127,7 +127,7 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
                 self.textDocumentProxy.insertText(key.outputForCase(self.shiftState.uppercase()))
             }
             return
-        } else if key.type == .Return {
+        } else if key.type == .return {
             if candidatesDataModel.hasTyping() {
                 let typingStringAsCandidate = candidatesDataModel.getUserTypingString()
                 self.textDocumentProxy.insertText(typingStringAsCandidate)
@@ -136,7 +136,7 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
                 // Insert Return
                 self.textDocumentProxy.insertText(key.outputForCase(self.shiftState.uppercase()))
             }
-        } else if key.type == .Character {    // Letters
+        } else if key.type == .character {    // Letters
             candidatesUpdateQueue.appendTyping(key.outputForCase(self.shiftState.uppercase()))
         } else {    // Special characters
             if candidatesDataModel.hasTyping() {
@@ -148,16 +148,16 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
         /* */
     }
     
-    override func keyPressedHelper(sender: KeyboardKey) {
+    override func keyPressedHelper(_ sender: KeyboardKey) {
         super.keyPressedHelper(sender)    // keyPressed is called in super.keyPressedHelper
         if candidatesDataModel.hasTyping() {
-            autoPeriodState = .NoSpace
+            autoPeriodState = .noSpace
         }
     }
     
     var isDeletingTyping = false
     
-    override func backspaceDown(sender: KeyboardKey) {
+    override func backspaceDown(_ sender: KeyboardKey) {
         self.cancelBackspaceTimers()
         
         /* Make sure the implementation is same as its super class' function except the folloing part */
@@ -178,10 +178,10 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
         /* */
         
         // trigger for subsequent deletes
-        self.backspaceDelayTimer = NSTimer.scheduledTimerWithTimeInterval(backspaceDelay - backspaceRepeat, target: self, selector: #selector(backspaceDelayCallback), userInfo: nil, repeats: false)
+        self.backspaceDelayTimer = Timer.scheduledTimer(timeInterval: backspaceDelay - backspaceRepeat, target: self, selector: #selector(backspaceDelayCallback), userInfo: nil, repeats: false)
     }
     
-    override func backspaceUp(sender: KeyboardKey) {
+    override func backspaceUp(_ sender: KeyboardKey) {
         super.backspaceUp(sender)
         
         Logger.sharedInstance.writeLogLine(filledString: "[DELETE] >")
@@ -207,25 +207,25 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
         /* */
     }
     
-    override func shiftDown(sender: KeyboardKey) {
+    override func shiftDown(_ sender: KeyboardKey) {
         super.shiftDown(sender)
         
         Logger.sharedInstance.writeLogLine(filledString: "[SHIFT] <")
     }
     
-    override func shiftUp(sender: KeyboardKey) {
+    override func shiftUp(_ sender: KeyboardKey) {
         super.shiftUp(sender)
         
         Logger.sharedInstance.writeLogLine(filledString: "[SHIFT] >")
     }
     
-    override func shiftDoubleTapped(sender: KeyboardKey) {
+    override func shiftDoubleTapped(_ sender: KeyboardKey) {
         super.shiftDoubleTapped(sender)
         
         Logger.sharedInstance.writeLogLine(filledString: "[SHIFT] <><")
     }
     
-    override func modeChangeTapped(sender: KeyboardKey) {
+    override func modeChangeTapped(_ sender: KeyboardKey) {
         let tappedKeyText = sender.label.text ?? "[MODE] ???"
         
         super.modeChangeTapped(sender)
@@ -233,16 +233,16 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
         Logger.sharedInstance.writeLogLine(filledString: "[\(tappedKeyText)] <>")
     }
     
-    override func advanceTapped(sender: KeyboardKey) {
+    override func advanceTapped(_ sender: KeyboardKey) {
         super.advanceTapped(sender)
         
         Logger.sharedInstance.writeLogLine(filledString: "[NEXT IM]")
     }
     
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        collectionView.deselectItemAtIndexPath(indexPath, animated: true)
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
         
-        Logger.sharedInstance.writeLogLine(selectedCellIndex: indexPath.row, selectedCellText: (collectionView.cellForItemAtIndexPath(indexPath) as! CandidateCell).textLabel.text!)
+        Logger.sharedInstance.writeLogLine(selectedCellIndex: indexPath.row, selectedCellText: (collectionView.cellForItem(at: indexPath) as! CandidateCell).textLabel.text!)
         
         if indexPath == indexPathZero {
             if candidatesDataModel.hasTyping() {
@@ -262,7 +262,7 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
         }
     }
         
-    func changeBannerHeight(height: CGFloat) {
+    func changeBannerHeight(_ height: CGFloat) {
         metrics["topBanner"] = Double(height)
         
         self.keyboardHeight = self.heightForOrientation(self.interfaceOrientation, withTopBanner: true)
@@ -270,31 +270,31 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
     
     override func createBanner() -> ExtraView? {
         
-        candidatesBanner = CandidatesBanner(globalColors: self.dynamicType.globalColors, darkMode: false, solidColorMode: self.solidColorMode())
+        candidatesBanner = CandidatesBanner(globalColors: type(of: self).globalColors, darkMode: false, solidColorMode: self.solidColorMode())
         candidatesBanner!.delegate = self
         
         return candidatesBanner
     }
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return candidatesDataModel.numberOfTypingAndCandidates()
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("Cell", forIndexPath: indexPath) as! CandidateCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! CandidateCell
         cell.updateAppearance()
         if (indexPath == indexPathZero) {
-            cell.textLabel.textAlignment = .Left
+            cell.textLabel.textAlignment = .left
         } else {
-            cell.textLabel.textAlignment = .Center
+            cell.textLabel.textAlignment = .center
         }
         cell.textLabel.text = candidatesDataModel.textAt(indexPath)
 //        cell.textLabel.sizeToFit()
         return cell
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return getCellSizeAtIndex(indexPath, inDataModel: candidatesDataModel, andSetLayout: collectionViewLayout as! UICollectionViewFlowLayout)
     }
     
@@ -303,7 +303,7 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
 //        candidatesBanner!.setCollectionViewFrame(CGRect(x: 0, y: 0, width: self.view.bounds.width, height: candidateCellHeight))
     }
     
-    func getCellSizeAtIndex(indexPath: NSIndexPath, inDataModel dataModel: CandidatesDataModel, andSetLayout layout: UICollectionViewFlowLayout) -> CGSize {
+    func getCellSizeAtIndex(_ indexPath: IndexPath, inDataModel dataModel: CandidatesDataModel, andSetLayout layout: UICollectionViewFlowLayout) -> CGSize {
         let size = CandidateCell.getCellSizeByText(dataModel.textAt(indexPath)!, needAccuracy: indexPath == indexPathZero ? true : false)
         if let myLayout = layout as? MyCollectionViewFlowLayout {
             myLayout.updateLayoutRaisedByCellAt(indexPath, withCellSize: size)
@@ -327,10 +327,10 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
     var nextPageStartX: CGFloat = 0
     var previousPageStartX: CGFloat = 0
     
-    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
 
         let collectionView = scrollView as! UICollectionView
-        let visibleItems = collectionView.indexPathsForVisibleItems()
+        let visibleItems = collectionView.indexPathsForVisibleItems
     
         if scrollView.isKindOfMyCollectionViewFlowLayout() == false {    // For candidates table scroll
             
@@ -346,26 +346,26 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
                 max($0, $1.row)
             }
             
-            let mostLeftCellIndexPath = NSIndexPath(forItem: mostLeftCellIndexPathRow, inSection: 0)
-            var mostRightCellIndexPath = NSIndexPath(forItem: mostRightCellIndexPathRow, inSection: 0)
+            let mostLeftCellIndexPath = IndexPath(item: mostLeftCellIndexPathRow, section: 0)
+            var mostRightCellIndexPath = IndexPath(item: mostRightCellIndexPathRow, section: 0)
             
             // Avoid wrong calculation when candidate cell is wider than the width of collectionView
             let collectionViewBoundsX = collectionView.bounds.origin.x
-            if collectionView.layoutAttributesForItemAtIndexPath(mostRightCellIndexPath)!.frame.minX <= (collectionViewBoundsX > 0 ? collectionViewBoundsX : 0) {    // Expression "? :" for the case when collectionViewBoundsX < 0 because of inset
-                if mostRightCellIndexPath.row + 1 < collectionView.numberOfItemsInSection(0) {
-                    mostRightCellIndexPath = NSIndexPath(forItem: mostRightCellIndexPath.row + 1, inSection: 0)
+            if collectionView.layoutAttributesForItem(at: mostRightCellIndexPath)!.frame.minX <= (collectionViewBoundsX > 0 ? collectionViewBoundsX : 0) {    // Expression "? :" for the case when collectionViewBoundsX < 0 because of inset
+                if mostRightCellIndexPath.row + 1 < collectionView.numberOfItems(inSection: 0) {
+                    mostRightCellIndexPath = IndexPath(item: mostRightCellIndexPath.row + 1, section: 0)
                 }
             }
             
-            nextPageStartX = collectionView.layoutAttributesForItemAtIndexPath(mostRightCellIndexPath)!.frame.minX
+            nextPageStartX = collectionView.layoutAttributesForItem(at: mostRightCellIndexPath)!.frame.minX
             
-            let maxXOfMostLeftCell = collectionView.layoutAttributesForItemAtIndexPath(mostLeftCellIndexPath)!.frame.maxX
-            var indexPath: NSIndexPath! = mostLeftCellIndexPath
-            while collectionView.layoutAttributesForItemAtIndexPath(indexPath)!.frame.minX + collectionView.bounds.width >= maxXOfMostLeftCell {
+            let maxXOfMostLeftCell = collectionView.layoutAttributesForItem(at: mostLeftCellIndexPath)!.frame.maxX
+            var indexPath: IndexPath! = mostLeftCellIndexPath
+            while collectionView.layoutAttributesForItem(at: indexPath)!.frame.minX + collectionView.bounds.width >= maxXOfMostLeftCell {
                 if indexPath.row - 1 < 0 {
                     break
                 } else {
-                    indexPath = NSIndexPath(forRow: indexPath.row - 1, inSection: indexPath.section)
+                    indexPath = IndexPath(row: indexPath.row - 1, section: indexPath.section)
                 }
             }
             
@@ -374,22 +374,22 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
                 if indexPath.row - 1 < 0 {
                     indexPath = indexPathZero
                 } else {
-                    indexPath = NSIndexPath(forRow: indexPath.row - 1, inSection: indexPath.section)
+                    indexPath = IndexPath(row: indexPath.row - 1, section: indexPath.section)
                 }
             } else {
                 if indexPath.row - 1 < 0 {
                     indexPath = indexPathZero
                 } else {
-                    indexPath = NSIndexPath(forRow: indexPath.row + 1, inSection: indexPath.section)
+                    indexPath = IndexPath(row: indexPath.row + 1, section: indexPath.section)
                 }
             }
             
-            previousPageStartX = collectionView.layoutAttributesForItemAtIndexPath(indexPath)!.frame.minX
+            previousPageStartX = collectionView.layoutAttributesForItem(at: indexPath)!.frame.minX
             
         }
     }
     
-    func scrollViewWillEndDragging(scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         if scrollView.isKindOfMyCollectionViewFlowLayout() == false {    // For candidates table scroll
             
             return
@@ -397,11 +397,11 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
         } else {    // For candidates banner scroll
             
             assert(previousPageStartX < nextPageStartX, "Calculate wrong pages start")
-            if targetContentOffset.memory.x > nextPageStartX {
-                targetContentOffset.memory.x = nextPageStartX
+            if targetContentOffset.pointee.x > nextPageStartX {
+                targetContentOffset.pointee.x = nextPageStartX
             }
-            if targetContentOffset.memory.x < previousPageStartX {
-                targetContentOffset.memory.x = previousPageStartX
+            if targetContentOffset.pointee.x < previousPageStartX {
+                targetContentOffset.pointee.x = previousPageStartX
             }
             
         }
@@ -418,7 +418,7 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
     }
     
     // KeyboardViewController
-    override func updateAppearances(appearanceIsDark: Bool) {
+    override func updateAppearances(_ appearanceIsDark: Bool) {
         candidatesBannerAppearanceIsDark = appearanceIsDark
         candidatesUpdateQueue.resetTyping()
         super.updateAppearances(appearanceIsDark)
@@ -426,14 +426,14 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
     }
     
     var currentOrientation: UIInterfaceOrientation? = nil
-    override func willRotateToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
-        super.willRotateToInterfaceOrientation(toInterfaceOrientation, duration: duration)
+    override func willRotate(to toInterfaceOrientation: UIInterfaceOrientation, duration: TimeInterval) {
+        super.willRotate(to: toInterfaceOrientation, duration: duration)
         if currentOrientation == nil || currentOrientation! != toInterfaceOrientation {
             switch(toInterfaceOrientation) {
-            case .Unknown, .Portrait, .PortraitUpsideDown:
+            case .unknown, .portrait, .portraitUpsideDown:
                 candidatesBanner?.removeConstraints(candidatesBanner!.landscapeBannerWidthConstraints!)
                 candidatesBanner?.addConstraints(candidatesBanner!.potraitBannerWidthConstraints!)
-            case .LandscapeLeft, .LandscapeRight:
+            case .landscapeLeft, .landscapeRight:
                 candidatesBanner?.removeConstraints(candidatesBanner!.potraitBannerWidthConstraints!)
                 candidatesBanner?.addConstraints(candidatesBanner!.landscapeBannerWidthConstraints!)
             }
@@ -442,54 +442,54 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
     }
     
     var needDismissKeyboard = false
-    func settingDidChange(notification: NSNotification) {
+    func settingDidChange(_ notification: Notification) {
         needDismissKeyboard = true
-        if (notification.object?.isEqual("kShowTypingCellInExtraLine") != nil) {
+        if ((notification.object as AnyObject).isEqual("kShowTypingCellInExtraLine")) {
             updateShowTypingCellInExtraLine()
             self.updateBannerHeight()
         }
-        if (notification.object?.isEqual("kCornerBracket") != nil) {
+        if ((notification.object as AnyObject).isEqual("kCornerBracket")) {
             updateCornerBracketEnabled()
         }
     }
     
-    private func outputUserHistory() {
-        let documentsFolder = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] 
-        let historyDatabasePath = NSURL(string: documentsFolder)!.URLByAppendingPathComponent("history.sqlite")
+    fileprivate func outputUserHistory() {
+        let documentsFolder = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] 
+        let historyDatabasePath = URL(string: documentsFolder)!.appendingPathComponent("history.sqlite")
         
         let historyDatabase = FMDatabase(path: historyDatabasePath.absoluteString)
         
-        if !historyDatabase.open() {
+        if !(historyDatabase?.open())! {
             print("Unable to open database")
             return
         }
         
-        let candidatesDatabasePath = NSBundle.mainBundle().pathForResource("candidates", ofType: "sqlite")
+        let candidatesDatabasePath = Bundle.main.path(forResource: "candidates", ofType: "sqlite")
         let candidatesDatabase = FMDatabase(path: candidatesDatabasePath)
-        if !candidatesDatabase.open() {
+        if !(candidatesDatabase?.open())! {
             assertionFailure("Unable to open database")
         }
         
         var rows: [Row] = []
         
-        if let rs = historyDatabase.executeQuery("select candidate, shuangpin, shengmu, length, frequency, candidate_type from history order by shengmu", withArgumentsInArray: nil) {
+        if let rs = historyDatabase?.executeQuery("select candidate, shuangpin, shengmu, length, frequency, candidate_type from history order by shengmu", withArgumentsIn: nil) {
             while rs.next() {
                 let row = rs.resultDictionary()
-                if let rs = candidatesDatabase.executeQuery("select * from candidates where candidate == ?", withArgumentsInArray: [row["candidate"] as! String]) {
+                if let rs = candidatesDatabase?.executeQuery("select * from candidates where candidate == ?", withArgumentsIn: [row?["candidate"] as! String]) {
                     if !rs.next() {
-                        rows.append(row)
+                        rows.append(row! as Row)
                     }
                 } else {
-                    fatalError("select failed: \(candidatesDatabase.lastErrorMessage())")
+                    fatalError("select failed: \(candidatesDatabase?.lastErrorMessage())")
                 }
                 
             }
         } else {
-            print("select failed: \(historyDatabase.lastErrorMessage())")
+            print("select failed: \(historyDatabase?.lastErrorMessage())")
         }
         
-        let orderedRows: [Row] = rows.sort { (lhs: Row, rhs: Row) -> Bool in
-            return (lhs["frequency"] as! NSNumber).integerValue > (rhs["frequency"] as! NSNumber).integerValue
+        let orderedRows: [Row] = rows.sorted { (lhs: Row, rhs: Row) -> Bool in
+            return (lhs["frequency"] as! NSNumber).intValue > (rhs["frequency"] as! NSNumber).intValue
         }
         
         for row in orderedRows {
@@ -502,11 +502,11 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
             self.textDocumentProxy.insertText("\(candidate),\(shuangpin),\(shengmu),\(length),\(frequency),\(candidateType);")
         }
         
-        historyDatabase.close()
-        candidatesDatabase.close()
+        historyDatabase?.close()
+        candidatesDatabase?.close()
     }
 
-    private func run_command(commandStr: String) {
+    fileprivate func run_command(_ commandStr: String) {
         switch commandStr {
         case "crash":
             func crash() {
@@ -534,7 +534,7 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
                         let frequency: Int? = Int(candidateParts[4])
                         let candidateType: Int? = Int(candidateParts[5])
                         if length != nil && frequency != nil && candidateType != nil {
-                            candidatesDataModel.inputHistory.updateDatabase(candidateText: candidateText, shuangpin: shuangpin, shengmu: shengmu, length: NSNumber(long: length!), frequency: NSNumber(long: frequency!), candidateType: String(candidateType!))
+                            candidatesDataModel.inputHistory.updateDatabase(candidateText: candidateText, shuangpin: shuangpin, shengmu: shengmu, length: NSNumber(value: length! as Int), frequency: NSNumber(value: frequency! as Int), candidateType: String(candidateType!))
                             imported = true
                         } else {
                             imported = false
@@ -553,12 +553,15 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
         case "clean":
             candidatesDataModel.inputHistory.cleanAllCandidates()
         case "turnonlog":
-            NSUserDefaults.standardUserDefaults().setBool(true, forKey: "kLogging")
+            UserDefaults.standard.set(true, forKey: "kLogging")
         case "turnofflog":
-            NSUserDefaults.standardUserDefaults().setBool(false, forKey: "kLogging")
+            UserDefaults.standard.set(false, forKey: "kLogging")
         case "log":
             let logString = Logger.sharedInstance.getLogFileContent()
             self.textDocumentProxy.insertText(logString)
+        case "memory":
+            let memoryUsageReport = Logger.sharedInstance.getMemoryUsageReport()
+            self.textDocumentProxy.insertText(memoryUsageReport)
         case "cllog":
             Logger.sharedInstance.clearLogFile()
         default:
@@ -572,17 +575,17 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
         let typingBeforeToggleSettings = candidatesDataModel.typingString.userTypingString
         candidatesUpdateQueue.resetTyping()
         if typingBeforeToggleSettings != "" {
-            let lastCharacter = typingBeforeToggleSettings[typingBeforeToggleSettings.endIndex.predecessor()]
+            let lastCharacter = typingBeforeToggleSettings[typingBeforeToggleSettings.characters.index(before: typingBeforeToggleSettings.endIndex)]
             switch lastCharacter {
             case "+":
                 if let documentContextAfterInput = (self.textDocumentProxy ).documentContextAfterInput {
                     if typingBeforeToggleSettings != "" && documentContextAfterInput != "" {
                         let candidateTextLength = documentContextAfterInput.getReadingLength()
-                        (self.textDocumentProxy ).adjustTextPositionByCharacterOffset(candidateTextLength)
+                        (self.textDocumentProxy ).adjustTextPosition(byCharacterOffset: candidateTextLength)
                         for _ in 0..<candidateTextLength {
                             textDocumentProxy.deleteBackward()
                         }
-                        let initStr = typingBeforeToggleSettings.substringToIndex(typingBeforeToggleSettings.endIndex.predecessor())
+                        let initStr = typingBeforeToggleSettings.substring(to: typingBeforeToggleSettings.characters.index(before: typingBeforeToggleSettings.endIndex))
                         candidatesDataModel.inputHistory.updateDatabase(candidateText: documentContextAfterInput, customCandidateQueryString: initStr)
                         candidatesUpdateQueue.resetTyping()
                         return
@@ -593,7 +596,7 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
                     
                 }
             case "!":
-                let initStr = typingBeforeToggleSettings.substringToIndex(typingBeforeToggleSettings.endIndex.predecessor())
+                let initStr = typingBeforeToggleSettings.substring(to: typingBeforeToggleSettings.characters.index(before: typingBeforeToggleSettings.endIndex))
                 run_command(initStr)
                 return
             default:
@@ -617,16 +620,16 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
         keyboardSettingsViewController.showCreditsFooter = false
         keyboardSettingsViewController.showDoneButton = true
         keyboardSettingsViewController.hiddenKeys = hideInputHistory ? Set(["kInputHistory", "kGesture", "kGestureComment"]) : nil
-        self.presentViewController(aNavController, animated: true, completion: nil)
+        self.present(aNavController, animated: true, completion: nil)
     }
     
-    func settingsViewControllerDidEnd(sender: IASKAppSettingsViewController!) {
+    func settingsViewControllerDidEnd(_ sender: IASKAppSettingsViewController!) {
         if self.needDismissKeyboard == true {
             self.dismissKeyboard()    // Dismiss keyboard to reload candidates banner appearance.
         }
         self.needDismissKeyboard = false
         
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
         
         ShuangpinScheme.reloadScheme()
     }
@@ -659,10 +662,10 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
         candidatesBanner!.hideTypingAndCandidatesView()
         candidatesBanner!.changeArrowUp()
         let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .Vertical
+        layout.scrollDirection = .vertical
         candidatesTable = UICollectionView(frame: CGRect(x: view.frame.origin.x, y: view.frame.origin.y + getBannerHeight(), width: view.frame.width, height: view.frame.height - getBannerHeight()), collectionViewLayout: layout)
-        candidatesTable.backgroundColor = candidatesBannerAppearanceIsDark ? UIColor.darkGrayColor() : UIColor.whiteColor()
-        candidatesTable.registerClass(CandidateCell.self, forCellWithReuseIdentifier: "Cell")
+        candidatesTable.backgroundColor = candidatesBannerAppearanceIsDark ? UIColor.darkGray : UIColor.white
+        candidatesTable.register(CandidateCell.self, forCellWithReuseIdentifier: "Cell")
         candidatesTable.delegate = self
         candidatesTable.dataSource = self
         self.view.addSubview(candidatesTable)
@@ -683,7 +686,7 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
         exitCandidatesTable()
     }
     
-    private func commandForKey(key: Key) -> (() -> ())? {
+    fileprivate func commandForKey(_ key: Key) -> (() -> ())? {
         if let character = key.lowercaseOutput {
             switch(character) {
             case "d":
@@ -704,10 +707,10 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
         }
         if let beginKeyView = beginView as? KeyboardKey {
             if let beginKey = self.layout?.keyForView(beginKeyView) {
-                if beginKey.type == .Space {
+                if beginKey.type == .space {
                     if let endKeyView = endView as? KeyboardKey {
                         if let endKey = self.layout?.keyForView(endKeyView) {
-                            if endKey.type != .Space {
+                            if endKey.type != .space {
                                 if let command = commandForKey(endKey) {
                                     if endKey.hasOutput {
                                         ignoreKeyPressOnce = true
@@ -728,7 +731,7 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
         Logger.sharedInstance.writeLogLine(filledString: "--------- VDL\n")
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         self.inputView?.setNeedsUpdateConstraints()
@@ -736,7 +739,7 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
         Logger.sharedInstance.writeLogLine(filledString: "--------- VDA\n")
     }
     
-    override func viewDidDisappear(animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         Logger.sharedInstance.writeLogLine(filledString: "--------- VDDA\n")
     }
@@ -745,8 +748,8 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
 
 class CandidatesUpdateQueue {
     
-    lazy var candidatesUpdateQueue: NSOperationQueue = {
-        var queue = NSOperationQueue()
+    lazy var candidatesUpdateQueue: OperationQueue = {
+        var queue = OperationQueue()
         queue.name = "Candidates update queue"
         queue.maxConcurrentOperationCount = 1
         return queue
@@ -757,7 +760,7 @@ class CandidatesUpdateQueue {
         self.controller = controller
     }
     
-    func appendTyping(text: String) {
+    func appendTyping(_ text: String) {
 //        objc_sync_enter(self.controller.candidatesDataModel)
 //        objc_sync_enter(self.controller.collectionViewLayout)
 //        
@@ -779,7 +782,7 @@ class CandidatesUpdateQueue {
         addCommonUpdateOperation(controller: controller)
     }
     
-    func selectCandidate(selectedCandidateIndexPath: NSIndexPath) {
+    func selectCandidate(_ selectedCandidateIndexPath: IndexPath) {
         self.controller.setMode(0)
         self.controller.exitCandidatesTableIfNecessary()
         self.controller.candidatesBanner!.scrollToFirstCandidate()
@@ -794,13 +797,13 @@ class CandidatesUpdateQueue {
         addCommonUpdateOperation(controller: controller)
     }
     
-    func addCommonUpdateOperation(controller controller: MyKeyboardViewController) {
+    func addCommonUpdateOperation(controller: MyKeyboardViewController) {
         let commonUpdateOperation = CommonUpdateOperation(controller: controller)
         commonUpdateOperation.completionBlock = {
-            if commonUpdateOperation.cancelled {
+            if commonUpdateOperation.isCancelled {
                 return
             }
-            dispatch_async(dispatch_get_main_queue(), {
+            DispatchQueue.main.async(execute: {
                 self.controller.insertCandidateAutomaticallyIfNecessary()
                 self.controller.candidatesDataModel.commitUpdate()
                 self.controller.updateCandidatesBanner()
@@ -809,7 +812,7 @@ class CandidatesUpdateQueue {
         candidatesUpdateQueue.addOperation(commonUpdateOperation)
     }
     
-    class CommonUpdateOperation: NSOperation {
+    class CommonUpdateOperation: Operation {
         weak var controller: MyKeyboardViewController!
         
         init(controller: MyKeyboardViewController) {
@@ -818,7 +821,7 @@ class CandidatesUpdateQueue {
         
         override func main() {
             autoreleasepool {
-                if self.cancelled {
+                if self.isCancelled {
                     return
                 }
                 
@@ -834,7 +837,7 @@ class CandidatesUpdateQueue {
 
 extension UIScrollView {
     func isKindOfMyCollectionViewFlowLayout() -> Bool {
-        return ((self as! UICollectionView).collectionViewLayout.isKindOfClass(MyCollectionViewFlowLayout))
+        return ((self as! UICollectionView).collectionViewLayout.isKind(of: MyCollectionViewFlowLayout.self))
     }
 }
 
