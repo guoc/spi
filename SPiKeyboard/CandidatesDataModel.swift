@@ -103,7 +103,7 @@ class CandidatesDataModel {
 
         func substringContainingFirstSpecialCharacterOf(_ string: String) -> String {
             let range = string.rangeOfCharacter(from: CharacterSet.lowercaseLetters.inverted)
-            return string.substring(with: string.startIndex...range!.lowerBound)
+            return string.substring(with: string.startIndex..<string.index(after: range!.lowerBound))
         }
         
         if candidateIndexPath == indexPathZero {
@@ -268,8 +268,8 @@ class CandidatesDataModel {
             }
 
             // Handle left typing
-            for ; index >= 0; index-=3 {
-                let strToAppend = formalizedStr.substring(to: formalizedStr.characters.index(formalizedStr.startIndex, offsetBy: index+1))
+            for i in stride(from: index, through: 0, by: -3) {
+                let strToAppend = formalizedStr.substring(to: formalizedStr.characters.index(formalizedStr.startIndex, offsetBy: i+1))
                 queryArguments.append(getShengmuString(from: strToAppend).lowercased())
                 queryArguments.append(strToAppend)
                 clauseCount += 1

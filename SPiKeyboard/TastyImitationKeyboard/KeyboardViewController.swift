@@ -490,17 +490,17 @@ class KeyboardViewController: UIInputViewController {
                 
                 var index = previousContext!.endIndex
                 
-                index = <#T##Collection corresponding to `index`##Collection#>.index(before: index)
+                index = previousContext!.index(before: index)
                 if previousContext![index] != " " {
                     return false
                 }
                 
-                index = <#T##Collection corresponding to `index`##Collection#>.index(before: index)
+                index = previousContext!.index(before: index)
                 if previousContext![index] != " " {
                     return false
                 }
                 
-                index = <#T##Collection corresponding to `index`##Collection#>.index(before: index)
+                index = previousContext!.index(before: index)
                 let char = previousContext![index]
 //                if self.characterIsWhitespace(char) || self.characterIsPunctuation(char) || char == "," {    // Commented by guoc
                 if self.characterIsWhitespace(char) || char == "。" || char == "！" || char == "？" || char == "，" {    // Added by guoc
@@ -764,7 +764,7 @@ class KeyboardViewController: UIInputViewController {
                     var index = beforeContext.endIndex
                     
                     for i in 0 ..< offset {
-                        index = <#T##Collection corresponding to `index`##Collection#>.index(before: index)
+                        index = beforeContext.index(before: index)
                         let char = beforeContext[index]
                         
                         if characterIsPunctuation(char) {

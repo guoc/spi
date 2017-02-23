@@ -161,8 +161,7 @@ class InputHistoryTableViewController: UITableViewController {
         
         func firstLetter(_ row: Row) -> Character {
             let str = row["shengmu"]! as! String
-            return Character(str.substringToIndex(
-                str.characters.index(str.startIndex, offsetBy: 1)).uppercased())
+            return Character(str.substring(to: str.characters.index(str.startIndex, offsetBy: 1)).uppercased())
         }
         
         return distinct(rows.map(firstLetter))

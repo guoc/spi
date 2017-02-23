@@ -444,11 +444,11 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
     var needDismissKeyboard = false
     func settingDidChange(_ notification: Notification) {
         needDismissKeyboard = true
-        if ((notification.object as AnyObject).isEqual("kShowTypingCellInExtraLine") != nil) {
+        if ((notification.object as AnyObject).isEqual("kShowTypingCellInExtraLine")) {
             updateShowTypingCellInExtraLine()
             self.updateBannerHeight()
         }
-        if ((notification.object as AnyObject).isEqual("kCornerBracket") != nil) {
+        if ((notification.object as AnyObject).isEqual("kCornerBracket")) {
             updateCornerBracketEnabled()
         }
     }
@@ -477,7 +477,7 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
                 let row = rs.resultDictionary()
                 if let rs = candidatesDatabase?.executeQuery("select * from candidates where candidate == ?", withArgumentsIn: [row?["candidate"] as! String]) {
                     if !rs.next() {
-                        rows.append(row as! Row)
+                        rows.append(row! as Row)
                     }
                 } else {
                     fatalError("select failed: \(candidatesDatabase?.lastErrorMessage())")
@@ -559,6 +559,9 @@ class MyKeyboardViewController: KeyboardViewController, UICollectionViewDataSour
         case "log":
             let logString = Logger.sharedInstance.getLogFileContent()
             self.textDocumentProxy.insertText(logString)
+        case "memory":
+            let memoryUsageReport = Logger.sharedInstance.getMemoryUsageReport()
+            self.textDocumentProxy.insertText(memoryUsageReport)
         case "cllog":
             Logger.sharedInstance.clearLogFile()
         default:

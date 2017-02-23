@@ -55,8 +55,8 @@ class Logger {
         if !UserDefaults.standard.bool(forKey: "kLogging") {
             return
         }
-        let qos = Int(DispatchQoS.QoSClass.background.rawValue)
-        let queue = DispatchQueue.global(priority: qos)
+        let qos = DispatchQoS.QoSClass.background
+        let queue = DispatchQueue.global(qos: qos)
         queue.async { () -> Void in
             self.outputStream.write(string)
             return
@@ -76,27 +76,19 @@ class Logger {
     }
     
     func getMemoryUsageReport() -> String {
-        // from http://stackoverflow.com/questions/27556807/swift-pointer-problems-with-mach-task-basic-info/27559770#27559770
+        // from http://stackoverflow.com/a/39048651/3157231
         
-        // constant
-        let MACH_TASK_BASIC_INFO_COUNT = (MemoryLayout<mach_task_basic_info_data_t>.size / MemoryLayout<natural_t>.size)
+        var info = mach_task_basic_info()
+        var count = mach_msg_type_number_t(MemoryLayout<mach_task_basic_info>.size)/4
         
-        // prepare parameters
-        let name   = mach_task_self_
-        let flavor = task_flavor_t(MACH_TASK_BASIC_INFO)
-        var size   = mach_msg_type_number_t(MACH_TASK_BASIC_INFO_COUNT)
-        
-        // allocate pointer to mach_task_basic_info
-        let infoPointer = UnsafeMutablePointer<mach_task_basic_info>.allocate(capacity: 1)
-        
-        // call task_info - note extra UnsafeMutablePointer(...) call
-        let kerr = task_info(name, flavor, UnsafeMutablePointer(infoPointer), &size)
-        
-        // get mach_task_basic_info struct out of pointer
-        let info = infoPointer.move()
-        
-        // deallocate pointer
-        infoPointer.deallocate(capacity: 1)
+        let kerr: kern_return_t = withUnsafeMutablePointer(to: &info) {
+            $0.withMemoryRebound(to: integer_t.self, capacity: 1) {
+                task_info(mach_task_self_,
+                          task_flavor_t(MACH_TASK_BASIC_INFO),
+                          $0,
+                          &count)
+            }
+        }
         
         // check return value for success / failure
         if kerr == KERN_SUCCESS {
@@ -107,8 +99,8 @@ class Logger {
             let usageStr = numberFormatter.string(from: NSNumber(value: info.resident_size as UInt64)) ?? "not available"
             return ("Memory in use (in bytes): \(usageStr)")
         } else {
-            let errorString = String(CString: mach_error_string(kerr), encoding: String.Encoding.ascii)
-            return (errorString ?? "Error: couldn't parse error string")
+            return ("Error with task_info(): " +
+                (String(cString: mach_error_string(kerr), encoding: String.Encoding.ascii) ?? "unknown error"))
         }
     }
 }

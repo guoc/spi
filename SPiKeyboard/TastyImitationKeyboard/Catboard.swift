@@ -46,13 +46,13 @@ class Catboard: KeyboardViewController {
                 
                 var index = context!.endIndex
                 
-                index = <#T##Collection corresponding to `index`##Collection#>.index(before: index)
+                index = context!.index(before: index)
                 if context?.characters[index] != " " {
                     textDocumentProxy.insertText(keyOutput)
                     return
                 }
                 
-                index = <#T##Collection corresponding to `index`##Collection#>.index(before: index)
+                index = context!.index(before: index)
                 if context?.characters[index] == " " {
                     textDocumentProxy.insertText(keyOutput)
                     return

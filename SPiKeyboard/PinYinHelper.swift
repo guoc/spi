@@ -631,7 +631,7 @@ func getShengmuString(from formalizedQuanpinString: String) -> String {
     
     let length = formalizedQuanpinString.getReadingLength()
     var returnStr = ""
-    for var index = 0; index < length; index+=3 {
+    for index in stride(from: 0, to: length, by: 3) {
         returnStr += String(Array(formalizedQuanpinString.characters)[index])
     }
     
